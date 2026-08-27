@@ -111,14 +111,28 @@ python3 -m http.server 8000
 
 ## Design notes
 
-Designed toward a thermal receipt, and the constraints are deliberate:
+A thermal receipt on the table of a dim restaurant. The constraints are
+deliberate, and the code follows them everywhere:
 
-- **One typeface** (Space Mono). A receipt printer has one font — hierarchy comes
-  from size, weight, caps and letterspacing only.
-- **One accent** (`--stamp`, a rubber-stamp red). It means "now" and nothing else.
-- Separators are dashed and dotted rules, never boxes or drop shadows.
-- The paper's torn edges are a CSS mask, so they follow the shadow correctly.
-- Dark mode is a real second palette, not an inversion, and follows the system
+**Two typefaces, one rule.** *Bodoni Moda* sets the establishment's own printed
+matter — the name over the door, dish names, pull quotes. *Martian Mono* sets
+everything the register prints. That's why the course title is a didone and the
+line items are blocky mono: they were printed by different machines.
+
+**One accent.** `--stamp`, a rubber-stamp red. It means "now" and nothing else.
+
+**Time is a colour.** Weeks already taught are printed in faded ink, because
+thermal print fades. This week is crisp and stamped. That's the only status
+indicator on the schedule and it needs no legend.
+
+Other details worth not breaking:
+
+- The paper's torn edges are a CSS mask, so the drop shadow follows the zigzag.
+- On load the receipt prints itself, line by line, with a print head sweeping
+  down the page. All of it is disabled under `prefers-reduced-motion`.
+- Dark mode is a real second palette, not an inversion. It follows the system
   setting unless you use the "Lights" toggle.
+- `html { font-size }` in `site.css` is the single dial for scale — raise it and
+  the paper and the print both grow, in proportion.
 
 To change the accent colour, edit `--stamp` in `site.css` (both palettes).

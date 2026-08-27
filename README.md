@@ -111,28 +111,54 @@ python3 -m http.server 8000
 
 ## Design notes
 
-A thermal receipt on the table of a dim restaurant. The constraints are
-deliberate, and the code follows them everywhere:
+A recreation of a Costco warehouse receipt. The rules below are what actually
+make one recognisable, and the CSS is written against them:
 
-**Two typefaces, one rule.** *Bodoni Moda* sets the establishment's own printed
-matter — the name over the door, dish names, pull quotes. *Martian Mono* sets
-everything the register prints. That's why the course title is a didone and the
-line items are blocky mono: they were printed by different machines.
+**Monochrome.** Black thermal print on white. A real Costco receipt has no
+accent colour anywhere, so neither does this. Emphasis is *reverse video* —
+white on black — which is a real receipt-printer mode, not a design flourish.
 
-**One accent.** `--stamp`, a rubber-stamp red. It means "now" and nothing else.
+**One font, one weight.** Everything is Share Tech Mono at 400. Bold is faked
+the way the printer fakes it, by striking the same glyph twice a hair offset:
+that's the `.strike` class. Big text is the same font stretched horizontally,
+not a larger point size: that's `.dw`, and it's why the WHOLESALE banner looks
+squashed-tall. Both are correct.
 
-**Time is a colour.** Weeks already taught are printed in faded ink, because
-thermal print fades. This week is crisp and stamped. That's the only status
-indicator on the schedule and it needs no legend.
+**Almost no rules.** Costco separates things with blank feed lines, not
+dividers. There are two dashed rules in the entire document. Use `.gap` and
+`.gap--l` instead of adding more.
+
+**The tells, all present:** 7-digit item numbers, hard-left item column,
+right-flush prices, the single-letter tax code in the last column, the `E`
+prefix, `****  TOTAL`, `TOTAL NUMBER OF ITEMS SOLD =`, the member number,
+`XXXXXXXXXXXX2026 CHIP READ`, and the door-scan barcode at the bottom.
+
+**How the course maps onto the format:**
+
+| Receipt thing | Course thing |
+|---|---|
+| Item number | Derived from the week number, stable |
+| Item description | The week's title |
+| Price | The date |
+| `E` prefix | That week has something due |
+| Tax code `A` / `N` | Posted / not yet posted |
+| Instant-savings line | This week, referencing the item number above it |
+| Faded print | Weeks already taught — thermal print fades |
+
+Two deliberate departures, both for reading on a screen: the tape is wider than
+a real 3⅛-inch receipt, and week titles aren't truncated to 22 characters the
+way a real item description is.
 
 Other details worth not breaking:
 
-- The paper's torn edges are a CSS mask, so the drop shadow follows the zigzag.
+- The paper edge is a fine serration (`--cut`), a printer's cutter rather than
+  a torn edge.
 - On load the receipt prints itself, line by line, with a print head sweeping
-  down the page. All of it is disabled under `prefers-reduced-motion`.
-- Dark mode is a real second palette, not an inversion. It follows the system
-  setting unless you use the "Lights" toggle.
+  down the page. All of it is off under `prefers-reduced-motion`.
+- Dark mode is a real second palette. It follows the system setting unless you
+  use the "Lights" toggle.
 - `html { font-size }` in `site.css` is the single dial for scale — raise it and
   the paper and the print both grow, in proportion.
 
-To change the accent colour, edit `--stamp` in `site.css` (both palettes).
+The header block (warehouse number, address, member number, operator) is edited
+in `course.js` under `receipt`.

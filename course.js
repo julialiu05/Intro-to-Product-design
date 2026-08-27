@@ -33,6 +33,18 @@ const COURSE = {
   // Which week to surface at the top of the schedule. Bump this every Wednesday.
   CURRENT_WEEK: 3,
 
+  // The header block, printed the way a warehouse prints it.
+  receipt: {
+    banner: "WHOLESALE",
+    warehouse: "#0198 BERKELEY",
+    address1: "2650 BANCROFT WAY",
+    address2: "BERKELEY, CA 94704",
+    member: "1118 1205 0198",
+    op: "4471",
+    name: "LIU",
+    register: "0198 03 042 0007",
+  },
+
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
     "No prior design experience is expected. If you have never opened Figma, you are the intended student.",

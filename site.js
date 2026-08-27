@@ -12,21 +12,28 @@ const esc = (s) =>
 
 const pad2 = (n) => String(n).padStart(2, "0");
 
-const line = (k, v, cls = "") =>
-  `<div class="line ${cls}"><span class="line__k">${esc(k)}</span><span class="line__d"></span><span class="line__v">${esc(v)}</span></div>`;
+/* label left, value flush right — the only layout a receipt really has */
+const row = (k, v, cls = "") =>
+  `<div class="row ${cls}"><span>${esc(k)}</span><span>${esc(v)}</span></div>`;
 
 const isLive = (w) => w.status !== "draft";
 
 const weekHref = (n) => `week.html?w=${n}`;
 
-const orderNo = () =>
-  `${COURSE.term.replace(/[^A-Za-z0-9]/g, "").slice(0, 4).toUpperCase()}-${COURSE.code.replace(/\D/g, "")}`;
+/* Costco item numbers are 7 digits. Derive one per week so it's stable. */
+const itemNo = (week) => String(1980000 + week * 1731);
 
-const printedAt = () => {
+const R = () => COURSE.receipt || {};
+
+/* 09/02/2026 18:30 0198 03 042 0007 */
+function registerLine() {
   const d = new Date();
-  const t = d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
-  return `${d.toLocaleDateString("en-US", { month: "short", day: "2-digit", year: "numeric" }).toUpperCase()}  ${t}`;
-};
+  const mm = pad2(d.getMonth() + 1);
+  const dd = pad2(d.getDate());
+  const hh = pad2(d.getHours());
+  const mi = pad2(d.getMinutes());
+  return `${mm}/${dd}/${d.getFullYear()} ${hh}:${mi} ${R().register || "0198 03 042 0007"}`;
+}
 
 /* ---------- theme --------------------------------------------------------- */
 
@@ -49,100 +56,128 @@ function navBar(current) {
   const item = (href, label) =>
     `<a href="${href}"${current === href ? ' aria-current="page"' : ""}>${label}</a>`;
   return `<nav class="nav">
-    ${item("index.html", "Order")}
-    ${item("syllabus.html", "Fine print")}
-    <button type="button" onclick="toggleTheme()">Lights</button>
+    ${item("index.html", "Receipt")}
+    ${item("syllabus.html", "Terms")}
+    <button type="button">Lights</button>
   </nav>`;
 }
 
+/* the bottom of every Costco receipt: register line, door-scan barcode,
+   thank you, operator. */
 function footerBlock(current) {
-  return `<hr class="hr">
-  ${navBar(current)}
+  return `
+  <div class="gap"></div>
+  <p class="sm faded c">${esc(registerLine())}</p>
   <div class="foot">
-    <p class="barcode" aria-hidden="true">*${COURSE.code.replace(/\s/g, "")}*</p>
-    <p class="xs faded">${esc(COURSE.code)} &middot; ${esc(COURSE.term)} &middot; ORDER ${esc(orderNo())}</p>
-    <p class="xs faded">QUESTIONS &mdash; ${esc(COURSE.contact)}</p>
-    <p class="xs faded" style="margin-top:.9rem">*** THANK YOU, PLEASE COME AGAIN ***</p>
-    <p class="xs faded">NO REFUNDS ON TIME SPENT</p>
+    <p class="barcode" aria-hidden="true">*${esc(COURSE.code.replace(/\s/g, ""))}*</p>
+    <p class="strike">THANK YOU! PLEASE COME AGAIN.</p>
+    <p class="sm soft">OP# ${esc(R().op || "0000")} &nbsp; NAME: ${esc(R().name || "")}</p>
+    <p class="sm faded">${esc(COURSE.contact)}</p>
+    <div class="gap"></div>
+    ${navBar(current)}
   </div>`;
 }
 
+/* the Lights button is bound after render so it survives innerHTML */
+function bindNav(root) {
+  root.querySelectorAll(".nav button").forEach((b) =>
+    b.addEventListener("click", () => window.toggleTheme())
+  );
+}
+
 /* ==========================================================================
-   INDEX — the full check
+   INDEX — the receipt
    ========================================================================== */
 
 function renderIndex() {
   const weeks = COURSE.weeks;
   const cur = COURSE.CURRENT_WEEK;
+  const r = R();
+  let i = 0;
 
   const rows = weeks
-    .map((w, k) => {
+    .map((w) => {
       const now = w.week === cur;
       const past = w.week < cur;
+      const no = itemNo(w.week);
 
-      const inner = `
-        <div class="item__top">
-          <span class="item__qty">${pad2(w.week)}</span>
-          <span class="item__name">${esc(w.title)}${
-            now ? '<span class="stamp item__stamp">Now serving</span>' : ""
-          }${!isLive(w) ? '<span class="stamp stamp--ghost item__stamp">Not yet fired</span>' : ""}</span>
-          <span class="item__price">${esc(w.date)}</span>
-        </div>
-        ${w.summary ? `<p class="item__note">${esc(w.summary)}</p>` : ""}`;
-
+      /* E marks a week with something due, the way it marks an eligible item.
+         The right-hand letter is the status code: A posted, N not yet. */
       const cls = ["item", now ? "item--now" : "", past ? "item--past" : "", !isLive(w) ? "item--void" : ""]
         .filter(Boolean)
         .join(" ");
 
-      return isLive(w)
-        ? `<a class="${cls}" style="--i:${k + 4}" href="${weekHref(w.week)}">${inner}</a>`
-        : `<div class="${cls}" style="--i:${k + 4}">${inner}</div>`;
+      const cells = `
+        <span class="item__e">${w.assignment ? "E" : ""}</span>
+        <span class="item__no">${esc(no)}</span>
+        <span class="item__name">${esc(w.title)}</span>
+        <span class="item__price">${esc(w.date.toUpperCase())}</span>
+        <span class="item__code">${isLive(w) ? "A" : "N"}</span>`;
+
+      const el = isLive(w)
+        ? `<a class="${cls}" style="--i:${i++}" href="${weekHref(w.week)}">${cells}</a>`
+        : `<div class="${cls}" style="--i:${i++}">${cells}</div>`;
+
+      /* this week prints an instant-savings line referencing the item above it */
+      const savings = now
+        ? `<div class="saving" style="--i:${i++}">
+             <span></span><span>/${esc(no)}</span><span>NOW SERVING</span><span></span><span></span>
+           </div>`
+        : "";
+
+      return el + savings;
     })
     .join("");
 
-  document.getElementById("app").innerHTML = `
+  const n = weeks.length;
+  const app = document.getElementById("app");
+
+  app.innerHTML = `
     <div class="feed">
-      <header class="masthead" style="--i:0">
-        <p class="masthead__est">Est. ${esc(COURSE.term)} &middot; Berkeley DeCal</p>
-        <h1 class="masthead__title">${esc(COURSE.title)}</h1>
-        <hr class="masthead__rule">
-        <p class="masthead__sub">${esc(COURSE.subtitle)}</p>
+      <header class="wh" style="--i:0">
+        <p class="wh__banner"><span class="dw">${esc(r.banner || "WHOLESALE")}</span></p>
+        <p class="wh__line">${esc(r.warehouse || "")}</p>
+        <p class="wh__line">${esc(r.address1 || "")}</p>
+        <p class="wh__line">${esc(r.address2 || "")}</p>
+        <h1 class="wh__title">${esc(COURSE.title)}</h1>
+        <p class="wh__sub">${esc(COURSE.subtitle)}</p>
       </header>
 
-      <hr class="hr" style="--i:1">
-
-      <div class="txn" style="--i:2">
-        ${line("Server", COURSE.facilitators[0].name)}
-        ${line("Table", COURSE.meets)}
-        ${line("Seating", COURSE.room)}
-        ${line("Order #", orderNo())}
-      </div>
-
-      <hr class="hr hr--dbl" style="--i:3">
+      <div class="gap" style="--i:1"></div>
+      <p class="member" style="--i:2">MEMBER ${esc(r.member || "")}</p>
+      <div class="gap" style="--i:3"></div>
 
       <div class="order feed" style="animation:none">${rows}</div>
 
-      <hr class="hr hr--dbl" style="--i:${weeks.length + 5}">
+      <div class="gap"></div>
+      <hr class="hr">
 
-      <div class="totals" style="--i:${weeks.length + 6}">
-        ${line("Sessions", String(weeks.length))}
-        ${line("Units", String(COURSE.units))}
-        ${line("Grading", COURSE.grading)}
+      <div class="totals">
+        ${row("SUBTOTAL", `${n} SESSIONS`)}
+        ${row("UNITS", String(COURSE.units))}
+        ${row("GRADING", COURSE.grading.toUpperCase())}
       </div>
+      <div class="grand"><span>****&nbsp; TOTAL</span><span>90 MIN / WK</span></div>
 
-      <hr class="hr hr--dbl" style="--i:${weeks.length + 7}">
-      <div class="grand" style="--i:${weeks.length + 8}"><span>Total due</span><span>90 min / wk</span></div>
-      <hr class="hr hr--dbl" style="--i:${weeks.length + 9}">
+      <div class="gap"></div>
+      <p class="sold">TOTAL NUMBER OF ITEMS SOLD = ${n}</p>
+      <div class="gap"></div>
 
-      <div style="--i:${weeks.length + 10}">
-        ${footerBlock("index.html")}
-        <p class="xs faded c" style="margin-top:1rem">PRINTED ${esc(printedAt())}</p>
-      </div>
+      <p class="sm soft">XXXXXXXXXXXX${esc(String(COURSE.term).replace(/\D/g, "") || "2026")} CHIP READ</p>
+      ${row("ATTENDANCE", "PAID")}
+      ${row("CHANGE", "0.00")}
+
+      <div class="gap"></div>
+      <p class="legend">E = SOMETHING DUE &nbsp; A = POSTED &nbsp; N = NOT YET</p>
+
+      ${footerBlock("index.html")}
     </div>`;
+
+  bindNav(app);
 }
 
 /* ==========================================================================
-   WEEK — a kitchen ticket
+   WEEK — one item's own tag
    ========================================================================== */
 
 function renderWeek() {
@@ -153,11 +188,11 @@ function renderWeek() {
   if (!w) {
     app.innerHTML = `
       <div class="c">
-        <p class="big big--sm">Order not found</p>
-        <p class="sm faded" style="margin-top:.75rem">There is no week ${esc(
+        <p class="wh__banner">ITEM NOT FOUND</p>
+        <p class="sm faded">THERE IS NO WEEK ${esc(
           new URLSearchParams(location.search).get("w") || "?"
-        )} on the menu.</p>
-        <div class="btnrow" style="margin-top:1.25rem"><a class="btn" href="index.html">Back to the check</a></div>
+        )} ON THIS RECEIPT.</p>
+        <div class="btnrow"><a class="btn" href="index.html">BACK TO RECEIPT</a></div>
       </div>`;
     return;
   }
@@ -171,92 +206,105 @@ function renderWeek() {
 
   const block = (label, body, note = "") =>
     body
-      ? `<hr class="hr">
+      ? `<div class="gap"></div>
          <div class="course">
            <div class="course__head">${esc(label)}${note ? `<span>${esc(note)}</span>` : ""}</div>
            ${body}
          </div>`
       : "";
 
-  const agenda = w.agenda && w.agenda.length
-    ? `<ol class="agenda">${w.agenda.map((a) => `<li><span>${esc(a)}</span></li>`).join("")}</ol>`
-    : "";
+  const agenda =
+    w.agenda && w.agenda.length
+      ? `<ol class="agenda">${w.agenda.map((a) => `<li><span>${esc(a)}</span></li>`).join("")}</ol>`
+      : "";
 
-  const readings = w.readings && w.readings.length
-    ? w.readings
-        .map(
-          (r) => `<div class="reading">
-            <div class="reading__t">${esc(r.title)}</div>
-            <div class="reading__a">${esc(r.author)}</div>
-            ${r.note ? `<div class="reading__n">${esc(r.note)}</div>` : ""}
-          </div>`
-        )
-        .join("")
-    : "";
+  const readings =
+    w.readings && w.readings.length
+      ? w.readings
+          .map(
+            (rd) => `<div class="reading">
+              <div class="reading__t">${esc(rd.title)}</div>
+              <div class="reading__a">${esc(rd.author)}</div>
+              ${rd.note ? `<div class="reading__n">${esc(rd.note)}</div>` : ""}
+            </div>`
+          )
+          .join("")
+      : "";
 
   const assignment = w.assignment
     ? `<div class="assign">
         <p class="assign__t">${esc(w.assignment.title)}</p>
-        <div class="assign__due">Due &mdash; ${esc(w.assignment.due)}</div>
+        <div class="assign__due">DUE ${esc(w.assignment.due.toUpperCase())}</div>
         <p class="assign__b">${esc(w.assignment.body)}</p>
-        ${w.assignment.deliverable ? `<p class="assign__d"><b>Hand in</b>${esc(w.assignment.deliverable)}</p>` : ""}
+        ${w.assignment.deliverable ? `<p class="assign__d"><b>HAND IN</b>${esc(w.assignment.deliverable)}</p>` : ""}
       </div>`
     : "";
 
-  const materials = w.materials && w.materials.length
-    ? `<ul class="mats">${w.materials
-        .map((m) => `<li>${esc(m.label)}<span>${esc(m.kind)}</span></li>`)
-        .join("")}</ul>`
-    : "";
+  const materials =
+    w.materials && w.materials.length
+      ? `<ul class="mats">${w.materials
+          .map((m) => `<li>${esc(m.label)}<span>${esc(m.kind)}</span></li>`)
+          .join("")}</ul>`
+      : "";
 
   app.innerHTML = `
-    <div class="ticket__kicker">
-      <span>${esc(COURSE.code)}</span>
-      <span>${now ? "Fired &mdash; now serving" : isLive(w) ? "Ticket" : "Not yet fired"}</span>
-    </div>
+    <div class="feed">
+      <div class="ticket__kicker" style="--i:0">
+        <span>${esc(COURSE.code)}</span>
+        <span>${now ? "NOW SERVING" : isLive(w) ? "POSTED" : "NOT YET POSTED"}</span>
+      </div>
 
-    <p class="ticket__qty">${pad2(w.week)}</p>
-    <p class="ticket__of">Week ${w.week} of ${COURSE.weeks.length} &middot; ${esc(w.date)}</p>
-    <h1 class="ticket__name">${esc(w.title)}</h1>
-    ${w.summary ? `<p class="ticket__sum">${esc(w.summary)}</p>` : ""}
-    ${now ? '<p class="c" style="margin-top:1rem"><span class="stamp stamp--big">This week</span></p>' : ""}
+      <p class="ticket__no" style="--i:1">ITEM ${esc(itemNo(w.week))}</p>
+      <p class="ticket__qty" style="--i:2">${pad2(w.week)}</p>
+      <p class="ticket__of" style="--i:3">WEEK ${w.week} OF ${COURSE.weeks.length} &middot; ${esc(w.date.toUpperCase())}</p>
+      <h1 class="ticket__name" style="--i:4">${esc(w.title)}</h1>
+      ${w.summary ? `<p class="ticket__sum" style="--i:5">${esc(w.summary)}</p>` : ""}
 
-    <div class="btnrow">
-      <a class="btn btn--stamp" href="slides.html?w=${w.week}">Open slides</a>
-      <a class="btn" href="index.html">All weeks</a>
-    </div>
+      <div class="btnrow" style="--i:6">
+        <a class="btn btn--stamp" href="slides.html?w=${w.week}">OPEN SLIDES</a>
+        <a class="btn" href="index.html">ALL WEEKS</a>
+      </div>
 
-    ${block("Service order", agenda, `${(w.agenda || []).length} courses`)}
-    ${block("Read before", readings, `${(w.readings || []).length}`)}
-    ${block("To take home", assignment)}
-    ${block("On the pass", materials)}
+      <div style="--i:7">
+        <div class="gap"></div>
+        <hr class="hr">
+        ${block("SERVICE ORDER", agenda, `${(w.agenda || []).length} ITEMS`)}
+        ${block("READ BEFORE", readings, `${(w.readings || []).length}`)}
+        ${block("TO TAKE HOME", assignment)}
+        ${block("ON THE PASS", materials)}
 
-    <hr class="hr hr--dbl">
-    <div class="pager">
-      ${
-        prev
-          ? `<a href="${isLive(prev) ? weekHref(prev.week) : "index.html"}"><span class="caps">&larr; ${pad2(
-              prev.week
-            )}</span><b>${esc(prev.title)}</b></a>`
-          : `<span></span>`
-      }
-      ${
-        next
-          ? `<a href="${isLive(next) ? weekHref(next.week) : "index.html"}"><span class="caps">${pad2(
-              next.week
-            )} &rarr;</span><b>${esc(next.title)}</b></a>`
-          : `<span></span>`
-      }
-    </div>
+        <div class="gap"></div>
+        <hr class="hr">
+        <div class="pager">
+          ${
+            prev
+              ? `<a href="${isLive(prev) ? weekHref(prev.week) : "index.html"}"><span class="caps">&lt;&lt; ${pad2(
+                  prev.week
+                )}</span><b>${esc(prev.title)}</b></a>`
+              : `<span></span>`
+          }
+          ${
+            next
+              ? `<a href="${isLive(next) ? weekHref(next.week) : "index.html"}"><span class="caps">${pad2(
+                  next.week
+                )} &gt;&gt;</span><b>${esc(next.title)}</b></a>`
+              : `<span></span>`
+          }
+        </div>
 
-    ${footerBlock("")}`;
+        ${footerBlock("")}
+      </div>
+    </div>`;
+
+  bindNav(app);
 }
 
 /* ==========================================================================
-   SYLLABUS — the fine print
+   SYLLABUS — the terms on the back
    ========================================================================== */
 
 function renderSyllabus() {
+  const r = R();
   const people = [...COURSE.facilitators, COURSE.sponsor]
     .map(
       (p) => `<div class="person">
@@ -267,49 +315,58 @@ function renderSyllabus() {
     )
     .join("");
 
-  document.getElementById("app").innerHTML = `
-    <header class="masthead">
-      <p class="masthead__est">${esc(COURSE.code)} &middot; ${esc(COURSE.term)}</p>
-      <h1 class="masthead__title">The fine print</h1>
-      <hr class="masthead__rule">
-      <p class="masthead__sub">Everything you'd otherwise have to ask about: what it costs you, what passing means, and what happens when things go wrong.</p>
-    </header>
+  const app = document.getElementById("app");
 
-    <hr class="hr hr--dbl">
+  app.innerHTML = `
+    <div class="feed">
+      <header class="wh" style="--i:0">
+        <p class="wh__banner"><span class="dw">TERMS</span></p>
+        <p class="wh__line">${esc(r.warehouse || "")}</p>
+        <p class="wh__line">${esc(COURSE.code)} &middot; ${esc(COURSE.term)}</p>
+        <p class="wh__sub">Everything you'd otherwise have to ask about: what it costs you, what passing means, and what happens when things go wrong.</p>
+      </header>
 
-    <div class="txn">
-      ${line("Course", COURSE.code)}
-      ${line("Term", COURSE.term)}
-      ${line("Meets", COURSE.meets)}
-      ${line("Room", COURSE.room)}
-      ${line("Units", String(COURSE.units))}
-      ${line("Grading", COURSE.grading)}
-      ${line("Sessions", String(COURSE.weeks.length))}
-    </div>
+      <div class="gap" style="--i:1"></div>
+      <hr class="hr" style="--i:2">
 
-    <hr class="hr">
-    <p class="head">What this is</p>
-    <div class="prose">${COURSE.description.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+      <div class="totals" style="--i:3">
+        ${row("COURSE", COURSE.code)}
+        ${row("TERM", COURSE.term.toUpperCase())}
+        ${row("MEETS", COURSE.meets.toUpperCase())}
+        ${row("ROOM", COURSE.room.toUpperCase())}
+        ${row("UNITS", String(COURSE.units))}
+        ${row("GRADING", COURSE.grading.toUpperCase())}
+        ${row("SESSIONS", String(COURSE.weeks.length))}
+      </div>
 
-    <hr class="hr">
-    <p class="head">House rules</p>
-    ${COURSE.policies
-      .map((p) => `<div class="policy"><h3>${esc(p.heading)}</h3><p>${esc(p.body)}</p></div>`)
-      .join("")}
+      <div style="--i:4">
+        <div class="gap"></div>
+        <p class="head">WHAT THIS IS</p>
+        <div class="prose">${COURSE.description.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
 
-    <hr class="hr">
-    <p class="head">Staff</p>
-    ${people}
+        <div class="gap"></div>
+        <p class="head">HOUSE RULES</p>
+        ${COURSE.policies
+          .map((p) => `<div class="policy"><h3>${esc(p.heading)}</h3><p>${esc(p.body)}</p></div>`)
+          .join("")}
 
-    <hr class="hr">
-    <p class="head">Enrollment</p>
-    <div class="prose"><p>${esc(COURSE.enrollment)}</p><p>Office hours &mdash; ${esc(COURSE.office_hours)}</p></div>
+        <div class="gap"></div>
+        <p class="head">STAFF</p>
+        ${people}
 
-    <hr class="hr">
-    <p class="head">By the end you can</p>
-    <ol class="list list--num">${COURSE.outcomes.map((o) => `<li>${esc(o)}</li>`).join("")}</ol>
+        <div class="gap"></div>
+        <p class="head">ENROLLMENT</p>
+        <div class="prose"><p>${esc(COURSE.enrollment)}</p><p>Office hours &mdash; ${esc(COURSE.office_hours)}</p></div>
 
-    ${footerBlock("syllabus.html")}`;
+        <div class="gap"></div>
+        <p class="head">BY THE END YOU CAN</p>
+        <ol class="list list--num">${COURSE.outcomes.map((o) => `<li>${esc(o)}</li>`).join("")}</ol>
+
+        ${footerBlock("syllabus.html")}
+      </div>
+    </div>`;
+
+  bindNav(app);
 }
 
 /* ==========================================================================
@@ -335,7 +392,7 @@ function slideHTML(s, w) {
   switch (s.layout) {
     case "title":
       return `<div class="slide">
-        <p class="s-kick">${esc(COURSE.code)} &middot; Week ${pad2(w.week)} &middot; ${esc(w.date)}</p>
+        <p class="s-kick">${esc(COURSE.code)} &middot; ITEM ${esc(itemNo(w.week))} &middot; ${esc(w.date.toUpperCase())}</p>
         <h1 class="s-title">${esc(s.text || w.title)}</h1>
         ${s.sub || w.summary ? `<p class="s-sub">${esc(s.sub || w.summary)}</p>` : ""}
       </div>`;
@@ -355,7 +412,9 @@ function slideHTML(s, w) {
     case "points":
       return `<div class="slide">
         ${s.heading ? `<h2 class="s-h">${esc(s.heading)}</h2>` : ""}
-        <ol class="s-points">${(s.points || []).map((p) => `<li><span>${esc(p)}</span></li>`).join("")}</ol>
+        <ol class="s-points">${(s.points || [])
+          .map((p, k) => `<li style="--i:${k}"><span>${esc(p)}</span></li>`)
+          .join("")}</ol>
       </div>`;
 
     case "two":
@@ -369,13 +428,13 @@ function slideHTML(s, w) {
 
     case "quote":
       return `<div class="slide">
-        <blockquote class="s-quote">&ldquo;${esc(s.quote)}&rdquo;</blockquote>
+        <blockquote class="s-quote">"${esc(s.quote)}"</blockquote>
         ${s.attribution ? `<p class="s-attr">${esc(s.attribution)}</p>` : ""}
       </div>`;
 
     case "exercise":
       return `<div class="slide s-ex">
-        <p class="s-kick" style="margin-bottom:1rem">Exercise${s.heading ? " &mdash; " + esc(s.heading) : ""}</p>
+        <p class="s-kick">EXERCISE${s.heading ? " &mdash; " + esc(s.heading) : ""}</p>
         <p>${esc(s.prompt)}</p>
         ${s.time ? `<span class="s-time">${esc(s.time)}</span>` : ""}
       </div>`;
@@ -388,12 +447,12 @@ function slideHTML(s, w) {
 
     case "assignment": {
       const a = w.assignment;
-      if (!a) return `<div class="slide"><p class="s-state">No assignment this week.</p></div>`;
+      if (!a) return `<div class="slide"><p class="s-state">NO ASSIGNMENT THIS WEEK.</p></div>`;
       return `<div class="slide s-assign">
-        <p class="s-kick" style="margin-bottom:0">To take home</p>
+        <p class="s-kick">TO TAKE HOME</p>
         <h2>${esc(a.title)}</h2>
         <p>${esc(a.body)}</p>
-        <p class="s-attr" style="margin-top:1.25rem">Due ${esc(a.due)}</p>
+        <p class="s-attr">DUE ${esc(a.due.toUpperCase())}</p>
       </div>`;
     }
 
@@ -424,8 +483,8 @@ function renderSlides() {
   if (!w) {
     document.body.classList.remove("deck");
     document.body.innerHTML = `<div class="tape"><div class="paper c">
-      <p class="big big--sm">No deck for that week</p>
-      <div class="btnrow" style="margin-top:1.25rem"><a class="btn" href="index.html">Back to the check</a></div>
+      <p class="wh__banner">NO DECK FOR THAT WEEK</p>
+      <div class="btnrow"><a class="btn" href="index.html">BACK TO RECEIPT</a></div>
     </div></div>`;
     return;
   }
@@ -447,11 +506,11 @@ function renderSlides() {
   function paint() {
     stage.innerHTML = `<div class="deck__paper">${slideHTML(deck[i], w)}</div>`;
     bar.innerHTML = `
-      <a href="week.html?w=${w.week}">&larr; Week ${pad2(w.week)} &middot; ${esc(w.title)}</a>
+      <a href="week.html?w=${w.week}">&lt;&lt; WEEK ${pad2(w.week)} &middot; ${esc(w.title)}</a>
       <div class="deck__keys">
-        <span>&larr; &rarr; move</span><span>O grid</span><span>N notes</span><span>F full</span><span>&#8984;P pdf</span>
+        <span>&larr; &rarr; MOVE</span><span>O GRID</span><span>N NOTES</span><span>F FULL</span><span>&#8984;P PDF</span>
       </div>
-      <span class="deck__count"><b>${pad2(i + 1)}</b> / ${pad2(deck.length)}${isAuto ? " &middot; auto" : ""}</span>`;
+      <span class="deck__count"><b>${pad2(i + 1)}</b> / ${pad2(deck.length)}${isAuto ? " &middot; AUTO" : ""}</span>`;
     prog.style.width = ((i + 1) / deck.length) * 100 + "%";
 
     const note = deck[i].note;
@@ -465,7 +524,7 @@ function renderSlides() {
   function paintGrid() {
     gridEl.innerHTML = deck
       .map(
-        (s, k) => `<button class="thumb" data-i="${k}" aria-current="${k === i}">
+        (s, k) => `<button class="thumb" style="--i:${k}" data-i="${k}" aria-current="${k === i}">
           <span class="thumb__n">${pad2(k + 1)}</span>
           <span class="thumb__t">${esc(String(slideLabel(s, w)).slice(0, 70))}</span>
           <span class="thumb__k">${esc(s.layout)}</span>

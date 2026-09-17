@@ -46,7 +46,7 @@ const COURSE = {
   // Bump this every Wednesday and the site changes its skin.
   CURRENT_WEEK: 1,
 
-  // How many week folders sit on the desktop (desktop.html), counting from 1.
+  // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
   // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
   DESKTOP_WEEKS: 1,

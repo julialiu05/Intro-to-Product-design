@@ -256,7 +256,7 @@ function renderScroll() {
   if (!w) {
     app.innerHTML = `<section class="sc-slide"><div class="slide">
       <h1 class="s-title">No deck for that week</h1>
-      <p><a class="btn" href="desktop.html">Back to the desktop</a></p>
+      <p><a class="btn" href="index.html">Back to the desktop</a></p>
     </div></section>`;
     return;
   }
@@ -400,7 +400,7 @@ function renderScroll() {
   if (window.self === window.top) {
     const home = document.createElement("a");
     home.className = "sc-home";
-    home.href = "desktop.html";
+    home.href = "index.html";
     home.innerHTML = '<span aria-hidden="true">‹</span><span>Desktop</span>';
     document.body.appendChild(home);
   }

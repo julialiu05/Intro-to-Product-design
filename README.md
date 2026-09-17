@@ -2,7 +2,7 @@
 
 The course site: a macOS desktop you open a week from, and a deck you read by
 scrolling. Plain HTML, CSS and JavaScript. No build step, no dependencies, no
-server needed. Open `desktop.html`.
+server needed. Open `index.html`.
 
 ## Files
 
@@ -11,7 +11,7 @@ server needed. Open `desktop.html`.
 | `course.js` | **All content.** The only file you edit week to week. |
 | `scroll.html` | The deck: scroll, one slide per screen. |
 | `wallpaper.js` | The rotating wallpaper, shared by the desktop and the scroll deck. |
-| `desktop.html` | The desktop front door. Every week is a file. |
+| `index.html` | The desktop. Every week is a file. |
 | `base.css` | Structure: layout, flow, accessibility. |
 | `site.js` | Builds the scroll deck from `course.js`. |
 | `desktop.css`, `desktop.js` | The desktop. Self-contained, reads `course.js`. |
@@ -131,7 +131,7 @@ python3 -m http.server 8000
 
 ## The desktop
 
-`desktop.html` is a second way into the same content: a Finder window where
+`index.html` is the desktop: a Finder window where
 every week is a file.
 
 | Finder thing | Course thing |

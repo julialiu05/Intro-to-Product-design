@@ -19,31 +19,37 @@ const COURSE = {
   term: "Fall 2026",
   units: 2,
   grading: "Pass / No Pass",
-  meets: "Wednesdays, 6:30–8:00pm",
-  room: "Wheeler 108",
+  meets: "Thursdays, 6:00–8:00pm",
+  room: "SOCS 104",
   enrollment: "CCN posted on decal.berkeley.edu — no prerequisites, no portfolio required.",
   contact: "julia[dot]liu05[at]berkeley[dot]edu",
   office_hours: "Thursdays 3–4pm, Moffitt 4th floor, or by appointment",
 
+  /* Shown in the Read Me. Emails are written with
+     [at] and [dot] so scrapers do not pick them up off a public repo. */
   facilitators: [
-    { name: "Julia Liu", role: "Facilitator", detail: "Cognitive Science + Design Innovation" },
+    { name: "Julia Liu", role: "Facilitator", email: "julia[dot]liu05[at]berkeley[dot]edu" },
+    { name: "Jennifer",  role: "Facilitator", email: "jennifer_tian[at]berkeley[dot]edu" },
+    { name: "Inder",     role: "TA",          email: "inderveersingh[at]berkeley[dot]edu" },
+    { name: "Niya",      role: "TA",          email: "niyacrowder[at]berkeley[dot]edu" },
+  ],
+
+  /* Shown in the Read Me. */
+  attendance: [
+    "Two unexcused absences are permitted over the semester.",
+    "Beyond that, please speak with the teaching staff.",
+    "If you need to miss a class, let us know in advance where possible.",
   ],
   sponsor: { name: "TBD", role: "Faculty Sponsor", detail: "Department of Design Innovation" },
 
-  // Which week to surface at the top of the schedule. Bump this every Wednesday.
-  CURRENT_WEEK: 3,
+  // Which week to surface, AND which theme the whole site wears.
+  // Bump this every Wednesday and the site changes its skin.
+  CURRENT_WEEK: 1,
 
-  // The header block, printed the way a warehouse prints it.
-  receipt: {
-    banner: "WHOLESALE",
-    warehouse: "#0198 BERKELEY",
-    address1: "2650 BANCROFT WAY",
-    address2: "BERKELEY, CA 94704",
-    member: "1118 1205 0198",
-    op: "4471",
-    name: "LIU",
-    register: "0198 03 042 0007",
-  },
+  // How many week folders sit on the desktop (desktop.html), counting from 1.
+  // The desktop fills up as the course runs: add one each week you release.
+  // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
+  DESKTOP_WEEKS: 1,
 
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
@@ -62,7 +68,7 @@ const COURSE = {
   policies: [
     {
       heading: "Attendance",
-      body: "This is a studio, so the room is the class. Two unexcused absences are fine. A third means a conversation, a fourth means No Pass. Email before class, not after.",
+      body: "This is a studio, so the room is the class. Two unexcused absences are permitted over the semester. Beyond that, please speak with the teaching staff. If you need to miss a class, let us know in advance where possible.",
     },
     {
       heading: "Weekly work",
@@ -95,445 +101,466 @@ const COURSE = {
       date: "Sep 2",
       title: "What product design actually is",
       status: "published",
-      summary:
-        "The job isn't making screens. We take apart three familiar products and find the decisions hiding inside them.",
+      summary: "",
       agenda: [
-        "Introductions, and the one product you'd fix if you could",
-        "Teardown: the BART ticket machine, Venmo's home feed, and a hospital intake form",
-        "Where design sits next to engineering, research, and whoever is paying",
-        "The vocabulary we'll use all semester: user, need, constraint, tradeoff",
+        "Hellos, and one product you quietly resent",
+        "Introductions: your facilitator and your TAs",
+        "How the class runs, and the shape of the semester",
+        "A brief look at what design even is, starting with six chairs",
+        "The nametag brief, which is the homework",
       ],
       readings: [
-        { title: "The Design of Everyday Things, ch. 1: The Psychopathology of Everyday Things", author: "Don Norman", note: "~25 pages. Scanned in the course packet." },
-        { title: "A Brief Rant on the Future of Interaction Design", author: "Bret Victor", note: "Short essay. Read the rant, skip the responses for now." },
+        {
+          title: "Don't trust the design process",
+          author: "Jenny Wen",
+          kind: "Essay",
+          url: "https://jennywen.ca/notes/dont-trust-the-design-process",
+          note: "Short. Read it early, because we are about to teach you a process and you should hold it loosely from the start. A process is scaffolding for when you are stuck, not a guarantee that anything good comes out the other end.",
+        },
+        {
+          title: "The design process is dead. Here’s what’s replacing it.",
+          author: "Jenny Wen",
+          kind: "Video",
+          url: "https://www.youtube.com/watch?v=eh8bcBIAAFo",
+          note: "The same argument as her essay, made out loud and taken further. Watch it after the essay, not before.",
+        },
+        {
+          title: "Design Engineering at Vercel",
+          author: "Glenn Hitchcock and others",
+          kind: "Post",
+          optional: true,
+          url: "https://vercel.com/blog/design-engineering-at-vercel",
+          note: "What the third column on the three jobs slide looks like at a company that takes it seriously.",
+        },
+        {
+          title: "Explain it like I’m 5: What is a Product Designer?",
+          author: "Henry Wu",
+          kind: "Essay",
+          url: "https://medium.com/hubspot-product/explain-it-like-im-5-what-is-a-product-designer-121aad98c047",
+          note: "The grocery store explanation we go through in class.",
+        },
+        {
+          title: "Product design in 2026: the beginning of a fantastic voyage?",
+          author: "Kike Peña",
+          kind: "Essay",
+          url: "https://uxdesign.cc/product-design-in-2026-the-beginning-of-a-fantastic-voyage-fb6866c907ac",
+          note: "We go through this in class. Read it again afterwards, once you have something to argue with.",
+        },
+        {
+          title: "IDEO Shopping Cart",
+          author: "ABC Nightline",
+          kind: "Video",
+          url: "https://www.youtube.com/watch?v=M66ZU2PCIcM",
+          note: "Eight minutes, filmed in 1999. A design team is given five days to redesign the shopping cart. Watch how much of it is arguing and watching people, and how little is drawing.",
+        },
+        {
+          title: "The Design of Everyday Things, ch. 1",
+          author: "Don Norman",
+          kind: "Book chapter",
+          note: "About 25 pages, in the course packet. The doors you push when you should pull. Read it once, quickly, and do not take notes.",
+        },
+        {
+          title: "Objectified",
+          author: "Gary Hustwit",
+          kind: "Film",
+          optional: true,
+          note: "Feature length. Industrial designers talking about the objects around them. Good background for the whole semester, not homework.",
+        },
+        {
+          title: "A Brief Rant on the Future of Interaction Design",
+          author: "Bret Victor",
+          kind: "Essay",
+          optional: true,
+          url: "http://worrydream.com/ABriefRantOnTheFutureOfInteractionDesign/",
+          note: "Short and annoyed, in a useful way. Read the rant, skip the responses for now.",
+        },
       ],
       assignment: {
-        title: "Bad Design Log",
-        due: "Tue Sep 8, 11:59pm",
-        body: "Photograph three things this week that made you hesitate, guess, or get it wrong — a door, an app, a sign, a checkout. For each one write two sentences: what you expected, and what happened. Do not propose fixes. We are practicing noticing, not solving.",
-        deliverable: "One PDF or Figma page, three photos, six sentences.",
+        title: "Make your own nametag",
+        due: "Wed Sep 23, 11:59pm",
+        /* ISO date so the Calendar app can mark it. Keep the two in step. */
+        dueDate: "2026-09-23",
+        body: "A nametag of your choice. Paper, an object, or digital. Let your creativity run wild.",
+        deliverable: "Bring it to class, or send it over if it only exists on a screen.",
       },
       materials: [
-        { label: "Bad Design Log template", kind: "Figma" },
-        { label: "Class roster + Slack invite", kind: "Link" },
+        { label: "Nametag template", kind: "Figma" },
+        { label: "Class Slack", kind: "Link" },
       ],
+      /* Day one. One slide per person for the introductions, the class
+         structure, a brief look at what design is, then the homework.
+
+         Slides carry only what goes on the screen. Nothing here explains
+         itself to the room: that is what the person standing up is for. */
       slides: [
         { layout: "title" },
+
+        { layout: "section", text: "Introductions", num: "01" },
+
+        /* One slide each. Photos go in img/w1/ under these names; until a file
+           exists the slide still renders and leaves the frame empty. Intros are
+           reproduced exactly as each person wrote them. */
         {
-          layout: "statement",
-          text: "Design is the record of decisions someone made on your behalf.",
-          sub: "Most of them you never see. That's the job working.",
+          layout: "person",
+          role: "Facilitator",
+          name: "Julia Liu",
+          detail: "",
+          photo: "img/w1/julia.jpg",
+          lines: [
+            "Hello! I am Julia and I’m a senior studying Art and Data science. I love baking and anything art related!",
+          ],
         },
         {
+          layout: "person",
+          role: "Facilitator",
+          name: "Jennifer",
+          detail: "",
+          photo: "img/w1/jennifer.jpg",
+          lines: [
+            "hello ;) I’m Jennifer, a 3rd year studying applied math and ds (+ the design certificate)! Some things I love are jewelry-making, whale sharks, classical cryptography, 30% sugar fruit milk tea, and teaching this decal <3",
+          ],
+        },
+        {
+          layout: "person",
+          role: "TA",
+          name: "Inder",
+          detail: "inderveersingh[at]berkeley[dot]edu",
+          photo: "img/w1/inder.jpg",
+          lines: [
+            "Hello everyone! My name is Inder and i’m a 2nd-year majoring in Bioengineering! Some of my favorite hobbies are eating new foods, trying new coffee spots, playing Roblox, working out, and listening to music😎😎",
+          ],
+        },
+        {
+          layout: "person",
+          role: "TA",
+          name: "Niya",
+          detail: "",
+          photo: "img/w1/niya.jpg",
+          lines: [
+            "Hi!!! I’m Niya and I am a 2nd year majoring in architecture and minoring in sustainable design + structural engineering! I love doing ceramics, playing tennis, and anything outdoors 😌",
+          ],
+        },
+
+        { layout: "section", text: "How this class runs", num: "02" },
+        {
           layout: "points",
-          heading: "What this class is not",
+          heading: "Expectations",
           points: [
-            "Not a Figma tutorial. Figma is a tool, we'll pick it up sideways.",
-            "Not a portfolio bootcamp. You'll leave with one project, not eight.",
-            "Not about taste. Taste is downstream of judgment, and judgment is teachable.",
+            "Come to class.",
+            "Bring work, finished or not.",
+            "Turn in your homework.",
+            "Due Wednesdays, 11:59pm.",
+            "Have fun and be creative!",
           ],
         },
         {
           layout: "points",
-          heading: "What it is",
+          heading: "Semester at a glance",
           points: [
-            "Fourteen weeks of deciding what to build and defending it.",
-            "One project, carried from a complaint to a tested prototype.",
-            "A room that will tell you the truth about your work.",
+            "First two weeks are intros into design.",
+            "Week 3 to week 10 is project weeks.",
+            "Week 10+ is portfolios.",
+            "We will have a Midterm and Final Project that are worth quite a bit of your grade.",
           ],
         },
-        { layout: "section", text: "Teardown", num: "01" },
+
+        { layout: "section", text: "What is design?", num: "03" },
+        {
+          layout: "gallery",
+          heading: "All six of these are chairs",
+          items: [
+            { src: "img/w1/chair-folding.jpg", label: "National Public Seating 50 Series", note: "$18" },
+            { src: "img/w1/chair-ikea.jpg",    label: "BALTSAR Ikea Chair",                note: "$169" },
+            { src: "img/w1/chair-ulloo.jpg",   label: "ULLOO 42 Chair",                    note: "$1999" },
+            { src: "img/w1/chair-bloom.jpg",   label: "Bloom lounge chair",                note: "$3430" },
+            { src: "img/w1/chair-up5.jpg",     label: "UP5 “Mama” Chair",        note: "$4145" },
+            { src: "img/w1/chair-eames.jpg",   label: "Eames Lounge Chair",                note: "$6495" },
+          ],
+        },
+        {
+          layout: "figure",
+          src: "img/w1/uncomfortable.jpg",
+          caption: "© Katerina Kamprani, The Uncomfortable",
+        },
+
+        /* The four principles from the GDP Decal deck, each stated and then
+           undercut. Side by side rather than on two slides: the argument is
+           the tension between them, so both halves want to be visible at once. */
+        { layout: "section", text: "What is good design?", num: "04" },
         {
           layout: "two",
-          heading: "The BART ticket machine",
-          left: { label: "What it asks you", body: "Choose an amount before you know the fare. Feed bills one at a time. Understand that 'Add Fare' and 'New Ticket' are different buttons doing nearly the same thing." },
-          right: { label: "What you wanted", body: "To get to Rockridge. The machine has never once asked where you are going." },
+          heading: "Design should be simple.",
+          left: {
+            label: "The case",
+            body: "Good design is as little design as possible. Simple designs are lasting and universal.",
+          },
+          right: {
+            label: "However",
+            body: "Good design grabs the user with a wow factor. It should strive for a balance between simplicity and authenticity.",
+          },
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w1/apple-card.jpg",    label: "Apple" },
+            { src: "img/w1/blandification.jpg", label: "“Blandification”" },
+            { src: "img/w1/dropbox-2017.jpg",  label: "Dropbox Redesign", note: "2017" },
+            { src: "img/w1/dropbox-2019.jpg",  label: "Dropbox Redesign", note: "2019" },
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Form follows function.",
+          left: {
+            label: "The case",
+            body: "Design must be driven by the purpose of the object rather than aesthetics. Achieve purity through reduction and restraint.",
+          },
+          right: {
+            label: "However",
+            body: "You can argue form IS function. Utilitarian restrictions can stifle innovation and wonder.",
+          },
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w1/bauhaus-chess.jpg",   label: "Bauhaus chess set" },
+            { src: "img/w1/cut-the-mustard.jpg", label: "“Cut the Mustard” exhibition poster" },
+            { src: "img/w1/invite-minimal.jpg",  label: "Utilitarian wedding invitations" },
+            { src: "img/w1/invite-andersen.jpg", label: "Wedding invitation", note: "Kelli Andersen" },
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Ego has no place in design.",
+          left: {
+            label: "The case",
+            body: "You must not design for yourself, you must design solely for the user. Designers are not users.",
+          },
+          right: {
+            label: "However",
+            body: "Ego and personal experience are instrumental in crafting sincerity, passion and poignancy. Design as expression.",
+          },
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w1/contrast.jpg",      label: "Inaccessible websites" },
+            { src: "img/w1/mri-plain.jpg",     label: "A scanner" },
+            { src: "img/w1/mri-adventure.jpg", label: "The same scanner, adventure series" },
+            { src: "img/w1/casino-city.jpg",   label: "“Casino City”", note: "Suzy Chan" },
+            { src: "img/w1/haribo.jpg",        label: "“Haribo Cult”", note: "Suzy Chan" },
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Design should be instinctive.",
+          left: {
+            label: "The case",
+            body: "Anticipate how people will use it and make it seamless. Never make the user work.",
+          },
+          right: {
+            label: "However: design should be distinctive.",
+            body: "There can be delight in working through a design, and in navigating new experiences.",
+          },
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w1/push-pull.jpg",   label: "Which one is it" },
+            { src: "img/w1/glass-doors.jpg", label: "Or this one" },
+            { src: "img/w1/guardian.jpg",    label: "Guardian Puzzle Special", note: "Mariane Batjes" },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "There is no universally good design approach.",
+          sub: "A design approach can only be considered good with respect to some particular niche.",
+        },
+        {
+          layout: "figure",
+          src: "img/w1/nonlinear.jpg",
+          caption: "Design is nonlinear and iterative. Each iteration makes your design better, and you can always return to the previous step.",
+        },
+        { layout: "statement", text: "So what does that mean for product design?" },
+        { layout: "section", text: "What is product design?", num: "05" },
+        {
+          layout: "statement",
+          text: "A Product Designer, at its core, is a problem solver.",
+          sub: "Henry Wu, HubSpot",
+        },
+        {
+          layout: "points",
+          heading: "A product designer has many names",
+          points: [
+            "Experience Designer (XD)",
+            "Information Architect (IA)",
+            "Interaction Designer (IX)",
+            "Experience Architect (XA)",
+            "User Interface (UI) Designer",
+            "User Experience (UX) Designer",
+            "A product designer may be responsible for some or all of the above.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "We don’t just use design to make things look pretty. We use design to solve problems.",
+        },
+        {
+          layout: "points",
+          heading: "Let’s say I’m hungry",
+          points: [
+            "A grocery store is one answer.",
+            "So are delivery, restaurants, food trucks and vending machines.",
+            "So are Netflix, books and going to sleep.",
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Three core types of design",
+          items: [
+            {
+              label: "System design",
+              body: "The whole thing, and how its parts work together.",
+            },
+            {
+              label: "Process design",
+              body: "The steps someone moves through to get something done.",
+            },
+            {
+              label: "Interface design",
+              body: "The part a person actually sees and touches.",
+            },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "What a product designer (used to) make",
+          points: [
+            "Journey map. A diagram of the steps a person takes to complete a task, and what they need at each one.",
+            "Wireframe. A low-fidelity layout showing structure and content, before any visual design.",
+            "Prototype. A version made to be tested, from paper to fully clickable.",
+            "High-fidelity design. The final visual design: layout, colour, type and spacing, for engineers to build from.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "What the job actually looks like",
+          points: [
+            "Research our users and problems.",
+            "Design and prototype.",
+            "Test with our users.",
+            "Design some more.",
+            "Launch a product.",
+            "Measure and iterate.",
+          ],
+          tap: "🔁 ×10",
+        },
+        {
+          layout: "statement",
+          text: "A constant loop of analyzing, designing, testing, launching, monitoring, and evolving.",
+          sub: "All of this is done because we are solving problems.",
+        },
+
+        {
+          layout: "statement",
+          text: "Deciding what to build, for whom, and why. Then making sure it gets built.",
+        },
+        {
+          layout: "points",
+          heading: "Four questions behind every decision",
+          points: [
+            "Who is this for? A specific person in a specific situation, never just people.",
+            "What are they trying to get done? Stated without your solution inside it.",
+            "What cannot change? Budget, physics, law, attention.",
+            "What did you give up to get the thing you chose?",
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Three jobs people confuse",
+          items: [
+            {
+              label: "UI/UX design",
+              body: "The screens and the path through them.",
+              list: [
+                "How it looks and how it feels to use",
+                "Layout, type, colour, states, flows",
+                "Hands off an interface",
+              ],
+            },
+            {
+              label: "Product design",
+              body: "What to build, for whom, and why.",
+              list: [
+                "Research, problem framing, tradeoffs",
+                "Talks to users, business and engineering",
+                "Hands off a decision, and the interface",
+              ],
+            },
+            {
+              label: "Design engineering",
+              body: "Making the thing real.",
+              list: [
+                "Turns the design into working code",
+                "Owns feel: motion, performance, edge cases",
+                "Hands off the product itself",
+              ],
+            },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "The lines between them are moving.",
+        },
+
+
+        /* From "Product design in 2026: the beginning of a fantastic voyage?"
+           by Kike Peña, UX Collective, April 2026. The wording is his. */
+        { layout: "section", text: "Product design in 2026", num: "06" },
+        {
+          layout: "statement",
+          text: "The invisible walls for designers have been broken down.",
+          sub: "Kike Peña, UX Collective, April 2026",
+        },
+        {
+          layout: "points",
+          heading: "Two walls that fell",
+          points: [
+            "The conversation wall. Designers used to be handed decisions. Now they sit in the room where decisions get made.",
+            "The code wall. Designers used to be told what was possible to build. Now they can build it themselves.",
+          ],
         },
         {
           layout: "quote",
-          quote: "The machine is not badly made. It is well made for a question nobody is asking.",
-          attribution: "The whole class in one sentence",
+          quote: "New designers should be measured on how big their imagination is, instead of how much they know about tools.",
+          attribution: "Carlos Pinilla",
         },
         {
           layout: "points",
-          heading: "Four words we'll use all semester",
+          heading: "The new designer/builder",
           points: [
-            "User — a specific person in a specific situation, never 'people'.",
-            "Need — what they're trying to get done, stated without your solution in it.",
-            "Constraint — what you can't change: budget, physics, law, attention.",
-            "Tradeoff — what you gave up to get the thing you chose.",
+            "You can speak three languages now: business, design and code.",
+            "Tools on their own make generic work. Your imagination is the part that is not generic.",
           ],
         },
-        {
-          layout: "exercise",
-          heading: "Ten minutes, in pairs",
-          prompt: "Pick the app on your phone you use most. Find one decision inside it that could plausibly have gone the other way. Say what was traded for what.",
-          time: "10 min, then four pairs report out",
-        },
-        { layout: "assignment" },
-      ],
-    },
-
-    {
-      week: 2,
-      date: "Sep 9",
-      title: "Talking to users without leading them",
-      status: "published",
-      summary:
-        "Almost every question you instinctively want to ask is the wrong one. We practise until they stop being leading.",
-      agenda: [
-        "Review of the Bad Design Logs — patterns across the room",
-        "Why 'would you use this?' produces a lie every time",
-        "The five questions that actually work",
-        "Live interview, facilitated, with the room critiquing the questions",
-        "Paired practice",
-      ],
-      readings: [
-        { title: "Just Enough Research, ch. 3: The Basics", author: "Erika Hall", note: "The chapter on interviewing. ~20 pages." },
-        { title: "The Mom Test, ch. 1", author: "Rob Fitzpatrick", note: "Short. The premise: never ask if your idea is good." },
-      ],
-      assignment: {
-        title: "Two interviews",
-        due: "Tue Sep 15, 11:59pm",
-        body: "Interview two people about a routine they have that involves some friction — commuting, cooking, studying, managing money, whatever. Twenty minutes each. Ask about last time, not about generally. Record if they consent, take notes if not. Then write the three things you heard that you did not expect.",
-        deliverable: "Notes from both, plus three surprises. One page is enough.",
-      },
-      materials: [
-        { label: "Interview guide + consent script", kind: "Doc" },
-        { label: "Question bank: leading vs. open", kind: "Doc" },
-      ],
-      slides: [
-        { layout: "title" },
         {
           layout: "statement",
-          text: "People will lie to you to be kind.",
-          sub: "Not out of malice. Because you asked a question that made agreement the polite answer.",
+          text: "Stop handing over pictures of a product.",
+          sub: "Hand over the product.",
         },
         {
-          layout: "two",
-          heading: "The same question, two ways",
-          left: { label: "Leading", body: "\"Would you use an app that helps you budget?\"\n\nAnswer: yes. Always yes. It costs them nothing to say yes and it makes you happy." },
-          right: { label: "Open", body: "\"Walk me through the last time you checked your account balance. What were you about to do?\"\n\nAnswer: a story, with facts in it." },
+          layout: "statement",
+          text: "So how can we start?",
         },
-        {
-          layout: "points",
-          heading: "Five questions that work",
-          points: [
-            "Tell me about the last time you did X.",
-            "What were you doing right before that?",
-            "What's the worst part of it?",
-            "What have you tried instead?",
-            "…and then silence. Count to five. They'll keep going.",
-          ],
-        },
-        {
-          layout: "points",
-          heading: "Three you should stop asking",
-          points: [
-            "Would you use this? — hypothetical, so the answer is fiction.",
-            "How much would you pay? — nobody knows, and they'll guess high to be nice.",
-            "Don't you find it annoying when…? — you just wrote their answer for them.",
-          ],
-        },
-        {
-          layout: "quote",
-          quote: "Opinions are worthless. Ask about their life instead.",
-          attribution: "Rob Fitzpatrick, The Mom Test",
-        },
-        { layout: "section", text: "Live interview", num: "02" },
-        {
-          layout: "exercise",
-          heading: "Paired practice",
-          prompt: "Ten minutes each way. Subject: how you decide what to eat on a weekday. Listener writes down every question they asked, verbatim. Afterward, mark which ones were leading.",
-          time: "25 min total",
-        },
+        { layout: "section", text: "Homework", num: "07" },
         { layout: "assignment" },
+        {
+          layout: "nametag",
+          heading: "One example, since digital counts",
+          name: "your name",
+          caption: "Type on it. Click it to change colour. Move your cursor across it.",
+        },
       ],
-    },
-
-    {
-      week: 3,
-      date: "Sep 16",
-      title: "From notes to a problem worth solving",
-      status: "published",
-      summary:
-        "Twenty pages of notes and no idea what to build. Clustering, naming, and narrowing until the problem is small enough to attack.",
-      agenda: [
-        "Affinity mapping the room's interview notes, live",
-        "Insight vs. observation vs. quote",
-        "Writing a problem statement that constrains you usefully",
-        "Choosing final project directions",
-      ],
-      readings: [
-        { title: "Design Thinking Bootleg: Define mode", author: "Stanford d.school", note: "The cards on point-of-view statements and 'How Might We'." },
-        { title: "Badass: Making Users Awesome, ch. 2", author: "Kathy Sierra", note: "On designing for what the user becomes, not what the product does." },
-      ],
-      assignment: {
-        title: "Problem statement + three How Might We's",
-        due: "Tue Sep 22, 11:59pm",
-        body: "From your two interviews, write one problem statement in the form: [specific person] needs [need stated as a verb] because [insight you didn't already know]. Then three How Might We questions at different altitudes — one narrow, one medium, one uncomfortably broad. This becomes your final project.",
-        deliverable: "Half a page. Bring it printed; we'll trade and critique in Week 4.",
-      },
-      materials: [
-        { label: "Affinity map board", kind: "FigJam" },
-        { label: "Problem statement examples, good and bad", kind: "Doc" },
-      ],
-    },
-
-    {
-      week: 4,
-      date: "Sep 23",
-      title: "Ideation, and why your first idea is a trap",
-      status: "published",
-      summary:
-        "Volume before judgment, then the harder skill: killing ideas on purpose, with a reason you can say out loud.",
-      agenda: [
-        "Crazy 8s, twice, with a hard timer",
-        "Why the first idea is almost always the one you already had before class",
-        "Constraint games: same problem, ten dollars, no screen, one button",
-        "Convergence: dot voting is a tool, not a verdict",
-      ],
-      readings: [
-        { title: "Sprint, ch. 9–10", author: "Jake Knapp", note: "The sketching and deciding chapters." },
-        { title: "Ten Principles for Good Design", author: "Dieter Rams", note: "One page. Argue with it." },
-      ],
-      assignment: {
-        title: "Twelve ideas, three survivors",
-        due: "Tue Sep 29, 11:59pm",
-        body: "Twelve sketched concepts against your problem statement — genuinely twelve, including the stupid ones. Then pick three and write one sentence each on why it survived. Then write one sentence on why you killed your favorite.",
-        deliverable: "One page of sketches, photographed. Four sentences.",
-      },
-      materials: [{ label: "Crazy 8s sheet, printable", kind: "PDF" }],
-    },
-
-    {
-      week: 5,
-      date: "Sep 30",
-      title: "Structure: flows, states, and information architecture",
-      status: "published",
-      summary:
-        "What screens exist, in what order, and what happens when things go wrong. Most bad products are structurally bad, not visually bad.",
-      agenda: [
-        "Drawing a user flow that survives contact with reality",
-        "The states everyone forgets: empty, loading, error, too much, offline",
-        "Navigation models, and how to pick one",
-        "Flow critique in threes",
-      ],
-      readings: [
-        { title: "Don't Make Me Think, ch. 2–3", author: "Steve Krug", note: "Short chapters, fast read." },
-        { title: "10 Usability Heuristics for User Interface Design", author: "Jakob Nielsen, NN/g", note: "Reference for the rest of the semester." },
-      ],
-      assignment: {
-        title: "Flow + state map",
-        due: "Tue Oct 6, 11:59pm",
-        body: "Map the main path through your concept, start to finish. Then annotate every point where it can fail or stall, and say what the product shows there. Empty state included — that's the one everyone skips.",
-        deliverable: "One flow diagram, minimum four annotated states.",
-      },
-      materials: [{ label: "Flow + states starter file", kind: "FigJam" }],
-    },
-
-    {
-      week: 6,
-      date: "Oct 7",
-      title: "Low-fidelity prototyping",
-      status: "published",
-      summary:
-        "Paper, then Figma. A thing you can put in a stranger's hands by Friday, not a thing you're proud of.",
-      agenda: [
-        "Paper prototypes and why they test better than you expect",
-        "Figma from zero: frames, auto layout, components, prototype links",
-        "Fidelity as a decision — what your fidelity is secretly promising",
-        "Build session, in class",
-      ],
-      readings: [
-        { title: "Paper Prototyping, ch. 1", author: "Carolyn Snyder", note: "The case for paper. Skim the rest." },
-        { title: "Figma: Auto Layout", author: "Figma Learn", note: "Watch before class. Fifteen minutes." },
-      ],
-      assignment: {
-        title: "Clickable v1",
-        due: "Tue Oct 13, 11:59pm",
-        body: "A prototype someone can click through end to end without you narrating. Grey boxes and Times New Roman are fine and encouraged. If it looks finished you spent time on the wrong thing.",
-        deliverable: "Figma prototype link, main path clickable.",
-      },
-      materials: [{ label: "Figma starter kit, wireframe components", kind: "Figma" }],
-    },
-
-    {
-      week: 7,
-      date: "Oct 14",
-      title: "Type, color, and the grid",
-      status: "published",
-      summary:
-        "Three systems that do most of the work, taught as rules you can follow before you have the instinct to break them.",
-      agenda: [
-        "Typographic hierarchy: size, weight, space, and nothing else",
-        "Measure, leading, tracking — the settings nobody touches and everybody should",
-        "Color with a job: one ink, one ground, one accent you have to earn",
-        "Grids, columns, and why alignment reads as competence",
-      ],
-      readings: [
-        { title: "Thinking with Type, part 1: Letter", author: "Ellen Lupton", note: "Look at it as much as read it." },
-        { title: "Practical Typography: Type Composition", author: "Matthew Butterick", note: "The summary of key rules." },
-      ],
-      assignment: {
-        title: "One screen, three type treatments",
-        due: "Tue Oct 20, 11:59pm",
-        body: "Take one screen from your v1. Set it three ways, changing only type and spacing — no color, no images, no new elements. Then say which reads fastest and why you think so.",
-        deliverable: "Three versions side by side, plus two sentences.",
-      },
-      materials: [{ label: "Type scale + spacing reference", kind: "Figma" }],
-    },
-
-    {
-      week: 8,
-      date: "Oct 21",
-      title: "Visual systems, not visual decoration",
-      status: "published",
-      summary:
-        "Making twenty screens look like one product, and the moment a style guide starts saving you time instead of costing it.",
-      agenda: [
-        "Building a small design system: color tokens, spacing scale, text styles",
-        "Components and variants in Figma, practically",
-        "Dark mode as a real decision rather than an inversion",
-        "Accessibility: contrast, target size, focus, motion",
-      ],
-      readings: [
-        { title: "Design Systems, ch. 1–2", author: "Alla Kholmatova", note: "On what makes a system cohere." },
-        { title: "WCAG 2.2 at a glance", author: "W3C", note: "Reference. Know contrast ratios and target sizes." },
-      ],
-      assignment: {
-        title: "Style pass on the whole prototype",
-        due: "Tue Oct 27, 11:59pm",
-        body: "Apply one consistent system across every screen. Every color, size, and spacing value should come from a defined set. Check contrast on the smallest text you used.",
-        deliverable: "Updated prototype plus a one-page system sheet.",
-      },
-      materials: [{ label: "Token starter file", kind: "Figma" }, { label: "Contrast checker links", kind: "Link" }],
-    },
-
-    {
-      week: 9,
-      date: "Oct 28",
-      title: "Interaction and motion",
-      status: "published",
-      summary:
-        "What happens between the screens. Feedback, latency, and motion that explains rather than performs.",
-      agenda: [
-        "Response, feedback, and the three latency thresholds",
-        "Transitions that carry meaning: where did this thing come from",
-        "Micro-interactions, and when they become noise",
-        "Prototyping motion in Figma without losing a night to it",
-      ],
-      readings: [
-        { title: "Designing Interface Animation, ch. 1–2", author: "Val Head", note: "On motion with a purpose." },
-        { title: "Response Times: The 3 Important Limits", author: "Jakob Nielsen, NN/g", note: "0.1s, 1s, 10s. Short." },
-      ],
-      assignment: {
-        title: "Three moments of feedback",
-        due: "Tue Nov 3, 11:59pm",
-        body: "Pick three moments in your flow where the user does something and the product must answer. Design the answer for each: what changes, how fast, and what it tells them.",
-        deliverable: "Three short screen recordings, or an annotated prototype.",
-      },
-      materials: [{ label: "Smart Animate examples", kind: "Figma" }],
-    },
-
-    {
-      week: 10,
-      date: "Nov 4",
-      title: "Critique",
-      status: "published",
-      summary:
-        "How to present work so it can be helped, how to give feedback that lands, and how to hear it without defending.",
-      agenda: [
-        "How to set up a crit: state the goal, the constraint, and the question",
-        "Feedback formats that work, and 'I like / I wish' and why it's weak",
-        "Full studio crit, everyone presents, six minutes each",
-      ],
-      readings: [
-        { title: "How to Give Feedback", author: "Julie Zhuo", note: "From The Year of the Looking Glass." },
-        { title: "Discussing Design: The Critique Method", author: "Adam Connor & Aaron Irizarry", note: "Chapter on running critique." },
-      ],
-      assignment: {
-        title: "Crit response",
-        due: "Tue Nov 10, 11:59pm",
-        body: "Write down the three pieces of feedback you got that you disagreed with. For each: make the strongest case for the other side, then decide. You may still disagree — but you have to have argued the other position first.",
-        deliverable: "Three short paragraphs, plus what you changed.",
-      },
-      materials: [{ label: "Crit sign-up sheet", kind: "Doc" }],
-    },
-
-    {
-      week: 11,
-      date: "Nov 11",
-      title: "Usability testing",
-      status: "published",
-      summary:
-        "Five people, one script, no helping. Watching a stranger fail at the thing you built is the fastest week of the term.",
-      agenda: [
-        "Writing tasks instead of asking questions",
-        "The hardest rule: do not help, do not explain, do not flinch",
-        "Running a session in fifteen minutes",
-        "Turning observations into a ranked list of what to fix",
-      ],
-      readings: [
-        { title: "Rocket Surgery Made Easy, ch. 1–4", author: "Steve Krug", note: "The whole method, quickly." },
-        { title: "Why You Only Need to Test with 5 Users", author: "Jakob Nielsen, NN/g", note: "The argument for small n." },
-      ],
-      assignment: {
-        title: "Test with five",
-        due: "Tue Nov 17, 11:59pm",
-        body: "Five sessions with people who aren't in this class. Same three tasks each time. Log every point where someone hesitated, backtracked, or asked you a question. Rank the problems by how many people hit them.",
-        deliverable: "Test script, raw notes, ranked list of issues.",
-      },
-      materials: [{ label: "Test script template", kind: "Doc" }, { label: "Observation log", kind: "Sheet" }],
-    },
-
-    {
-      week: 12,
-      date: "Nov 18",
-      title: "Designing with and for AI",
-      status: "published",
-      summary:
-        "Two problems: using these tools in your own process, and designing for systems that are slow, probabilistic and sometimes wrong.",
-      agenda: [
-        "AI in the process: where it genuinely helps and where it flattens your work",
-        "Designing for uncertainty — confidence, correction, and undo",
-        "Why the chat box is a default, not an answer",
-        "Live: rebuilding one of your screens as a non-chat AI interaction",
-      ],
-      readings: [
-        { title: "Why Chatbots Are Not the Future", author: "Amelia Wattenberger", note: "Short, visual, argumentative." },
-        { title: "The Expanding Dark Forest and Generative AI", author: "Maggie Appleton", note: "On what these tools do to the field." },
-        { title: "Magic Ink", author: "Bret Victor", note: "Optional, long, worth it. Read the first section." },
-      ],
-      assignment: {
-        title: "One AI moment, no chat box",
-        due: "Tue Nov 24, 11:59pm",
-        body: "Find one place in your product where a model could genuinely help. Design that interaction without a chat interface. Show what happens when the model is confident, when it's unsure, and when it's wrong.",
-        deliverable: "Three states, designed. One paragraph on the failure case.",
-      },
-      materials: [{ label: "Reference: non-chat AI interfaces", kind: "Link" }],
-    },
-
-    {
-      week: 13,
-      date: "Dec 2",
-      title: "Final presentations",
-      status: "draft",
-      summary:
-        "Eight minutes each: the problem, what changed your mind, the prototype, and what broke in testing.",
-      agenda: [
-        "Presentations, eight minutes plus two for questions",
-        "What to do with this after the semester",
-        "Course feedback, honestly",
-      ],
-      readings: [],
-      assignment: {
-        title: "Final project",
-        due: "Presented in class, Dec 2",
-        body: "The full arc: problem statement, research, prototype, test results, and what you'd do next. Show the version that failed alongside the one that worked — the change is the interesting part.",
-        deliverable: "Presentation plus a link to the final prototype.",
-      },
-      materials: [{ label: "Presentation order + timing", kind: "Doc" }],
     },
   ],
 };

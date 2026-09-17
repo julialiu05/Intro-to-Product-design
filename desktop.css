@@ -1,0 +1,1346 @@
+/* ==========================================================================
+   DES 198 — DESKTOP
+
+   The course as a Finder window. Every week is a file, and the Kind column
+   is the design that week wears, which is the argument the whole site is
+   making: same content, thirteen presentations, listed in a column like any
+   other file attribute.
+
+   ---------------------------------------------------------------------------
+   DESIGN LANGUAGE: LIQUID GLASS (macOS 26 Tahoe, as refined in macOS 27)
+
+   Liquid Glass is a translucent finish that reflects and refracts what sits
+   behind it, and it reaches from the smallest control to the largest
+   structure. What that means concretely here:
+
+     The menu bar is transparent. Not tinted, not frosted: the wallpaper
+     runs straight under it.
+
+     Sidebars and toolbars are the glass. The window itself has no opaque
+     background, so the wallpaper shows through the sidebar and title bar
+     while the content area stays solid enough to read.
+
+     Corners are concentric. An inner radius equals the outer radius minus
+     the gap between them, so curves stay parallel instead of fighting.
+     --r-win and --r-in are set up that way and must stay in step.
+
+     Glass has an edge. Real glass catches light along its rim, so every
+     glass surface carries a bright top inset line and a darker bottom one.
+     That edge, not a border, is what makes it read as a material.
+
+   THE OPACITY CONTROL. macOS 27 reduced the default transparency because
+   content was getting lost, and added a control running from a tinted,
+   nearly opaque look to clear glass. That is a real setting, so it is real
+   here: --glass-op drives every glass surface at once, and the Apple menu
+   sets it. Legibility has to hold at both ends, which is the guidance.
+
+   ---------------------------------------------------------------------------
+   ASSETS. Nothing here is drawn by hand. There is no official Apple design
+   system for the web: Apple ships the macOS UI Kit as Figma and Sketch files
+   only, and both those and SF Symbols are licensed for software running on
+   Apple's own operating systems, which a course website is not. So this uses
+   the two Apple assets a Mac already serves:
+
+     SF Pro              via -apple-system, the real system font
+     Apple Color Emoji   the file, folder and menu-bar icons, Apple's own
+                         artwork rendered by the OS
+      (U+F8FF)         the Apple logo glyph, also from the system font
+
+   The system accent follows CURRENT_WEEK's theme, the way the macOS accent
+   colour is a system setting.
+   ========================================================================== */
+
+:root {
+  --wall-1: #2b4a6f;
+  --wall-2: #14243a;
+  --accent: #0a6cff;
+  --accent-ink: #ffffff;
+
+  /* 0 = clear glass, 1 = tinted and nearly opaque. The Apple menu sets it.
+     The default sits high because macOS 27 pulled transparency back. */
+  --glass-op: .62;
+
+  /* the glass recipe, mixed from --glass-op so one dial moves everything */
+  --glass-tint:  rgba(255, 255, 255, calc(.10 + .74 * var(--glass-op)));
+  --glass-deep:  rgba(246, 247, 250, calc(.06 + .80 * var(--glass-op)));
+  --glass-spec:  rgba(255, 255, 255, calc(.50 + .35 * var(--glass-op)));
+  --glass-under: rgba(0, 0, 0, .07);
+  --glass-blur:  32px;
+
+  --content: rgba(255, 255, 255, calc(.72 + .26 * var(--glass-op)));
+
+  /* VIBRANCY. Text on glass cannot be one fixed colour: as the glass goes
+     clear the dark wallpaper comes through and dark ink disappears into it,
+     which is the legibility complaint against this design language. So the
+     ink on glass follows the opacity, flipping to white as the glass clears.
+     The curve is steep on purpose, so ink stays properly dark until the
+     glass is genuinely transparent rather than passing through a muddy grey. */
+  --on-glass: clamp(0%, calc((var(--glass-op) - .26) * 260%), 100%);
+  --glass-ink:      color-mix(in oklab, #1d1d1f var(--on-glass), #ffffff);
+  --glass-ink-soft: color-mix(in oklab, #5f6066 var(--on-glass), rgba(255,255,255,.82));
+  --glass-shade: 0 1px 3px rgba(0, 0, 0, calc(.55 - .55 * var(--glass-op)));
+
+  --ink:        #1d1d1f;
+  --ink-soft:   #5f6066;
+  --ink-faint:  #8e8f96;
+  --hair:       rgba(0, 0, 0, .10);
+  --row-alt:    rgba(0, 0, 0, .022);
+  --sel-idle:   rgba(0, 0, 0, .075);
+
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue",
+          "Segoe UI", system-ui, sans-serif;
+
+  /* Concentric corners: an inner surface inset by --inset from a container
+     with radius --r-win gets --r-in, so the two curves stay parallel. */
+  --r-win: 17px;
+  --inset: 7px;
+  --r-in: calc(var(--r-win) - var(--inset));
+  --r-ctl: 8px;
+
+
+  /* Text sitting directly on the wallpaper: the menu bar and the icon labels.
+     White ink was right over a dark gradient and is wrong over this one, which
+     is a pale sky at the top where the menu bar sits. So the ink is dark and
+     the halo behind it is light, the opposite of the usual arrangement. Swap
+     both if you ever put a dark photo here, and check the menu bar first: it
+     lands on the brightest part of the image. */
+  --desk-ink:   #23241f;
+  --desk-shade: 0 1px 2px rgba(255,255,255,.7), 0 0 10px rgba(255,255,255,.45);
+  --desk-hover: rgba(0, 0, 0, .1);
+
+  --menubar-h: 26px;
+  --dock-h: 70px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-mode="light"]) {
+    --wall-1: #1b3350;
+    --wall-2: #060c15;
+    --glass-tint:  rgba(70, 72, 82, calc(.14 + .72 * var(--glass-op)));
+    --glass-deep:  rgba(38, 40, 47, calc(.10 + .80 * var(--glass-op)));
+    --glass-spec:  rgba(255, 255, 255, calc(.16 + .16 * var(--glass-op)));
+    --glass-under: rgba(0, 0, 0, .3);
+    --content: rgba(28, 29, 34, calc(.70 + .28 * var(--glass-op)));
+    --glass-ink: #f2f2f4;
+    --glass-ink-soft: #a6a7ae;
+    --glass-shade: none;
+    --ink:        #f2f2f4;
+    --ink-soft:   #a6a7ae;
+    --ink-faint:  #7a7b83;
+    --hair:       rgba(255, 255, 255, .09);
+    --row-alt:    rgba(255, 255, 255, .028);
+    --sel-idle:   rgba(255, 255, 255, .1);
+  }
+}
+
+* { box-sizing: border-box; }
+
+/* An explicit display in this file would otherwise beat the hidden attribute,
+   which is what left the empty Quick Look panel covering the desktop. */
+[hidden] { display: none !important; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--wall-2);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+/* Apple Color Emoji first, so the icons are Apple's artwork on a Mac and the
+   platform's own set elsewhere. Never a hand-drawn substitute. */
+.glyph {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-style: normal;
+  line-height: 1;
+}
+
+.noscript {
+  position: fixed; inset: auto 0 0 0; z-index: 99;
+  margin: 0; padding: 1rem 1.25rem;
+  background: var(--content); color: var(--ink);
+  font-size: 13px; line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   THE GLASS
+   One place mixes the material, so every surface is the same stuff.
+   -------------------------------------------------------------------------- */
+
+.glass {
+  position: relative;
+  background:
+    linear-gradient(180deg,
+      var(--glass-tint) 0%,
+      var(--glass-deep) 46%,
+      var(--glass-deep) 100%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(190%) brightness(1.06);
+  backdrop-filter: blur(var(--glass-blur)) saturate(190%) brightness(1.06);
+  box-shadow:
+    inset 0 .5px 0 var(--glass-spec),          /* the lit top rim */
+    inset 0 -.5px 0 var(--glass-under),        /* the shaded bottom rim */
+    inset .5px 0 0 rgba(255,255,255,.16),
+    inset -.5px 0 0 rgba(255,255,255,.08);
+}
+
+/* --------------------------------------------------------------- menu bar -- */
+/* Transparent by default in Tahoe: the wallpaper runs straight under it, so
+   the only job left is keeping the text legible against whatever it lands on. */
+
+.menubar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  height: var(--menubar-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 10px 0 7px;
+  background: transparent;
+  color: var(--desk-ink);
+  font-size: 13px;
+  text-shadow: var(--desk-shade);
+  user-select: none;
+}
+
+.menubar__left, .menubar__right { display: flex; align-items: center; gap: 1px; }
+.menubar__right { gap: 10px; padding-right: 2px; }
+
+/* U+F8FF is Apple's own logo glyph in the system font */
+.menubar__apple {
+  width: 26px; height: 20px; padding: 0;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 7px;
+  background: transparent; color: inherit;
+  font-family: var(--font); font-size: 15px; line-height: 20px;
+  text-shadow: inherit;
+  cursor: default;
+}
+.menubar__apple::before { content: "\F8FF"; }
+
+.menubar__item {
+  padding: 2px 10px;
+  border-radius: 7px;
+  line-height: 17px;
+  cursor: default;
+}
+.menubar__item--app { font-weight: 590; }
+.menubar__item:hover, .menubar__apple:hover,
+.menubar__item[data-on], .menubar__apple[data-on] {
+  background: var(--desk-hover);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.menubar__time { font-size: 13px; font-variant-numeric: tabular-nums; }
+
+/* -------------------------------------------------------------- drop-downs -- */
+
+.dropdown {
+  position: fixed; z-index: 60;
+  min-width: 232px; max-width: min(460px, 90vw);
+  max-height: 70vh; overflow-y: auto;
+  padding: 6px;
+  border-radius: 14px;
+  box-shadow:
+    inset 0 .5px 0 var(--glass-spec),
+    inset 0 -.5px 0 var(--glass-under),
+    0 18px 50px rgba(0,0,0,.34),
+    0 2px 8px rgba(0,0,0,.18);
+  color: var(--glass-ink);
+  font-size: 13px;
+}
+.dropdown button {
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  width: 100%; padding: 5px 10px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 8px;
+  background: transparent; color: var(--glass-ink);
+  font: inherit; text-align: left; cursor: default;
+}
+.dropdown button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dropdown button:disabled { color: var(--glass-ink-soft); opacity: .7; }
+.dropdown button:not(:disabled):hover { background: var(--accent); color: var(--accent-ink); }
+.dropdown button[aria-checked="true"] span::before { content: "\2713\00A0\00A0"; }
+.dropdown kbd { font: inherit; color: var(--glass-ink-soft); flex: none; }
+.dropdown button:not(:disabled):hover kbd { color: inherit; opacity: .8; }
+.dropdown hr { margin: 6px 10px; border: 0; border-top: .5px solid var(--hair); }
+
+/* ---------------------------------------------------------------- desktop -- */
+/* The wallpaper carries real colour because glass has nothing to refract over
+   a flat fill. Two soft blooms in the week's accent, nothing more. */
+
+/* The wallpaper rotates, so it is two stacked layers rather than one image.
+   One holds what you are looking at, the other is loaded with what comes next
+   and then faded up; the next change swaps their roles. Crossfading needs two
+   layers because you cannot fade an element to a different version of itself.
+
+   The gradient sits under both as the fallback and the colour the edges blend
+   into, so a slow or missing file never shows a white void. */
+
+.desktop {
+  position: fixed; inset: 0;
+  background: linear-gradient(163deg, var(--wall-1) 0%, var(--wall-2) 100%);
+  overflow: hidden;
+}
+
+.desktop::before,
+.desktop::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: center / cover no-repeat;
+  transition: opacity 1600ms ease-in-out;
+}
+.desktop::before { background-image: var(--shot-a); opacity: 1; }
+.desktop::after  { background-image: var(--shot-b); opacity: 0; }
+.desktop[data-layer="b"]::before { opacity: 0; }
+.desktop[data-layer="b"]::after  { opacity: 1; }
+
+.icons {
+  /* The wallpaper layers are absolutely positioned, so they paint above any
+     in-flow content. Without a stacking order of its own the icon labels end
+     up underneath them, while the emoji stays visible because its filter
+     lifts it into the same paint step. Both belong above the wallpaper. */
+  position: relative; z-index: 1;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(auto-fill, 96px);
+  justify-content: end;
+  gap: 2px;
+  height: 100%;
+  padding: calc(var(--menubar-h) + 8px) 14px calc(var(--dock-h) + 14px);
+}
+
+.icon {
+  width: 90px;
+  display: grid; grid-template-columns: 1fr; justify-items: center; gap: 4px;
+  padding: 6px 2px 5px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 12px;
+  background: transparent; box-shadow: none;
+  font: inherit; color: var(--desk-ink);
+  cursor: default;
+}
+.icon .glyph {
+  font-size: 42px;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,.28));
+}
+.icon span:last-child {
+  max-width: 84px;
+  padding: 1px 6px;
+  border-radius: 7px;
+  font-size: 12px; line-height: 1.25;
+  text-align: center;
+  text-shadow: var(--desk-shade);
+  overflow-wrap: anywhere;
+}
+.icon[aria-selected="true"] .glyph {
+  background: rgba(255,255,255,.18);
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.icon[aria-selected="true"] span:last-child {
+  background: var(--accent); color: var(--accent-ink); text-shadow: none;
+}
+.icon:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+
+/* ----------------------------------------------------------------- windows -- */
+/* The window has no opaque background of its own. That is what lets the
+   wallpaper show through the sidebar and the toolbar. */
+
+.windows { position: fixed; inset: var(--menubar-h) 0 0 0; pointer-events: none; z-index: 20; }
+
+.window {
+  position: absolute;
+  display: flex; flex-direction: column;
+  min-width: 360px; min-height: 220px;
+  background: transparent;
+  border-radius: var(--r-win);
+  /* No drop shadow. The half-pixel rim is what separates the window from the
+     wallpaper, and it is the only thing that should: a cast shadow would put
+     the window above the glass rather than in it. */
+  box-shadow: 0 0 0 .5px rgba(255,255,255,.16);
+  overflow: hidden;
+  pointer-events: auto;
+}
+.window[data-min="true"] { display: none; }
+.window[data-zoom="true"] {
+  left: 0 !important; top: 0 !important;
+  width: 100% !important; height: 100% !important;
+  border-radius: 0;
+}
+
+/* the toolbar, which in Tahoe is glass rather than a tinted bar */
+.window__bar {
+  display: flex; align-items: center; gap: 10px;
+  height: 50px; flex: none;
+  padding: 0 15px;
+  cursor: default; user-select: none;
+  z-index: 2;
+}
+
+.lights { display: flex; gap: 8px; flex: none; }
+
+.light {
+  position: relative;
+  width: 12px; height: 12px; padding: 0;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 50%;
+  box-shadow: inset 0 .5px 0 rgba(255,255,255,.45), 0 .5px 1px rgba(0,0,0,.2);
+  cursor: default;
+}
+.light--close { background: #ff5f57; }
+.light--min   { background: #febc2e; }
+.light--zoom  { background: #28c840; }
+.window[data-focus="false"] .light { background: rgba(150,150,155,.5); box-shadow: none; }
+
+/* The hover symbols are characters from the system font, not drawn shapes. */
+.light::after {
+  content: "";
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-family: var(--font);
+  font-size: 10px; line-height: 1;
+  color: rgba(0,0,0,.62);
+  opacity: 0;
+}
+.lights:hover .light::after { opacity: 1; }
+.light--close::after { content: "\00D7"; font-size: 12px; }
+.light--min::after   { content: "\2212"; }
+.light--zoom::after  { content: "\2921"; font-size: 9px; }
+
+.window__title {
+  flex: 1; margin: 0;
+  font-size: 13px; font-weight: 590; text-align: center;
+  color: var(--glass-ink);
+  text-shadow: var(--glass-shade);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.window[data-focus="false"] .window__title { color: var(--ink-faint); }
+
+.window__tools { display: flex; gap: 6px; flex: none; }
+.tool {
+  padding: 4px 11px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 999px;              /* Tahoe rounds its controls */
+  background: rgba(255,255,255,.16);
+  box-shadow: inset 0 .5px 0 rgba(255,255,255,.4), inset 0 -.5px 0 rgba(0,0,0,.08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--glass-ink);
+  font: inherit; font-size: 12px;
+  cursor: default;
+}
+.tool:hover { background: var(--accent); color: var(--accent-ink); }
+
+.window__body { flex: 1; display: flex; min-height: 0; }
+
+/* sidebar: floating glass, concentric with the window corner */
+
+.side {
+  width: 190px; flex: none;
+  padding: 8px 8px 10px;
+  border-right: .5px solid var(--hair);
+  overflow-y: auto;
+}
+.side h3 {
+  margin: 9px 0 3px; padding: 0 8px;
+  font-size: 11px; font-weight: 590;
+  color: var(--glass-ink-soft);
+  text-shadow: var(--glass-shade);
+}
+.side h3:first-child { margin-top: 2px; }
+.side button {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 5px 8px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 8px;
+  background: transparent; color: var(--glass-ink);
+  text-shadow: var(--glass-shade);
+  font: inherit; font-size: 13px; text-align: left;
+  cursor: default;
+}
+.side .glyph { font-size: 13px; flex: none; width: 16px; text-align: center; }
+.side button span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.side button:hover { background: var(--sel-idle); }
+.side button[aria-current="true"] {
+  background: rgba(255,255,255,.3);
+  box-shadow: inset 0 .5px 0 rgba(255,255,255,.5), 0 1px 3px rgba(0,0,0,.1);
+  font-weight: 500;
+}
+
+/* content area: the solid surface, so the list stays readable */
+
+.list {
+  flex: 1; display: flex; flex-direction: column; min-width: 0;
+  background: var(--content);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  overflow: hidden;
+}
+
+.list__head {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 74px 136px 92px;
+  height: 28px; flex: none;
+  border-bottom: .5px solid var(--hair);
+}
+.list__head button {
+  display: flex; align-items: center; gap: 4px;
+  min-width: 0; padding: 0 10px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-right: .5px solid var(--hair);
+  background: transparent; color: var(--ink-soft);
+  font: inherit; font-size: 11px; font-weight: 500;
+  text-align: left; cursor: default;
+}
+.list__head button:last-child { border-right: 0; }
+.list__head button:hover { background: var(--sel-idle); }
+.list__head .dir { font-size: 8px; color: var(--ink-faint); }
+
+/* A week folder has no sidebar, so it can afford wider metadata columns:
+   a reading's author is the useful part of its Kind and should not clip. */
+.list--folder .list__head,
+.list--folder .row { grid-template-columns: minmax(0,1fr) 104px 176px 76px; }
+
+.list__rows { flex: 1; overflow-y: auto; padding: 4px; }
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 74px 136px 92px;
+  align-items: center;
+  width: 100%; height: 26px;
+  padding: 0; border: 0;
+  border-radius: var(--r-ctl);              /* Tahoe rounds list selection */
+  background: transparent; color: var(--ink);
+  font: inherit; font-size: 13px; text-align: left;
+  cursor: default;
+}
+.row:nth-child(even) { background: var(--row-alt); }
+.row > * { padding: 0 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row__name { display: flex; align-items: center; gap: 5px; padding-left: 9px; }
+.row__name .glyph { font-size: 13px; flex: none; }
+.row__date, .row__kind, .row__state { color: var(--ink-soft); font-size: 12px; }
+.row__date { font-variant-numeric: tabular-nums; }
+
+/* The disclosure triangle. Finder's list view is an outline view, which is
+   Apple's own name for an expandable hierarchical list, so the weeks twist
+   open to show what they contain. */
+.row__disc {
+  flex: none;
+  width: 14px; height: 14px;
+  display: inline-grid; place-items: center;
+  margin-right: 1px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; background: transparent;
+  color: var(--ink-soft);
+  font: inherit; font-size: 8px; line-height: 1;
+  cursor: default;
+  transition: transform 160ms cubic-bezier(.3,.9,.3,1);
+}
+.row__disc[data-open="true"] { transform: rotate(90deg); }
+.row__disc--none { visibility: hidden; }
+.row:hover .row__disc { color: var(--ink); }
+
+.row[aria-selected="true"] {
+  background: var(--accent); color: var(--accent-ink);
+  box-shadow: inset 0 .5px 0 rgba(255,255,255,.3);
+}
+.row[aria-selected="true"] .row__disc { color: var(--accent-ink); }
+.row[aria-selected="true"] .row__date,
+.row[aria-selected="true"] .row__kind,
+.row[aria-selected="true"] .row__state { color: var(--accent-ink); opacity: .85; }
+.row[data-draft="true"] .row__name { opacity: .45; }
+.row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+
+.list__foot {
+  flex: none;
+  display: flex; align-items: center; justify-content: center;
+  height: 26px; padding: 0 10px;
+  border-top: .5px solid var(--hair);
+  color: var(--ink-soft); font-size: 11px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* a plain document surface, for Read Me and Quick Look */
+
+.doc {
+  flex: 1; overflow-y: auto; padding: 24px 30px 32px;
+  background: var(--content);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-radius: var(--r-in);
+}
+.doc h1 { margin: 0 0 2px; font-size: 21px; font-weight: 640; letter-spacing: -.015em; }
+.doc .sub { margin: 0 0 18px; color: var(--ink-soft); font-size: 13px; }
+.doc h2 {
+  margin: 20px 0 6px;
+  font-size: 11px; font-weight: 590; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.doc p, .doc li { font-size: 13px; line-height: 1.55; max-width: 62ch; }
+.doc p { margin: 0 0 10px; }
+.doc ul, .doc ol { margin: 0 0 10px; padding-left: 20px; }
+.doc li { margin-bottom: 3px; }
+.doc dl { display: grid; grid-template-columns: 120px 1fr; gap: 2px 14px; margin: 0; font-size: 13px; }
+.doc dt { color: var(--ink-soft); }
+.doc dd { margin: 0; }
+.doc a { color: var(--accent); }
+
+/* ------------------------------------------------------------- quick look -- */
+
+.ql {
+  position: fixed; inset: 0; z-index: 70;
+  display: grid; place-items: center;
+  padding: 6vh 5vw;
+  background: rgba(0,0,0,.3);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.ql__panel {
+  width: min(670px, 100%); max-height: 80vh;
+  display: flex; flex-direction: column;
+  padding: 0 var(--inset) var(--inset);
+  border-radius: var(--r-win);
+  box-shadow: 0 0 0 .5px rgba(255,255,255,.16);
+  overflow: hidden;
+}
+.ql__bar {
+  display: flex; align-items: center; gap: 12px;
+  height: 46px; flex: none; padding: 0 8px;
+}
+.ql__title {
+  flex: 1; margin: 0;
+  font-size: 13px; font-weight: 590; text-align: center;
+  color: var(--glass-ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ql__open {
+  flex: none; padding: 4px 13px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  box-shadow: inset 0 .5px 0 rgba(255,255,255,.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--ink);
+  font: inherit; font-size: 12px; cursor: default;
+}
+.ql__open:hover { background: var(--accent); color: var(--accent-ink); }
+
+/* ------------------------------------------------------------------- dock -- */
+
+.dock {
+  position: fixed; left: 50%; bottom: 8px; z-index: 40;
+  transform: translateX(-50%);
+  display: flex; align-items: flex-end; gap: 8px;
+  max-width: calc(100vw - 24px);
+  /* The panel grows with the wave. --dock-pad is half the total growth of the
+     icons plus the resting padding, set by the pointer handler, and it grows
+     on both sides at once: the dock is centred, so equal padding leaves the
+     icons where they are in flow and only pushes the glass edges outward. */
+  padding: 7px var(--dock-pad, 9px);
+  transition: padding 130ms cubic-bezier(.25,.9,.3,1);
+  border-radius: 24px;
+  box-shadow:
+    inset 0 .5px 0 var(--glass-spec),
+    inset 0 -.5px 0 var(--glass-under),
+    0 14px 40px rgba(0,0,0,.38),
+    0 2px 8px rgba(0,0,0,.2);
+}
+
+.dock__app {
+  position: relative;
+  width: 48px; height: 48px; padding: 0;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 12px;
+  background: transparent;
+  cursor: default;
+  transform-origin: bottom center;
+  /* --m is how magnified this icon is (0 to 1), --px how far it slides to
+     make room. Both are set by the pointer handler in desktop.js. */
+  transform:
+    translateX(var(--px, 0px))
+    translateY(calc(var(--m, 0) * -13px))
+    scale(calc(1 + var(--m, 0) * .62));
+  transition: transform 130ms cubic-bezier(.25,.9,.3,1);
+  will-change: transform;
+}
+.dock__app .glyph {
+  font-size: 38px;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.3));
+}
+/* The running dot. It follows the glass ink rather than being a fixed
+   colour, because the dock is glass: a white dot vanished on a pale
+   wallpaper, and a black one would vanish once the glass goes dark. */
+.dock__app[data-on="true"]::after {
+  content: ""; position: absolute; left: 50%; bottom: -3px;
+  width: 4px; height: 4px; margin-left: -2px;
+  border-radius: 50%;
+  background: var(--glass-ink);
+  opacity: .75;
+}
+.dock__app::before {
+  content: attr(data-label);
+  position: absolute; bottom: 60px; left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 11px;
+  background: var(--glass-deep);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 9px;
+  box-shadow: inset 0 .5px 0 var(--glass-spec), 0 6px 18px rgba(0,0,0,.3);
+  color: var(--glass-ink); font-size: 12px; white-space: nowrap;
+  opacity: 0; pointer-events: none;
+}
+.dock__app:hover::before { opacity: 1; }
+
+.dock__sep {
+  width: .5px; height: 38px; margin: 0 4px;
+  align-self: center;
+  background: rgba(255,255,255,.28);
+}
+
+/* ------------------------------------------------------------------ small -- */
+
+@media (max-width: 660px) {
+  .icons {
+    grid-auto-flow: row; grid-template-rows: none;
+    grid-template-columns: repeat(auto-fill, 90px);
+    justify-content: start;
+  }
+  .window {
+    left: 6px !important; top: 6px !important;
+    width: calc(100vw - 12px) !important;
+    height: calc(100% - var(--dock-h) - 18px) !important;
+  }
+  .side { display: none; }
+  .list__head, .row { grid-template-columns: minmax(0,1fr) 74px; }
+  .row__kind, .row__state,
+  .list__head button:nth-child(3), .list__head button:nth-child(4) { display: none; }
+  .menubar__item[data-menu="edit"],
+  .menubar__item[data-menu="view"] { display: none; }
+  .doc { padding: 18px; }
+  .doc dl { grid-template-columns: 1fr; }
+  .doc dt { margin-top: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .dock__app { transform: none; }
+}
+
+/* --------------------------------------------------------------------- apps -- */
+/* Calendar and the games. They sit on the same solid surface the Finder list
+   uses, because a grid of numbers has to stay readable whatever the glass is
+   doing behind it. */
+
+.cal, .g2048, .c4 {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  padding: 12px;
+  background: var(--content);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-radius: var(--r-in);
+  overflow: hidden;
+}
+.g2048, .c4 { overflow: auto; }
+
+.game__bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  flex: none; margin-bottom: 10px;
+}
+.game__score { font-size: 12px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.game__btn {
+  padding: 4px 11px;
+  appearance: none; -webkit-appearance: none;
+  border: .5px solid var(--hair); border-radius: 999px;
+  background: transparent; color: var(--ink);
+  font: inherit; font-size: 12px; cursor: default;
+}
+.game__btn:hover { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.game__note { margin: 10px 0 0; font-size: 11px; color: var(--ink-faint); text-align: center; }
+
+/* calendar */
+
+.cal__head { display: flex; align-items: center; gap: 8px; flex: none; margin-bottom: 8px; }
+.cal__title { flex: 1; margin: 0; font-size: 14px; font-weight: 640; text-align: center; }
+.cal__nav {
+  width: 26px; height: 24px; padding: 0;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 7px;
+  background: transparent; color: var(--ink-soft);
+  font: inherit; font-size: 16px; line-height: 1; cursor: default;
+}
+.cal__nav:hover { background: var(--sel-idle); color: var(--ink); }
+
+.cal__dow, .cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal__dow { flex: none; margin-bottom: 4px; }
+.cal__dow span {
+  text-align: center; font-size: 10px; font-weight: 590;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.cal__grid { flex: 1; min-height: 0; grid-auto-rows: 1fr; }
+.cal__day {
+  position: relative;
+  min-height: 0;
+  display: grid; place-items: center;
+  padding: 0;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 8px;
+  background: transparent; color: var(--ink);
+  font: inherit; font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  cursor: default;
+}
+.cal__day:hover { background: var(--sel-idle); }
+.cal__day--out { color: var(--ink-faint); opacity: .45; pointer-events: none; }
+.cal__day[data-today="true"] { font-weight: 700; box-shadow: inset 0 0 0 1.5px var(--ink-faint); }
+.cal__day[data-sel="true"] { background: var(--accent); color: var(--accent-ink); }
+.cal__dot {
+  position: absolute; bottom: 4px; left: 50%;
+  width: 4px; height: 4px; margin-left: -2px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.cal__day[data-sel="true"] .cal__dot { background: var(--accent-ink); }
+
+.cal__detail { flex: none; margin-top: 10px; padding-top: 10px; border-top: .5px solid var(--hair); }
+.cal__none { margin: 0; font-size: 12px; color: var(--ink-faint); }
+.cal__due { display: grid; gap: 1px; margin-bottom: 8px; font-size: 12px; }
+.cal__due strong { font-size: 13px; font-weight: 590; }
+.cal__due span { color: var(--ink-soft); }
+.cal__due a { color: var(--accent); font-size: 12px; justify-self: start; }
+
+/* 2048 */
+
+.g2048:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.g2048__board {
+  flex: none;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px;
+  padding: 7px;
+  border-radius: 10px;
+  background: var(--sel-idle);
+  touch-action: none;
+}
+.tile {
+  aspect-ratio: 1 / 1;
+  display: grid; place-items: center;
+  border-radius: 7px;
+  background: rgba(127,127,127,.09);
+  font-size: 20px; font-weight: 680;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  color: #4a4438;
+}
+.tile[data-v]      { background: #eee4da; }
+.tile[data-v="4"]  { background: #ece0c8; }
+.tile[data-v="8"]  { background: #f2b179; color: #fff; }
+.tile[data-v="16"] { background: #f59563; color: #fff; }
+.tile[data-v="32"] { background: #f57c5f; color: #fff; }
+.tile[data-v="64"] { background: #f65e3b; color: #fff; }
+.tile[data-v="128"], .tile[data-v="256"],
+.tile[data-v="512"] { background: #edcf72; color: #fff; font-size: 18px; }
+.tile[data-v="1024"], .tile[data-v="2048"],
+.tile[data-v="big"] { background: #edc22e; color: #fff; font-size: 16px; }
+
+/* connect four */
+
+.c4__board {
+  flex: none;
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;
+  padding: 7px;
+  border-radius: 10px;
+  background: rgba(86, 118, 170, .22);
+}
+.c4__slot {
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 50%;
+  background: var(--content);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.22);
+  cursor: default;
+}
+.c4__slot:not(:disabled):hover { box-shadow: inset 0 0 0 2px var(--accent); }
+.c4__slot[data-p="1"] { background: #f0779d; box-shadow: inset 0 -2px 3px rgba(0,0,0,.14); }
+.c4__slot[data-p="2"] { background: #f2c14e; box-shadow: inset 0 -2px 3px rgba(0,0,0,.14); }
+
+/* the Games launcher: one dock icon, both games inside */
+.games {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 10px;
+  background: var(--content);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-radius: var(--r-in);
+  overflow: auto;
+}
+.games__item {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 10px 12px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 12px;
+  background: transparent; color: var(--ink);
+  font: inherit; text-align: left; cursor: default;
+}
+.games__item:hover { background: var(--sel-idle); }
+.games__item .glyph { font-size: 30px; flex: none; }
+.games__text { display: grid; gap: 1px; min-width: 0; }
+.games__text strong { font-size: 13px; font-weight: 590; }
+.games__text span { font-size: 12px; color: var(--ink-soft); }
+
+/* a person's one-line bio, under their name in the Notes app */
+.doc dd .bio {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-soft);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   SCROLL DECK  (scroll.html?w=1)
+
+   The deck read the way you read a PDF: one slide per screen, scrolling down,
+   each one locking into place as it arrives. It stays in the Apple design
+   rather than wearing the week's own theme, so it matches the desktop it
+   opens from.
+
+   The locking is CSS scroll snapping rather than JavaScript watching the
+   scroll position, so the browser does it on the compositor: smooth, and it
+   survives a fast trackpad flick.
+   -------------------------------------------------------------------------- */
+
+.scrolldeck { overflow: hidden; }
+.scrolldeck body, body.scrolldeck { background: var(--wall-2); }
+
+/* the wallpaper, same two crossfading layers the desktop uses */
+.wall {
+  position: fixed; inset: 0; z-index: 0;
+  background: linear-gradient(163deg, var(--wall-1) 0%, var(--wall-2) 100%);
+}
+.wall::before, .wall::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: center / cover no-repeat;
+  transition: opacity 1600ms ease-in-out;
+}
+.wall::before { background-image: var(--shot-a); opacity: 1; }
+.wall::after  { background-image: var(--shot-b); opacity: 0; }
+.wall[data-layer="b"]::before { opacity: 0; }
+.wall[data-layer="b"]::after  { opacity: 1; }
+
+.sc {
+  position: relative; z-index: 1;
+  height: 100vh; height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+}
+
+.sc-slide {
+  position: relative;
+  min-height: 100vh; min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;          /* never skip one on a fast flick */
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem);
+}
+
+/* Each slide sits on glass, so the wallpaper reads through it and the page
+   belongs to the same material as the desktop. */
+.sc-slide .slide {
+  width: min(980px, 100%);
+  max-height: calc(100dvh - clamp(4rem, 12vw, 10rem));
+  overflow: auto;
+  padding: clamp(1.75rem, 4vw, 3.25rem);
+  border-radius: var(--r-win);
+  background: #fff;
+  color: #1d1d1f;
+}
+
+/* slide type, in the Apple face rather than a theme's */
+.sc-slide .s-kicker {
+  margin: 0 0 .75rem;
+  font-size: .75rem; font-weight: 590;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: #86868b;
+}
+.sc-slide .s-title {
+  margin: 0; font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 680; letter-spacing: -.03em; line-height: 1.04;
+}
+.sc-slide .s-secname {
+  margin: 0; font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 640; letter-spacing: -.025em; line-height: 1.08;
+}
+.sc-slide .s-num {
+  margin: 0 0 .4rem;
+  font-size: .8125rem; font-weight: 590;
+  color: #86868b;
+  font-variant-numeric: tabular-nums;
+}
+.sc-slide .s-statement {
+  margin: 0; font-size: clamp(1.5rem, 3.4vw, 2.35rem);
+  font-weight: 620; letter-spacing: -.02em; line-height: 1.2;
+}
+.sc-slide .s-sub {
+  margin: 1rem 0 0; max-width: 62ch;
+  font-size: clamp(1rem, 1.5vw, 1.1rem); line-height: 1.5;
+  color: #6e6e73;
+}
+.sc-slide .s-head {
+  margin: 0 0 1.25rem; font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 620; letter-spacing: -.015em;
+}
+.sc-slide .s-points { margin: 0; padding: 0; list-style: none; display: grid; gap: .85rem; }
+.sc-slide .s-points li {
+  display: flex; gap: .75rem;
+  font-size: clamp(.95rem, 1.5vw, 1.125rem); line-height: 1.45;
+}
+.sc-slide .s-points li::before {
+  content: counter(list-item);
+  counter-increment: list-item;
+  flex: none; width: 1.55em; height: 1.55em;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #f0f0f2; color: #6e6e73;
+  font-size: .72em; font-weight: 640;
+  font-variant-numeric: tabular-nums;
+}
+.sc-slide .s-two { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.sc-slide .s-two h3 {
+  margin: 0 0 .4rem; font-size: .75rem; font-weight: 590;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: #86868b;
+}
+.sc-slide .s-two p { margin: 0; font-size: 1rem; line-height: 1.5; color: #1d1d1f; }
+.sc-slide .s-quote {
+  margin: 0; font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 500; line-height: 1.3; letter-spacing: -.015em;
+}
+.sc-slide .s-attr { margin: 1rem 0 0; font-size: .9375rem; color: #6e6e73; }
+.sc-slide .s-time {
+  display: inline-block; margin-top: 1rem; padding: .3rem .8rem;
+  border-radius: 999px;
+  background: #f0f0f2; color: #6e6e73;
+  font-size: .8125rem; font-weight: 590;
+}
+.sc-slide .s-fig img { border-radius: var(--r-in); }
+.sc-slide .s-fig figcaption { margin-top: .75rem; font-size: .875rem; color: #6e6e73; }
+
+/* slides arrive rather than simply being there */
+@media (prefers-reduced-motion: no-preference) {
+  .sc-slide > * { opacity: 0; transform: translateY(16px); transition: opacity 560ms ease, transform 560ms cubic-bezier(.2,.8,.3,1); }
+  .sc-slide[data-on="true"] > * { opacity: 1; transform: none; }
+}
+
+/* a presenter note, shown here because reading is not presenting */
+.sc-note {
+  width: min(880px, 100%);
+  margin: 1rem 0 0;
+  padding: .7rem 1rem;
+  border-radius: var(--r-in);
+  background: rgba(0,0,0,.28);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: #fff;
+  font-size: .8125rem; line-height: 1.5;
+}
+
+.sc-bar {
+  position: fixed; inset: 0 0 auto 0; z-index: 12;
+  height: 3px;
+  background: rgba(127,127,127,.25);
+}
+.sc-bar i {
+  display: block; height: 100%;
+  background: rgba(0,0,0,.45);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 320ms ease;
+}
+
+.sc-count {
+  position: fixed; right: 18px; bottom: 16px; z-index: 12;
+  margin: 0; padding: .3rem .7rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.82);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  color: #6e6e73;
+  font-size: .75rem; font-variant-numeric: tabular-nums;
+}
+
+.sc-end .wk-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.5rem 0 0; }
+.sc-end .btn {
+  padding: .5rem 1rem;
+  border: .5px solid rgba(0,0,0,.14); border-radius: 999px;
+  background: #fff; color: #1d1d1f;
+  font-size: .875rem; text-decoration: none;
+}
+.sc-end .btn--primary { background: #1d1d1f; color: #fff; border-color: transparent; }
+
+/* a row of captioned examples on one slide */
+.sc-slide .s-gallery {
+  display: grid; gap: clamp(.75rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: .5rem 0 0;
+}
+.sc-slide .s-gallery[data-n="6"] { grid-template-columns: repeat(6, 1fr); }
+.sc-slide .s-gallery figure { margin: 0; display: grid; gap: .5rem; }
+.sc-slide .s-gallery img {
+  width: 100%; aspect-ratio: 1 / 1;
+  max-height: 22vh;
+  object-fit: contain;
+  background: #fafafa;
+  border-radius: var(--r-in);
+  padding: .5rem;
+}
+.sc-slide .s-gallery figcaption {
+  font-size: .75rem; line-height: 1.35; text-align: center;
+  color: #6e6e73;
+}
+.sc-slide .s-gallery figcaption b { color: #1d1d1f; font-weight: 640; }
+
+@media (max-width: 1000px) {
+  .sc-slide .s-gallery[data-n="6"] { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 560px) {
+  .sc-slide .s-gallery[data-n="6"] { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* The scroll deck stays on one wallpaper rather than cycling: a background
+   that changes while you are reading pulls focus off the words. */
+.wall--fixed::before { background-image: url("img/wall-1.jpg"); }
+
+/* one slide per person: picture left, words right */
+.sc-slide .s-person {
+  display: grid;
+  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.s-person__pic { margin: 0; }
+.s-person__pic img,
+.s-person__empty {
+  display: block;
+  width: 100%; aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r-in);
+  background: #f0f0f2;
+}
+.s-person__name {
+  margin: 0; font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 680; letter-spacing: -.025em; line-height: 1.05;
+}
+.s-person__detail { margin: .4rem 0 0; font-size: 1rem; color: #6e6e73; }
+.s-person__text p + p { margin-top: .85rem; }
+.s-person__text p { font-size: clamp(.95rem, 1.4vw, 1.0625rem); line-height: 1.55; max-width: 52ch; }
+
+@media (max-width: 720px) {
+  .sc-slide .s-person { grid-template-columns: 1fr; }
+  .s-person__pic img, .s-person__empty { aspect-ratio: 3 / 2; }
+}
+
+/* a deck opened in a window: the iframe is the whole window body */
+.deckframe {
+  flex: 1; width: 100%; min-height: 0;
+  border: 0; display: block;
+  border-radius: var(--r-in);
+  background: var(--wall-2);
+}
+
+/* Standalone, the deck offers its own way back to the desktop. Inside a
+   window it does not: the window's own close button is the way back, and a
+   second one would be a button that leaves you where you already are. */
+.sc-home {
+  position: fixed; left: 16px; top: 14px; z-index: 12;
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .35rem .8rem .35rem .65rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.82);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  color: #1d1d1f;
+  font-size: .8125rem; text-decoration: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,.12);
+}
+.sc-home:hover { background: #fff; }
+.sc-home span:first-child { font-size: 1em; line-height: 1; }
+
+/* Resize grips. Invisible, sitting just inside the window rim, with the
+   cursor doing the telling. Corners are above edges so they win where they
+   overlap, which is what you expect when you aim at a corner. */
+.grip { position: absolute; z-index: 5; }
+.grip--n, .grip--s { left: 10px; right: 10px; height: 6px; cursor: ns-resize; }
+.grip--e, .grip--w { top: 10px; bottom: 10px; width: 6px; cursor: ew-resize; }
+.grip--n { top: -2px; }
+.grip--s { bottom: -2px; }
+.grip--e { right: -2px; }
+.grip--w { left: -2px; }
+.grip--ne, .grip--nw, .grip--se, .grip--sw { width: 14px; height: 14px; z-index: 6; }
+.grip--ne { top: -2px; right: -2px; cursor: nesw-resize; }
+.grip--nw { top: -2px; left: -2px;  cursor: nwse-resize; }
+.grip--se { bottom: -2px; right: -2px; cursor: nwse-resize; }
+.grip--sw { bottom: -2px; left: -2px;  cursor: nesw-resize; }
+
+/* A zoomed window fills the screen, so there is nothing left to drag. */
+.window[data-zoom="true"] .grip { display: none; }
+
+/* a comparison across three or more columns */
+.sc-slide .s-cols {
+  display: grid; gap: clamp(1.25rem, 3vw, 2.25rem);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+.sc-slide .s-cols > div { display: grid; align-content: start; gap: .5rem; }
+.sc-slide .s-cols h3 {
+  margin: 0; padding-bottom: .5rem;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+  font-size: .8125rem; font-weight: 640;
+  letter-spacing: .04em; text-transform: uppercase;
+  color: #1d1d1f;
+}
+.sc-slide .s-cols p { margin: 0; font-size: .9375rem; line-height: 1.5; color: #1d1d1f; }
+.sc-slide .s-cols ul { margin: 0; padding-left: 1.05rem; display: grid; gap: .3rem; }
+.sc-slide .s-cols li { font-size: .875rem; line-height: 1.45; color: #6e6e73; }
+
+/* A tappable slide: click the card and its badge appears. The cursor and a
+   faint hint say so, because an interaction nobody discovers is not one. */
+.sc-slide .slide[data-tappable="true"] { cursor: pointer; position: relative; }
+.s-tap {
+  position: absolute; right: clamp(1rem, 3vw, 2rem); bottom: clamp(1rem, 3vw, 2rem);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 640;
+  letter-spacing: -.02em;
+  opacity: 0; transform: scale(.7) rotate(-8deg);
+  transition: opacity 260ms ease, transform 320ms cubic-bezier(.2,1.4,.4,1);
+  pointer-events: none;
+}
+.slide[data-tapped="true"] .s-tap { opacity: 1; transform: none; }
+
+/* --------------------------------------------------------------- nametag -- */
+/* The worked example on the homework slide: a classic HELLO sticker you can
+   type on, click to recolour, and tilt with the pointer. It is an argument as
+   much as a demo, since the brief says a nametag can be digital. */
+
+.nt { perspective: 900px; display: grid; place-items: center; padding: .5rem 0; }
+
+.nt__card {
+  width: min(420px, 100%);
+  aspect-ratio: 4 / 3;
+  display: grid;
+  grid-template-rows: 38% 1fr;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 1px 0 rgba(0,0,0,.06);
+  cursor: pointer;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1);
+  transform-style: preserve-3d;
+}
+
+.nt__top {
+  display: grid; place-content: center; gap: .1rem;
+  text-align: center;
+  background: var(--nt-bg, #d8342c);
+  color: #fff;
+}
+.nt__top span {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 800; letter-spacing: .04em; line-height: 1;
+}
+.nt__top small {
+  font-size: clamp(.65rem, 1.6vw, .8rem);
+  font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  opacity: .92;
+}
+
+.nt__field {
+  display: grid; place-items: center;
+  padding: .5rem 1rem;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 26px,
+      rgba(0,0,0,.07) 26px 27px);
+}
+.nt__name {
+  display: inline-block;
+  min-width: 4ch;
+  padding: .1em .2em;
+  font-family: var(--nt-font, "Bradley Hand", "Segoe Script", cursive);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  line-height: 1.1;
+  color: var(--nt-ink, #1d3f8f);
+  text-align: center;
+  outline: none;
+  cursor: text;
+}
+.nt__name:focus { background: rgba(0,0,0,.04); border-radius: 6px; }
+
+/* five palettes, cycled by clicking */
+.nt[data-c="1"] .nt__card { --nt-bg: #1d3f8f; }
+.nt[data-c="1"] .nt__name { --nt-ink: #d8342c; }
+.nt[data-c="2"] .nt__card { --nt-bg: #15795b; }
+.nt[data-c="2"] .nt__name { --nt-ink: #15795b; }
+.nt[data-c="3"] .nt__card { --nt-bg: #1d1d1f; }
+.nt[data-c="3"] .nt__name { --nt-ink: #1d1d1f; }
+.nt[data-c="4"] .nt__card { --nt-bg: #e0559b; }
+.nt[data-c="4"] .nt__name { --nt-ink: #7a2150; }
+
+.nt__hint { text-align: center; margin-top: 1rem; }
+
+/* the last screen: one way back up, and nothing else */
+.sc-end { place-content: center; }
+.sc-top {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .85rem 1.5rem;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 999px;
+  background: #fff; color: #1d1d1f;
+  font: inherit; font-size: 1rem; font-weight: 590;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,.14);
+  transition: transform 160ms cubic-bezier(.2,.9,.3,1);
+}
+.sc-top:hover { transform: translateY(-2px); }
+.sc-top span:first-child { font-size: 1.1em; line-height: 1; }
+
+
+/* --------------------------------------------------------------- markdown -- */
+/* A .md in the listing opens as one: the source, monospaced, syntax visible.
+   Only a bare <url> is clickable, since a reading list you cannot open is not
+   much of a reading list. */
+
+.md {
+  flex: 1; min-height: 0; overflow: auto;
+  margin: 0; padding: 22px 26px 28px;
+  background: var(--content);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-radius: var(--r-in);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+  tab-size: 2;
+}
+.md__hash  { color: var(--ink-faint); }
+.md__head  { font-weight: 640; color: var(--ink); }
+.md__rule  { color: var(--ink-faint); }
+.md__punct { color: var(--ink-faint); }
+.md__bold  { font-weight: 640; }
+.md__url   { color: var(--accent); text-decoration: none; }
+.md__url:hover { text-decoration: underline; }

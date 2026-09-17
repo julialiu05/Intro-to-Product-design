@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DES 198 — Desktop</title>
+<meta name="description" content="The DES 198 course site as a desktop. Every week is a file; the Kind column is the design it wears that week.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="desktop.css">
+<script src="course.js"></script>
+</head>
+<body>
+
+<!-- ---------------------------------------------------------------- menu bar -->
+<div class="menubar" role="banner">
+  <div class="menubar__left">
+    <button class="menubar__apple" type="button" aria-label="About this course" data-open="about"></button>
+    <span class="menubar__item menubar__item--app">DES 198</span>
+    <span class="menubar__item" data-menu="file">File</span>
+    <span class="menubar__item" data-menu="edit">Edit</span>
+    <span class="menubar__item" data-menu="view">View</span>
+    <span class="menubar__item" data-menu="go">Go</span>
+    <span class="menubar__item" data-menu="help">Help</span>
+  </div>
+  <div class="menubar__right">
+    <time class="menubar__time" id="mbTime"></time>
+  </div>
+</div>
+
+<div class="dropdown glass" id="dropdown" hidden></div>
+
+<!-- ---------------------------------------------------------------- desktop -->
+<main class="desktop" id="desktop" data-wallpaper>
+  <div class="icons" id="icons" role="listbox" aria-label="Desktop"></div>
+</main>
+
+<div class="windows" id="windows"></div>
+
+<!-- Quick Look -->
+<div class="ql" id="ql" hidden>
+  <div class="ql__panel glass" role="dialog" aria-modal="true" aria-labelledby="qlTitle">
+    <header class="ql__bar">
+      <button class="light light--close" type="button" data-ql-close aria-label="Close Quick Look"></button>
+      <h2 class="ql__title" id="qlTitle"></h2>
+      <button class="ql__open" type="button" data-ql-open>Open</button>
+    </header>
+    <div class="ql__body doc" id="qlBody"></div>
+  </div>
+</div>
+
+<nav class="dock glass" id="dock" aria-label="Dock"></nav>
+
+<noscript>
+  <p class="noscript">This page is a desktop you click around in, so it needs
+  JavaScript to work.</p>
+</noscript>
+
+<script src="wallpaper.js"></script>
+<script src="desktop.js"></script>
+<script src="apps.js"></script>
+</body>
+</html>

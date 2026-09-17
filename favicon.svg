@@ -1,16 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#23231f"/>
-  <rect x="7" y="4" width="18" height="24" fill="#fcfcfa"/>
-  <g fill="#23231f">
-    <rect x="10" y="7" width="12" height="2.4"/>
-    <rect x="10" y="12.5" width="3" height="1.3"/>
-    <rect x="14.5" y="12.5" width="5" height="1.3"/>
-    <rect x="20.5" y="12.5" width="1.5" height="1.3"/>
-    <rect x="10" y="15.5" width="3" height="1.3"/>
-    <rect x="14.5" y="15.5" width="4" height="1.3"/>
-    <rect x="20.5" y="15.5" width="1.5" height="1.3"/>
-    <rect x="10" y="18.5" width="3" height="1.3"/>
-    <rect x="14.5" y="18.5" width="5.5" height="1.3"/>
-    <rect x="10" y="22.5" width="12" height="2"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- The tab icon is an emoji, drawn by the system emoji font rather than by
+       hand, the same way every other icon on the site works.
+
+       Positioned with an explicit baseline and text-anchor rather than
+       dominant-baseline: browsers honour that inconsistently on a bare
+       <text>, and the glyph ends up clipped at the edges. -->
+  <text x="50" y="72" font-size="66" text-anchor="middle">🖌️</text>
 </svg>

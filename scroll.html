@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Read the week — DES 198</title>
+<meta name="description" content="A week of DES 198 read as a deck: one slide per screen, scrolling down.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<!-- base.css for the slide hooks, desktop.css for the Apple design. -->
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="desktop.css">
+<script src="course.js"></script>
+</head>
+<body class="scrolldeck">
+  <a class="skip" href="#s1">Skip to the first slide</a>
+
+  <!-- One wallpaper, not the rotation: a background that changes under you
+       while you are reading is a distraction rather than a pleasure. -->
+  <div class="wall wall--fixed" aria-hidden="true"></div>
+
+  <main class="sc" id="app"></main>
+
+  <script src="site.js"></script>
+  <script>renderScroll();</script>
+</body>
+</html>

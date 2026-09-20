@@ -20,6 +20,7 @@ server needed. Open `index.html`.
 | `img/wall-*.jpg` | The desktop wallpapers, rotated. |
 | `img/w1/` | Week 1 images: portraits and lecture examples. |
 | `favicon.svg` | The tab icon, an emoji. |
+| `CONTINUE.md` | How to build the next week, and how to get set up from scratch. |
 
 ## Updating it each week
 
@@ -61,9 +62,10 @@ navigation and next/previous links all follow automatically.
 ## Slides
 
 Every week already has a deck. If a week has no `slides` array, the deck is
-generated from its title, agenda, readings and assignment — so a new week is
-presentable the moment you write it. Weeks 1 and 2 have hand-written decks; use
-them as a model.
+generated from its title, agenda, readings and assignment, so a new week is
+presentable the moment you write it. Week 1 has a hand-written deck; use it as
+a model. There are thirteen layouts, all of them listed in the SLIDE CHEATSHEET
+at the bottom of `course.js` and explained at length in `CONTINUE.md`.
 
 To write your own, add a `slides` array to the week. Available layouts:
 

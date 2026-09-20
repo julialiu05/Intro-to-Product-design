@@ -569,14 +569,17 @@ const COURSE = {
    SLIDE CHEATSHEET
 
    Add a `slides: [...]` array to any week. If you leave it out, the deck is
-   generated automatically from that week's title, agenda, readings, and
-   assignment — so every week has a usable deck from day one.
+   generated automatically from that week's title, agenda, readings and
+   assignment, so every week has a usable deck from day one.
+
+   All thirteen layouts are below. Week 1 uses every one of them, so scroll up
+   for a real example of any of these. CONTINUE.md explains them at length.
 
    { layout: "title" }
-       Auto-fills course code, week number, title, and date.
+       Auto-fills course code, week number, title and date.
 
    { layout: "section", text: "Teardown", num: "01" }
-       Full-bleed divider.
+       Full-bleed divider. Number them.
 
    { layout: "statement", text: "One big line.", sub: "Optional second line." }
 
@@ -584,19 +587,52 @@ const COURSE = {
 
    { layout: "two",
      heading: "Optional",
-     left:  { label: "Leading", body: "Use \n for line breaks." },
-     right: { label: "Open",    body: "..." } }
+     left:  { label: "The case", body: "Use \n for line breaks." },
+     right: { label: "However",  body: "..." } }
+       Two columns. Best for a claim and its counter-claim.
+
+   { layout: "columns",
+     heading: "Three jobs people confuse",
+     items: [ { label: "UI/UX design",
+                body: "The screens and the path through them.",
+                list: ["optional", "bullets"] }, ... ] }
+       Like "two", but for three or more, each with its own list.
 
    { layout: "quote", quote: "...", attribution: "Who said it" }
+       Do not type the quotation marks. The layout draws them.
+
+   { layout: "person",
+     role: "TA", name: "Their name", detail: "name[at]berkeley[dot]edu",
+     photo: "img/w1/theirname.jpg",
+     lines: ["Their introduction, in their own words."] }
+       Portraits crop to 4:5. `photo` is optional: without it the slide still
+       renders and leaves the frame empty until you have the picture.
+
+   { layout: "gallery",
+     heading: "All six of these are chairs",
+     items: [ { src: "img/w1/chair-eames.jpg", label: "Eames Lounge Chair",
+                note: "$6495" }, ... ],
+     caption: "Optional line underneath." }
+       A row of captioned images. `note` is set apart from the label, which is
+       what makes a row of prices read as a range. Six items get a six-across
+       grid; other counts wrap. Images are fitted, not cropped.
+
+   { layout: "figure", src: "img/w1/thing.jpg", caption: "What we're looking at" }
+       One image, full width. Credit the source in the caption.
 
    { layout: "exercise", heading: "In pairs", prompt: "Do this.", time: "10 min" }
 
-   { layout: "figure", src: "img/thing.png", caption: "What we're looking at" }
+   { layout: "nametag", heading: "...", name: "your name", caption: "..." }
+       The interactive nametag: type on it, click to recolour, it tilts toward
+       the pointer. Specific to the Week 1 homework.
 
    { layout: "assignment" }
        Auto-fills this week's assignment block. Good last slide.
 
-   Any slide can take  note: "presenter note"  — press N in the deck to show it.
+   Any slide can also take:
+     note: "presenter note"   shown under the card in the deck
+     tap:  "\u{1F501} \u00D710"        a badge that appears when the card is clicked,
+                              and goes away when it is clicked again
    ========================================================================== */
 
 if (typeof module !== "undefined") module.exports = COURSE;

@@ -23,9 +23,10 @@
    ========================================================================== */
 
 var WALLPAPERS = [
-  { src: "img/wall-1.jpg", ink: "dark" },   /* meadow, pale sky */
-  { src: "img/wall-2.jpg", ink: "dark" },   /* pastel water */
-  { src: "img/wall-3.jpg", ink: "dark" },   /* lake, white sky */
+  { src: "img/wall-1.jpg", ink: "dark" },   /* cottage garden, white fence */
+  { src: "img/wall-2.jpg", ink: "dark" },   /* lily pond */
+  { src: "img/wall-3.jpg", ink: "dark" },   /* wildflower shore */
+  { src: "img/wall-4.jpg", ink: "dark" },   /* pastel meadow wash */
 ];
 
 var WALL_EVERY = 45000;   /* ms between changes */
@@ -51,7 +52,7 @@ var WALL_EVERY = 45000;   /* ms between changes */
 
   var root = document.documentElement.style;
   var css = function (w) { return 'url("' + w.src + '")'; };
-  var at = Math.floor(Math.random() * WALLPAPERS.length);   /* varies per visit */
+  var at = 0;   /* always the first entry in WALLPAPERS on load, then rotates */
   var layer = "a";
 
   function wearInk(w) {

@@ -580,6 +580,7 @@ body.deck {
 }
 .s-fig { margin: 0; text-align: center; }
 .s-fig img { max-height: 58vh; margin: 0 auto; }
+.s-fig__empty { display: block; width: 70%; aspect-ratio: 16 / 10; max-height: 58vh; margin: 0 auto; }
 .s-fig figcaption { margin-top: .875rem; font-family: var(--font-mono); font-size: .8125rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); }
 .s-assign { padding: clamp(1.25rem, 3vw, 2.25rem); border: 1px solid var(--accent); border-radius: var(--radius); }
 .s-assign h2 { margin: .35rem 0 1rem; font-family: var(--font-display); font-size: clamp(1.4rem, 3.6vw, 2.5rem); line-height: 1.1; }

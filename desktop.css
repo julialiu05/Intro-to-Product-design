@@ -970,6 +970,17 @@ body {
   color: #1d1d1f;
 }
 
+/* A slide with bg/fg (see the SLIDE CHEATSHEET in course.js) goes full-bleed
+   instead of sitting in a card: the color is the point, so it should fill
+   the slide, not a small box floating on the wallpaper. */
+.sc-slide[data-fullbleed="true"] { background: var(--slide-bg, transparent); }
+.sc-slide[data-fullbleed="true"] .slide {
+  background: transparent;
+  color: var(--slide-fg, inherit);
+  max-height: none;
+  border-radius: 0;
+}
+
 /* slide type, in the Apple face rather than a theme's */
 .sc-slide .s-kicker {
   margin: 0 0 .75rem;
@@ -1038,6 +1049,7 @@ body {
   font-size: .8125rem; font-weight: 590;
 }
 .sc-slide .s-fig img { border-radius: var(--r-in); }
+.sc-slide .s-fig__empty { background: #f0f0f2; border-radius: var(--r-in); }
 .sc-slide .s-fig figcaption { margin-top: .75rem; font-size: .875rem; color: #6e6e73; }
 
 /* slides arrive rather than simply being there */
@@ -1058,6 +1070,18 @@ body {
   color: #fff;
   font-size: .8125rem; line-height: 1.5;
 }
+
+/* A gallery/figure note starts hidden, so an example can be discussed before
+   its answer is shown. --revealed="true" (see site.js) swaps which span is
+   visible; nothing else about the note's look changes. */
+.sc-note--toggle { cursor: pointer; }
+.sc-note--toggle .sc-note__label {
+  font-weight: 590; letter-spacing: .02em;
+  opacity: .85;
+}
+.sc-note--toggle .sc-note__body { display: none; }
+.sc-note--toggle[data-revealed="true"] .sc-note__label { display: none; }
+.sc-note--toggle[data-revealed="true"] .sc-note__body { display: block; }
 
 .sc-bar {
   position: fixed; inset: 0 0 auto 0; z-index: 12;
@@ -1107,6 +1131,13 @@ body {
   border-radius: var(--r-in);
   padding: .5rem;
 }
+.sc-slide .s-gallery__empty {
+  display: block;
+  width: 100%; aspect-ratio: 1 / 1;
+  max-height: 22vh;
+  background: #f0f0f2;
+  border-radius: var(--r-in);
+}
 .sc-slide .s-gallery figcaption {
   font-size: .75rem; line-height: 1.35; text-align: center;
   color: #6e6e73;
@@ -1121,8 +1152,10 @@ body {
 }
 
 /* The scroll deck stays on one wallpaper rather than cycling: a background
-   that changes while you are reading pulls focus off the words. */
-.wall--fixed::before { background-image: url("img/wall-1.jpg"); }
+   that changes while you are reading pulls focus off the words. A week can
+   override it with --deck-bg (set in site.js from course.js's `background`);
+   unset, it falls back to the default. */
+.wall--fixed::before { background-image: var(--deck-bg, url("img/wall-1.jpg")); }
 
 /* one slide per person: picture left, words right */
 .sc-slide .s-person {

@@ -49,7 +49,7 @@ const COURSE = {
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
   // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
-  DESKTOP_WEEKS: 1,
+  DESKTOP_WEEKS: 2,
 
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
@@ -562,6 +562,796 @@ const COURSE = {
         },
       ],
     },
+
+    {
+      week: 2,
+      date: "TBD",
+      title: "Graphic Design Principles",
+      status: "draft",
+      summary: "",
+      /* Overrides the deck's default backdrop (img/wall-1.jpg) for this week
+         only. Leave this out on any other week to keep the default. */
+      background: "img/w2/floral-sky-background.jpg",
+      agenda: [],
+      readings: [],
+      assignment: {
+        title: "",
+        due: "",
+        dueDate: "",
+        body: "",
+        deliverable: "",
+      },
+      materials: [],
+      /* Scaffold only. Julia has a Google Slides deck for this lecture that
+         still needs to be transcribed in, plus a few extra slides on
+         general graphic design principles to round it out. Every section
+         below is a placeholder, marked with a note, waiting on that
+         material rather than invented content. */
+      slides: [
+        { layout: "title" },
+
+        { layout: "section", text: "Nametag Project Critique", num: "01" },
+        /* Three blank slots for student nametag work. Add `src` (and a
+           `caption` crediting the student) to each as work comes in. */
+        { layout: "figure", caption: "" },
+        { layout: "figure", caption: "" },
+        { layout: "figure", caption: "" },
+
+        { layout: "section", text: "Why Style Choices Matter", num: "02" },
+        {
+          layout: "statement",
+          text: "Color, type and layout aren't graphic design extras.",
+          sub: "They're how a product earns trust before anyone reads a word.",
+        },
+        {
+          layout: "quote",
+          quote: "Design is not just what it looks like and feels like. Design is how it works.",
+          attribution: "Steve Jobs",
+        },
+        {
+          layout: "points",
+          heading: "Why a product designer still needs this",
+          points: [
+            "Color carries meaning: it signals errors, success, and what's clickable.",
+            "Typography sets hierarchy: it tells someone what to read first.",
+            "Layout and spacing reduce the effort it takes to understand a screen.",
+            "Get these wrong, and the product feels untrustworthy before anyone uses it.",
+          ],
+        },
+        {
+          layout: "quote",
+          quote: "Good design is as little design as possible.",
+          attribution: "Dieter Rams",
+        },
+        {
+          layout: "statement",
+          text: "The same choices that make a poster feel messy make a product feel broken.",
+        },
+        /* No per-image labels or caption on purpose: this is an in-class
+           exercise, and pre-labeling what's wrong would give it away. */
+        {
+          layout: "gallery",
+          heading: "Examples: when style choices work against you",
+          items: [
+            { src: "img/w2/bad-design-meltdown-poster.jpg" },
+            { src: "img/w2/bad-design-community-poster.jpg" },
+            { src: "img/w2/bad-design-fundraiser-poster.jpg" },
+            { src: "img/w2/bad-design-ogden-poster.jpg" },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "It's tempting to say all of this is just taste.",
+        },
+        {
+          layout: "statement",
+          text: "But almost everyone looking at those posters agreed something was off.",
+          sub: "That agreement is the tell: design isn't arbitrary, even though it is subjective.",
+        },
+        {
+          layout: "exercise",
+          heading: "Discuss",
+          prompt: "What do you think “good” design should be considered as?",
+        },
+        {
+          layout: "points",
+          heading: "What “good” usually turns out to mean",
+          points: [
+            "It's accessible: people with different abilities can still use it.",
+            "It gets you the important information fast, without digging.",
+            "It's consistent: the same pattern behaves the same way everywhere.",
+            "It's honest: it doesn't trick you into clicking the wrong thing.",
+            "It still holds up under stress: a small screen, bad lighting, low signal.",
+          ],
+        },
+
+        { layout: "section", text: "Color", num: "03" },
+        /* A live demo rather than a description: the slide itself is the bad
+           example, then the good one. bg/fg override the card's colors, see
+           the SLIDE CHEATSHEET at the bottom of this file. */
+        {
+          layout: "statement",
+          text: "why this isn't a good slide",
+          bg: "#3a0a0a",
+          fg: "#4a0a5c",
+        },
+        {
+          layout: "statement",
+          text: "and why this is a better slide",
+          bg: "#fff6f6",
+          fg: "#3a0a0a",
+        },
+        /* From here down: transcribed from Julia and Pat's "Week Three:
+           Color" slide deck (a past run of this course), pulled in with
+           python-pptx. On-screen text became each slide's visible content;
+           the speaker notes became the `note` on each slide, same as the
+           deck already does elsewhere. The recurring "GDP Decal" watermark
+           and running footer weren't real content, so they're left out.
+           HW3's due date belongs to that past term, not this one: it's kept
+           here as reference material only, not wired into this week's real
+           `assignment` above. */
+        {
+          layout: "points",
+          heading: "Objectives",
+          points: [
+            "Uses of color",
+            "Components of color",
+            "Color in Design",
+            "Resources for finding color",
+            "In-Class Challenge!!!",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "How is color used?",
+          points: ["Draws Attention", "Evoke Mood", "Communication"],
+        },
+        {
+          layout: "gallery",
+          heading: "Drawing attention",
+          items: [
+            { src: "img/w2/color/w3-attention-website-before.jpg", label: "Before", note: "Bland, low contrast" },
+            { src: "img/w2/color/w3-attention-website-after.jpg", label: "After", note: "A muted palette, one bold accent" },
+          ],
+          note: "The first website's colors are bland, not much contrast, not very eye-catching. The second has a more muted color, and a bold color to draw your eyes to it, e.g. the register button has the bold red to draw users to that action.",
+        },
+        {
+          layout: "points",
+          heading: "Evoke mood",
+          points: [
+            "Warm colors (red, yellow, orange) can spark comfort and warmth, or hostility and anger.",
+            "Cool colors (green, blue, purple) often spark calmness, sometimes sadness.",
+            "Even emoji hearts carry it: black heart is grief, red is love, orange is friendship.",
+          ],
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-mood-error-blue.jpg",
+          note: "Ask the class what they associate with this bright blue. It's the color we associate with something being wrong, hence why it's the background to error messages.",
+        },
+        {
+          layout: "points",
+          heading: "Communication",
+          points: [
+            "Traffic signals: red is stop, green is go, everywhere.",
+            "Curb colors: blue for handicapped parking, white for limited-time parking.",
+          ],
+        },
+        {
+          layout: "gallery",
+          heading: "Communication, underfoot",
+          items: [
+            { src: "img/w2/color/w3-communication-subway-1.jpg" },
+            { src: "img/w2/color/w3-communication-subway-2.jpg" },
+            { src: "img/w2/color/w3-communication-subway-3.jpg" },
+          ],
+          note: "Yellow means stand behind, on the subway platform or the bus (“get behind the yellow line”).",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-van-gogh-cafe.jpg",
+          caption: "Café Terrace at Night, Vincent van Gogh",
+          note: "Is the café's interior actually yellow, or is that the lighting? We put certain colors on a 2D space to convey something defined in 3D space. Colors can appear differently under different light.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-dress-illusion.jpg",
+          note: "Its original color is blue and black, but it appears white and gold under bright light.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-munsell-system.jpg",
+          caption: "The Munsell Color System",
+          note: "Perception of color splits into two systems: the color of an object as it is, or how it looks under different light. On the right is the Munsell Color System.",
+        },
+        {
+          layout: "points",
+          heading: "Components of Colors",
+          points: [
+            "Hue: pure color, before any white or black is added.",
+            "Value: how much black or white you add into a color.",
+            "Chroma: the purity of a color.",
+            "Saturation: the intensity of a color, the amount of hue.",
+          ],
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-van-gogh-cafe.jpg",
+          caption: "The same painting, looking again",
+          note: "The interior may not objectively be yellow, but it reads as yellow under that light. The buildings aren't really fading to black, that's the color under darker light.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-highlights-shadows.jpg",
+          caption: "Highlights and Shadows",
+          note: "Shadows and highlights bring your work to life: less flat with shadows, more visible with highlights.",
+        },
+        {
+          layout: "two",
+          heading: "Two ways to do it",
+          left: { label: "Darker + unsaturated", body: "A darker chroma shadow with an unsaturated highlight can show dimension." },
+          right: { label: "Saturated + lighter", body: "A saturated shadow with a lighter value highlight feels more cohesive, and vibrant." },
+        },
+        {
+          layout: "points",
+          heading: "Color in design",
+          points: ["How colors are organized", "How brands use colors", "Effects of color choices"],
+          note: "Color choices directly affect how users feel about a brand or product, whether that's welcoming, luxurious, or professional.",
+        },
+        {
+          layout: "gallery",
+          heading: "Color Groups",
+          items: [
+            { src: "img/w2/color/w3-colors-primary.jpg", label: "Primary", note: "Blue, red, yellow" },
+            { src: "img/w2/color/w3-colors-secondary.jpg", label: "Secondary", note: "Violet, orange, green" },
+            { src: "img/w2/color/w3-colors-tertiary.jpg", label: "Tertiary", note: "Red-orange, yellow-orange, blue-green, blue-violet" },
+          ],
+          note: "Primary colors can't be made by mixing colors, they're the basis of all colors. Mix primaries to get secondaries, mix those to get tertiaries. Enlightenment scholars were extremely intent on discovering “pure colors,” which brought us modern color theory: monochrome, analogous, and complementary schemes.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-scheme-monochrome.jpg",
+          caption: "Scheme: Monochrome",
+          note: "Mono = one. Same hue, but shade, tint, and tone can change. Not exclusively black and white.",
+        },
+        {
+          layout: "gallery",
+          heading: "Scheme: Analogous",
+          items: [
+            { src: "img/w2/color/w3-scheme-analogous-1.jpg" },
+            { src: "img/w2/color/w3-scheme-analogous-2.jpg" },
+          ],
+          note: "Analogous means color groups next to each other on the wheel that are similar, like red, violet, and red-violet.",
+        },
+        {
+          layout: "gallery",
+          heading: "Scheme: Complementary",
+          items: [
+            { src: "img/w2/color/w3-scheme-complementary-1.jpg" },
+            { src: "img/w2/color/w3-scheme-complementary-2.jpg" },
+          ],
+          note: "Complementary: colors on opposite ends of the wheel. Split complementary starts with a color, finds its complement, then takes the colors next to that complement. Triad is three points, tetrad is four.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-simultaneous-contrast.jpg",
+          caption: "Simultaneous contrast: the same orange, twice",
+          note: "Color is always seen in relation to what surrounds it. A dark color next to a light one makes both look brighter. Warmer colors look warmer next to cool ones. Here, both oranges are the same color, the white and black around them just change how we read it.",
+        },
+        {
+          layout: "gallery",
+          heading: "What does red mean?",
+          items: [
+            { src: "img/w2/color/w3-meaning-red-1.jpg" },
+            { src: "img/w2/color/w3-meaning-red-2.jpg" },
+            { src: "img/w2/color/w3-meaning-red-3.jpg" },
+          ],
+          note: "Hot, fire, danger, anger. Also love, passion, importance. Red is scientifically proven to raise your heart rate and blood pressure, and it's the hardest color to execute well but the most memorable.",
+        },
+        {
+          layout: "gallery",
+          heading: "What does yellow mean?",
+          items: [
+            { src: "img/w2/color/w3-meaning-yellow-1.jpg" },
+            { src: "img/w2/color/w3-meaning-yellow-2.jpg" },
+            { src: "img/w2/color/w3-meaning-yellow-3.jpg" },
+          ],
+          note: "Fun, childish, playful. It's why so many fast food chains pair red and yellow: red triggers appetite and attention, yellow brings comfort and happiness.",
+        },
+        {
+          layout: "gallery",
+          heading: "What does blue mean?",
+          items: [
+            { src: "img/w2/color/w3-meaning-blue-1.jpg" },
+            { src: "img/w2/color/w3-meaning-blue-2.jpg" },
+            { src: "img/w2/color/w3-meaning-blue-3.jpg" },
+          ],
+          note: "A stable color, and the most common in logo design because of its neutrality. Dark blues read reliable, light blues read friendly. In Western culture it's also associated with sadness.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-brand-swap-cocapepsi.jpg",
+          caption: "Swap the colors, and it looks wrong",
+          note: "These brands have successfully represented themselves with iconic colors.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-brand-swap-2.jpg",
+          note: "More inverted color examples for logos.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-brand-swap-3.jpg",
+          note: "Tiffany blue, Valentino pink, Cartier red.",
+        },
+        {
+          layout: "statement",
+          text: "Isoluminance",
+          sub: "When colors are matched so carefully in brightness that only the color itself does the work, not the light.",
+          note: "Uniform light intensity, differentiated only by color, not brightness. Technically possible in design, but less accessible: eye-strain colors.",
+        },
+        { layout: "statement", text: "This is hard to read", bg: "#FF00FF", fg: "#00FF00" },
+        { layout: "statement", text: "This is also hard to read", bg: "#674EA7", fg: "#3D85C6" },
+        { layout: "statement", text: "Don’t even bother", bg: "#00FFFF", fg: "#FFFF00" },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-contrast-example.jpg",
+          caption: "Contrast",
+          note: "A great difference between two things, here two juxtaposed colors with a noticeable difference. Greenish blue against gray makes the blue stand out.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-balance-example.jpg",
+          caption: "Balance",
+          note: "A balanced arrangement needs a dominant color temperature, so a subordinate color can stand out against it. Too many colors clashing, like here, means nothing stands out: distracting, hard to read, not accessible.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/color/w3-legibility-example.jpg",
+          caption: "Legibility",
+          note: "The degree to which something is easy to read, how individual characters can be told apart.",
+        },
+        {
+          layout: "points",
+          heading: "Resources for practice",
+          points: ["Coolors: coolors.co", "Adobe Color", "Color game: color.method.ac"],
+          note: "Coolors: a color palette generator, lock colors you like and hit space bar to cycle the rest. Adobe Color: build and share color themes. The color game: use your cursor to match a given color.",
+        },
+        {
+          layout: "exercise",
+          heading: "In-Class Challenge",
+          prompt: "Illustrating with random colors! Theme: Boba Drinks. Go to coolors.co and generate a palette of 5 colors, try ones you aren't familiar with. Then make an illustration (Ai, Ps, Procreate, whatever) using those colors.",
+          time: "10–20 min",
+        },
+        {
+          layout: "points",
+          heading: "Once you’re done…",
+          points: ["Upload your classwork to Discord!", "Make sure to download it in .png format"],
+        },
+        {
+          layout: "points",
+          heading: "Homework 3: Illustrating and Recoloring",
+          points: [
+            "1) Make an illustration with the theme Adventure, in black and white.",
+            "2) Recolor your illustration in a monochrome palette.",
+            "3) Then recolor it again in a complementary palette.",
+          ],
+          note: "Remember that color is used to draw attention, evoke mood, and for communication. (From a past run of this course, due date and platform were specific to that term. Reference only, not this week's real assignment.)",
+        },
+        {
+          layout: "gallery",
+          heading: "HW3 past examples",
+          items: [
+            { src: "img/w2/color/w3-hw-example-1.jpg" },
+            { src: "img/w2/color/w3-hw-example-2.jpg" },
+            { src: "img/w2/color/w3-hw-example-3.jpg" },
+            { src: "img/w2/color/w3-hw-example-4.jpg" },
+            { src: "img/w2/color/w3-hw-example-5.jpg" },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Question of the week",
+          sub: "What's your favorite color? Your least favorite?",
+        },
+
+        { layout: "section", text: "Typography", num: "04" },
+        /* From here down: transcribed from Julia and Pat's "Week Four:
+           Typography" slide deck, the same way the Color section was. One
+           real departure: this lecture's whole point on a few slides is what
+           a typeface actually looks like, so those points carry a `font`
+           (see the SLIDE CHEATSHEET) to render in the real typeface rather
+           than describing it. Everywhere else, including the transition
+           statements like "Type sends us signals," uses the site's own type,
+           the same as every other slide on the site. */
+        { layout: "statement", text: "Why type matters." },
+        {
+          layout: "points",
+          heading: "Which do you believe?",
+          points: [
+            { text: "The driving distance between Berkeley and Embarcadero in SF is 10 miles (Baskerville)", font: "Baskervville" },
+            { text: "The driving distance between Berkeley and Embarcadero in SF is 11.5 miles (Georgia)", font: "Georgia" },
+            { text: "The driving distance between Berkeley and Embarcadero in SF is 12.6 miles (Helvetica)", font: "Helvetica Neue" },
+            { text: "The driving distance between Berkeley and Embarcadero in SF is 13 miles (Comic Sans)", font: "Comic Sans MS" },
+            { text: "The driving distance between Berkeley and Embarcadero in SF is 16 miles (Trebuchet)", font: "Trebuchet MS" },
+            { text: "The driving distance between Berkeley and Embarcadero in SF is 20 miles (Arial)", font: "Arial" },
+          ],
+          note: "Which statement do you believe the most? The “correct” one is Helvetica. Different fonts can evoke different emotions, trust, and associations: Baskerville feels more professional, closer to a newspaper. Comic Sans feels goofy. Serif text tends to read as more academic.",
+        },
+        {
+          layout: "points",
+          heading: "Type + Truth",
+          points: ["Can your typographical choices affect your grades?"],
+          note: "Writing essays in different fonts: does it change the grade?",
+        },
+        {
+          layout: "gallery",
+          heading: "The average grade, by font",
+          items: [
+            { src: "img/w2/typography/w4-grades-bar-1.jpg", label: "1" },
+            { src: "img/w2/typography/w4-grades-bar-2.jpg", label: "2" },
+            { src: "img/w2/typography/w4-grades-bar-3.jpg", label: "3" },
+          ],
+          note: "Trebuchet looks like something off a blog rather than an academic journal. Nowadays our essays are, by default, in Times New Roman. Baskerville still retains that academic feel, but feels a bit more elevated.",
+        },
+        { layout: "statement", text: "Type sends us signals." },
+        {
+          layout: "gallery",
+          heading: "What messages should I trust?",
+          items: [
+            { src: "img/w2/typography/w4-trust-logo-1.jpg" },
+            { src: "img/w2/typography/w4-trust-logo-2.jpg" },
+            { src: "img/w2/typography/w4-trust-logo-3.jpg" },
+            { src: "img/w2/typography/w4-trust-logo-4.jpg" },
+            { src: "img/w2/typography/w4-trust-logo-5.jpg" },
+            { src: "img/w2/typography/w4-trust-logo-6.jpg" },
+          ],
+          note: "Top row: professional, well-established, long-standing news sources. Bottom row: some are just as established, but the logo sets a different tone, more entertainment than news.",
+        },
+        {
+          layout: "gallery",
+          heading: "What kind of product am I buying?",
+          items: [
+            { src: "img/w2/typography/w4-product-tiffany.jpg" },
+            { src: "img/w2/typography/w4-product-mcdonalds.jpg" },
+          ],
+          note: "Swapping the logos of well-established brands looks weird. Tiffany & Co. is known for elegance, hence serifs, a classic look. McDonald's with serifs would read as fine dining rather than fast food. Type sets expectations for what you're buying.",
+        },
+        {
+          layout: "gallery",
+          heading: "How should I feel?",
+          items: [
+            { src: "img/w2/typography/w4-feeling-1.jpg" },
+            { src: "img/w2/typography/w4-feeling-2.jpg" },
+            { src: "img/w2/typography/w4-feeling-3.jpg" },
+            { src: "img/w2/typography/w4-feeling-4.jpg" },
+          ],
+          caption: "Glyphworld, Leah Maldonado",
+          note: "Leah Maldonado makes expressionist type design to express emotion, fonts that correspond to different traits, like an alignment chart.",
+        },
+        {
+          layout: "points",
+          heading: "Agenda",
+          points: ["Anatomy of typography", "Typeface selection", "Typographic layout"],
+        },
+        { layout: "statement", text: "Anatomy of Typography." },
+        {
+          layout: "points",
+          heading: "Typeface vs. Font",
+          points: ["Typeface: font family of the same design.", "Font: a specific flavor of a typeface."],
+        },
+        { layout: "figure", src: "img/w2/typography/w4-anatomy-diagram.jpg" },
+        {
+          layout: "points",
+          heading: "Character vs. Glyph",
+          points: [
+            "Character: symbol representing a letter, number, or punctuation mark.",
+            "Glyph: specific shape, design, representation of a character.",
+          ],
+          note: "The character “a” can be represented by many glyphs, set in different typefaces.",
+        },
+        {
+          layout: "points",
+          heading: "Characters",
+          points: ["A: Letter", "5: Number", "!: Punctuation"],
+        },
+        { layout: "figure", src: "img/w2/typography/w4-glyphs-a.jpg", caption: "Glyphs of character “a”" },
+        {
+          layout: "points",
+          heading: "Measuring Fonts",
+          points: ["Point size: distance from the lowest to highest point of the text.", "Point: a unit of measurement. 72pt = 1 inch."],
+        },
+        {
+          layout: "points",
+          heading: "Balance in Font",
+          points: ["Stress and stroke create contrast.", "Optical balance beats mathematical balance."],
+          note: "The variation in thickness of a letter's stroke is like pressure. What you see is different from the actual mathematical ratio.",
+        },
+        {
+          layout: "exercise",
+          heading: "Kerning Game",
+          prompt: "type.method.ac: a letter-spacing game. It names a font, and you move the letters until they look evenly spaced. Trains your eye to space letters individually.",
+          time: "5 min",
+        },
+        {
+          layout: "points",
+          heading: "Typeface Classifications",
+          points: [
+            { text: "Serif Typefaces (Old Style, Transitional, Modern, Slab)", font: "Times New Roman" },
+            { text: "Sans Serif Typefaces (Grotesque, Neo-Grotesque, Humanist, Geometric)", font: "Comic Sans MS" },
+            { text: "Display Typefaces (Script, Blackletter, Inline, Relief, Experimental)", font: "Impact" },
+          ],
+        },
+        { layout: "statement", text: "Typeface selection." },
+        {
+          layout: "points",
+          heading: "Pair by difference",
+          points: ["Use contrast to emphasize hierarchy and create visual interest.", "Vary font “volume” to create balance."],
+          note: "We often use fonts from the same family, but pairing different fonts is normal too.",
+        },
+        {
+          layout: "gallery",
+          heading: "Pairing font by difference",
+          items: [
+            { src: "img/w2/typography/w4-pair-diff-1.jpg", label: "(a) Helvetica, (b) Univers" },
+            { src: "img/w2/typography/w4-pair-diff-2.jpg", label: "(a) Clarendon, (b) Rockwell" },
+            { src: "img/w2/typography/w4-pair-diff-3.jpg", label: "(a) Clarendon, (b) Garamond" },
+          ],
+          note: "The first two pair fonts from the same category. The last pairs fonts from different categories: Clarendon is a slab serif, Garamond is an old serif font from the 16th century.",
+        },
+        {
+          layout: "points",
+          heading: "Pair by family",
+          points: ["Guaranteed harmony between elements.", "Create hierarchy using font variations.", "Don’t stretch or distort the fonts."],
+          note: "An easy way to pair fonts: stay cohesive by family.",
+        },
+        {
+          layout: "gallery",
+          heading: "Pairing font by family",
+          items: [
+            { src: "img/w2/typography/w4-pair-family-1.jpg" },
+            { src: "img/w2/typography/w4-pair-family-2.jpg" },
+          ],
+          caption: "Chivo font family",
+          note: "These slides are an example: Chivo for large bodies of text, Chivo Bold for headlines.",
+        },
+        {
+          layout: "points",
+          heading: "Pair by similarity",
+          points: ["Closely analyze fonts next to each other at the same point size.", "Use font variants to create contrast.", "Be intentional with the function of each typeface."],
+          note: "Pair fonts with similar styles. Different typeface, similar size.",
+        },
+        {
+          layout: "gallery",
+          heading: "Pairing font by similarity",
+          items: [
+            { src: "img/w2/typography/w4-pair-sim-1.jpg", label: "(a) Helvetica, (b) Univers" },
+            { src: "img/w2/typography/w4-pair-sim-2.jpg", label: "(top) Helvetica, (bottom) Univers" },
+          ],
+          note: "Different families that appear similar work well together. The main difference between Helvetica and Univers is the spacing and width.",
+        },
+        {
+          layout: "figure",
+          src: "img/w2/typography/w4-pair-sim-magazine.jpg",
+          caption: "Making Helvetica and Univers work",
+          note: "Both are sans serif, and stylistically very similar.",
+        },
+        {
+          layout: "statement",
+          text: "Pairing is about balancing similarity and difference.",
+          note: "Even with these examples, don't be afraid to explore other methods.",
+        },
+        { layout: "statement", text: "Type + layout." },
+        {
+          layout: "points",
+          heading: "Using the Grid",
+          points: ["Guides content placement and line breaks.", "Grids can aid accessibility.", "Don’t be afraid to break the grid and experiment!"],
+        },
+        {
+          layout: "gallery",
+          heading: "Grid Terminology",
+          items: [
+            { src: "img/w2/typography/w4-grid-format.jpg", label: "Format" },
+            { src: "img/w2/typography/w4-grid-margins.jpg", label: "Margins" },
+          ],
+          note: "The format is sectioned into four-sided polygons, separated by lines. The margins are the boundaries of the grid.",
+        },
+        {
+          layout: "gallery",
+          heading: "Grid Terminology",
+          items: [
+            { src: "img/w2/typography/w4-grid-gutters.jpg", label: "Gutters" },
+            { src: "img/w2/typography/w4-grid-flowlines.jpg", label: "Flowlines / baselines" },
+          ],
+          note: "Gutters are the space between columns and rows. Flowlines and baselines are horizontal lines that break the space into bands, guiding the eye and imposing a start and stop.",
+        },
+        {
+          layout: "gallery",
+          heading: "Grid Types",
+          items: [
+            { src: "img/w2/typography/w4-grid-multicolumn.jpg", label: "Multi-column grid" },
+            { src: "img/w2/typography/w4-grid-modular.jpg", label: "Modular grid" },
+          ],
+        },
+        {
+          layout: "gallery",
+          heading: "Swiss Typography",
+          items: [
+            { src: "img/w2/typography/w4-swiss-1.jpg" },
+            { src: "img/w2/typography/w4-swiss-2.jpg" },
+            { src: "img/w2/typography/w4-swiss-3.jpg" },
+          ],
+          note: "Swiss poster designs, following modular grid guidelines.",
+        },
+        {
+          layout: "gallery",
+          heading: "Grid Types",
+          items: [
+            { src: "img/w2/typography/w4-grid-other-1.jpg" },
+            { src: "img/w2/typography/w4-grid-other-2.jpg" },
+          ],
+          note: "More types of grids that don't follow the conventional patterns.",
+        },
+        {
+          layout: "gallery",
+          heading: "Using an Axis",
+          items: [
+            { src: "img/w2/typography/w4-axis-1.jpg" },
+            { src: "img/w2/typography/w4-axis-2.jpg" },
+            { src: "img/w2/typography/w4-axis-3.jpg" },
+          ],
+          note: "Grid outlines don't always run along the x-axis. Elements just need to align to the central axis, no matter which way it turns.",
+        },
+        {
+          layout: "gallery",
+          heading: "Radial System",
+          items: [
+            { src: "img/w2/typography/w4-radial-1.jpg" },
+            { src: "img/w2/typography/w4-radial-2.jpg" },
+          ],
+          note: "Follows a circular topology: elements revolve around a center point, like planets around the sun.",
+        },
+        {
+          layout: "gallery",
+          heading: "“Breaking” the grid",
+          items: [
+            { src: "img/w2/typography/w4-break-grid-1.jpg" },
+            { src: "img/w2/typography/w4-break-grid-2.jpg" },
+            { src: "img/w2/typography/w4-break-grid-3.jpg" },
+          ],
+          note: "Breaking the rules is actually harder, because you need to know the rules before you can break them.",
+        },
+        {
+          layout: "points",
+          heading: "Structural Typography",
+          points: ["Form of type informs the grid.", "Abstracting type + typographic color.", "Type to reinforce imagery."],
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w2/typography/w4-structural-1.jpg" },
+            { src: "img/w2/typography/w4-structural-2.jpg" },
+          ],
+          note: "The text is perfectly aligned with the visual illustration, the question mark guides the text.",
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w2/typography/w4-contrast-1.jpg" },
+            { src: "img/w2/typography/w4-contrast-2.jpg" },
+          ],
+          note: "Blocked-out shapes with visual contrast, thick and thin fonts. The most important info is bolded, easier for the eye to catch.",
+        },
+        {
+          layout: "points",
+          heading: "Manipulating Typography",
+          points: [
+            "Play with color, transparency, texture, material, image masking.",
+            "Play with line art, outline, 3D forms.",
+            "Play with overlap, geometric shape, unique containers.",
+          ],
+          note: "Most designers manipulate typography to make their branding distinguishable. The following slides show different ways to manipulate type.",
+        },
+        {
+          layout: "gallery",
+          heading: "Staircase",
+          items: [
+            { src: "img/w2/typography/w4-staircase-1.jpg" },
+            { src: "img/w2/typography/w4-staircase-2.jpg" },
+            { src: "img/w2/typography/w4-staircase-3.jpg" },
+          ],
+          note: "A diagonal arrangement of type, reminiscent of stairs going up or down across the format.",
+        },
+        {
+          layout: "gallery",
+          heading: "Letterspace",
+          items: [
+            { src: "img/w2/typography/w4-letterspace-1.jpg" },
+            { src: "img/w2/typography/w4-letterspace-2.jpg" },
+            { src: "img/w2/typography/w4-letterspace-3.jpg" },
+          ],
+          note: "Words divided into individual letters or syllables, arranged randomly, and still legible after moving the letters around.",
+        },
+        {
+          layout: "gallery",
+          heading: "Repetition",
+          items: [
+            { src: "img/w2/typography/w4-repetition-1.jpg" },
+            { src: "img/w2/typography/w4-repetition-2.jpg" },
+          ],
+          note: "Repetition puts emphasis on certain words.",
+        },
+        {
+          layout: "gallery",
+          heading: "Type on path",
+          items: [
+            { src: "img/w2/typography/w4-typeonpath-1.jpg" },
+            { src: "img/w2/typography/w4-typeonpath-2.jpg" },
+            { src: "img/w2/typography/w4-typeonpath-3.jpg" },
+          ],
+          note: "Playful and fun to look at.",
+        },
+        {
+          layout: "gallery",
+          heading: "Hyphens",
+          items: [
+            { src: "img/w2/typography/w4-hyphens-1.jpg" },
+            { src: "img/w2/typography/w4-hyphens-2.jpg" },
+            { src: "img/w2/typography/w4-hyphens-3.jpg" },
+          ],
+          note: "Words divided across two or more lines, sometimes to fit the format, sometimes for no particular reason. A fun, intentional-looking way to fix a word that doesn't fit on one line.",
+        },
+        {
+          layout: "exercise",
+          heading: "In-Class Challenge",
+          prompt: "Illustrating an artist tag or signature! Get in groups of 2–3, make up an artist group name, and create an artist tag or signature.",
+        },
+        {
+          layout: "gallery",
+          heading: "In-Class Challenge examples",
+          items: [
+            { src: "img/w2/typography/w4-challenge-example-1.jpg" },
+            { src: "img/w2/typography/w4-challenge-example-2.jpg" },
+            { src: "img/w2/typography/w4-challenge-example-3.jpg" },
+            { src: "img/w2/typography/w4-challenge-example-4.jpg" },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Resources",
+          points: ["dafont.com", "fontspace.com", "Adobe Fonts"],
+          note: "I use dafont.com all the time, especially when I have a reference photo and want to manipulate the text to make it my own.",
+        },
+
+        { layout: "section", text: "Grid & Layout", num: "05" },
+        {
+          layout: "points",
+          heading: "Placeholder heading",
+          points: ["Placeholder point."],
+          note: "Fill in from the Google Slides deck.",
+        },
+
+        { layout: "section", text: "Hierarchy & Contrast", num: "06" },
+        {
+          layout: "points",
+          heading: "Placeholder heading",
+          points: ["Placeholder point."],
+          note: "Fill in from the Google Slides deck.",
+        },
+
+        { layout: "section", text: "In-class exercise", num: "07" },
+        {
+          layout: "exercise",
+          heading: "Placeholder",
+          prompt: "Placeholder prompt.",
+          time: "TBD",
+          note: "Fill in from the Google Slides deck.",
+        },
+
+        { layout: "section", text: "Homework", num: "08" },
+        { layout: "assignment" },
+      ],
+    },
   ],
 };
 
@@ -584,6 +1374,8 @@ const COURSE = {
    { layout: "statement", text: "One big line.", sub: "Optional second line." }
 
    { layout: "points", heading: "Heading", points: ["one", "two", "three"] }
+       A point can also be { text: "...", font: "Georgia" } when the point is
+       what a typeface actually looks like, not just a description of it.
 
    { layout: "two",
      heading: "Optional",
@@ -633,6 +1425,13 @@ const COURSE = {
      note: "presenter note"   shown under the card in the deck
      tap:  "\u{1F501} \u00D710"        a badge that appears when the card is clicked,
                               and goes away when it is clicked again
+     bg:   "#3a0a0a"          fills the whole slide with this background
+     fg:   "#3a0a0a"          sets the text color on a bg/fg slide
+                              (bg/fg are for demonstrating a color choice
+                              live, e.g. a slide that is deliberately hard to
+                              read. Set either one and the slide goes
+                              full-bleed instead of sitting in a white card.
+                              Leave them out and it's a normal slide.)
    ========================================================================== */
 
 if (typeof module !== "undefined") module.exports = COURSE;

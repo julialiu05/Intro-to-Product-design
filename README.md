@@ -176,8 +176,8 @@ desktop, so the desktop stays week folders only.
 and `WALL_EVERY` is the interval; the files live in `img/`. It crossfades
 between two stacked layers, since you cannot fade an element to a different
 version of itself, and it preloads everything so a fade never catches an image
-mid-download. Which one you get first is random, so the site does not always
-greet you the same way. Under `prefers-reduced-motion` it picks one and stays.
+mid-download. It always opens on the first entry in `WALLPAPERS`, then rotates
+through the rest. Under `prefers-reduced-motion` it picks one and stays.
 
 Two things to check when you add a wallpaper. The menu bar and the icon labels
 sit straight on the picture with no panel behind them, and their ink is dark

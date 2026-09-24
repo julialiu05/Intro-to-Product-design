@@ -111,10 +111,17 @@ function slideHTML(s, w) {
         ${s.sub ? `<p class="s-sub">${esc(s.sub)}</p>` : ""}
       </div>`;
     case "points":
+      /* A point is usually a plain string. It can also be { text, font } when
+         the actual typeface is the content, e.g. showing the same line set
+         in five different fonts, rather than just describing it. */
       return `<div class="slide">
         ${s.heading ? `<h2 class="s-head">${esc(s.heading)}</h2>` : ""}
         <ol class="s-points">${(s.points || [])
-          .map((p, k) => `<li style="--i:${k}"><span>${esc(p)}</span></li>`)
+          .map((p, k) => {
+            const text = typeof p === "string" ? p : p.text;
+            const font = typeof p === "object" && p.font ? `;font-family:${esc(p.font)}` : "";
+            return `<li style="--i:${k}${font}"><span>${esc(text)}</span></li>`;
+          })
           .join("")}</ol>
       </div>`;
     case "two":
@@ -192,13 +199,20 @@ function slideHTML(s, w) {
           .join("")}</div>
       </div>`;
     case "gallery":
-      /* a row of captioned images, for showing several examples at once */
+      /* a row of captioned images, for showing several examples at once.
+         `src` is optional per item, the same way `figure` and `person` treat
+         their image: without it, that slot leaves an empty frame to drop the
+         picture into later. */
       return `<div class="slide">
         ${s.heading ? `<h2 class="s-head">${esc(s.heading)}</h2>` : ""}
         <div class="s-gallery" data-n="${(s.items || []).length}">${(s.items || [])
           .map(
             (it) => `<figure>
-              <img src="${esc(it.src)}" alt="${esc(it.label || "")}" loading="lazy">
+              ${
+                it.src
+                  ? `<img src="${esc(it.src)}" alt="${esc(it.label || "")}" loading="lazy">`
+                  : `<span class="s-gallery__empty" aria-hidden="true"></span>`
+              }
               <figcaption>${esc(it.label)}${
                 it.note ? ` <b>${esc(it.note)}</b>` : ""
               }</figcaption>
@@ -208,8 +222,15 @@ function slideHTML(s, w) {
         ${s.caption ? `<p class="s-sub">${esc(s.caption)}</p>` : ""}
       </div>`;
     case "figure":
+      /* `src` is optional, the same way `person`'s `photo` is: without it the
+         slide still renders and leaves an empty frame to drop the image into
+         later. */
       return `<figure class="slide s-fig">
-        <img src="${esc(s.src)}" alt="${esc(s.caption || "")}">
+        ${
+          s.src
+            ? `<img src="${esc(s.src)}" alt="${esc(s.caption || "")}">`
+            : `<span class="s-fig__empty" aria-hidden="true"></span>`
+        }
         ${s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : ""}
       </figure>`;
     case "assignment": {
@@ -264,12 +285,43 @@ function renderScroll() {
   const deck = w.slides && w.slides.length ? w.slides : autoDeck(w);
   document.title = `${pad2(w.week)} · ${w.title} — ${COURSE.code}`;
 
+  /* A week can override the deck's default backdrop with `background` in
+     course.js. Leaving it out keeps the CSS default (img/wall-1.jpg). The
+     image actually paints on .wall--fixed::before, so this has to go through
+     a custom property rather than an inline style on the element itself. */
+  const wall = document.querySelector(".wall--fixed");
+  if (wall && w.background) wall.style.setProperty("--deck-bg", `url("${w.background}")`);
+
+  /* A slide can override the card's default colors with `bg`/`fg`, e.g. to
+     demonstrate a bad color choice live rather than just describe it. Set as
+     custom properties on the section, and go full-bleed (see desktop.css)
+     so the color fills the whole slide rather than a small floating card. */
+  const slideStyle = (s) =>
+    s.bg || s.fg
+      ? ` data-fullbleed="true" style="${s.bg ? `--slide-bg:${esc(s.bg)};` : ""}${s.fg ? `--slide-fg:${esc(s.fg)};` : ""}"`
+      : "";
+
+  /* On a gallery or figure, the note is usually the answer to an example
+     that's meant to be discussed before it's explained, so it starts hidden
+     and takes a click to reveal. Everywhere else the note is just context,
+     so it stays visible like it always has. */
+  const noteHTML = (s) => {
+    if (!s.note) return "";
+    if (s.layout !== "gallery" && s.layout !== "figure") {
+      return `<p class="sc-note">${esc(s.note)}</p>`;
+    }
+    return `<div class="sc-note sc-note--toggle" data-revealed="false" role="button" tabindex="0">
+      <span class="sc-note__label">Show notes</span>
+      <span class="sc-note__body">${esc(s.note)}</span>
+    </div>`;
+  };
+
   app.innerHTML =
     deck
       .map(
-        (s, i) => `<section class="sc-slide" data-n="${i + 1}" id="s${i + 1}">
+        (s, i) => `<section class="sc-slide" data-n="${i + 1}" id="s${i + 1}"${slideStyle(s)}>
           ${slideHTML(s, w)}
-          ${s.note ? `<p class="sc-note">${esc(s.note)}</p>` : ""}
+          ${noteHTML(s)}
         </section>`
       )
       .join("") +
@@ -325,6 +377,18 @@ function renderScroll() {
         card.style.setProperty("--rx", "0deg");
       });
     }
+  });
+
+  /* The hidden-until-clicked note on a gallery/figure slide: toggle on click
+     or on Enter/Space, since it's a div rather than a real <button>. */
+  app.querySelectorAll(".sc-note--toggle").forEach((note) => {
+    const toggle = () => {
+      note.dataset.revealed = note.dataset.revealed === "true" ? "false" : "true";
+    };
+    note.addEventListener("click", toggle);
+    note.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); toggle(); }
+    });
   });
 
   /* Any slide can carry `tap: "..."`: click the card and it appears, click

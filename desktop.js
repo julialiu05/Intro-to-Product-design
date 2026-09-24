@@ -394,14 +394,17 @@
       date: wk.date,
       state: draft ? "Not posted" : "Posted",
       run: draft ? null : function () { openDeck(n); },
-    }, {
-      ch: "📄",
-      name: "Some things to look at.md",
-      kind: "Reading list",
-      date: wk.date,
-      state: (wk.readings || []).length + " links",
-      run: function () { openReading(n); },
     }];
+    if ((wk.readings || []).length) {
+      items.push({
+        ch: "📄",
+        name: "Some things to look at.md",
+        kind: "Reading list",
+        date: wk.date,
+        state: wk.readings.length + " links",
+        run: function () { openReading(n); },
+      });
+    }
 
     var sel = -1, rowEls = [];
 

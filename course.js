@@ -44,7 +44,7 @@ const COURSE = {
 
   // Which week to surface, AND which theme the whole site wears.
   // Bump this every Wednesday and the site changes its skin.
-  CURRENT_WEEK: 1,
+  CURRENT_WEEK: 2,
 
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
@@ -565,9 +565,9 @@ const COURSE = {
 
     {
       week: 2,
-      date: "TBD",
+      date: "Sep 24",
       title: "Graphic Design Principles",
-      status: "draft",
+      status: "published",
       summary: "",
       /* Overrides the deck's default backdrop (img/wall-1.jpg) for this week
          only. Leave this out on any other week to keep the default. */

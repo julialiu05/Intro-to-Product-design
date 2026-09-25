@@ -575,11 +575,12 @@ const COURSE = {
       agenda: [],
       readings: [],
       assignment: {
-        title: "",
-        due: "",
-        dueDate: "",
-        body: "",
-        deliverable: "",
+        title: "Recommunicate a bad design",
+        due: "Wed Sep 30, 11:59pm",
+        /* ISO date so the Calendar app can mark it. Keep the two in step. */
+        dueDate: "2026-09-30",
+        body: "Find a poster or web design that isn't working, then reinvent it so it actually gets its message across. Redesign it in Figma, Canva, whatever, or change the medium entirely: a bad poster could become a shirt, a sticker, anything more effective. The point is to practice manipulating color and typography on purpose, so lean into that.",
+        deliverable: "Bring both the original and your redesign, in class or sent over if it's digital.",
       },
       materials: [],
       /* Scaffold only. Julia has a Google Slides deck for this lecture that
@@ -591,13 +592,57 @@ const COURSE = {
         { layout: "title" },
 
         { layout: "section", text: "Nametag Project Critique", num: "01" },
-        /* Three blank slots for student nametag work. Add `src` (and a
-           `caption` crediting the student) to each as work comes in. */
-        { layout: "figure", caption: "" },
-        { layout: "figure", caption: "" },
-        { layout: "figure", caption: "" },
+        /* Student nametag submissions, split fairly evenly across three
+           slides for discussion. No labels, on purpose: it's a live
+           critique, not a captioned gallery. */
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w2/critique/critique-01.jpg" },
+            { src: "img/w2/critique/critique-02.jpg" },
+            { src: "img/w2/critique/critique-03.jpg" },
+            { src: "img/w2/critique/critique-04.jpg" },
+            { src: "img/w2/critique/critique-05.jpg" },
+            { src: "img/w2/critique/critique-06.jpg" },
+            { src: "img/w2/critique/critique-07.jpg" },
+            { src: "img/w2/critique/critique-08.jpg" },
+          ],
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w2/critique/critique-09.jpg" },
+            { src: "img/w2/critique/critique-10.jpg" },
+            { src: "img/w2/critique/critique-11.jpg" },
+            { src: "img/w2/critique/critique-12.jpg" },
+            { src: "img/w2/critique/critique-13.jpg" },
+            { src: "img/w2/critique/critique-14.jpg" },
+            { src: "img/w2/critique/critique-15.jpg" },
+          ],
+        },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w2/critique/critique-16.jpg" },
+            { src: "img/w2/critique/critique-17.jpg" },
+            { src: "img/w2/critique/critique-18.jpg" },
+            { src: "img/w2/critique/critique-19.jpg" },
+            { src: "img/w2/critique/critique-20.jpg" },
+            { src: "img/w2/critique/critique-21.jpg" },
+            { src: "img/w2/critique/critique-22.jpg" },
+            { src: "img/w2/critique/critique-23.jpg" },
+          ],
+        },
 
         { layout: "section", text: "Why Style Choices Matter", num: "02" },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w2/bad-design-store-window.jpg" },
+            { src: "img/w2/bad-design-burger-flyer.jpg" },
+            { src: "img/w2/bad-design-shirt.jpg" },
+          ],
+        },
         {
           layout: "statement",
           text: "Color, type and layout aren't graphic design extras.",
@@ -646,7 +691,7 @@ const COURSE = {
         {
           layout: "statement",
           text: "But almost everyone looking at those posters agreed something was off.",
-          sub: "That agreement is the tell: design isn't arbitrary, even though it is subjective.",
+          sub: "Design isn't arbitrary, even though it is subjective.",
         },
         {
           layout: "exercise",
@@ -666,6 +711,12 @@ const COURSE = {
         },
 
         { layout: "section", text: "Color", num: "03" },
+        {
+          layout: "statement",
+          text: "tinyurl.com/2tejyasr",
+          sub: "Classwork: make a copy of the template and fill it in yourself.",
+          note: "Color association: a color that represents you, your hometown, Sunday, what relaxes you, a triangle, a circle, one you really don't like, and nostalgia. List the HEX code for each.",
+        },
         /* A live demo rather than a description: the slide itself is the bad
            example, then the good one. bg/fg override the card's colors, see
            the SLIDE CHEATSHEET at the bottom of this file. */
@@ -728,14 +779,6 @@ const COURSE = {
           layout: "figure",
           src: "img/w2/color/w3-mood-error-blue.jpg",
           note: "Ask the class what they associate with this bright blue. It's the color we associate with something being wrong, hence why it's the background to error messages.",
-        },
-        {
-          layout: "points",
-          heading: "Communication",
-          points: [
-            "Traffic signals: red is stop, green is go, everywhere.",
-            "Curb colors: blue for handicapped parking, white for limited-time parking.",
-          ],
         },
         {
           layout: "gallery",
@@ -917,44 +960,6 @@ const COURSE = {
           points: ["Coolors: coolors.co", "Adobe Color", "Color game: color.method.ac"],
           note: "Coolors: a color palette generator, lock colors you like and hit space bar to cycle the rest. Adobe Color: build and share color themes. The color game: use your cursor to match a given color.",
         },
-        {
-          layout: "exercise",
-          heading: "In-Class Challenge",
-          prompt: "Illustrating with random colors! Theme: Boba Drinks. Go to coolors.co and generate a palette of 5 colors, try ones you aren't familiar with. Then make an illustration (Ai, Ps, Procreate, whatever) using those colors.",
-          time: "10–20 min",
-        },
-        {
-          layout: "points",
-          heading: "Once you’re done…",
-          points: ["Upload your classwork to Discord!", "Make sure to download it in .png format"],
-        },
-        {
-          layout: "points",
-          heading: "Homework 3: Illustrating and Recoloring",
-          points: [
-            "1) Make an illustration with the theme Adventure, in black and white.",
-            "2) Recolor your illustration in a monochrome palette.",
-            "3) Then recolor it again in a complementary palette.",
-          ],
-          note: "Remember that color is used to draw attention, evoke mood, and for communication. (From a past run of this course, due date and platform were specific to that term. Reference only, not this week's real assignment.)",
-        },
-        {
-          layout: "gallery",
-          heading: "HW3 past examples",
-          items: [
-            { src: "img/w2/color/w3-hw-example-1.jpg" },
-            { src: "img/w2/color/w3-hw-example-2.jpg" },
-            { src: "img/w2/color/w3-hw-example-3.jpg" },
-            { src: "img/w2/color/w3-hw-example-4.jpg" },
-            { src: "img/w2/color/w3-hw-example-5.jpg" },
-          ],
-        },
-        {
-          layout: "statement",
-          text: "Question of the week",
-          sub: "What's your favorite color? Your least favorite?",
-        },
-
         { layout: "section", text: "Typography", num: "04" },
         /* From here down: transcribed from Julia and Pat's "Week Four:
            Typography" slide deck, the same way the Color section was. One
@@ -1323,33 +1328,25 @@ const COURSE = {
           note: "I use dafont.com all the time, especially when I have a reference photo and want to manipulate the text to make it my own.",
         },
 
-        { layout: "section", text: "Grid & Layout", num: "05" },
-        {
-          layout: "points",
-          heading: "Placeholder heading",
-          points: ["Placeholder point."],
-          note: "Fill in from the Google Slides deck.",
-        },
-
-        { layout: "section", text: "Hierarchy & Contrast", num: "06" },
-        {
-          layout: "points",
-          heading: "Placeholder heading",
-          points: ["Placeholder point."],
-          note: "Fill in from the Google Slides deck.",
-        },
-
-        { layout: "section", text: "In-class exercise", num: "07" },
-        {
-          layout: "exercise",
-          heading: "Placeholder",
-          prompt: "Placeholder prompt.",
-          time: "TBD",
-          note: "Fill in from the Google Slides deck.",
-        },
-
-        { layout: "section", text: "Homework", num: "08" },
+        { layout: "section", text: "Homework", num: "05" },
         { layout: "assignment" },
+        {
+          layout: "gallery",
+          heading: "Example: a poster redesign",
+          items: [
+            { src: "img/w2/examples/poster-redesign-before.jpg", label: "Initial Design" },
+            { src: "img/w2/examples/poster-redesign-after-1.jpg", label: "Redesign" },
+            { src: "img/w2/examples/poster-redesign-after-2.jpg", label: "Redesign" },
+          ],
+        },
+        {
+          layout: "gallery",
+          heading: "Example: a UI redesign",
+          items: [
+            { src: "img/w2/examples/ui-redesign-before.jpg", label: "Initial Design" },
+            { src: "img/w2/examples/ui-redesign-after.jpg", label: "Redesign" },
+          ],
+        },
       ],
     },
   ],

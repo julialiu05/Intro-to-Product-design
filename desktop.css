@@ -1138,6 +1138,22 @@ body {
   background: #f0f0f2;
   border-radius: var(--r-in);
 }
+
+/* A gallery of one or two images (e.g. a before/after phone screenshot) has
+   room to spare, so it drops the square crop and small height cap that a
+   six-across row of chairs needs, and scales up to its natural shape. */
+.sc-slide .s-gallery[data-n="1"] img,
+.sc-slide .s-gallery[data-n="2"] img {
+  width: auto; max-width: 100%;
+  height: auto; max-height: 58vh;
+  aspect-ratio: auto;
+  margin: 0 auto;
+}
+.sc-slide .s-gallery[data-n="1"] .s-gallery__empty,
+.sc-slide .s-gallery[data-n="2"] .s-gallery__empty {
+  aspect-ratio: 4 / 5;
+  max-height: 58vh;
+}
 .sc-slide .s-gallery figcaption {
   font-size: .75rem; line-height: 1.35; text-align: center;
   color: #6e6e73;

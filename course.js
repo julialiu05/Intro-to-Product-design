@@ -44,12 +44,12 @@ const COURSE = {
 
   // Which week to surface, AND which theme the whole site wears.
   // Bump this every Wednesday and the site changes its skin.
-  CURRENT_WEEK: 2,
+  CURRENT_WEEK: 3,
 
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
   // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
-  DESKTOP_WEEKS: 2,
+  DESKTOP_WEEKS: 3,
 
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
@@ -1345,6 +1345,442 @@ const COURSE = {
           items: [
             { src: "img/w2/examples/ui-redesign-before.jpg", label: "Initial Design" },
             { src: "img/w2/examples/ui-redesign-after.jpg", label: "Redesign" },
+          ],
+        },
+      ],
+    },
+
+    {
+      week: 3,
+      date: "Oct 1",
+      title: "Project 1 and critique",
+      status: "published",
+      summary: "",
+      agenda: [
+        "Critique of last week's redesigns",
+        "Problem statement to design statement",
+        "The job in 2026",
+        "Example: Reels AI",
+        "Find your group",
+        "In class: a problem you have noticed",
+        "Project 1, deliverables, and this week\u0027s write-up",
+      ],
+      readings: [
+        {
+          title: "Problem Statements in UX Discovery",
+          author: "Maria Rosala, Nielsen Norman Group",
+          kind: "Post",
+          url: "https://www.nngroup.com/articles/problem-statements/",
+          note: "Short. Read it before you write your problem statement. The rule that matters: a problem statement does not contain a solution.",
+        },
+        {
+          title: "Design role requirements are evolving: the 2026 design job description",
+          author: "Ioana Teleanu",
+          kind: "Post",
+          url: "https://aigoodies.beehiiv.com/p/design-job-requirements-2026",
+          note: "Where the 2026 slides come from. Real job posts, read closely. Worth it even if you are not job hunting.",
+        },
+        {
+          title: "Are You Solving the Right Problems?",
+          author: "Thomas Wedell-Wedellsborg",
+          kind: "Essay",
+          optional: true,
+          url: "https://hbr.org/2017/01/are-you-solving-the-right-problems",
+          note: "Optional. On how often the problem you were handed is the wrong one.",
+        },
+      ],
+      /* `dueDate` stays empty until the week is published, because apps.js puts
+         any week carrying a dueDate onto the Calendar whether or not the week
+         is a draft. Set it to "2026-10-07" with the other publish switches. */
+      assignment: {
+        title: "Scope and write-up",
+        due: "Wed Oct 7, 11:59pm",
+        dueDate: "2026-10-07",
+        body: "As a group: the software you picked, the scope of what you are taking on, what you are interested in solving, and your design statement.",
+        deliverable: "One write-up per group, every name on it.",
+      },
+      materials: [],
+      /* ------------------------------------------------------------------
+         Order: critique, teach, example, groups, project.
+
+         Slides carry labels only. The explaining lives in the notes and in
+         the person at the front.
+
+         Worked example is Julia's Reels AI case study, which is this
+         assignment done once already. Stills pulled from the demo videos on
+         julialius.com, her own work. The 2026 section is from Ioana
+         Teleanu's survey of real job postings, May 2026. Credits in
+         img/w3/_credits.json.
+         ------------------------------------------------------------------ */
+      slides: [
+        { layout: "title" },
+
+        /* ========== 01 CRITIQUE ========== */
+        { layout: "section", text: "Critique", num: "01" },
+        {
+          layout: "exercise",
+          heading: "Critique",
+          prompt: "Everyone says something about at least one that isn't theirs.",
+          time: "45 min",
+        },
+
+        {
+          layout: "points",
+          heading: "Ask about each one",
+          points: [
+            "What is it getting someone to do?",
+            "What did the original get wrong?",
+            "Which change does the most work?",
+            "What would you try next?",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Decisions, not taste.",
+          sub: "“The colour makes the date hard to find,” not “I don't like the colour.”",
+        },
+        /* Student submissions from "Recommunicate a bad design". Numbered
+           rather than named, the same way Week 2 handled the nametags,
+           because this repo is public. No headings and no notes on purpose:
+           this is a live critique, and labelling it gives the answer away.
+           Click any one to blow it up. */
+        { layout: "gallery", items: [{ src: "img/w3/critique/critique-01.jpg" }] },
+        { layout: "gallery", items: [{ src: "img/w3/critique/critique-02.jpg" }] },
+        { layout: "gallery", items: [{ src: "img/w3/critique/critique-03.jpg" }] },
+        { layout: "gallery", items: [{ src: "img/w3/critique/critique-04.jpg" }] },
+        { layout: "gallery", items: [{ src: "img/w3/critique/critique-05.jpg" }] },
+        {
+          layout: "gallery",
+          items: [
+            { src: "img/w3/critique/critique-06.jpg", label: "Original" },
+            { src: "img/w3/critique/critique-07.jpg", label: "Redesign" },
+          ],
+        },
+        /* ========== 02 FRAMING ========== */
+        { layout: "section", text: "Problem to design statement", num: "02" },
+        {
+          layout: "two",
+          heading: "Two ways it goes wrong",
+          left: { label: "A complaint", body: "“Instagram is bad at saving things.”" },
+          right: { label: "A solution in disguise", body: "“Add a summarise button.”" },
+        },
+        {
+          layout: "statement",
+          text: "A problem statement does not contain a solution.",
+          sub: "Nielsen Norman Group",
+        },
+        {
+          layout: "points",
+          heading: "A problem statement has three parts",
+          points: [
+            "Who, specifically.",
+            "What they are trying to do.",
+            "Why it is hard.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "[User] needs a way to [need] because [insight].",
+        },
+        {
+          layout: "statement",
+          text: "Worked example: a delivery app.",
+          sub: "The problem is people are hungry.",
+        },
+        {
+          layout: "two",
+          heading: "Same problem, two ways of saying it",
+          left: { label: "How the business says it", body: "Orders drop off after 9pm.\nCart abandonment is up." },
+          right: { label: "How a designer says it", body: "Someone opens the app hungry and closes it without ordering." },
+        },
+        {
+          layout: "points",
+          heading: "Break it down",
+          points: [
+            "Who: hungry at 9pm, alone, tired.",
+            "What they want: to eat soon.",
+            "Why it is hard: 400 restaurants and no way to choose.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "The third blank does the work",
+          left: { label: "Weak", body: "A hungry person needs a way to order food.\n\nTrue of everyone. Tells you nothing." },
+          right: { label: "Stronger", body: "Someone hungry at 9pm needs to decide in under a minute, because the longer they scroll the more likely they give up and eat cereal." },
+        },
+        {
+          layout: "two",
+          heading: "Then turn it into a design statement",
+          left: { label: "Problem statement", body: "Describes what is wrong.\nEnds in a full stop." },
+          right: { label: "Design statement", body: "“How might we help someone decide what to eat before they lose patience?”\nEnds in a question you can answer." },
+        },
+        {
+          layout: "two",
+          heading: "How each one goes at it",
+          left: { label: "Product manager", body: "Pull the funnel.\nWhere do people drop off?\nSegment by time of day.\nA/B test the home screen." },
+          right: { label: "Designer", body: "Watch five people order at 9pm.\nFind the moment they give up.\nScope the problem to that moment." },
+        },
+        {
+          layout: "two",
+          heading: "What each one gives you",
+          left: { label: "The data", body: "62% leave on the restaurant list.\n\nTells you where. Not why." },
+          right: { label: "Watching someone", body: "They open it, scroll, close it, open it again.\n\nTells you why. Not how often." },
+        },
+        {
+          layout: "points",
+          heading: "Use both",
+          points: [
+            "Data finds where it happens.",
+            "Watching finds why.",
+            "You need the why before you can design anything.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Scope it",
+          points: [
+            "Too broad: redesign food delivery.",
+            "Too narrow: add a surprise me button.",
+            "About right: help someone decide what to eat quickly.",
+          ],
+        },
+
+        /* ========== 03 THE JOB ========== */
+        { layout: "section", text: "The job in 2026", num: "03" },
+        {
+          layout: "quote",
+          quote: "A product designer can always be a product manager.",
+          attribution: "Julia Liu",
+        },
+        {
+          layout: "points",
+          heading: "What that means here",
+          points: [
+            "You pick what to build.",
+            "You defend why.",
+            "You ship it.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "What companies ask for in 2026",
+          points: [
+            "Anthropic, Vercel: prototype in HTML, CSS, JS.",
+            "Cursor, Linear: iterate in code.",
+            "Notion: prototype against real models.",
+            "Stripe, Perplexity: designers ship production code.",
+          ],
+        },
+        {
+          layout: "chart",
+          heading: "Job postings since early 2022",
+          bars: [
+            { label: "UX research", value: 71, display: "-71%", accent: true },
+            { label: "UX design", value: 70, display: "-70%", accent: true },
+          ],
+          caption: "Ioana Teleanu, 2026. Researchers were laid off at roughly three times the rate of designers.",
+        },
+        {
+          layout: "statement",
+          text: "Research is part of the design job now.",
+        },
+        {
+          layout: "points",
+          heading: "So on this project",
+          points: [
+            "You choose the problem.",
+            "You build the thing.",
+            "You present the reasoning.",
+          ],
+        },
+
+        /* ========== 04 EXAMPLE ========== */
+        /* The finished case study, live in a window rather than screenshotted.
+           Scroll it during class. The sections down its left side are the same
+           nine parts the project asks for. */
+        { layout: "section", text: "Example", num: "04" },
+        {
+          layout: "site",
+          heading: "A feature added to Instagram",
+          label: "Reels AI",
+          src: "https://www.julialius.com/case-study-6.html#overview",
+          body: "Scroll it. Watch the side nav: those sections are what your page needs.",
+        },
+        {
+          layout: "points",
+          heading: "What to look at while we scroll",
+          points: [
+            "Role, timeline, team, skills at the top.",
+            "The user journey, drawn, not described.",
+            "Competitive analysis, with the gap marked.",
+            "Prototypes playing, not screenshotted.",
+            "Tradeoffs, benefits against risks.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Every feature has a cost",
+          left: { label: "Gives", body: "Saves time.\nPulls the recipe out.\nRuns on tap." },
+          right: { label: "Costs", body: "You consume more.\nContext flattens.\nIt reads your messages." },
+        },
+
+        /* ========== 05 GROUPS ========== */
+        { layout: "section", text: "Find your group", num: "05" },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "Groups of 3 to 5",
+          body: "Same group until the end of October.",
+          points: [
+            "Match schedules first.",
+            "Group chat.",
+            "A weekly time you can all meet.",
+          ],
+          src: "img/w3/penguins.jpg",
+          caption: "Penguins of Madagascar, DreamWorks Animation",
+        },
+        {
+          layout: "exercise",
+          heading: "Find your group",
+          prompt: "Come back with 3 to 5 names and a way to contact each other.",
+          time: "15 min",
+        },
+
+        /* ========== 06 ACTIVITY ========== */
+        { layout: "section", text: "In class", num: "06" },
+        {
+          layout: "exercise",
+          heading: "On your own",
+          prompt: "Think of a problem you have in your daily life. Write down what you have noticed about it.",
+          time: "10 min",
+        },
+        {
+          layout: "points",
+          heading: "Write down",
+          points: [
+            "When it happens.",
+            "What you do instead.",
+            "Who else you have seen hit it.",
+            "What you have noticed about it.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "No solutions.",
+        },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "Read them to each other. Keep the ones more than one of you has hit.",
+          time: "10 min",
+        },
+
+        /* ========== 06 PROJECT ========== */
+        { layout: "section", text: "Project 1", num: "07" },
+        {
+          layout: "statement",
+          text: "You are tasked to make a software or app better with a new feature.",
+        },
+        {
+          layout: "points",
+          heading: "Why an existing app",
+          points: [
+            "No company to invent first.",
+            "It already has users you can talk to.",
+            "It already has rules to work inside.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Things that count",
+          points: [
+            "An app you open every day.",
+            "A university system.",
+            "A tool from another class.",
+            "A game, a bank app, a transit app.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Due end of October",
+          left: { label: "Working prototype", body: "Figma, SwiftUI, code.\nYour feature only." },
+          right: { label: "Website", body: "Motion graphics.\nNine parts." },
+        },
+        {
+          layout: "statement",
+          text: "Website, not a deck.",
+          sub: "Video of the prototype running on the page.",
+        },
+        {
+          layout: "points",
+          heading: "Nine parts, in this order",
+          points: [
+            "Overview",
+            "Solution",
+            "Core flows",
+            "Research",
+            "Explorations",
+            "Prototyping and testing",
+            "Design decisions",
+            "Constraints",
+            "Reflections",
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "What you made",
+          items: [
+            { label: "Overview", body: "The software, the problem, the feature. Under 100 words.", list: ["Reels AI: content piles up, summarise it inline"] },
+            { label: "Solution", body: "The feature.", list: ["Video, not static screens"] },
+            { label: "Core flows", body: "Two or three paths through it.", list: ["Friend sends a reel, you are busy, you come back"] },
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "How you got there",
+          items: [
+            { label: "Research", body: "Who you talked to.", list: ["Quote them", "Say what surprised you"] },
+            { label: "Explorations", body: "Versions you dropped.", list: ["Include the dead ends"] },
+            { label: "Prototyping and testing", body: "What broke.", list: ["And what you changed"] },
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Why it looks like this",
+          items: [
+            { label: "Design decisions", body: "The three or four that mattered.", list: ["Each with the option you turned down"] },
+            { label: "Constraints", body: "Time, access, skill, scope.", list: ["Reels AI: solo, one month, no Meta data"] },
+            { label: "Reflections", body: "What you would redo.", list: ["Say where you used AI"] },
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Dates",
+          left: { label: "Checkpoints", body: "Oct 8: problem and research.\nOct 15: explorations.\nOct 22: prototype in progress." },
+          right: { label: "Due", body: "Thu Oct 29, in class.\nPrototype running.\nPage live.\nEvery group presents." },
+        },
+        {
+          layout: "points",
+          heading: "Graded on",
+          points: [
+            "Evidence for the problem.",
+            "Reasons behind the decisions.",
+            "Prototype works.",
+            "Page is honest about what went wrong.",
+          ],
+        },
+
+        /* ========== 07 THIS WEEK ========== */
+        { layout: "section", text: "This week", num: "08" },
+        { layout: "assignment" },
+        {
+          layout: "points",
+          heading: "The write-up has four parts",
+          points: [
+            "The software you picked.",
+            "The scope of what you are taking on.",
+            "What you are interested in solving.",
+            "Your design statement.",
           ],
         },
       ],

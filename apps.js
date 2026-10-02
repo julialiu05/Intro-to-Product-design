@@ -448,6 +448,343 @@
   });
 
   /* ==========================================================================
+     CHESS
+     Full legal movement: castling, en passant, promotion, check, checkmate and
+     stalemate. The computer searches two ply on material, which makes it take
+     a free piece and avoid an obvious recapture, and lose to anyone paying
+     attention. Pieces are the Unicode chess glyphs from the system font, the
+     same reasoning as every other icon here: nothing is drawn by hand.
+     ========================================================================== */
+
+  var GLYPH = {
+    wk: "♔", wq: "♕", wr: "♖", wb: "♗", wn: "♘", wp: "♙",
+    bk: "♚", bq: "♛", br: "♜", bb: "♝", bn: "♞", bp: "♟",
+  };
+  var VALUE = { p: 100, n: 320, b: 330, r: 500, q: 900, k: 20000 };
+
+  function startBoard() {
+    var back = ["r", "n", "b", "q", "k", "b", "n", "r"];
+    var b = new Array(64).fill(null);
+    for (var i = 0; i < 8; i++) {
+      b[i]      = { t: back[i], c: "b" };
+      b[8 + i]  = { t: "p", c: "b" };
+      b[48 + i] = { t: "p", c: "w" };
+      b[56 + i] = { t: back[i], c: "w" };
+    }
+    return b;
+  }
+
+  function cloneState(st) {
+    return {
+      b: st.b.slice(),
+      turn: st.turn,
+      ep: st.ep,
+      cast: { wk: st.cast.wk, wq: st.cast.wq, bk: st.cast.bk, bq: st.cast.bq },
+    };
+  }
+
+  var SLIDE = { b: [[1,1],[1,-1],[-1,1],[-1,-1]],
+                r: [[1,0],[-1,0],[0,1],[0,-1]] };
+  SLIDE.q = SLIDE.b.concat(SLIDE.r);
+  var HOP = { n: [[1,2],[2,1],[-1,2],[-2,1],[1,-2],[2,-1],[-1,-2],[-2,-1]],
+              k: SLIDE.q };
+
+  function onBoard(r, c) { return r >= 0 && r < 8 && c >= 0 && c < 8; }
+
+  /* Pseudo-legal moves: shape only, king safety is checked afterwards. */
+  function rawMoves(st, from) {
+    var pc = st.b[from];
+    if (!pc) return [];
+    var r = Math.floor(from / 8), c = from % 8, out = [], i, d, rr, cc, to;
+
+    if (pc.t === "p") {
+      var dir = pc.c === "w" ? -1 : 1;
+      var home = pc.c === "w" ? 6 : 1;
+      if (onBoard(r + dir, c) && !st.b[(r + dir) * 8 + c]) {
+        out.push((r + dir) * 8 + c);
+        if (r === home && !st.b[(r + 2 * dir) * 8 + c]) out.push((r + 2 * dir) * 8 + c);
+      }
+      [[dir, -1], [dir, 1]].forEach(function (o) {
+        rr = r + o[0]; cc = c + o[1];
+        if (!onBoard(rr, cc)) return;
+        to = rr * 8 + cc;
+        if ((st.b[to] && st.b[to].c !== pc.c) || to === st.ep) out.push(to);
+      });
+      return out;
+    }
+
+    if (HOP[pc.t] && pc.t !== "k") {
+      HOP[pc.t].forEach(function (o) {
+        rr = r + o[0]; cc = c + o[1];
+        if (!onBoard(rr, cc)) return;
+        to = rr * 8 + cc;
+        if (!st.b[to] || st.b[to].c !== pc.c) out.push(to);
+      });
+      return out;
+    }
+
+    if (pc.t === "k") {
+      HOP.k.forEach(function (o) {
+        rr = r + o[0]; cc = c + o[1];
+        if (!onBoard(rr, cc)) return;
+        to = rr * 8 + cc;
+        if (!st.b[to] || st.b[to].c !== pc.c) out.push(to);
+      });
+      /* Castling: squares empty, and the king does not start, cross or land
+         on an attacked square. */
+      var row = pc.c === "w" ? 7 : 0;
+      if (from === row * 8 + 4 && !attacked(st, from, pc.c)) {
+        var kSide = pc.c === "w" ? st.cast.wk : st.cast.bk;
+        var qSide = pc.c === "w" ? st.cast.wq : st.cast.bq;
+        if (kSide && !st.b[row * 8 + 5] && !st.b[row * 8 + 6] &&
+            !attacked(st, row * 8 + 5, pc.c) && !attacked(st, row * 8 + 6, pc.c)) {
+          out.push(row * 8 + 6);
+        }
+        if (qSide && !st.b[row * 8 + 1] && !st.b[row * 8 + 2] && !st.b[row * 8 + 3] &&
+            !attacked(st, row * 8 + 3, pc.c) && !attacked(st, row * 8 + 2, pc.c)) {
+          out.push(row * 8 + 2);
+        }
+      }
+      return out;
+    }
+
+    SLIDE[pc.t].forEach(function (o) {
+      rr = r + o[0]; cc = c + o[1];
+      while (onBoard(rr, cc)) {
+        to = rr * 8 + cc;
+        if (!st.b[to]) { out.push(to); }
+        else { if (st.b[to].c !== pc.c) out.push(to); break; }
+        rr += o[0]; cc += o[1];
+      }
+    });
+    return out;
+  }
+
+  /* Is `sq` attacked by the side that is not `me`? Pawn direction is the one
+     thing worth getting right here, so it is written out rather than reused. */
+  function attacked(st, sq, me) {
+    var them = me === "w" ? "b" : "w";
+    var r = Math.floor(sq / 8), c = sq % 8, i, rr, cc, to, pc;
+
+    var pd = them === "w" ? 1 : -1;   /* where a `them` pawn would come from */
+    for (i = -1; i <= 1; i += 2) {
+      rr = r + pd; cc = c + i;
+      if (onBoard(rr, cc)) {
+        pc = st.b[rr * 8 + cc];
+        if (pc && pc.c === them && pc.t === "p") return true;
+      }
+    }
+    for (i = 0; i < HOP.n.length; i++) {
+      rr = r + HOP.n[i][0]; cc = c + HOP.n[i][1];
+      if (!onBoard(rr, cc)) continue;
+      pc = st.b[rr * 8 + cc];
+      if (pc && pc.c === them && pc.t === "n") return true;
+    }
+    for (i = 0; i < HOP.k.length; i++) {
+      rr = r + HOP.k[i][0]; cc = c + HOP.k[i][1];
+      if (!onBoard(rr, cc)) continue;
+      pc = st.b[rr * 8 + cc];
+      if (pc && pc.c === them && pc.t === "k") return true;
+    }
+    var rays = [["r", SLIDE.r], ["b", SLIDE.b]];
+    for (var k = 0; k < rays.length; k++) {
+      var kind = rays[k][0], dirs = rays[k][1];
+      for (i = 0; i < dirs.length; i++) {
+        rr = r + dirs[i][0]; cc = c + dirs[i][1];
+        while (onBoard(rr, cc)) {
+          pc = st.b[rr * 8 + cc];
+          if (pc) {
+            if (pc.c === them && (pc.t === kind || pc.t === "q")) return true;
+            break;
+          }
+          rr += dirs[i][0]; cc += dirs[i][1];
+        }
+      }
+    }
+    return false;
+  }
+
+  function kingSq(st, col) {
+    for (var i = 0; i < 64; i++) if (st.b[i] && st.b[i].t === "k" && st.b[i].c === col) return i;
+    return -1;
+  }
+  function inCheck(st, col) {
+    var k = kingSq(st, col);
+    return k >= 0 && attacked(st, k, col);
+  }
+
+  /* Apply a move to a copy. Promotion is always a queen: offering the other
+     three on a 380px window costs more than it adds. */
+  function applyMove(st, from, to) {
+    var n = cloneState(st);
+    var pc = n.b[from];
+    var r = Math.floor(from / 8), c = from % 8, tr = Math.floor(to / 8), tc = to % 8;
+
+    if (pc.t === "p" && to === st.ep && !n.b[to]) n.b[tr === 2 ? to + 8 : to - 8] = null;
+    if (pc.t === "k" && Math.abs(tc - c) === 2) {
+      var row = r * 8;
+      if (tc === 6) { n.b[row + 5] = n.b[row + 7]; n.b[row + 7] = null; }
+      else          { n.b[row + 3] = n.b[row + 0]; n.b[row + 0] = null; }
+    }
+
+    n.b[to] = pc; n.b[from] = null;
+    if (pc.t === "p" && (tr === 0 || tr === 7)) n.b[to] = { t: "q", c: pc.c };
+
+    n.ep = (pc.t === "p" && Math.abs(tr - r) === 2) ? (r + tr) / 2 * 8 + c : -1;
+
+    if (pc.t === "k") { if (pc.c === "w") { n.cast.wk = n.cast.wq = false; } else { n.cast.bk = n.cast.bq = false; } }
+    if (from === 63 || to === 63) n.cast.wk = false;
+    if (from === 56 || to === 56) n.cast.wq = false;
+    if (from === 7  || to === 7)  n.cast.bk = false;
+    if (from === 0  || to === 0)  n.cast.bq = false;
+
+    n.turn = st.turn === "w" ? "b" : "w";
+    return n;
+  }
+
+  function legalFrom(st, from) {
+    var pc = st.b[from];
+    if (!pc || pc.c !== st.turn) return [];
+    return rawMoves(st, from).filter(function (to) {
+      return !inCheck(applyMove(st, from, to), pc.c);
+    });
+  }
+  function allMoves(st) {
+    var out = [];
+    for (var i = 0; i < 64; i++) {
+      if (!st.b[i] || st.b[i].c !== st.turn) continue;
+      legalFrom(st, i).forEach(function (to) { out.push([i, to]); });
+    }
+    return out;
+  }
+
+  function material(st, col) {
+    var sum = 0;
+    for (var i = 0; i < 64; i++) {
+      var p = st.b[i];
+      if (p) sum += (p.c === col ? 1 : -1) * VALUE[p.t];
+    }
+    return sum;
+  }
+
+  /* Two ply: play a move, let the other side take its best reply, keep the
+     move whose worst case is best. Enough to punish a hanging piece. */
+  function chooseMove(st) {
+    var moves = allMoves(st), best = null, bestScore = -Infinity;
+    for (var i = 0; i < moves.length; i++) {
+      var after = applyMove(st, moves[i][0], moves[i][1]);
+      var replies = allMoves(after), worst = Infinity;
+      if (!replies.length) {
+        worst = inCheck(after, after.turn) ? 1e6 : 0;
+      } else {
+        for (var j = 0; j < replies.length; j++) {
+          var sc = material(applyMove(after, replies[j][0], replies[j][1]), st.turn);
+          if (sc < worst) worst = sc;
+        }
+      }
+      var score = worst + Math.random() * 8;
+      if (score > bestScore) { bestScore = score; best = moves[i]; }
+    }
+    return best;
+  }
+
+  function buildChess(body) {
+    var st, sel = null, targets = [], over = false, thinking = false;
+
+    var wrap = node("div", "chess");
+    var bar = node("header", "game__bar");
+    var status = node("div", "game__score", "Your move.");
+    var again = node("button", "game__btn", "New game");
+    again.type = "button";
+    bar.appendChild(status); bar.appendChild(again);
+    wrap.appendChild(bar);
+
+    var boardEl = node("div", "chess__board");
+    wrap.appendChild(boardEl);
+    wrap.appendChild(node("p", "game__note", "You are white. Click a piece, then where it goes."));
+    body.appendChild(wrap);
+
+    var cells = [];
+    for (var i = 0; i < 64; i++) {
+      var cell = node("button", "chess__sq");
+      cell.type = "button";
+      cell.dataset.dark = ((Math.floor(i / 8) + i) % 2 === 1) ? "true" : "false";
+      cell.dataset.i = i;
+      cell.addEventListener("click", onCell);
+      boardEl.appendChild(cell);
+      cells.push(cell);
+    }
+
+    function paint() {
+      for (var i = 0; i < 64; i++) {
+        var pc = st.b[i];
+        cells[i].textContent = pc ? GLYPH[pc.c + pc.t] : "";
+        cells[i].dataset.sel = (i === sel) ? "true" : "false";
+        cells[i].dataset.to = targets.indexOf(i) >= 0 ? "true" : "false";
+        cells[i].dataset.hit = (targets.indexOf(i) >= 0 && st.b[i]) ? "true" : "false";
+      }
+    }
+
+    function finish() {
+      var moves = allMoves(st);
+      if (moves.length) {
+        if (inCheck(st, st.turn)) status.textContent = st.turn === "w" ? "Check." : "Computer in check.";
+        else status.textContent = st.turn === "w" ? "Your move." : "Thinking…";
+        return false;
+      }
+      over = true;
+      if (inCheck(st, st.turn)) status.textContent = st.turn === "w" ? "Checkmate. You lost." : "Checkmate. You win.";
+      else status.textContent = "Stalemate.";
+      return true;
+    }
+
+    function computer() {
+      thinking = true;
+      setTimeout(function () {
+        var mv = chooseMove(st);
+        if (mv) st = applyMove(st, mv[0], mv[1]);
+        thinking = false;
+        sel = null; targets = [];
+        paint(); finish();
+      }, 260);
+    }
+
+    function onCell(ev) {
+      if (over || thinking || st.turn !== "w") return;
+      var i = Number(ev.currentTarget.dataset.i);
+      if (sel !== null && targets.indexOf(i) >= 0) {
+        st = applyMove(st, sel, i);
+        sel = null; targets = [];
+        paint();
+        if (!finish()) computer();
+        return;
+      }
+      if (st.b[i] && st.b[i].c === "w") {
+        sel = i; targets = legalFrom(st, i);
+      } else {
+        sel = null; targets = [];
+      }
+      paint();
+    }
+
+    function reset() {
+      st = { b: startBoard(), turn: "w", ep: -1,
+             cast: { wk: true, wq: true, bk: true, bq: true } };
+      sel = null; targets = []; over = false; thinking = false;
+      status.textContent = "Your move.";
+      paint();
+    }
+
+    again.addEventListener("click", reset);
+    reset();
+  }
+
+  var openChess = Desktop.add({
+    id: "chess", ch: "♞", label: "Chess", w: 400, h: 560,
+    build: buildChess, dock: false,
+  });
+
+  /* ==========================================================================
      GAMES
      One dock icon holding both, rather than a dock slot each. Two identical
      controller icons side by side would say nothing about which is which, and
@@ -457,6 +794,7 @@
   var GAMES = [
     { ch: "🔢", name: "2048",         note: "Slide and merge to 2048.",   open: open2048 },
     { ch: "🔴", name: "Connect Four", note: "Four in a row, against the computer.", open: openC4 },
+    { ch: "\u265E", name: "Chess",     note: "Full rules, against the computer.", open: openChess },
   ];
 
   Desktop.separator();

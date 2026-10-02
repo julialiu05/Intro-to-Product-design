@@ -116,7 +116,7 @@ function slideHTML(s, w) {
          in five different fonts, rather than just describing it. */
       return `<div class="slide">
         ${s.heading ? `<h2 class="s-head">${esc(s.heading)}</h2>` : ""}
-        <ol class="s-points">${(s.points || [])
+        <ol class="s-points" data-long="${(s.points || []).length >= 8}">${(s.points || [])
           .map((p, k) => {
             const text = typeof p === "string" ? p : p.text;
             const font = typeof p === "object" && p.font ? `;font-family:${esc(p.font)}` : "";
@@ -233,6 +233,86 @@ function slideHTML(s, w) {
         }
         ${s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : ""}
       </figure>`;
+    case "site":
+      /* A real page, live, inside the same window chrome the desktop uses.
+         Screenshots of a website go stale and look soft on a projector; this
+         is the actual thing, scrollable during class. The traffic lights are
+         decoration here rather than buttons, and there is deliberately no
+         back control, because the deck is the way out, not the window. */
+      return `<div class="slide s-site">
+        ${s.heading ? `<h2 class="s-head">${esc(s.heading)}</h2>` : ""}
+        <div class="s-site__win">
+          <header class="s-site__bar glass">
+            <span class="lights" aria-hidden="true">
+              <span class="light light--close"></span>
+              <span class="light light--min"></span>
+              <span class="light light--zoom"></span>
+            </span>
+            ${s.label ? `<span class="s-site__title">${esc(s.label)}</span>` : ""}
+          </header>
+          <iframe class="s-site__frame" src="${esc(s.src)}" title="${esc(s.label || s.heading || "Example")}"
+                  loading="lazy" referrerpolicy="no-referrer"
+                  sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        ${s.body ? `<p class="s-site__note">${esc(s.body)}</p>` : ""}
+      </div>`;
+    case "visual":
+      /* Heading, picture and words on one slide, instead of spending three
+         slides saying one thing. `side` puts the picture left or right
+         (default right), `body` takes \n for a line break, and `points` is
+         the same numbered list the points layout draws. `src` is optional,
+         like figure's, so the slide can be written before the picture exists. */
+      return `<div class="slide s-visual" data-side="${s.side === "left" ? "left" : "right"}">
+        <div class="s-visual__text">
+          ${s.heading ? `<h2 class="s-head">${esc(s.heading)}</h2>` : ""}
+          ${s.body ? `<p class="s-visual__body">${esc(s.body)}</p>` : ""}
+          ${
+            (s.points || []).length
+              ? `<ol class="s-points">${s.points
+                  .map((p, k) => `<li style="--i:${k}"><span>${esc(typeof p === "string" ? p : p.text)}</span></li>`)
+                  .join("")}</ol>`
+              : ""
+          }
+        </div>
+        <figure class="s-visual__fig">
+          ${
+            s.src
+              ? `<img src="${esc(s.src)}" alt="${esc(s.caption || s.heading || "")}">`
+              : `<span class="s-visual__empty" aria-hidden="true"></span>`
+          }
+          ${s.caption ? `<figcaption>${esc(s.caption)}</figcaption>` : ""}
+        </figure>
+      </div>`;
+    case "chart": {
+      /* A bar chart drawn with divs, not SVG. The no-custom-graphics rule is
+         about icons and illustrations: this is data, and there is no way to
+         show a number getting smaller with an emoji. Bar length is the value
+         as a share of the largest value in the set, so the data decides the
+         shape and nothing is drawn by hand. `display` is what gets printed at
+         the end of the bar, so a bar can read "-71%" while sorting on 71. */
+      const bars = (s.bars || []).map((b) => ({
+        label: b.label,
+        n: Math.abs(Number(b.value) || 0),
+        display: b.display != null ? String(b.display) : String(b.value),
+        accent: !!b.accent,
+      }));
+      const max = Math.max(...bars.map((b) => b.n), 1);
+      return `<div class="slide">
+        ${s.heading ? `<h2 class="s-head">${esc(s.heading)}</h2>` : ""}
+        <div class="s-chart">${bars
+          .map(
+            (b, k) => `<div class="s-chart__row" style="--i:${k}">
+              <span class="s-chart__label">${esc(b.label)}</span>
+              <span class="s-chart__track"><i class="s-chart__bar${
+                b.accent ? " is-accent" : ""
+              }" style="--w:${((b.n / max) * 100).toFixed(1)}%"></i></span>
+              <span class="s-chart__val">${esc(b.display)}</span>
+            </div>`
+          )
+          .join("")}</div>
+        ${s.caption ? `<p class="s-chart__cap">${esc(s.caption)}</p>` : ""}
+      </div>`;
+    }
     case "assignment": {
       const a = w.assignment;
       if (!a) return `<div class="slide"><p class="s-statement">No assignment this week.</p></div>`;
@@ -388,6 +468,50 @@ function renderScroll() {
     note.addEventListener("click", toggle);
     note.addEventListener("keydown", (ev) => {
       if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); toggle(); }
+    });
+  });
+
+  /* A framed page is for looking at, not for browsing out of. In-page jumps
+     (the section nav) do not reload the frame, so those still work and the
+     thing stays scrollable. Anything that actually leaves the page, a back
+     link or another project, fires a load, and the frame goes straight home.
+     Nothing on the other site is modified; this only governs this window. */
+  app.querySelectorAll(".s-site__frame").forEach((frame) => {
+    const home = frame.getAttribute("src");
+    let settled = false;
+    frame.addEventListener("load", () => {
+      if (!settled) { settled = true; return; }
+      frame.src = home;
+    });
+  });
+
+  /* Click any picture on a slide to blow it up, click again or press Escape
+     to put it back. The same gesture as Quick Look on the desktop, and the
+     reason it exists is the critique: a wall of eight student submissions is
+     unreadable from the back of the room until one of them fills the screen.
+     The click stops there, so it does not also fire a slide's `tap` toggle. */
+  const zoom = document.createElement("div");
+  zoom.className = "sc-zoom";
+  zoom.hidden = true;
+  zoom.innerHTML = '<img alt=""><span class="sc-zoom__hint">Click anywhere to close</span>';
+  document.body.appendChild(zoom);
+
+  const zoomImg = zoom.querySelector("img");
+  const closeZoom = () => {
+    zoom.hidden = true;
+    zoomImg.removeAttribute("src");
+  };
+  zoom.addEventListener("click", closeZoom);
+  addEventListener("keydown", (ev) => {
+    if (ev.key === "Escape" && !zoom.hidden) { ev.preventDefault(); closeZoom(); }
+  });
+
+  app.querySelectorAll(".slide img").forEach((picture) => {
+    picture.classList.add("is-zoomable");
+    picture.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      zoomImg.src = picture.currentSrc || picture.src;
+      zoom.hidden = false;
     });
   });
 

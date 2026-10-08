@@ -1,0 +1,106 @@
+[
+  {
+    "file": "img/w4/research-methods-landscape.jpg",
+    "title": "A Landscape of User Research Methods",
+    "creator": "Christian Rohrer, Nielsen Norman Group",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.nngroup.com/articles/which-ux-research-methods/",
+    "bytes": 242258
+  },
+  {
+    "file": "img/w4/affinity-wall.jpg",
+    "title": "Wikipedia-Affinity.jpg",
+    "creator": "Parul Vora",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Wikipedia-Affinity.jpg",
+    "bytes": 411071
+  },
+  {
+    "file": "img/w4/affinity-wall-clustered.jpg",
+    "title": "WMFUI-Affinity horiz.jpg",
+    "creator": "Parul Vora",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:WMFUI-Affinity_horiz.jpg",
+    "bytes": 312762
+  },
+  {
+    "file": "img/w4/persona-example.jpg",
+    "title": "Example persona",
+    "creator": "Nielsen Norman Group",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.nngroup.com/articles/persona/",
+    "bytes": 105646
+  },
+  {
+    "file": "img/w4/journey-map-template.jpg",
+    "title": "Customer/User Journey Map",
+    "creator": "Nielsen Norman Group",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.nngroup.com/articles/journey-mapping-101/",
+    "bytes": 129578
+  },
+  {
+    "file": "img/w4/journey-map-mobile-plan.jpg",
+    "title": "Customer Journey Map Example (Switching Mobile Plans)",
+    "creator": "Nielsen Norman Group",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.nngroup.com/articles/journey-mapping-101/",
+    "bytes": 265122
+  },
+  {
+    "file": "img/w4/double-diamond.jpg",
+    "title": "Double diamond",
+    "creator": "After the UK Design Council",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "",
+    "bytes": 196288
+  },
+  {
+    "file": "img/w4/competitive-2x2-reels-ai.jpg",
+    "title": "Competitive Analysis, Reels AI case study",
+    "creator": "Julia Liu",
+    "license": "Course staff's own work, rendered from julialius.com",
+    "source": "https://www.julialius.com/case-study-6.html",
+    "bytes": 98944
+  },
+  {
+    "file": "img/w4/swot-analysis.jpg",
+    "title": "SWOT en.svg",
+    "creator": "Xhienne",
+    "license": "CC BY-SA 2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:SWOT_en.svg",
+    "bytes": 133693
+  },
+  {
+    "file": "img/w4/pastel-blur-background.jpg",
+    "title": "Pastel blur background",
+    "creator": "Supplied by course staff",
+    "license": "Deck background",
+    "source": "",
+    "bytes": 21185
+  },
+  {
+    "file": "img/w4/competitor-direct-delivery.jpg",
+    "title": "UBER Eats Delivery Cyclist Riding Through a Busy Oxford Road in Manchester",
+    "creator": "shopblocks",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:UBER_Eats_Delivery_Cyclist_Riding_Through_a_Busy_Oxford_Road_in_Manchester.jpg",
+    "bytes": 297637
+  },
+  {
+    "file": "img/w4/competitor-indirect-meal-kit.jpg",
+    "title": "Blue Apron Box Contents (1)",
+    "creator": "Yongho Kim",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Blue_Apron_Box_Contents_(1).jpg",
+    "bytes": 182877
+  },
+  {
+    "file": "img/w4/competitor-instead-cereal.jpg",
+    "title": "Bowl of Cereal (Unsplash)",
+    "creator": "Yvens Banatte",
+    "license": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bowl_of_Cereal_(Unsplash).jpg",
+    "bytes": 200663
+  }
+]

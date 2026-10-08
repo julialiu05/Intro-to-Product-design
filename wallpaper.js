@@ -22,14 +22,15 @@
    that changes under you is exactly the kind of motion that setting is for.
    ========================================================================== */
 
+/* wall-1 to wall-4 (the paintings) are no longer in the rotation but stay in
+   img/: wall-1 is still the default deck backdrop in desktop.css. */
 var WALLPAPERS = [
-  { src: "img/wall-1.jpg", ink: "dark" },   /* cottage garden, white fence */
-  { src: "img/wall-2.jpg", ink: "dark" },   /* lily pond */
-  { src: "img/wall-3.jpg", ink: "dark" },   /* wildflower shore */
-  { src: "img/wall-4.jpg", ink: "dark" },   /* pastel meadow wash */
+  { src: "img/wall-5.jpg", ink: "dark" },   /* pink, sparkles and a cat */
+  { src: "img/wall-6.jpg", ink: "dark" },   /* pastel ocean, fish and rays */
+  { src: "img/wall-8.jpg", ink: "dark" },   /* iridescent marble, sparkles */
 ];
 
-var WALL_EVERY = 45000;   /* ms between changes */
+var WALL_EVERY = 30000;   /* ms between changes */
 
 (function wallpaper() {
   "use strict";

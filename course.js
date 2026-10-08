@@ -1785,6 +1785,1245 @@ const COURSE = {
         },
       ],
     },
+
+    {
+      week: 4,
+      date: "Oct 8",
+      title: "Research and synthesis",
+      status: "draft",
+      background: "img/w4/pastel-blur-background.jpg",
+      summary: "",
+      agenda: [
+        "Critique of your design statements",
+        "Why research",
+        "Choosing a method",
+        "Interviews",
+        "Surveys",
+        "Competitive analysis",
+        "Usability testing",
+        "Some numbers",
+        "Synthesis: affinity maps, personas, journeys, quotes",
+        "Group work on the research phase",
+      ],
+      readings: [
+        {
+          title: "When to Use Which User-Experience Research Methods",
+          author: "Christian Rohrer, Nielsen Norman Group",
+          kind: "Post",
+          url: "https://www.nngroup.com/articles/which-ux-research-methods/",
+          note: "The landscape chart from class, explained. Read it before you pick your methods.",
+        },
+        {
+          title: "The Mom Test",
+          author: "Rob Fitzpatrick",
+          kind: "Book chapter",
+          url: "https://www.momtestbook.com/",
+          note: "Chapter 1 only. Why everyone lies to you about your idea, and the three rules for asking questions they can't lie about.",
+        },
+        {
+          title: "Journey Mapping 101",
+          author: "Sarah Gibbons, Nielsen Norman Group",
+          kind: "Post",
+          url: "https://www.nngroup.com/articles/journey-mapping-101/",
+          note: "The five parts of a journey map, with the Jumping Jamie example from class.",
+        },
+        {
+          title: "Why You Only Need to Test with 5 Users",
+          author: "Jakob Nielsen, Nielsen Norman Group",
+          kind: "Post",
+          optional: true,
+          url: "https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/",
+          note: "Optional. Where the curve comes from, and why three small tests beat one big one.",
+        },
+        {
+          title: "Design Thinking Bootleg",
+          author: "Stanford d.school",
+          kind: "Book chapter",
+          optional: true,
+          url: "https://dschool.stanford.edu/resources/design-thinking-bootleg",
+          note: "Optional. A deck of method cards. Interview for Empathy, Extreme Users and Story Share-and-Capture are the ones for this week.",
+        },
+      ],
+      /* `dueDate` stays empty while the week is a draft, because apps.js puts
+         any week carrying a dueDate onto the Calendar whether or not the week
+         is published. Set it to "2026-10-14" with the other publish switches. */
+      assignment: {
+        title: "Research plan",
+        due: "Wed Oct 14, 11:59pm",
+        dueDate: "",
+        body: "As a group: brainstorm your feature idea, revise your design statement, pick the research methods you will use and why, and draft your interview and survey questions.",
+        deliverable: "One research plan per group, every name on it.",
+      },
+      materials: [],
+      /* ------------------------------------------------------------------
+         Order: critique, teach, group work. Same shape as Week 3.
+
+         The worked example all the way through is Week 3's delivery app,
+         the person hungry at 9pm, so students watch one problem go through
+         every method. The example interview answers, clusters, persona and
+         journey are made up for teaching and are labelled as examples.
+
+         Sources, with wording kept where a slide quotes them:
+         - Stanford d.school, Design Thinking Bootleg (2018): interview prep,
+           Interview for Empathy, Extreme Users, Story Share-and-Capture,
+           the 2x2 matrix.
+         - Rob Fitzpatrick, The Mom Test: the three rules, bad data.
+         - Nielsen Norman Group: Rohrer's research methods landscape;
+           survey best practices; leading questions; competitive usability
+           evaluations; Nielsen on thinking aloud and on testing with five
+           users; task scenarios; affinity diagramming; empathy mapping;
+           personas; Journey Mapping 101.
+         - Pew Research Center, Writing Survey Questions: the 2008 open
+           versus closed question.
+         - Jeff Sauro, MeasuringU: SUS, average 68 across 500 studies.
+         Image credits in img/w4/_credits.json.
+         ------------------------------------------------------------------ */
+      slides: [
+        { layout: "title" },
+
+        /* ========== 01 CRITIQUE ========== */
+        { layout: "section", text: "Critique", num: "01" },
+        {
+          layout: "points",
+          heading: "Ask about each one",
+          points: [
+            "Who is it for, specifically?",
+            "Is there a solution hiding in it?",
+            "Is the scope about right?",
+            "What would you need to find out first?",
+          ],
+        },
+        /* This week's submissions, typed in word for word from the groups'
+           write-ups, including their punctuation. Unnamed, as in Weeks 2
+           and 3, because this repo is public, and no headings, so the
+           critique is not steered. */
+        {
+          layout: "columns",
+          items: [
+            { label: "Software", body: "Weather app." },
+            { label: "Scope", body: "Help people decide what to wear that day based on reported weather/temperature by suggesting appropriate clothing." },
+            { label: "We are interested in solving", body: "wasting time in the morning deciding what to wear, fluctuating temperatures complicating outfit choices" },
+            { label: "Design statement", body: "“How might we help people quickly choose outfits that align with personalized temperature preferences/comfort according to the weather temperature data?”" },
+          ],
+        },
+        {
+          layout: "columns",
+          items: [
+            { label: "The software we picked.", list: ["bCourses"] },
+            { label: "The scope of what we are taking on.", list: ["Experience of how students keep track of their grades, important deadlines and updates"] },
+            {
+              label: "What we are interested in solving.",
+              list: [
+                "Redesigning the website to be better suited for student life/access",
+                "Redesigning bCourses/canvas so people don’t need to download BetterCampus to find more templates/different formats for their canvas homepage",
+                "Grade tracking and accessibility redesign",
+                "Due date change tracking, seeing what assignments are due (e.g 24 hour email notification)",
+                "Rearrange the sidebar to be better for daily usage",
+              ],
+            },
+            { label: "Our design statement.", list: ["How might we help Berkeley students manage their deadlines and important course changes across all classes with confidence. Generally making bCourses to be more personalized, accessible and organized for students."] },
+          ],
+        },
+        {
+          layout: "columns",
+          items: [
+            { label: "Software", body: "Instagram" },
+            { label: "HMW", body: "How might we help users personalize the stories they share?" },
+            { label: "Problem", body: "When sharing Instagram stories/posts, you want to share to a specific group of people. Right now, Instagram only has two options: Close Friends and Followers. If you want to share something to a specific group, you need to constantly update the Close Friends list." },
+            { label: "Solution", body: "Multiple Private sharing groups that you can customize yourself with labels. That way individuals can choose who they want to share their posts with." },
+          ],
+        },
+
+        /* ========== 02 WHY RESEARCH ========== */
+        { layout: "section", text: "Why research", num: "02" },
+        {
+          layout: "statement",
+          text: "You are not the user.",
+          sub: "Nielsen Norman Group",
+        },
+        {
+          layout: "two",
+          heading: "Where you are",
+          left: { label: "Last week", body: "A design statement.\nWritten from what you noticed." },
+          right: { label: "This week", body: "Find out if it is true." },
+        },
+        {
+          layout: "points",
+          heading: "Research answers three questions",
+          points: [
+            "Is the problem real?",
+            "Who has it, and when?",
+            "What do they do about it now?",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Research is where the third blank comes from.",
+          sub: "[User] needs a way to [need] because [insight].",
+        },
+        {
+          layout: "figure",
+          src: "img/w4/double-diamond.jpg",
+          caption: "The double diamond, after the UK Design Council",
+          tap: "\u{1F4CD} this week: Discover and Define",
+        },
+
+        /* ========== 03 CHOOSING A METHOD ========== */
+        { layout: "section", text: "Choosing a method", num: "03" },
+        {
+          layout: "two",
+          heading: "Two questions to ask about any method",
+          left: { label: "Attitudinal or behavioural?", body: "What people say.\nOr what people do." },
+          right: { label: "Qualitative or quantitative?", body: "Why, and how to fix it.\nOr how many, and how much." },
+        },
+        {
+          layout: "figure",
+          src: "img/w4/research-methods-landscape.jpg",
+          caption: "A Landscape of User Research Methods. Christian Rohrer, Nielsen Norman Group, 2022",
+        },
+        {
+          layout: "points",
+          heading: "Pick by what you need to know",
+          points: [
+            "Is it a real problem? Interview.",
+            "How many people have it? Survey.",
+            "What already exists? Competitive analysis.",
+            "Can people use what we made? Usability test.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "This week: the first three.",
+          sub: "Testing comes once you have something to test.",
+        },
+
+        /* ========== 04 INTERVIEWS ========== */
+        /* d.school Bootleg wording on the prep, empathy and extreme user
+           slides. The Mom Test wording on its rules and bad data. */
+        { layout: "section", text: "Interviews", num: "04" },
+        {
+          layout: "statement",
+          text: "We interview to gain empathy.",
+          sub: "Stanford d.school",
+        },
+        {
+          layout: "points",
+          heading: "How to prepare for an interview",
+          points: [
+            "Brainstorm questions.",
+            "Identify and order themes.",
+            "Refine questions.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "How to interview for empathy",
+          points: [
+            "Ask why. Even when you think you know the answer.",
+            "Never say “usually” when asking a question.",
+            "Encourage stories.",
+            "Look for inconsistencies.",
+            "Pay attention to nonverbal cues.",
+            "Don't be afraid of silence.",
+            "Ask questions neutrally and don't suggest answers.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "“Tell me about the last time you ____.”",
+          sub: "Stanford d.school",
+        },
+        {
+          layout: "points",
+          heading: "The Mom Test",
+          points: [
+            "Talk about their life instead of your idea.",
+            "Ask about specifics in the past instead of generics or opinions about the future.",
+            "Talk less and listen more.",
+          ],
+        },
+        {
+          layout: "quote",
+          quote: "Customer conversations are bad by default. It’s your job to fix them.",
+          attribution: "Rob Fitzpatrick, The Mom Test",
+        },
+        {
+          layout: "points",
+          heading: "Why they're bad by default",
+          points: [
+            "Unnatural: a stranger asking how they choose dinner.",
+            "Uncomfortable: nobody wants to tell you your idea is bad.",
+            "Unhelpful: so they're polite, and say what you want to hear.",
+            "Your job: make it feel like an ordinary conversation about their life, so you get the truth.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Example: the delivery app from last week.",
+          sub: "Someone hungry at 9pm.",
+        },
+        /* Don't, ask instead, and why, each why backed by two sources:
+           - Your idea: Nielsen, "First Rule of Usability? Don't Listen to
+             Users" (NN/g), and The Mom Test, rule 1.
+           - Usually: NN/g, "6 Mistakes When Crafting Interview Questions",
+             mistake 2, and the d.school Bootleg.
+           - Leading: NN/g, "Leading Questions", and Pew on acquiescence bias.
+           - Price: Murphy, Allen, Stevens and Weatherhead (2005), "A
+             Meta-Analysis of Hypothetical Bias in Stated Preference
+             Valuation", Environmental and Resource Economics 30: 28 studies,
+             median ratio of hypothetical to actual value 1.35. And The Mom
+             Test on asking what they pay now. */
+        {
+          layout: "columns",
+          heading: "Don't ask about your idea",
+          items: [
+            { label: "Don't", body: "“Would you use an app that picks dinner for you?”" },
+            { label: "Ask instead", body: "“Tell me about the last time you ordered food late at night.”" },
+            {
+              label: "Why",
+              body: "People are bad at predicting what they'll do, and they're polite. You'll hear “yes” whether or not it's true.",
+              list: ["“Definitely don't believe what people predict they may do in the future.” Jakob Nielsen"],
+            },
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Don't ask what they usually do",
+          items: [
+            { label: "Don't", body: "“Do you usually order delivery?”" },
+            { label: "Ask instead", body: "“When did you last order delivery? Walk me through it.”" },
+            {
+              label: "Why",
+              body: "“Usually” gets the tidy version they believe about themselves. One real time gets what actually happened, with details you can design for.",
+              list: ["“What people typically do and what they think they typically do may be different things!” Nielsen Norman Group"],
+            },
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Don't suggest the answer",
+          items: [
+            { label: "Don't", body: "“Don't you hate scrolling through restaurants?”" },
+            { label: "Ask instead", body: "“How did you pick where to order from?”" },
+            {
+              label: "Why",
+              body: "The question tells them what you want to hear, and people tend to agree. Now you can't tell their opinion from yours.",
+              list: ["A leading question “includes or implies the desired answer.” Nielsen Norman Group"],
+            },
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Don't ask them to guess a price",
+          items: [
+            { label: "Don't", body: "“How much would you pay for faster delivery?”" },
+            { label: "Ask instead", body: "“What did you spend on delivery last week?”" },
+            {
+              label: "Why",
+              body: "Naming a price costs them nothing, so they guess high. Across 28 studies, the price people said was a median 1.35 times what they really paid.",
+              list: ["Murphy, Allen, Stevens and Weatherhead, 2005"],
+            },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Price still matters. Get it from what they do",
+          points: [
+            "What they pay now: “What did you spend on food this week?”",
+            "What they do to avoid paying: walking to the dining hall to skip a $6 fee.",
+            "Later, a real commitment beats a guess: a pre-order, a sign-up, a waitlist.",
+          ],
+        },
+        /* The three types and the three fixes ("deflecting compliments,
+           anchoring fluff, and digging beneath ideas") are The Mom Test's,
+           chapter 2. The example lines are written for the delivery app. */
+        {
+          layout: "columns",
+          heading: "Three kinds of bad data",
+          items: [
+            {
+              label: "Compliments",
+              body: "They like your idea. It feels good, and it tells you nothing.",
+              list: ["“That sounds so cool.”", "Fix: deflect it, and go back to their life."],
+            },
+            {
+              label: "Fluff",
+              body: "Generics, hypotheticals, and the future. What they think they do, not what they did.",
+              list: ["“I usually…”, “I would…”, “I might…”", "Fix: anchor it. “When did that last happen?”"],
+            },
+            {
+              label: "Ideas",
+              body: "Often good suggestions. Write them down. But an idea isn't evidence: it's their solution, not their problem.",
+              list: ["“You should add a filter for cheap food.”", "Fix: dig beneath it. “Why would that help?” The answer is the data."],
+            },
+          ],
+        },
+        {
+          layout: "two",
+          heading: "When you get one, steer back",
+          left: { label: "They say", body: "“Oh, I'd totally use an app that picks dinner for me!”" },
+          right: { label: "You ask", body: "“When's the last time you couldn't decide what to eat? What did you end up doing?”" },
+        },
+        {
+          layout: "points",
+          heading: "Who to talk to",
+          points: [
+            "People who actually have the problem: someone who orders late at night.",
+            "Not only your friends. They'll be too nice.",
+            "Extreme users: the person who orders every night, and the one who never does.",
+            "A mix: different schedules, budgets, living situations.",
+          ],
+        },
+        {
+          layout: "exercise",
+          heading: "In pairs",
+          prompt: "Interview your neighbour about the last time they ordered food. Then swap.",
+          time: "6 min",
+        },
+
+        /* ========== 05 SURVEYS ========== */
+        /* Pew Research Center for the open and closed question. Bad and
+           better pairs from NN/g's survey best practices, except the scale. */
+        { layout: "section", text: "Surveys", num: "05" },
+        {
+          layout: "two",
+          heading: "Interview or survey",
+          left: { label: "Interview", body: "Five people.\nWhy." },
+          right: { label: "Survey", body: "Fifty people.\nHow many." },
+        },
+        {
+          layout: "statement",
+          text: "The wording changes the answer.",
+          sub: "Pew Research Center",
+        },
+        /* Three wording experiments. Pew's question is quoted from Writing
+           Survey Questions. Loftus and Palmer (1974), "Reconstruction of
+           automobile destruction", Journal of Verbal Learning and Verbal
+           Behavior 13. Rugg (1941), the allow and forbid split ballot. */
+        {
+          layout: "statement",
+          text: "“What one issue mattered most to you in deciding how you voted for president?”",
+          sub: "Pew Research Center, after the 2008 election. Half were given a list of five issues. Half got a blank box.",
+        },
+        {
+          layout: "chart",
+          heading: "Same question, asked two ways",
+          bars: [
+            { label: "Given a list", value: 58, display: "58%", accent: true },
+            { label: "Blank box", value: 35, display: "35%" },
+          ],
+          caption: "Share who said the economy. And 43% of the blank-box group named something that wasn't on the list at all.",
+        },
+        {
+          layout: "statement",
+          text: "“About how fast were the cars going when they ___ each other?”",
+          sub: "Loftus and Palmer, 1974. Everyone watched the same car crash. Only the verb changed.",
+        },
+        {
+          layout: "chart",
+          heading: "Estimated speed, by verb",
+          bars: [
+            { label: "smashed", value: 40.8, display: "40.8 mph", accent: true },
+            { label: "collided", value: 39.3, display: "39.3 mph" },
+            { label: "bumped", value: 38.1, display: "38.1 mph" },
+            { label: "hit", value: 34.0, display: "34.0 mph" },
+            { label: "contacted", value: 31.8, display: "31.8 mph" },
+          ],
+          caption: "A week later, 32% of the “smashed” group remembered broken glass, against 14% of the “hit” group. There was no broken glass.",
+        },
+        {
+          layout: "statement",
+          text: "“Do you think that the United States should allow / forbid public speeches against democracy?”",
+          sub: "Rugg, 1941. Half were asked “allow”, half were asked “forbid”. Either way, it's the same ban.",
+        },
+        {
+          layout: "chart",
+          heading: "Wanted the speeches banned",
+          bars: [
+            { label: "Asked “allow?”", value: 62, display: "62%", accent: true },
+            { label: "Asked “forbid?”", value: 46, display: "46%" },
+          ],
+          caption: "Same rule. “Forbid” sounds harsher than “not allow”, so fewer people would say it.",
+        },
+        {
+          layout: "points",
+          heading: "Four ways a question goes wrong",
+          points: [
+            "It leads.",
+            "It asks two things at once.",
+            "It asks about the future.",
+            "The scale is lopsided.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "It leads",
+          left: { label: "Bad", body: "“We're committed to achieving 5-star ratings. How satisfied are you?”" },
+          right: { label: "Better", body: "“Rate your experience.”" },
+        },
+        {
+          layout: "two",
+          heading: "It asks two things at once",
+          left: { label: "Bad", body: "“How easy and intuitive was this website?”" },
+          right: { label: "Better", body: "“How easy was this website?”\n“How intuitive was the process?”" },
+        },
+        {
+          layout: "two",
+          heading: "It asks about the future",
+          left: { label: "Bad", body: "“How likely are you to use this product?”" },
+          right: { label: "Better", body: "“Approximately how many times did you use this in the past 7 days?”" },
+        },
+        {
+          layout: "two",
+          heading: "The scale is lopsided",
+          left: { label: "Bad", body: "Excellent\nVery good\nGood\nPoor\n\nThree good, one bad." },
+          right: { label: "Better", body: "Very satisfied\nSatisfied\nNeutral\nDissatisfied\nVery dissatisfied" },
+        },
+        {
+          layout: "points",
+          heading: "Make it easy to finish",
+          points: [
+            "Short. Only what you need.",
+            "Mostly multiple choice.",
+            "One open question at the end.",
+            "Add “Other” and “Not sure”.",
+          ],
+        },
+        /* Demographics: NN/g, "Writing Good Survey Questions" (ask only
+           what you will use, make questions optional, more than two gender
+           options plus an opt-out). */
+        {
+          layout: "statement",
+          text: "Demographics: ask only what you'll use.",
+          sub: "“Do you need all that demographic information? Will you use it to answer your research questions?” Nielsen Norman Group",
+        },
+        {
+          layout: "points",
+          heading: "If you ask",
+          points: [
+            "Make them optional.",
+            "Gender: more than two options, plus “Prefer not to say”.",
+            "Ask what's relevant: year, where they live, how often they order.",
+            "Skip what changes nothing: star sign, hobbies, full name.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Use the survey to find people to interview.",
+          sub: "Last question: “Can we talk to you for 15 minutes?”",
+        },
+        {
+          layout: "points",
+          heading: "Who answered?",
+          points: [
+            "Your group chat is not a sample.",
+            "Post where the users are.",
+            "Say how many answered, and where you found them.",
+          ],
+        },
+        /* Incentives, kept light on purpose: students should not feel they
+           have to pay anyone. Backed by Singer and Ye (2013), "The Use and
+           Effects of Incentives in Surveys", Annals of the American Academy
+           of Political and Social Science 645, and NSSE (Indiana University)
+           Survey Incentive FAQ: raffles add 3 to 6 points of response for
+           college students. */
+        {
+          layout: "points",
+          heading: "Optional: a small thank-you",
+          points: [
+            "Some researchers offer one to get more people to respond.",
+            "Not required for this project.",
+            "If you want to: a coffee, a snack, a raffle entry.",
+          ],
+        },
+
+        /* ========== 06 COMPETITIVE ANALYSIS ========== */
+        /* Two reasons to study competitors, both NN/g: "Competitive
+           Usability Evaluations" (learn from competitors' usability work,
+           find features worth integrating, study sites better than yours)
+           and Jakob's Law. d.school Bootleg for the 2x2. The 2x2 is from
+           Julia's Reels AI case study, the Week 3 example, rendered from
+           julialius.com. SWOT diagram by Xhienne, Wikimedia Commons,
+           CC BY-SA 2.5. The feature grid and SWOT contents are made up and
+           labelled as examples, and use "App A" and "App B" rather than
+           real company names so nothing reads as a claim about a real app. */
+        { layout: "section", text: "Competitive analysis", num: "06" },
+        {
+          layout: "two",
+          heading: "Two reasons to study competitors",
+          left: { label: "Learn from them", body: "What do they already do well?\nWhat do users already expect?" },
+          right: { label: "Find the gap", body: "What does nobody do yet?\nWhere could you stand out?" },
+        },
+        {
+          layout: "quote",
+          quote: "Users spend most of their time on other sites. This means that users prefer your site to work the same way as all the other sites they already know.",
+          attribution: "Jakob's Law, Nielsen Norman Group",
+        },
+        {
+          layout: "statement",
+          text: "Study the good ones, not just the bad ones.",
+          sub: "“It's equally important to study sites with better usability than yours.” Nielsen Norman Group",
+        },
+        /* Photos from Wikimedia Commons: Uber Eats cyclist in Manchester by
+           shopblocks (CC BY 2.0), Blue Apron box by Yongho Kim (CC BY-SA
+           4.0), bowl of cereal by Yvens Banatte (CC0). Milkshake example
+           from the Christensen Institute, Jobs to Be Done: the morning
+           competition "wasn't other fast food milkshakes; rather, bananas
+           and bagels". */
+        {
+          layout: "columns",
+          heading: "Three kinds of competitors",
+          items: [
+            {
+              label: "Direct",
+              body: "Does the same job, the same way. Your users already compare you to these.",
+              list: ["Look for: what users expect as standard"],
+            },
+            {
+              label: "Indirect",
+              body: "Does the same job, a different way.",
+              list: ["Look for: why someone picks these over an app"],
+            },
+            {
+              label: "What they do instead",
+              body: "What people do now without any product at all. Often your real competition.",
+              list: ["Look for: what makes it easier than your app"],
+            },
+          ],
+        },
+        {
+          layout: "gallery",
+          heading: "Examples, for a delivery app",
+          items: [
+            { src: "img/w4/competitor-direct-delivery.jpg", label: "Direct", note: "DoorDash, Uber Eats, Grubhub" },
+            { src: "img/w4/competitor-indirect-meal-kit.jpg", label: "Indirect", note: "Meal kits, grocery delivery, the dining hall" },
+            { src: "img/w4/competitor-instead-cereal.jpg", label: "What they do instead", note: "Cereal, leftovers, a roommate's dinner, skipping it" },
+          ],
+          caption: "Photos: shopblocks, CC BY 2.0; Yongho Kim, CC BY-SA 4.0; Yvens Banatte, CC0. Wikimedia Commons",
+        },
+        {
+          layout: "statement",
+          text: "Your real competition is often not an app.",
+          sub: "If ordering takes more effort than pouring cereal, cereal wins.",
+        },
+        {
+          layout: "statement",
+          text: "A fast-food chain found its morning milkshakes were competing with bananas and bagels.",
+          sub: "Commuters wanted something filling they could hold in the car. Clayton Christensen, Jobs to Be Done",
+        },
+        {
+          layout: "columns",
+          heading: "Find out what they do instead",
+          items: [
+            {
+              label: "Ask what they did instead",
+              body: "Ask about a real time they didn't use any app.",
+              list: ["“Last time you were hungry late and didn't order, what did you do?”"],
+            },
+            {
+              label: "Ask why",
+              body: "Their reason is what your app has to beat.",
+              list: ["“Cereal was right there.” It has to be faster.", "“Delivery's too expensive.” It has to be cheaper."],
+            },
+            {
+              label: "Listen for workarounds",
+              body: "Homemade fixes show where products fall short.",
+              list: ["A screenshot of the one menu they always order from", "A group chat to split one delivery fee"],
+            },
+            {
+              label: "Doing nothing counts",
+              body: "Skipping it is a choice too.",
+              list: ["“I just went to bed.” Is ordering worth the effort?"],
+            },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Three ways to lay it out",
+          points: [
+            "Feature grid: what each one has.",
+            "2x2: where each one sits.",
+            "SWOT: one competitor, up close.",
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Example feature grid",
+          items: [
+            { label: "App A", list: ["Filter by price: yes", "Total before checkout: no", "Reorder in one tap: yes"] },
+            { label: "App B", list: ["Filter by price: yes", "Total before checkout: yes", "Reorder in one tap: no"] },
+            { label: "Dining hall", list: ["Filter by price: n/a", "Total before checkout: yes", "Reorder in one tap: n/a"] },
+            { label: "What you learn", list: ["Price filters are expected. Have one.", "Only one shows the total early. A gap."] },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "2x2",
+          points: [
+            "Pick two things your user cares about.",
+            "Make each one an axis.",
+            "Place each competitor.",
+            "Look at the empty corner.",
+          ],
+        },
+        {
+          layout: "figure",
+          src: "img/w4/competitive-2x2-reels-ai.jpg",
+          caption: "Competitive 2x2 from the Reels AI case study, Julia Liu. Nobody is AI-powered and integrated into the feed. That's the gap.",
+        },
+        {
+          layout: "quote",
+          quote: "An empty quadrant may signal a market opportunity (or a very bad idea).",
+          attribution: "Stanford d.school",
+        },
+        {
+          layout: "figure",
+          src: "img/w4/swot-analysis.jpg",
+          caption: "SWOT analysis. Diagram by Xhienne, Wikimedia Commons, CC BY-SA 2.5",
+        },
+        {
+          layout: "columns",
+          heading: "Example SWOT: App A",
+          items: [
+            { label: "Strengths", body: "What it does well.", list: ["Huge choice", "Fast delivery"] },
+            { label: "Weaknesses", body: "Where it falls short.", list: ["Slow to decide", "Fees appear at checkout"] },
+            { label: "Opportunities", body: "Outside things it could use.", list: ["More students living off campus", "Late-night hunger"] },
+            { label: "Threats", body: "Outside things that could hurt it.", list: ["The dining hall is cheaper", "Cooking at home"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Keep what works. Build what's missing.",
+        },
+
+        /* ========== 07 USABILITY TESTING ========== */
+        /* Nielsen on think-aloud and on five users. Curve is his formula,
+           1 - (1 - 0.31)^n, rounded. Task pairs are NN/g's wording. */
+        { layout: "section", text: "Usability testing", num: "07" },
+        /* Intro from NN/g, "Usability Testing 101": "The only way to get UX
+           design right is to test it", the three goals, and the facilitator,
+           participant and tasks. */
+        {
+          layout: "statement",
+          text: "The only way to get UX design right is to test it.",
+          sub: "Nielsen Norman Group",
+        },
+        {
+          layout: "two",
+          heading: "Research, then testing",
+          left: { label: "Research: this week", body: "Are we solving the right problem?" },
+          right: { label: "Usability testing: once you've built something", body: "Did we solve it in a way people can actually use?" },
+        },
+        {
+          layout: "points",
+          heading: "Why test",
+          points: [
+            "Find the problems in your design.",
+            "Find chances to make it better.",
+            "Learn how your users actually behave.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "You know how your design works. Your users don't.",
+          sub: "What's obvious to you after weeks of work is new to them. Watching them is the only way to see that.",
+        },
+        {
+          layout: "columns",
+          heading: "A usability test has three parts",
+          items: [
+            { label: "Facilitator", body: "Gives the tasks and watches, without steering." },
+            { label: "Participant", body: "A realistic user of the product. Often thinks aloud." },
+            { label: "Tasks", body: "Realistic things they'd really do, worded so they don't give away the answer." },
+          ],
+        },
+        {
+          layout: "quote",
+          quote: "Thinking aloud may be the single most valuable usability engineering method.",
+          attribution: "Jakob Nielsen",
+        },
+        {
+          layout: "points",
+          heading: "Think aloud",
+          points: [
+            "Recruit representative users.",
+            "Give them representative tasks.",
+            "Let them talk. Don't help.",
+          ],
+        },
+        {
+          layout: "chart",
+          heading: "Problems found, by number of people",
+          bars: [
+            { label: "1 person", value: 31, display: "31%" },
+            { label: "2 people", value: 52, display: "52%" },
+            { label: "3 people", value: 67, display: "67%" },
+            { label: "5 people", value: 85, display: "85%", accent: true },
+            { label: "10 people", value: 98, display: "98%" },
+            { label: "15 people", value: 100, display: "~100%" },
+          ],
+          caption: "Jakob Nielsen, 2000. Each person finds about 31% of the problems, and the rest repeat.",
+        },
+        {
+          layout: "quote",
+          quote: "The ultimate user experience is improved much more by 3 studies with 5 users each than by a single monster study with 15 users.",
+          attribution: "Jakob Nielsen",
+        },
+        {
+          layout: "two",
+          heading: "Make the task realistic",
+          left: { label: "Bad", body: "“Purchase a pair of orange Nike running shoes.”" },
+          right: { label: "Better", body: "“Buy a pair of shoes for less than $40.”" },
+        },
+        {
+          layout: "two",
+          heading: "Make it something they do",
+          left: { label: "Bad", body: "“Go to www.fandango.com and tell me where you'd click next.”" },
+          right: { label: "Better", body: "“Use www.fandango.com to find a movie you'd be interested in seeing on Sunday afternoon.”" },
+        },
+        {
+          layout: "two",
+          heading: "Don't give away the steps",
+          left: { label: "Bad", body: "“Go to the website, sign in, and tell me where you would click to get your transcript.”" },
+          right: { label: "Better", body: "“Look up the results of your midterm exams.”" },
+        },
+        {
+          layout: "points",
+          heading: "While they test",
+          points: [
+            "Watch what they do, not what they say.",
+            "If they ask you, ask back: “What do you think?”",
+            "Write down where they stop.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "After, ask neutrally",
+          left: { label: "Leading", body: "“Why did you have difficulty with the navigation?”" },
+          right: { label: "Neutral", body: "“What was easy or difficult about getting to the information you wanted?”" },
+        },
+
+        /* ========== 08 NUMBERS ========== */
+        /* The five times are invented for the example. SUS benchmark is Jeff
+           Sauro's, MeasuringU. */
+        { layout: "section", text: "Some numbers", num: "08" },
+        {
+          layout: "two",
+          heading: "Say it honestly",
+          left: { label: "Bad", body: "“80% of users wanted this.”" },
+          right: { label: "Better", body: "“4 of the 5 people we talked to.”" },
+        },
+        {
+          layout: "chart",
+          heading: "Time to place an order",
+          bars: [
+            { label: "Person 1", value: 32, display: "32s" },
+            { label: "Person 2", value: 35, display: "35s" },
+            { label: "Person 3", value: 38, display: "38s" },
+            { label: "Person 4", value: 41, display: "41s" },
+            { label: "Person 5", value: 240, display: "240s", accent: true },
+          ],
+          caption: "Example data. Five people, one task.",
+        },
+        {
+          layout: "two",
+          heading: "Two kinds of average",
+          left: { label: "Mean", body: "77 seconds.\nPulled up by one person." },
+          right: { label: "Median", body: "38 seconds.\nWhat most people did." },
+        },
+        {
+          layout: "statement",
+          text: "Don't average Person 5 away.",
+          sub: "Go find out what happened to them.",
+        },
+        {
+          layout: "points",
+          heading: "Numbers worth recording in a test",
+          points: [
+            "Success: did they finish?",
+            "Time on task.",
+            "Errors.",
+            "SUS: ten questions, scored 0 to 100.",
+          ],
+        },
+        /* SUS: the ten items verbatim, the scoring, "it isn't a percentage",
+           the grades and the small-sample note are all from Jeff Sauro,
+           MeasuringU, "Measuring Usability with the System Usability Scale". */
+        {
+          layout: "statement",
+          text: "SUS: the System Usability Scale.",
+          sub: "John Brooke, 1986. A short questionnaire people fill in right after a test, so you get one usability score.",
+        },
+        {
+          layout: "points",
+          heading: "The ten statements",
+          points: [
+            "I think that I would like to use this system frequently.",
+            "I found the system unnecessarily complex.",
+            "I thought the system was easy to use.",
+            "I think that I would need the support of a technical person to be able to use this system.",
+            "I found the various functions in this system were well integrated.",
+            "I thought there was too much inconsistency in this system.",
+            "I would imagine that most people would learn to use this system very quickly.",
+            "I found the system very cumbersome to use.",
+            "I felt very confident using the system.",
+            "I needed to learn a lot of things before I could get going with this system.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "How people answer",
+          left: { label: "Each statement", body: "1: Strongly disagree\n2\n3\n4\n5: Strongly agree" },
+          right: { label: "Notice", body: "The odd ones are good things.\nThe even ones are bad things.\n\nSo agreeing with everything doesn't give a high score." },
+        },
+        {
+          layout: "points",
+          heading: "Scoring it",
+          points: [
+            "Odd statements: their answer minus 1.",
+            "Even statements: 5 minus their answer.",
+            "Add all ten, then multiply by 2.5.",
+            "You get a score from 0 to 100.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "A SUS score isn't a percentage.",
+          sub: "70 doesn't mean 70% usable. It's just a little above average.",
+        },
+        {
+          layout: "statement",
+          text: "68",
+          sub: "The average SUS score across 500 studies. Jeff Sauro, MeasuringU",
+        },
+        {
+          layout: "chart",
+          heading: "What a score means",
+          bars: [
+            { label: "Average (C)", value: 68, display: "68" },
+            { label: "Excellent (A)", value: 80.3, display: "80.3+", accent: true },
+            { label: "Highest possible", value: 100, display: "100" },
+          ],
+          caption: "Jeff Sauro, MeasuringU. It works even with very small groups, so five testers is enough.",
+        },
+        {
+          layout: "two",
+          heading: "Correlation isn't causation",
+          left: { label: "What the data says", body: "People who use the filter order more often." },
+          right: { label: "What it might mean", body: "The filter helps.\n\nOr people who order a lot are the ones who find the filter." },
+        },
+        {
+          layout: "points",
+          heading: "When you report a survey",
+          points: [
+            "Say how many: n = 42.",
+            "Show the counts, not just the percentages.",
+            "Say who you didn't reach.",
+          ],
+        },
+
+        /* ========== 09 SYNTHESIS ========== */
+        /* NN/g wording on the affinity steps and tips, the empathy map
+           quadrants, the persona definition and the journey map parts.
+           d.school for the story share. Clusters, persona and journey for
+           the delivery app are made-up examples. */
+        { layout: "section", text: "Synthesis", num: "09" },
+        {
+          layout: "two",
+          heading: "What you saw, and what it means",
+          left: { label: "Observation", body: "“She scrolled for four minutes, then closed the app.”" },
+          right: { label: "Insight", body: "“Too much choice makes people give up, so the hungriest people order the least.”" },
+        },
+        {
+          layout: "points",
+          heading: "Synthesis, in order",
+          points: [
+            "Story share.",
+            "Affinity map.",
+            "Persona.",
+            "Journey map.",
+            "Pick the quotes.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Story share-and-capture.",
+          sub: "After interviewing, tell your team the stories you heard. One thing per sticky note.",
+        },
+        {
+          layout: "figure",
+          src: "img/w4/affinity-wall.jpg",
+          caption: "Affinity wall, Wikipedia usability study, 2009. Photo by Parul Vora, CC BY-SA 3.0",
+        },
+        {
+          layout: "points",
+          heading: "Affinity diagram",
+          points: [
+            "Generate ideas as sticky notes.",
+            "Organize notes into clusters or themes.",
+            "Prioritize clusters and next steps.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Tips",
+          points: [
+            "One note, one thing.",
+            "Write alone first.",
+            "Group by what they say before naming the group.",
+            "Small clusters count.",
+          ],
+        },
+        {
+          layout: "figure",
+          src: "img/w4/affinity-wall-clustered.jpg",
+          caption: "The same study, clustered. Photo by Parul Vora, CC BY-SA 3.0",
+        },
+        {
+          layout: "columns",
+          heading: "Example: three clusters",
+          items: [
+            { label: "Too many choices", list: ["“I just scroll forever.”", "Closed the app twice before ordering", "Picked by photo, not menu"] },
+            { label: "Fees show up late", list: ["“It was $14, then $26 at checkout.”", "Checks the total before the food"] },
+            { label: "Fall back on habit", list: ["“I just get what I got last time.”", "Reorders the same three places"] },
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Empathy map",
+          items: [
+            { label: "Says", body: "Direct quotes.", list: ["“I just get what I got last time.”"] },
+            { label: "Thinks", body: "What goes through their mind.", list: ["“Is this even worth $26?”"] },
+            { label: "Does", body: "What they do, as opposed to what they say.", list: ["Opens and closes the app twice"] },
+            { label: "Feels", body: "An adjective, and why.", list: ["Tired: has been deciding all day"] },
+          ],
+        },
+        {
+          layout: "quote",
+          quote: "A persona is a fictional, yet realistic, description of a typical or target user of the product.",
+          attribution: "Nielsen Norman Group",
+        },
+        {
+          layout: "figure",
+          src: "img/w4/persona-example.jpg",
+          caption: "Example persona, Nielsen Norman Group",
+        },
+        {
+          layout: "points",
+          heading: "What goes in",
+          points: [
+            "A name and a photo.",
+            "Goals.",
+            "Frustrations.",
+            "How and when they use it.",
+            "A real quote.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Each piece of information should have a purpose for being included.",
+          sub: "Nielsen Norman Group",
+        },
+        {
+          layout: "two",
+          heading: "Leave it out",
+          left: { label: "Doesn't change a decision", body: "Favourite wine.\nStar sign.\nHobbies." },
+          right: { label: "Does", body: "Works until 8pm.\nHas $15 for dinner.\nOrders on her phone, in bed." },
+        },
+        {
+          layout: "columns",
+          heading: "Example persona: Late-shift Lena",
+          items: [
+            { label: "Who", body: "Junior. Lives off campus. Works until 8pm three nights a week.", list: ["Orders on her phone", "Usually alone"] },
+            { label: "Goals", list: ["Eat within 30 minutes", "Spend under $15", "Not have to think about it"] },
+            { label: "Frustrations", list: ["Too many options", "Fees she finds at checkout", "Ends up eating the same thing"] },
+          ],
+        },
+        {
+          layout: "quote",
+          quote: "By the time I pick something I'm not even hungry anymore, I'm just annoyed.",
+          attribution: "Lena, example persona",
+        },
+        /* NN/g lists name, age, gender and photo among what a persona
+           needs ("Personas Make Users Memorable"), and titles the section in
+           "Personas vs. Jobs-to-Be-Done" "Good Personas Go Beyond
+           Demographics". The roommate example is made up. */
+        {
+          layout: "statement",
+          text: "Good personas go beyond demographics.",
+          sub: "Nielsen Norman Group",
+        },
+        {
+          layout: "two",
+          heading: "A persona needs both",
+          left: { label: "Demographics: who they are", body: "20. Junior.\nLives off campus.\n\nMakes the persona feel like a real person." },
+          right: { label: "Behaviour: what they do", body: "Works until 8pm.\nOrders three times a week.\nHas $15 for dinner.\n\nWhat you design for." },
+        },
+        {
+          layout: "two",
+          heading: "Same demographics, different persona",
+          left: { label: "Lena", body: "20, junior, off campus.\n\nGets home at 9pm and orders delivery." },
+          right: { label: "Her roommate", body: "20, junior, off campus.\n\nCooks every night and never opens the app." },
+        },
+        {
+          layout: "statement",
+          text: "A persona is a pattern of behaviour, not a demographic group.",
+        },
+        /* Several personas: NN/g, "Segment Analytics Data Using Personas"
+           ("most commonly, 3–7 personas will cover the majority of an
+           audience", and a segment "should display user behavior that is
+           clearly different" and "represent a sizeable chunk"). Primary
+           persona: Alan Cooper and Robert Reimann, About Face ("Design each
+           interface for a single, primary persona"). Wes and Kai are made
+           up, like Lena. */
+        {
+          layout: "statement",
+          text: "Most products have more than one kind of user.",
+          sub: "“Most commonly, 3–7 personas will cover the majority of an audience.” Nielsen Norman Group. For one feature, 2 or 3 is plenty.",
+        },
+        {
+          layout: "points",
+          heading: "Finding your groups",
+          points: [
+            "Go back to your affinity map.",
+            "Look for people who behave differently, not people who look different.",
+            "Each group should be clearly different, and big enough to matter.",
+            "One persona per group.",
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Example: three groups for the delivery app",
+          items: [
+            { label: "Late-shift Lena", body: "Orders alone, late, tired, on a budget.", list: ["Gives up when there's too much choice"] },
+            { label: "Weekend Wes", body: "Orders with friends on weekends.", list: ["Splitting the bill is the hard part"] },
+            { label: "Cook-at-home Kai", body: "Cooks most nights. Orders when sick.", list: ["Wants it fast and simple, rarely"] },
+          ],
+        },
+        {
+          layout: "quote",
+          quote: "Design each interface for a single, primary persona.",
+          attribution: "Alan Cooper and Robert Reimann, About Face",
+        },
+        {
+          layout: "two",
+          heading: "Primary and secondary",
+          left: { label: "Primary", body: "Who you design for first.\n\nHere: Lena. She's the one closing the app at 9pm." },
+          right: { label: "Secondary", body: "Who you make sure it still works for.\n\nHere: Wes and Kai." },
+        },
+        {
+          layout: "statement",
+          text: "Personas help you narrow down who your feature is really for.",
+        },
+        {
+          layout: "quote",
+          quote: "A journey map is a visualization of the process that a person goes through in order to accomplish a goal.",
+          attribution: "Nielsen Norman Group",
+        },
+        {
+          layout: "figure",
+          src: "img/w4/journey-map-template.jpg",
+          caption: "Journey map, Nielsen Norman Group",
+        },
+        {
+          layout: "points",
+          heading: "Five parts",
+          points: [
+            "Actor.",
+            "Scenario and expectations.",
+            "Journey phases.",
+            "Actions, mindsets and emotions.",
+            "Opportunities.",
+          ],
+        },
+        {
+          layout: "figure",
+          src: "img/w4/journey-map-mobile-plan.jpg",
+          caption: "Jumping Jamie switches mobile plans. Nielsen Norman Group",
+        },
+        {
+          layout: "columns",
+          heading: "Example journey: Lena at 9pm",
+          items: [
+            { label: "Hungry", list: ["Opens the app on the bus", "“What do I even want?”", "Feels: fine"] },
+            { label: "Browse", list: ["Scrolls 40 restaurants", "“They all look the same.”", "Feels: tired"] },
+            { label: "Checkout", list: ["Sees the fees", "“$26?”", "Feels: annoyed"] },
+            { label: "Gives up", list: ["Closes the app", "Eats cereal", "Feels: defeated"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "The low point is the opportunity.",
+          sub: "Here: Browse.",
+        },
+        {
+          layout: "points",
+          heading: "A good quote",
+          points: [
+            "Is what they said, word for word.",
+            "Shows a feeling or a reason, not just a fact.",
+            "Makes the problem obvious without you explaining it.",
+            "Stands for a pattern, not one person.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Pick the one that does the work",
+          left: { label: "Weak", body: "“Yeah, it's fine I guess.”" },
+          right: { label: "Strong", body: "“By the time I pick something I'm not even hungry anymore, I'm just annoyed.”" },
+        },
+        {
+          layout: "points",
+          heading: "Rules for quotes",
+          points: [
+            "Quote, don't paraphrase.",
+            "Cut with “...”, never add.",
+            "Name the role, not the person: “junior, lives off campus”.",
+            "Ask before you use it.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Check your design statement",
+          left: { label: "Before research", body: "“How might we help someone decide what to eat before they lose patience?”" },
+          right: { label: "If your primary persona sharpens it", body: "“How might we help a student who works late pick a dinner they can afford in under a minute?”" },
+        },
+
+        /* ========== 10 THIS WEEK ========== */
+        { layout: "section", text: "This week", num: "10" },
+        { layout: "assignment" },
+        {
+          layout: "points",
+          heading: "The research plan",
+          points: [
+            "Brainstorm: a few directions for your feature, not one answer.",
+            "Your design statement, revised.",
+            "Which methods you'll use, and why: interviews, a survey, competitive analysis.",
+            "Who you'll talk to, and how you'll find them.",
+            "Draft interview and survey questions, using the methods and tips from today.",
+          ],
+        },
+
+        /* ========== 11 GROUP WORK ========== */
+        { layout: "section", text: "Group work", num: "11" },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "The rest of class is yours. Plan your research, then start it.",
+          time: "Rest of class",
+        },
+        {
+          layout: "points",
+          heading: "Before you leave",
+          points: [
+            "Who you will talk to, and how many.",
+            "A first draft of your interview questions.",
+            "Your 2 to 4 competitors.",
+            "Who does what, by when.",
+          ],
+        },
+      ],
+    },
   ],
 };
 

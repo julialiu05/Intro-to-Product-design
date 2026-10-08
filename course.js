@@ -44,12 +44,12 @@ const COURSE = {
 
   // Which week to surface, AND which theme the whole site wears.
   // Bump this every Wednesday and the site changes its skin.
-  CURRENT_WEEK: 3,
+  CURRENT_WEEK: 4,
 
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
   // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
-  DESKTOP_WEEKS: 3,
+  DESKTOP_WEEKS: 4,
 
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
@@ -1790,7 +1790,7 @@ const COURSE = {
       week: 4,
       date: "Oct 8",
       title: "Research and synthesis",
-      status: "draft",
+      status: "published",
       background: "img/w4/pastel-blur-background.jpg",
       summary: "",
       agenda: [
@@ -1844,13 +1844,10 @@ const COURSE = {
           note: "Optional. A deck of method cards. Interview for Empathy, Extreme Users and Story Share-and-Capture are the ones for this week.",
         },
       ],
-      /* `dueDate` stays empty while the week is a draft, because apps.js puts
-         any week carrying a dueDate onto the Calendar whether or not the week
-         is published. Set it to "2026-10-14" with the other publish switches. */
       assignment: {
         title: "Research plan",
         due: "Wed Oct 14, 11:59pm",
-        dueDate: "",
+        dueDate: "2026-10-14",
         body: "As a group: brainstorm your feature idea, revise your design statement, pick the research methods you will use and why, and draft your interview and survey questions.",
         deliverable: "One research plan per group, every name on it.",
       },

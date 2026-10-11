@@ -3021,6 +3021,492 @@ const COURSE = {
         },
       ],
     },
+
+    {
+      week: 5,
+      date: "Oct 15",
+      title: "From research to a prototype",
+      status: "draft",
+      summary: "",
+      agenda: [
+        "Critique of your research plans",
+        "From findings to ideas",
+        "Choosing one",
+        "Flow and wireframe",
+        "Start building",
+        "Figma basics",
+        "Make it clickable",
+        "Prototype only what matters",
+        "Build your first screen",
+        "Explorations and first screens, due next week",
+      ],
+      readings: [
+        {
+          title: "Using “How Might We” Questions to Ideate on the Right Problems",
+          author: "Maria Rosala, Nielsen Norman Group",
+          kind: "Post",
+          url: "https://www.nngroup.com/articles/how-might-we-questions/",
+          note: "Read it before you write your HMW questions. The rule that matters: a good one does not have a solution hiding in it.",
+        },
+        {
+          title: "Guide to auto layout",
+          author: "Figma Help Center",
+          kind: "Post",
+          url: "https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout",
+          note: "The one Figma feature worth learning properly this week. Everything you build next week sits on it.",
+        },
+        {
+          title: "Wireflows: A UX Deliverable for Workflows and Apps",
+          author: "Page Laubheimer, Nielsen Norman Group",
+          kind: "Post",
+          url: "https://www.nngroup.com/articles/wireflows/",
+          note: "Wireframes and flows on one page. A good shape for the homework.",
+        },
+        {
+          title: "7 Simple Rules of Brainstorming",
+          author: "IDEO U",
+          kind: "Post",
+          optional: true,
+          url: "https://www.ideou.com/blogs/inspiration/7-simple-rules-of-brainstorming",
+          note: "Optional. Short. For when your group sits down to come up with ideas.",
+        },
+      ],
+      /* `dueDate` stays empty until the week is published, because apps.js puts
+         any week carrying a dueDate onto the Calendar whether or not the week
+         is a draft. Set it to "2026-10-21" with the other publish switches. */
+      assignment: {
+        title: "Explorations and first screens",
+        due: "Wed Oct 21, 11:59pm",
+        dueDate: "",
+        body: "As a group: at least three directions for your feature, sketched, and the one you picked and why. A user flow for it. Then the first screens of your prototype, built and linked together.",
+        deliverable: "One doc per group, every name on it, with a link to your Figma file or code. Photos of paper sketches are fine.",
+      },
+      materials: [],
+      /* ------------------------------------------------------------------
+         Order: critique, then two halves. The first half takes Week 4's
+         research to one chosen idea, kept short because synthesis was
+         taught last week. The second half is making: start building the
+         prototype. Matches the Project 1 checkpoints, Oct 15 explorations
+         and Oct 22 prototype in progress.
+
+         The worked example is still the delivery app and Late-shift Lena
+         from Week 4. The example HMWs, ideas, flow and screens are made up
+         for teaching.
+
+         Sources, with wording kept where a slide quotes them:
+         - Nielsen Norman Group: Rosala on How Might We questions;
+           Laubheimer on wireflows.
+         - IDEO U, 7 Simple Rules of Brainstorming.
+         - Google Ventures design sprint: Crazy 8s, dot voting.
+         - Bill Buxton, Sketching User Experiences: sketches ask questions,
+           prototypes answer them. Paraphrased, not quoted.
+         - Figma Help Center, Guide to auto layout.
+         - Apple Design Resources: Apple's iOS UI kit for Figma.
+         - The course's own Using AI policy, quoted from this file.
+         Image credits in img/w5/_credits.json.
+         ------------------------------------------------------------------ */
+      slides: [
+        { layout: "title" },
+
+        /* ========== 01 CRITIQUE ========== */
+        /* Add this week's research plans here as `columns` slides, word
+           for word and unnamed, the same way Week 4 did the design
+           statements. */
+        { layout: "section", text: "Critique", num: "01" },
+        {
+          layout: "points",
+          heading: "Ask about each one",
+          points: [
+            "Do the methods match what they need to know?",
+            "Are they talking to people who have the problem?",
+            "Would any question get a “yes” no matter what?",
+            "What will they know after that they don't know now?",
+          ],
+        },
+
+        /* ========== 02 FINDINGS TO IDEAS ========== */
+        { layout: "section", text: "From findings to ideas", num: "02" },
+        {
+          layout: "figure",
+          src: "img/w4/double-diamond.jpg",
+          caption: "The double diamond, after the UK Design Council",
+          tap: "\u{1F4CD} this week: Develop",
+        },
+        {
+          layout: "two",
+          heading: "Where you are",
+          left: { label: "Last week", body: "Research and synthesis.\nAffinity map, persona, journey." },
+          right: { label: "This week", body: "Turn it into one idea.\nThen start building it." },
+        },
+        {
+          layout: "statement",
+          text: "The low point is the opportunity.",
+          sub: "From last week: Lena gives up at Browse.",
+        },
+        {
+          layout: "statement",
+          text: "How might we…?",
+          sub: "A question that turns a finding into something you can have ideas about.",
+        },
+        {
+          layout: "points",
+          heading: "A good HMW",
+          points: [
+            "Starts from something you found in research.",
+            "Does not have a solution hiding in it.",
+            "Is broad enough for lots of ideas.",
+            "Is narrow enough to stay on the problem.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Don't hide a solution in it",
+          left: { label: "Bad", body: "“How might we tell users which form to complete?”" },
+          right: { label: "Better", body: "“How might we make users feel confident they are filing their taxes correctly?”" },
+        },
+        {
+          layout: "points",
+          heading: "Example: one finding, several HMWs",
+          points: [
+            "How might we help Lena decide in under a minute?",
+            "How might we show the real price before she starts choosing?",
+            "How might we make ordering easier than pouring cereal?",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Two kinds of thinking",
+          left: { label: "Diverge", body: "Go wide.\nAs many ideas as you can.\nNo judging." },
+          right: { label: "Converge", body: "Narrow down.\nPick one.\nSay why." },
+        },
+        {
+          layout: "statement",
+          text: "Your first idea is rarely your best one.",
+          sub: "It is usually the one everybody has.",
+        },
+        {
+          layout: "points",
+          heading: "Crazy 8s",
+          points: [
+            "Fold a sheet of paper into eight boxes.",
+            "Set a timer for eight minutes.",
+            "One idea per box. One minute each.",
+            "Alone first, then show your group.",
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Example: Lena's eight",
+          items: [
+            { label: "Choose less", list: ["Three picks, not 400", "A surprise button with a budget", "“What my friends ordered”"] },
+            { label: "Price first", list: ["Total shown on every card", "Set $15, see only what fits", "Fees split with a neighbour"] },
+            { label: "Habit, but better", list: ["Reorder, with one new thing", "Tonight's dinner, planned at lunch"] },
+          ],
+        },
+        {
+          layout: "exercise",
+          heading: "On your own",
+          prompt: "Pick one HMW from your research. Crazy 8s.",
+          time: "8 min",
+        },
+
+        /* ========== 03 CHOOSING ========== */
+        { layout: "section", text: "Choosing one", num: "03" },
+        {
+          layout: "figure",
+          src: "img/w5/dot-voting.jpg",
+          caption: "Dot voting. Photo by Ben Chun, CC BY-SA 2.0, Wikimedia Commons",
+        },
+        {
+          layout: "points",
+          heading: "Dot voting",
+          points: [
+            "Put every sketch on the table.",
+            "Everyone reads them in silence.",
+            "Three dots each, on the ideas you'd build.",
+            "Talk about the ideas, not who drew them.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Then check it against your research",
+          points: [
+            "Does it answer your design statement?",
+            "Does it help your primary persona at their low point?",
+            "Is it easier than what they do instead?",
+            "Can you build it by Oct 29?",
+          ],
+        },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "Show your eights. Dot vote. Pick one direction, and say why in one sentence.",
+          time: "12 min",
+        },
+        {
+          layout: "statement",
+          text: "Keep the ones you didn't pick.",
+          sub: "They go in the Explorations section of your case study.",
+        },
+
+        /* ========== 04 FLOW AND WIREFRAME ========== */
+        { layout: "section", text: "Flow and wireframe", num: "04" },
+        {
+          layout: "points",
+          heading: "Draw the flow first",
+          points: [
+            "Start where they start, not on your feature.",
+            "One box per screen.",
+            "One arrow per action.",
+            "Mark where they could leave.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Open app → Set budget → See three picks → Order",
+          sub: "Example flow for Lena. Four screens.",
+        },
+        {
+          layout: "statement",
+          text: "Count the screens.",
+          sub: "That's how many you need to build. Every extra one is a place someone can give up.",
+        },
+        {
+          layout: "figure",
+          src: "img/w5/paper-prototype.jpg",
+          caption: "A paper wireframe. Photo by Sage Ross, CC BY-SA 4.0, Wikimedia Commons",
+        },
+        {
+          layout: "two",
+          heading: "A wireframe",
+          left: { label: "Shows", body: "What is on the screen.\nWhere it goes.\nWhat matters most." },
+          right: { label: "Leaves out", body: "Colour.\nFonts.\nPhotos.\nIcons." },
+        },
+        {
+          layout: "statement",
+          text: "Use real words, not lorem ipsum.",
+          sub: "“Thai Basil, $13.80 total, 25 min” tells you if it fits. Squiggles don't.",
+        },
+        {
+          layout: "two",
+          heading: "Sketch or prototype",
+          left: { label: "Sketch", body: "Quick and cheap.\nThrown away.\nAsks a question." },
+          right: { label: "Prototype", body: "Slower, more detailed.\nKept and tested.\nAnswers a question." },
+        },
+
+        /* ========== 05 START BUILDING ========== */
+        { layout: "section", text: "Start building", num: "05" },
+        {
+          layout: "statement",
+          text: "You're adding to an app that already exists.",
+          sub: "So you don't start from a blank canvas.",
+        },
+        {
+          layout: "points",
+          heading: "Start from the real app",
+          points: [
+            "Screenshot the screens around your feature.",
+            "Drop them into Figma at actual size.",
+            "Rebuild the one screen your feature changes.",
+            "Design your feature inside it.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Match what's there",
+          left: { label: "Copy from the app", body: "Its fonts.\nIts colours.\nIts buttons and spacing." },
+          right: { label: "Why", body: "Your feature should look like it shipped.\nNot like a different app glued on." },
+        },
+        {
+          layout: "statement",
+          text: "Don't draw what you can borrow.",
+          sub: "Apple and Google publish their UI kits for Figma: real buttons, bars, keyboards and lists.",
+        },
+        {
+          layout: "columns",
+          heading: "Three ways to build it",
+          items: [
+            { label: "Figma", body: "Draw the screens, link them together.", list: ["Fastest to start", "Most of you, this project"] },
+            { label: "Code", body: "HTML, CSS, JS, or SwiftUI.", list: ["Real scrolling, real typing", "If someone in your group can"] },
+            { label: "AI tools", body: "Describe it, get a working draft.", list: ["Fast first draft", "You still make every decision"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Using AI: say where you used it.",
+          sub: "“A prototype generated in one prompt with no account of the decisions inside it is not an assignment, it is a screenshot.” Course policy",
+        },
+        {
+          layout: "columns",
+          heading: "Fidelity, over the next two weeks",
+          items: [
+            { label: "Low", body: "Paper or grey boxes.", list: ["Minutes", "Today"] },
+            { label: "Mid", body: "Real layout and words, greyscale.", list: ["Hours", "This week"] },
+            { label: "High", body: "Looks real, clicks through.", list: ["Days", "By Oct 29"] },
+          ],
+        },
+
+        /* ========== 06 FIGMA BASICS ========== */
+        /* Auto layout wording from the Figma Help Center. */
+        { layout: "section", text: "Figma basics", num: "06" },
+        {
+          layout: "points",
+          heading: "Five things to learn first",
+          points: [
+            "Frames: one per screen, set to a phone size.",
+            "Auto layout: things that stack and space themselves.",
+            "Components: build a button once, use it everywhere.",
+            "Styles: name your colours and text sizes.",
+            "Prototype mode: link screens together.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "One frame per screen.",
+          sub: "Pick one phone size and use it for every screen.",
+        },
+        {
+          layout: "quote",
+          quote: "Elements in an auto layout frame are automatically arranged in a frame based on direction, spacing, padding, alignment, and other auto layout properties.",
+          attribution: "Figma Help Center",
+        },
+        {
+          layout: "two",
+          heading: "Why auto layout",
+          left: { label: "Without it", body: "Change a word.\nNudge everything below it by hand." },
+          right: { label: "With it", body: "Change a word.\nEverything moves on its own." },
+        },
+        {
+          layout: "two",
+          heading: "Why components",
+          left: { label: "Without them", body: "Twelve copies of a button.\nChange one, then eleven more." },
+          right: { label: "With them", body: "One main button.\nChange it once, all twelve update." },
+        },
+        {
+          layout: "points",
+          heading: "Name things as you go",
+          points: [
+            "Screens: “01 Home”, “02 Set budget”, “03 Picks”.",
+            "Layers you'll click on.",
+            "One page for explorations, one for the prototype.",
+          ],
+        },
+
+        /* ========== 07 MAKE IT CLICKABLE ========== */
+        { layout: "section", text: "Make it clickable", num: "07" },
+        {
+          layout: "points",
+          heading: "In prototype mode",
+          points: [
+            "Pick the starting screen.",
+            "Drag from a button to the screen it opens.",
+            "Choose what triggers it: on tap.",
+            "Press play, and use it like a user would.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Wire your flow, screen by screen.",
+          sub: "Each arrow in your flow becomes one link.",
+        },
+        {
+          layout: "points",
+          heading: "Test it on your phone",
+          points: [
+            "Open it in the Figma app.",
+            "Hand it to someone in your group.",
+            "Don't explain. Watch where they tap.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Record it running.",
+          sub: "Your case study needs video of the prototype, not static screens. Start recording now.",
+        },
+
+        /* ========== 08 PROTOTYPE WHAT MATTERS ========== */
+        { layout: "section", text: "Prototype only what matters", num: "08" },
+        {
+          layout: "statement",
+          text: "Build the path, not the whole app.",
+          sub: "Your feature only. Everything else can be a screenshot.",
+        },
+        {
+          layout: "two",
+          heading: "Happy path first",
+          left: { label: "Build first", body: "The one path your persona takes.\nStart to finish." },
+          right: { label: "Then add", body: "What happens when it goes wrong." },
+        },
+        {
+          layout: "columns",
+          heading: "Screens people forget",
+          items: [
+            { label: "Empty", body: "Nothing there yet.", list: ["“Nothing under $15 near you.”"] },
+            { label: "Loading", body: "Waiting.", list: ["Finding your picks…"] },
+            { label: "Error", body: "Something broke.", list: ["“Card declined.”"] },
+            { label: "Done", body: "It worked.", list: ["“Order placed. 25 min.”"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Real content, not perfect content.",
+          sub: "Real restaurant names, real prices, a long name that wraps. That's what breaks a layout.",
+        },
+        {
+          layout: "points",
+          heading: "When you're stuck",
+          points: [
+            "Look at how the real app does something similar.",
+            "Make it ugly and working first.",
+            "Ask: what would Lena tap next?",
+          ],
+        },
+
+        /* ========== 09 IN CLASS ========== */
+        { layout: "section", text: "Build your first screen", num: "09" },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "In your group",
+          body: "Before you leave, you should have:",
+          points: [
+            "One Figma file, everyone in it.",
+            "Screenshots of the real app dropped in.",
+            "Your flow, drawn.",
+            "The first screen of your feature, rebuilt.",
+          ],
+          src: "img/w5/sketching-wireframes.jpg",
+          caption: "Photo: Green Chameleon, CC0. Wikimedia Commons",
+        },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "Set up your Figma file. Wireframe your flow. Build the first screen.",
+          time: "Rest of class",
+        },
+
+        /* ========== 10 THIS WEEK ========== */
+        { layout: "section", text: "This week", num: "10" },
+        { layout: "assignment" },
+        {
+          layout: "points",
+          heading: "What to hand in",
+          points: [
+            "Your HMWs, from your research.",
+            "At least three directions, sketched.",
+            "The one you picked, and why.",
+            "A user flow for it.",
+            "The first screens of your prototype, linked together.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Where this is going",
+          left: { label: "Oct 22", body: "Prototype in progress.\nBring it to class." },
+          right: { label: "Oct 29", body: "Prototype running.\nPage live.\nEvery group presents." },
+        },
+      ],
+    },
   ],
 };
 

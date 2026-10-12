@@ -3033,6 +3033,8 @@ const COURSE = {
         "From findings to ideas",
         "Choosing one",
         "Flow and wireframe",
+        "Example: a feature for Duolingo",
+        "Find a design system",
         "Start building",
         "Figma basics",
         "Make it clickable",
@@ -3041,6 +3043,13 @@ const COURSE = {
         "Explorations and first screens, due next week",
       ],
       readings: [
+        {
+          title: "Duolingo Feature",
+          author: "Megan Archer",
+          kind: "Post",
+          url: "https://www.meganarcherux.com/ux-work/duolingo-feature",
+          note: "The case study from class. A feature added to an app she doesn't work for, inside its design system, then tested and changed. The shape your Project 1 page is going for.",
+        },
         {
           title: "Using “How Might We” Questions to Ideate on the Right Problems",
           author: "Maria Rosala, Nielsen Norman Group",
@@ -3069,6 +3078,22 @@ const COURSE = {
           optional: true,
           url: "https://www.ideou.com/blogs/inspiration/7-simple-rules-of-brainstorming",
           note: "Optional. Short. For when your group sits down to come up with ideas.",
+        },
+        {
+          title: "Design Systems 101",
+          author: "Therese Fessenden, Nielsen Norman Group",
+          kind: "Post",
+          optional: true,
+          url: "https://www.nngroup.com/articles/design-systems-101/",
+          note: "Optional. What a design system is, and its three parts.",
+        },
+        {
+          title: "The Component Gallery",
+          author: "Iain Bean",
+          kind: "Post",
+          optional: true,
+          url: "https://component.gallery/",
+          note: "Optional. One component, every design system's version of it. Look up whatever you're about to build.",
         },
       ],
       /* `dueDate` stays empty until the week is published, because apps.js puts
@@ -3102,6 +3127,12 @@ const COURSE = {
            prototypes answer them. Paraphrased, not quoted.
          - Figma Help Center, Guide to auto layout.
          - Apple Design Resources: Apple's iOS UI kit for Figma.
+         - Megan Archer, "Duolingo Feature" (2023), the worked case study.
+           Her wording is kept on every slide that quotes her. Images are
+           hers, from meganarcherux.com, credited in the captions.
+         - Therese Fessenden, NN/g, Design Systems 101: the definition and
+           the three parts.
+         - Iain Bean, The Component Gallery.
          - The course's own Using AI policy, quoted from this file.
          Image credits in img/w5/_credits.json.
          ------------------------------------------------------------------ */
@@ -3294,8 +3325,182 @@ const COURSE = {
           right: { label: "Prototype", body: "Slower, more detailed.\nKept and tested.\nAnswers a question." },
         },
 
-        /* ========== 05 START BUILDING ========== */
-        { layout: "section", text: "Start building", num: "05" },
+        /* ========== 05 EXAMPLE CASE STUDY ========== */
+        /* Megan Archer's Duolingo feature, 2023. Picked because it is
+           Project 1 done once already: one narrow user and problem, a
+           feature added to an app she doesn't work for, built inside its
+           design system, tested and changed. Quoted text is hers. */
+        { layout: "section", text: "Example: a feature for Duolingo", num: "05" },
+        {
+          layout: "statement",
+          text: "Adding a feature to the Duolingo app, allowing users to favorite especially important words.",
+          sub: "Megan Archer, 2023. She doesn't work for Duolingo. It's a project like yours.",
+        },
+        {
+          layout: "two",
+          heading: "Narrow user, narrow problem",
+          left: { label: "Who", body: "People using Duolingo to get ready for a trip." },
+          right: { label: "What's missing", body: "“Targeted review.”\nThey want to review “the words that will be most useful to them on their journey.”" },
+        },
+        {
+          layout: "points",
+          heading: "Research",
+          points: [
+            "Four interviews and a survey: 11 Duolingo users.",
+            "Competitive analysis: Memrise and Busuu.",
+            "A persona and an empathy map, from the interviews.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "“Busuu already features a review tab containing favorited words from previous lessons.”",
+          sub: "“This shows that there is a demand for this feature.” A competitor doing it is evidence, not a reason to stop.",
+        },
+        {
+          layout: "figure",
+          src: "img/w5/duolingo/persona.png",
+          caption: "Persona: Becca Gilmore, “a single young professional with a passion for travel.” Megan Archer",
+        },
+        {
+          layout: "figure",
+          src: "img/w5/duolingo/user-flow.png",
+          caption: "User flow: her three tasks combined with the existing Duolingo app flow. Megan Archer",
+        },
+        {
+          layout: "statement",
+          text: "She didn't redraw Duolingo.",
+          sub: "“For the lesson flow, I used screenshots as the base, since just the star icon and toast were being added to that screen.” Megan Archer",
+        },
+        {
+          layout: "gallery",
+          heading: "Wireframe, then design",
+          items: [
+            { src: "img/w5/duolingo/wire-review.png", label: "Review tab", note: "wireframe" },
+            { src: "img/w5/duolingo/final-review.png", label: "Review tab", note: "final" },
+            { src: "img/w5/duolingo/wire-favorites.png", label: "Favorite words", note: "wireframe" },
+            { src: "img/w5/duolingo/final-favorites.png", label: "Favorite words", note: "final" },
+          ],
+          caption: "Mid-fidelity wireframes in grey, then the same screens in Duolingo's style. Megan Archer",
+        },
+        {
+          layout: "quote",
+          quote: "I followed along as closely as possible with Duolingo's existing branding and design system while creating the design.",
+          attribution: "Megan Archer",
+        },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "What she borrowed",
+          points: [
+            "Duo the owl at the top of every page, as Duolingo does.",
+            "Green, their secondary button colour, for actions and toasts.",
+            "Their lesson screens, as screenshots. She only added a star.",
+          ],
+          src: "img/w5/duolingo/final-lesson.png",
+          caption: "Favouriting a word mid-lesson. Megan Archer",
+        },
+        {
+          layout: "points",
+          heading: "Then she tested it",
+          points: [
+            "Unmoderated tests with 8 participants, using Maze.",
+            "Add a favorite word from the lesson flow.",
+            "Navigate to the favorite words page and add a word.",
+            "Navigate to the favorite words page and remove a word.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "“5/8 participants attempted to click to add or remove a word without clicking the edit button first.”",
+          sub: "Megan Archer",
+        },
+        {
+          layout: "figure",
+          src: "img/w5/duolingo/iteration.png",
+          caption: "Before and after. She removed the edit button, let the search bar add words, and made the remove button red, “as users expect it to be.” Megan Archer",
+        },
+        {
+          layout: "site",
+          heading: "The whole case study",
+          label: "Duolingo Feature",
+          src: "https://www.meganarcherux.com/ux-work/duolingo-feature",
+          body: "Scroll it. Research, define, ideate, design, test: the order you're working in.",
+        },
+        {
+          layout: "points",
+          heading: "What to take from it",
+          points: [
+            "One user, one problem, one feature.",
+            "Start from screenshots of the real app.",
+            "Match its design system.",
+            "Test it, and show what you changed.",
+          ],
+        },
+
+        /* ========== 06 FIND A DESIGN SYSTEM ========== */
+        /* Definition and the three parts: Therese Fessenden, NN/g, Design
+           Systems 101. The descriptions under each part are ours. */
+        { layout: "section", text: "Find a design system", num: "06" },
+        {
+          layout: "quote",
+          quote: "A design system is a complete set of standards intended to manage design at scale using reusable components and patterns.",
+          attribution: "Therese Fessenden, Nielsen Norman Group",
+        },
+        {
+          layout: "columns",
+          heading: "Three parts",
+          items: [
+            { label: "Style guide", body: "How it looks.", list: ["Colours, type, spacing, icons"] },
+            { label: "Component library", body: "The pieces.", list: ["Buttons, lists, toasts, tab bars"] },
+            { label: "Pattern library", body: "How pieces go together.", list: ["A search, a form, an empty state"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Your app already has a design system.",
+          sub: "Your job is to find it, not invent one.",
+        },
+        {
+          layout: "columns",
+          heading: "Where to look",
+          items: [
+            { label: "The company's own", body: "Some publish theirs.", list: ["Canvas, so bCourses: Instructure UI", "Shopify: Polaris", "GitHub: Primer", "IBM: Carbon"] },
+            { label: "The platform", body: "What the app is built on.", list: ["Apple: Human Interface Guidelines, and an iOS UI kit for Figma", "Google: Material 3, and a Figma kit"] },
+            { label: "Collections", body: "Many systems side by side.", list: ["The Component Gallery", "Figma Community: search the app's name"] },
+          ],
+        },
+        {
+          layout: "site",
+          heading: "One component, every design system",
+          label: "The Component Gallery",
+          src: "https://component.gallery/",
+          body: "Search “toast” or “empty state” and see how everyone else does it.",
+        },
+        {
+          layout: "points",
+          heading: "If your app doesn't publish one",
+          points: [
+            "Screenshot the screens around your feature.",
+            "Pick the colours with the eyedropper. Save them as styles.",
+            "Find the font. Note the sizes.",
+            "Rebuild only the components your feature needs.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "For your feature",
+          left: { label: "Reuse first", body: "A button that's already there.\nA list that's already there." },
+          right: { label: "Make new only when nothing fits", body: "In the same style.\nDuolingo's star icon and toast." },
+        },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "Find your app's design system, or the kit for its platform. Put the link at the top of your Figma file.",
+          time: "5 min",
+        },
+
+        /* ========== 07 START BUILDING ========== */
+        { layout: "section", text: "Start building", num: "07" },
         {
           layout: "statement",
           text: "You're adding to an app that already exists.",
@@ -3310,17 +3515,6 @@ const COURSE = {
             "Rebuild the one screen your feature changes.",
             "Design your feature inside it.",
           ],
-        },
-        {
-          layout: "two",
-          heading: "Match what's there",
-          left: { label: "Copy from the app", body: "Its fonts.\nIts colours.\nIts buttons and spacing." },
-          right: { label: "Why", body: "Your feature should look like it shipped.\nNot like a different app glued on." },
-        },
-        {
-          layout: "statement",
-          text: "Don't draw what you can borrow.",
-          sub: "Apple and Google publish their UI kits for Figma: real buttons, bars, keyboards and lists.",
         },
         {
           layout: "columns",
@@ -3346,9 +3540,9 @@ const COURSE = {
           ],
         },
 
-        /* ========== 06 FIGMA BASICS ========== */
+        /* ========== 08 FIGMA BASICS ========== */
         /* Auto layout wording from the Figma Help Center. */
-        { layout: "section", text: "Figma basics", num: "06" },
+        { layout: "section", text: "Figma basics", num: "08" },
         {
           layout: "points",
           heading: "Five things to learn first",
@@ -3392,8 +3586,8 @@ const COURSE = {
           ],
         },
 
-        /* ========== 07 MAKE IT CLICKABLE ========== */
-        { layout: "section", text: "Make it clickable", num: "07" },
+        /* ========== 09 MAKE IT CLICKABLE ========== */
+        { layout: "section", text: "Make it clickable", num: "09" },
         {
           layout: "points",
           heading: "In prototype mode",
@@ -3424,8 +3618,8 @@ const COURSE = {
           sub: "Your case study needs video of the prototype, not static screens. Start recording now.",
         },
 
-        /* ========== 08 PROTOTYPE WHAT MATTERS ========== */
-        { layout: "section", text: "Prototype only what matters", num: "08" },
+        /* ========== 10 PROTOTYPE WHAT MATTERS ========== */
+        { layout: "section", text: "Prototype only what matters", num: "10" },
         {
           layout: "statement",
           text: "Build the path, not the whole app.",
@@ -3462,8 +3656,8 @@ const COURSE = {
           ],
         },
 
-        /* ========== 09 IN CLASS ========== */
-        { layout: "section", text: "Build your first screen", num: "09" },
+        /* ========== 11 IN CLASS ========== */
+        { layout: "section", text: "Build your first screen", num: "11" },
         {
           layout: "visual",
           side: "right",
@@ -3485,8 +3679,8 @@ const COURSE = {
           time: "Rest of class",
         },
 
-        /* ========== 10 THIS WEEK ========== */
-        { layout: "section", text: "This week", num: "10" },
+        /* ========== 12 THIS WEEK ========== */
+        { layout: "section", text: "This week", num: "12" },
         { layout: "assignment" },
         {
           layout: "points",

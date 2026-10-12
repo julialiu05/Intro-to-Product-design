@@ -22,5 +22,69 @@
     "license": "CC BY-SA 2.0",
     "source": "https://commons.wikimedia.org/wiki/File:Sticky-dot-voting.jpg",
     "bytes": 467758
+  },
+  {
+    "file": "img/w5/duolingo/persona.png",
+    "title": "Persona",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 139203
+  },
+  {
+    "file": "img/w5/duolingo/user-flow.png",
+    "title": "User flow",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 261323
+  },
+  {
+    "file": "img/w5/duolingo/wire-review.png",
+    "title": "Review tab, wireframe",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 22759
+  },
+  {
+    "file": "img/w5/duolingo/final-review.png",
+    "title": "Review tab, final",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 180590
+  },
+  {
+    "file": "img/w5/duolingo/wire-favorites.png",
+    "title": "Favorite words page, wireframe",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 21730
+  },
+  {
+    "file": "img/w5/duolingo/final-favorites.png",
+    "title": "Favorite words page, final",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 67208
+  },
+  {
+    "file": "img/w5/duolingo/final-lesson.png",
+    "title": "Lesson favorite word",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 91727
+  },
+  {
+    "file": "img/w5/duolingo/iteration.png",
+    "title": "Priority iterations, before and after",
+    "creator": "Megan Archer",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.meganarcherux.com/ux-work/duolingo-feature",
+    "bytes": 245757
   }
 ]

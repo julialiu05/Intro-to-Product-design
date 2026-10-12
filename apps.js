@@ -201,7 +201,9 @@
         return [
           "Designing with AI in DES 198. Optional, never required.",
           "",
+          "  figma     set up Figma, free with your Berkeley email",
           "  setup     get Claude Code running",
+          "  github    prompts that get your AI to set up GitHub for you",
           "  free      free options, including two every Berkeley student already has",
           "  skills    instructions for your AI agent, made for this class",
           "  policy    the one rule",
@@ -260,6 +262,37 @@
         });
       },
     },
+    figma: {
+      about: "set up Figma, free with your Berkeley email",
+      run: function () {
+        return [
+          "Figma for Education: the Professional plan free for a year, with Figma Make",
+          "and 3,000 AI credits a month.",
+          "",
+          "1. Make a Figma account with your berkeley.edu email.",
+          "2. Apply: https://www.figma.com/education/apply",
+          "3. Create an Education team for your group, and invite your groupmates.",
+          "4. Get Apple's iOS UI kit: https://developer.apple.com/design/resources/",
+          "   On a Mac, also install SF Pro and SF Symbols from the same page.",
+          "",
+          "The full Week 5 setup guide is in the Week 5 folder on the desktop.",
+        ];
+      },
+    },
+    github: {
+      about: "prompts that get your AI to set up GitHub for you",
+      run: function () {
+        /* Prints the Week 5 doc, so the prompts live in one place. */
+        var doc = null;
+        (COURSE.weeks || []).forEach(function (w) {
+          (w.docs || []).forEach(function (d) { if (/GitHub/.test(d.name)) doc = d; });
+        });
+        if (!doc) return ["not posted yet"];
+        return [].concat(doc.body).map(function (l) {
+          return l.replace(/^<(https?:\/\/\S+)>$/, "$1").replace(/\*\*/g, "");
+        });
+      },
+    },
     setup: {
       about: "install Claude Code",
       run: function () {
@@ -312,9 +345,12 @@
           "",
           "Free for anyone:",
           "",
-          "  Claude           The free plan has chat and artifacts, not Claude Code.",
-          "                   Paste a skill's SKILL.md into a chat and ask it to build",
-          "                   your screens as an HTML artifact.",
+          "  Claude Design    Free on every Claude plan. Describe a screen, edit it on a",
+          "                   canvas, export HTML. In Claude: Output, then Design.",
+          "  Claude           The free plan has chat, artifacts and Claude Design, not",
+          "                   Claude Code. Paste a skill's SKILL.md into a chat first.",
+          "  Cursor           Free Hobby plan, with a small number of agent requests.",
+          "  Antigravity      Google's coding agent, with a tight free tier: antigravity.google",
           "",
           "Last checked October 2026. Limits and plans change, so check before you rely on one.",
         ];

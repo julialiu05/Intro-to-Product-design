@@ -91,6 +91,11 @@ weeks: [ ... ]       // one object per week
 
 Each week object carries `week`, `date`, `title`, `status`, `summary`,
 `agenda[]`, `readings[]`, `assignment{}`, `materials[]`, and `slides[]`.
+It can also carry `background` (the deck's backdrop image) and `docs[]`,
+Read Me files that show up in the week's folder: each is `{ name, kind,
+state, body }`, with `body` an array of Markdown lines. Week 5 has two. Docs
+open even while a week is a draft, so a folder can go on the desktop before
+its slides are posted.
 
 If a week has no `slides` array, `autoDeck()` in `site.js:79` builds a usable
 deck from the title, agenda, readings and assignment. So a week is never

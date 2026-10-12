@@ -395,6 +395,25 @@
       state: draft ? "Not posted" : "Posted",
       run: draft ? null : function () { openDeck(n); },
     }];
+    /* A week can carry its own Read Me files: `docs` in course.js, each
+       { name, kind, body } with `body` as an array of Markdown lines. They
+       open even while the week is a draft, like the reading list. */
+    (wk.docs || []).forEach(function (doc, k) {
+      items.push({
+        ch: "📝",
+        name: doc.name,
+        kind: doc.kind || "Read Me",
+        date: wk.date,
+        state: doc.state || "",
+        run: function () {
+          var dw = makeWindow("doc" + n + "-" + k, doc.name, { w: 680, h: 560 });
+          if (dw.__built) return;
+          dw.body.textContent = "";
+          dw.body.appendChild(paintMarkdown([].concat(doc.body).join("\n")));
+          dw.__built = true;
+        },
+      });
+    });
     if ((wk.readings || []).length) {
       items.push({
         ch: "📄",

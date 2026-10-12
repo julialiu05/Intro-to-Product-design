@@ -324,7 +324,7 @@ assignment: {
 }
 ```
 
-**Terminal** is the course as a command line, and reads `course.js` like
+**Terminal** (🖥️) is the course as a command line, and reads `course.js` like
 everything else. `help` lists the commands: `ls` for the weeks, `open 4` for a
 week's slides, `readings 4`, `due`, `readme`, `staff`, and `skills`, which
 prints the one line that installs the class skill for Claude Code. Draft weeks

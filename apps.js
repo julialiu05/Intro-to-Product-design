@@ -334,7 +334,7 @@
   }
 
   Desktop.add({
-    id: "terminal", ch: "⌨️", label: "Terminal", w: 620, h: 400,
+    id: "terminal", ch: "🖥️", label: "Terminal", w: 620, h: 400,
     build: buildTerminal,
   });
 

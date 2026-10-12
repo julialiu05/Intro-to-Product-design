@@ -195,6 +195,21 @@
         });
       },
     },
+    ai: {
+      about: "start here if you want to design with AI",
+      run: function () {
+        return [
+          "Designing with AI in DES 198. Optional, never required.",
+          "",
+          "  setup     get Claude Code running",
+          "  free      free options, including two every Berkeley student already has",
+          "  skills    instructions for your AI agent, made for this class",
+          "  policy    the one rule",
+          "",
+          "Last checked October 2026. These plans change often.",
+        ];
+      },
+    },
     ls: {
       about: "list the weeks",
       run: function () {
@@ -245,18 +260,98 @@
         });
       },
     },
-    skills: {
-      about: "install the class skill for Claude Code",
+    setup: {
+      about: "install Claude Code",
       run: function () {
         return [
-          "design-system-screens: builds your screens from your app's design system.",
+          "Claude Code: an AI agent that works in your terminal, on your files.",
           "",
-          "Paste this into your own Terminal to install it for Claude Code:",
+          "It needs a paid Claude plan (Pro or above). The free Claude plan does not",
+          "include it. No paid plan? Type free.",
           "",
-          "  git clone --depth 1 " + REPO + ".git /tmp/des198 && mkdir -p ~/.claude/skills && cp -R /tmp/des198/skills/design-system-screens ~/.claude/skills/",
+          "1. Install. Paste one line into your own Terminal:",
+          "     Mac:      curl -fsSL https://claude.ai/install.sh | bash",
+          "     Windows:  irm https://claude.ai/install.ps1 | iex      (in PowerShell)",
+          "   Or skip the terminal: the Claude desktop app has Claude Code built in.",
+          "",
+          "2. Open a new Terminal window and check it worked:",
+          "     claude --version",
+          "",
+          "3. Make a folder for your project, go into it, and start:",
+          "     mkdir project-1 && cd project-1",
+          "     claude",
+          "   It opens your browser to log in the first time.",
+          "",
+          "4. Add the class skills (type skills).",
+          "",
+          "Docs: https://code.claude.com/docs",
+        ];
+      },
+    },
+    free: {
+      about: "free ways to use AI for design",
+      run: function () {
+        return [
+          "Free, for every Berkeley student, through CalNet:",
+          "",
+          "  ChatGPT Edu      Sign up through the IT Service Hub. It includes Codex,",
+          "                   OpenAI's coding agent, which reads the same skills:",
+          "                     npm install -g @openai/codex     (or: brew install --cask codex)",
+          "                     codex   → Sign in with ChatGPT → your Berkeley account",
+          "  Google AI Pro    gemini.google.com with your Berkeley account.",
+          "                   Google AI Studio's Build mode makes working prototypes.",
+          "",
+          "  Berkeley's list: https://ai.berkeley.edu/tools-training/licensed-ai-tools",
+          "  Keep non-public UC data out of all of them.",
+          "",
+          "Free for verified students:",
+          "",
+          "  Figma Education  Professional plan, Figma Make, 3,000 AI credits a month.",
+          "                   figma.com/education/apply, with your school email.",
+          "  GitHub Copilot   The Student plan, through GitHub Education.",
+          "",
+          "Free for anyone:",
+          "",
+          "  Claude           The free plan has chat and artifacts, not Claude Code.",
+          "                   Paste a skill's SKILL.md into a chat and ask it to build",
+          "                   your screens as an HTML artifact.",
+          "",
+          "Last checked October 2026. Limits and plans change, so check before you rely on one.",
+        ];
+      },
+    },
+    policy: {
+      about: "the course rule on AI",
+      run: function () {
+        return [
+          "Allowed and expected. The one rule: say where you used it.",
+          "",
+          "“A prototype generated in one prompt with no account of the decisions",
+          "inside it is not an assignment, it is a screenshot.”",
+          "",
+          "The class skills keep a decisions.md log for you. That log is your account.",
+        ];
+      },
+    },
+    skills: {
+      about: "instructions for your AI agent, made for this class",
+      run: function () {
+        return [
+          "Skills are instructions you give an AI agent so it works the way this class does.",
+          "",
+          "  design-system-screens   builds your screens from your app's real design system",
+          "  case-study-page         builds your Project 1 case study site from your own material",
+          "",
+          "Install both for Claude Code. Paste this into your own Terminal:",
+          "",
+          "  git clone --depth 1 " + REPO + ".git /tmp/des198 && mkdir -p ~/.claude/skills && cp -R /tmp/des198/skills/design-system-screens /tmp/des198/skills/case-study-page ~/.claude/skills/",
           "",
           "Then in Claude Code: “Use the design-system-screens skill.”",
-          "More: " + REPO + "/tree/main/skills",
+          "",
+          "Codex, Cursor and others read the same format: check where your tool keeps skills.",
+          "No agent? Open a SKILL.md, copy it, and paste it into any AI chat first.",
+          "",
+          "All of them: " + REPO + "/tree/main/skills",
         ];
       },
     },
@@ -305,7 +400,7 @@
     }
 
     print("Last login: " + new Date().toString().slice(0, 24) + " on ttys001", "term__dim");
-    print(COURSE.code + " · " + COURSE.title + ". Type help to start.");
+    print(COURSE.code + " · " + COURSE.title + ". Type help to start, or ai to design with AI.");
 
     input.addEventListener("keydown", function (ev) {
       if (ev.key === "Enter") {

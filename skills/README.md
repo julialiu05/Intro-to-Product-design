@@ -39,6 +39,25 @@ It will ask you eight questions before it builds anything. Answer them from your
 research and your wireframes, and have two or three screenshots of the real
 app ready.
 
+## case-study-page
+
+Builds your Project 1 case study website from your own material, in the nine
+parts the project asks for, with video of your prototype instead of static
+screens. It never invents research, quotes or numbers: if something is
+missing, it leaves a visible gap and tells you. Install it the same way as
+the one above, and start it with "Use the case-study-page skill."
+
+## No paid plan?
+
+Claude Code needs a paid Claude plan. Free options that read these skills:
+
+- **Codex**, through ChatGPT Edu, which every Berkeley student can get free
+  through CalNet. Run `codex` and sign in with your Berkeley account.
+- **Any AI chat**, including Claude's free plan: paste the contents of a
+  `SKILL.md` first, then ask it to build your screens as an HTML artifact.
+
+The course site's Terminal has the full list: type `free`.
+
 ### Before you use Figma with it
 
 Connecting Figma is optional. On Figma's free Starter plan the connection

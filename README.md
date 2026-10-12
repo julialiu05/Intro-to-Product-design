@@ -326,8 +326,10 @@ assignment: {
 
 **Terminal** (🖥️) is the course as a command line, and reads `course.js` like
 everything else. `help` lists the commands: `ls` for the weeks, `open 4` for a
-week's slides, `readings 4`, `due`, `readme`, `staff`, and `skills`, which
-prints the one line that installs the class skill for Claude Code. Draft weeks
+week's slides, `readings 4`, `due`, `readme`, `staff`, and the AI commands: `ai` to start, `setup` for Claude
+Code, `free` for free options (including ChatGPT Edu and Google AI Pro, which
+every Berkeley student has), `policy`, and `skills`, which prints the one line
+that installs the class skills. Plans change, so re-check `free` each term. Draft weeks
 are listed but will not open. To add a command, add an entry to `COMMANDS` in
 `apps.js`.
 

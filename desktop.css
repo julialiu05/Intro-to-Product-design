@@ -911,6 +911,7 @@ body {
   cursor: text;
 }
 .term__row { white-space: pre-wrap; overflow-wrap: anywhere; }
+.term__row:empty { height: 1.5em; }   /* a blank line between groups */
 .term__echo { color: #ffffff; }
 .term__dim { color: #8e8e93; }
 .term__line { display: flex; gap: .6em; align-items: baseline; }

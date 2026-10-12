@@ -3056,6 +3056,14 @@ const COURSE = {
           note: "Where the iOS UI kit for Figma lives. Download it before you start building.",
         },
         {
+          title: "design-system-screens",
+          author: "DES 198",
+          kind: "Skill",
+          optional: true,
+          url: "https://github.com/julialiu05/Intro-to-Product-design/tree/main/skills",
+          note: "Optional, for building with AI. Instructions for your AI agent: it pulls your app's design system into CSS and builds your screens with it, asking you before every design choice. Install steps in the README.",
+        },
+        {
           title: "Guide to auto layout",
           author: "Figma Help Center",
           kind: "Post",
@@ -3129,6 +3137,9 @@ const COURSE = {
          - Page Laubheimer, NN/g, on wireflows.
          - Figma Help Center, Guide to auto layout.
          - The course's own Using AI policy, quoted from this file.
+         - skills/design-system-screens/SKILL.md, the class skill for
+           students building with AI. Its Figma MCP details are from
+           Figma's mcp-server-guide and tools reference.
          Image credits in img/w5/_credits.json.
          ------------------------------------------------------------------ */
       slides: [
@@ -3542,6 +3553,38 @@ const COURSE = {
           layout: "statement",
           text: "Using AI: say where you used it.",
           sub: "“A prototype generated in one prompt with no account of the decisions inside it is not an assignment, it is a screenshot.” Course policy",
+        },
+        /* The skill lives in this repo at skills/design-system-screens,
+           with install steps in skills/README.md. */
+        {
+          layout: "statement",
+          text: "Building with AI? Use the class skill.",
+          sub: "Instructions you give your AI agent so it builds with your app's real design system.",
+        },
+        {
+          layout: "points",
+          heading: "What it does",
+          points: [
+            "Pulls the design system into CSS: real colours, type, spacing.",
+            "Builds only the components your flow needs.",
+            "One HTML file per screen, linked into a prototype.",
+            "Sends it into Figma, if you want.",
+            "Asks you before every design choice.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Its log is your Design decisions section.",
+          sub: "decisions.md: what you asked for, what it made, what you kept, and why.",
+        },
+        {
+          layout: "points",
+          heading: "Get it",
+          points: [
+            "The skills folder in the course repo on GitHub.",
+            "Claude Code: put it in .claude/skills/ in your project.",
+            "Then say: “Use the design-system-screens skill.”",
+          ],
         },
         {
           layout: "columns",

@@ -38,5 +38,13 @@
     "license": "Third-party lecture image, credited in caption",
     "source": "https://developer.apple.com/design/human-interface-guidelines/toggles",
     "bytes": 16389
+  },
+  {
+    "file": "img/w5/ios-beach-background.jpg",
+    "title": "iOS 11 default wallpaper",
+    "creator": "Apple",
+    "license": "Third-party lecture image, deck background",
+    "source": "Supplied by Julia Liu; watermark cropped",
+    "bytes": 458441
   }
 ]

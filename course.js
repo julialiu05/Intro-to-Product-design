@@ -3027,6 +3027,8 @@ const COURSE = {
       date: "Oct 15",
       title: "From ideas to screens",
       status: "draft",
+      /* The iOS 11 beach wallpaper, Apple, for a week built on iPhone. */
+      background: "img/w5/ios-beach-background.jpg",
       summary: "",
       agenda: [
         "Critique of your research plans",

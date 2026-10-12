@@ -3033,8 +3033,8 @@ const COURSE = {
         "From findings to ideas",
         "Choosing one",
         "Flow and wireframe",
-        "Example: a feature for Duolingo",
-        "Find a design system",
+        "Design for iPhone",
+        "Example: a feature for Reminders",
         "Start building",
         "Figma basics",
         "Make it clickable",
@@ -3044,11 +3044,18 @@ const COURSE = {
       ],
       readings: [
         {
-          title: "Duolingo Feature",
-          author: "Megan Archer",
+          title: "Human Interface Guidelines",
+          author: "Apple",
           kind: "Post",
-          url: "https://www.meganarcherux.com/ux-work/duolingo-feature",
-          note: "The case study from class. A feature added to an app she doesn't work for, inside its design system, then tested and changed. The shape your Project 1 page is going for.",
+          url: "https://developer.apple.com/design/human-interface-guidelines/",
+          note: "Apple's design system. Read the page for every component your feature uses before you draw it.",
+        },
+        {
+          title: "Apple Design Resources",
+          author: "Apple",
+          kind: "Post",
+          url: "https://developer.apple.com/design/resources/",
+          note: "Where the iOS UI kit for Figma lives. Download it before you start building.",
         },
         {
           title: "Using “How Might We” Questions to Ideate on the Right Problems",
@@ -3086,6 +3093,14 @@ const COURSE = {
           optional: true,
           url: "https://www.nngroup.com/articles/design-systems-101/",
           note: "Optional. What a design system is, and its three parts.",
+        },
+        {
+          title: "Duolingo Feature",
+          author: "Megan Archer",
+          kind: "Post",
+          optional: true,
+          url: "https://www.meganarcherux.com/ux-work/duolingo-feature",
+          note: "Optional. A real case study in the shape of Project 1: a feature added to an app she doesn't work for, built inside its design system, tested and changed.",
         },
         {
           title: "The Component Gallery",
@@ -3127,9 +3142,10 @@ const COURSE = {
            prototypes answer them. Paraphrased, not quoted.
          - Figma Help Center, Guide to auto layout.
          - Apple Design Resources: Apple's iOS UI kit for Figma.
-         - Megan Archer, "Duolingo Feature" (2023), the worked case study.
-           Her wording is kept on every slide that quotes her. Images are
-           hers, from meganarcherux.com, credited in the captions.
+         - Apple Human Interface Guidelines and Apple Design Resources:
+           the component definitions, quoted word for word, and images.
+         - Apple Support, "Share and assign reminders on your iPhone or
+           iPad", for what Reminders already does.
          - Therese Fessenden, NN/g, Design Systems 101: the definition and
            the three parts.
          - Iain Bean, The Component Gallery.
@@ -3325,178 +3341,210 @@ const COURSE = {
           right: { label: "Prototype", body: "Slower, more detailed.\nKept and tested.\nAnswers a question." },
         },
 
-        /* ========== 05 EXAMPLE CASE STUDY ========== */
-        /* Megan Archer's Duolingo feature, 2023. Picked because it is
-           Project 1 done once already: one narrow user and problem, a
-           feature added to an app she doesn't work for, built inside its
-           design system, tested and changed. Quoted text is hers. */
-        { layout: "section", text: "Example: a feature for Duolingo", num: "05" },
-        {
-          layout: "statement",
-          text: "Adding a feature to the Duolingo app, allowing users to favorite especially important words.",
-          sub: "Megan Archer, 2023. She doesn't work for Duolingo. It's a project like yours.",
-        },
-        {
-          layout: "two",
-          heading: "Narrow user, narrow problem",
-          left: { label: "Who", body: "People using Duolingo to get ready for a trip." },
-          right: { label: "What's missing", body: "“Targeted review.”\nThey want to review “the words that will be most useful to them on their journey.”" },
-        },
-        {
-          layout: "points",
-          heading: "Research",
-          points: [
-            "Four interviews and a survey: 11 Duolingo users.",
-            "Competitive analysis: Memrise and Busuu.",
-            "A persona and an empathy map, from the interviews.",
-          ],
-        },
-        {
-          layout: "statement",
-          text: "“Busuu already features a review tab containing favorited words from previous lessons.”",
-          sub: "“This shows that there is a demand for this feature.” A competitor doing it is evidence, not a reason to stop.",
-        },
-        {
-          layout: "figure",
-          src: "img/w5/duolingo/persona.png",
-          caption: "Persona: Becca Gilmore, “a single young professional with a passion for travel.” Megan Archer",
-        },
-        {
-          layout: "figure",
-          src: "img/w5/duolingo/user-flow.png",
-          caption: "User flow: her three tasks combined with the existing Duolingo app flow. Megan Archer",
-        },
-        {
-          layout: "statement",
-          text: "She didn't redraw Duolingo.",
-          sub: "“For the lesson flow, I used screenshots as the base, since just the star icon and toast were being added to that screen.” Megan Archer",
-        },
-        {
-          layout: "gallery",
-          heading: "Wireframe, then design",
-          items: [
-            { src: "img/w5/duolingo/wire-review.png", label: "Review tab", note: "wireframe" },
-            { src: "img/w5/duolingo/final-review.png", label: "Review tab", note: "final" },
-            { src: "img/w5/duolingo/wire-favorites.png", label: "Favorite words", note: "wireframe" },
-            { src: "img/w5/duolingo/final-favorites.png", label: "Favorite words", note: "final" },
-          ],
-          caption: "Mid-fidelity wireframes in grey, then the same screens in Duolingo's style. Megan Archer",
-        },
-        {
-          layout: "quote",
-          quote: "I followed along as closely as possible with Duolingo's existing branding and design system while creating the design.",
-          attribution: "Megan Archer",
-        },
-        {
-          layout: "visual",
-          side: "right",
-          heading: "What she borrowed",
-          points: [
-            "Duo the owl at the top of every page, as Duolingo does.",
-            "Green, their secondary button colour, for actions and toasts.",
-            "Their lesson screens, as screenshots. She only added a star.",
-          ],
-          src: "img/w5/duolingo/final-lesson.png",
-          caption: "Favouriting a word mid-lesson. Megan Archer",
-        },
-        {
-          layout: "points",
-          heading: "Then she tested it",
-          points: [
-            "Unmoderated tests with 8 participants, using Maze.",
-            "Add a favorite word from the lesson flow.",
-            "Navigate to the favorite words page and add a word.",
-            "Navigate to the favorite words page and remove a word.",
-          ],
-        },
-        {
-          layout: "statement",
-          text: "“5/8 participants attempted to click to add or remove a word without clicking the edit button first.”",
-          sub: "Megan Archer",
-        },
-        {
-          layout: "figure",
-          src: "img/w5/duolingo/iteration.png",
-          caption: "Before and after. She removed the edit button, let the search bar add words, and made the remove button red, “as users expect it to be.” Megan Archer",
-        },
-        {
-          layout: "site",
-          heading: "The whole case study",
-          label: "Duolingo Feature",
-          src: "https://www.meganarcherux.com/ux-work/duolingo-feature",
-          body: "Scroll it. Research, define, ideate, design, test: the order you're working in.",
-        },
-        {
-          layout: "points",
-          heading: "What to take from it",
-          points: [
-            "One user, one problem, one feature.",
-            "Start from screenshots of the real app.",
-            "Match its design system.",
-            "Test it, and show what you changed.",
-          ],
-        },
-
-        /* ========== 06 FIND A DESIGN SYSTEM ========== */
-        /* Definition and the three parts: Therese Fessenden, NN/g, Design
-           Systems 101. The descriptions under each part are ours. */
-        { layout: "section", text: "Find a design system", num: "06" },
+        /* ========== 05 DESIGN SYSTEM: IPHONE ========== */
+        /* Definition and three parts: Therese Fessenden, NN/g, Design
+           Systems 101. Apple's side: Apple Design Resources ("Design apps
+           accurately and quickly using official Apple design templates...")
+           and the Human Interface Guidelines, whose Foundations, Components
+           and Patterns sections line up with NN/g's three parts. Component
+           definitions are the HIG's own first lines, word for word. Images
+           are from the HIG, credited in img/w5/_credits.json. */
+        { layout: "section", text: "Design for iPhone", num: "05" },
         {
           layout: "quote",
           quote: "A design system is a complete set of standards intended to manage design at scale using reusable components and patterns.",
           attribution: "Therese Fessenden, Nielsen Norman Group",
         },
         {
+          layout: "statement",
+          text: "Apple publishes theirs.",
+          sub: "The Human Interface Guidelines, and an iOS UI kit for Figma. Free.",
+        },
+        {
           layout: "columns",
-          heading: "Three parts",
+          heading: "Three parts, and where Apple keeps them",
           items: [
-            { label: "Style guide", body: "How it looks.", list: ["Colours, type, spacing, icons"] },
-            { label: "Component library", body: "The pieces.", list: ["Buttons, lists, toasts, tab bars"] },
-            { label: "Pattern library", body: "How pieces go together.", list: ["A search, a form, an empty state"] },
+            { label: "Style guide", body: "How it looks.", list: ["HIG: Foundations", "Colour, typography, layout, SF Symbols"] },
+            { label: "Component library", body: "The pieces.", list: ["HIG: Components", "The iOS UI kit for Figma"] },
+            { label: "Pattern library", body: "How pieces go together.", list: ["HIG: Patterns", "Searching, onboarding, loading, settings"] },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Get the kit",
+          points: [
+            "developer.apple.com/design/resources",
+            "Download the iOS UI kit for Figma.",
+            "Install SF Symbols and SF Pro. The kit uses both.",
+            "Copy the parts you need into your own file.",
           ],
         },
         {
           layout: "statement",
-          text: "Your app already has a design system.",
-          sub: "Your job is to find it, not invent one.",
-        },
-        {
-          layout: "columns",
-          heading: "Where to look",
-          items: [
-            { label: "The company's own", body: "Some publish theirs.", list: ["Canvas, so bCourses: Instructure UI", "Shopify: Polaris", "GitHub: Primer", "IBM: Carbon"] },
-            { label: "The platform", body: "What the app is built on.", list: ["Apple: Human Interface Guidelines, and an iOS UI kit for Figma", "Google: Material 3, and a Figma kit"] },
-            { label: "Collections", body: "Many systems side by side.", list: ["The Component Gallery", "Figma Community: search the app's name"] },
-          ],
-        },
-        {
-          layout: "site",
-          heading: "One component, every design system",
-          label: "The Component Gallery",
-          src: "https://component.gallery/",
-          body: "Search “toast” or “empty state” and see how everyone else does it.",
-        },
-        {
-          layout: "points",
-          heading: "If your app doesn't publish one",
-          points: [
-            "Screenshot the screens around your feature.",
-            "Pick the colours with the eyedropper. Save them as styles.",
-            "Find the font. Note the sizes.",
-            "Rebuild only the components your feature needs.",
-          ],
+          text: "Even if your app isn't Apple's.",
+          sub: "Instagram and bCourses on iPhone still use iOS parts: the status bar, tab bar, sheets, keyboard and alerts.",
         },
         {
           layout: "two",
-          heading: "For your feature",
-          left: { label: "Reuse first", body: "A button that's already there.\nA list that's already there." },
-          right: { label: "Make new only when nothing fits", body: "In the same style.\nDuolingo's star icon and toast." },
+          heading: "Start from the kit, then match the app",
+          left: { label: "From the kit", body: "Status bar.\nKeyboard.\nSheets, alerts, lists." },
+          right: { label: "From the app", body: "Its colours.\nIts icons.\nIts own buttons and cards." },
+        },
+        {
+          layout: "points",
+          heading: "Not on iPhone?",
+          points: [
+            "Android: Google's Material 3, also with a Figma kit.",
+            "bCourses on the web: Canvas publishes Instructure UI.",
+            "Anything else: screenshot it and rebuild only the parts you need.",
+          ],
         },
         {
           layout: "exercise",
           heading: "In your group",
-          prompt: "Find your app's design system, or the kit for its platform. Put the link at the top of your Figma file.",
+          prompt: "Download the iOS UI kit. Put it in your Figma file, next to screenshots of your app.",
           time: "5 min",
+        },
+
+        /* ========== 06 EXAMPLE ========== */
+        /* A worked example on an Apple app, so every part of it is in the
+           kit. Reminders already lets you share a list and assign a
+           reminder to someone; reassigning is done by hand (Apple Support,
+           "Share and assign reminders on your iPhone or iPad"). The
+           roommates, research and feature are made up for teaching, the
+           same way Lena was. */
+        { layout: "section", text: "Example: a feature for Reminders", num: "06" },
+        {
+          layout: "statement",
+          text: "Example: Reminders, for roommates.",
+          sub: "Made up for teaching, the way Lena was. Every part of it comes from Apple's kit.",
+        },
+        {
+          layout: "two",
+          heading: "Narrow user, narrow problem",
+          left: { label: "Who", body: "Students sharing an apartment.\nThree to five people." },
+          right: { label: "Problem", body: "Chores repeat every week.\nNobody remembers whose turn it is." },
+        },
+        {
+          layout: "points",
+          heading: "Example research",
+          points: [
+            "Five interviews: “Tell me about the last time the trash didn't go out.”",
+            "Workarounds: a group chat, a whiteboard, a spreadsheet nobody opens.",
+            "What they do instead: whoever cares most does it.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "What Reminders already does",
+          left: { label: "Already there", body: "Share a list.\nAssign a reminder to someone." },
+          right: { label: "Still by hand", body: "When it's done, someone has to reassign it.\nSo nobody does." },
+        },
+        {
+          layout: "statement",
+          text: "How might we help roommates know whose turn it is, without anyone keeping track?",
+        },
+        {
+          layout: "statement",
+          text: "The feature: take turns.",
+          sub: "When a repeating reminder is done, it's assigned to the next person.",
+        },
+        {
+          layout: "statement",
+          text: "Shared list → New reminder → Repeat weekly → Take turns → Done",
+          sub: "The flow. Five steps, one of them new.",
+        },
+        {
+          layout: "statement",
+          text: "Now build each step from the kit.",
+          sub: "Look up each part in the HIG before you draw anything.",
+        },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "The shared list: a list",
+          body: "“Lists and tables present data in one or more columns of rows.” Apple HIG",
+          points: [
+            "One row per chore.",
+            "Who's next, in grey on the right.",
+          ],
+          src: "img/w5/apple/disclosure-indicator-in-list.png",
+          caption: "A grouped list. Apple Human Interface Guidelines",
+        },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "New reminder: a sheet",
+          body: "“A sheet helps people perform a scoped task that’s closely related to their current context.” Apple HIG",
+          points: [
+            "Cancel on the left, Done on the right.",
+            "Swipe down to dismiss.",
+          ],
+          src: "img/w5/apple/sheets-buttons-placement-cancel-done.png",
+          caption: "Cancel and Done in a sheet. Apple Human Interface Guidelines",
+        },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "Take turns: a toggle",
+          body: "“A toggle lets people choose between a pair of opposing states, like on and off, using a different appearance to indicate each state.” Apple HIG",
+          points: [
+            "One new row in the sheet.",
+            "Turn it on, then pick the order.",
+          ],
+          src: "img/w5/apple/toggles-ios-default-color.png",
+          caption: "Switches in list rows. Apple Human Interface Guidelines",
+        },
+        {
+          layout: "columns",
+          heading: "The whole feature, in parts",
+          items: [
+            { label: "List", body: "From the kit.", list: ["The shared list", "Who goes in what order"] },
+            { label: "Sheet", body: "From the kit.", list: ["New reminder", "Cancel and Done"] },
+            { label: "Toggle", body: "From the kit.", list: ["Take turns"] },
+            { label: "New", body: "Just one thing.", list: ["The words: “Take turns”, “Next: Sam”"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "The new part is small.",
+          sub: "One row and two words. The rest already exists, so it looks like Apple shipped it.",
+        },
+        {
+          layout: "points",
+          heading: "Check the HIG for each part",
+          points: [
+            "When to use it, and when not to.",
+            "Where its buttons go.",
+            "How it looks in dark mode.",
+            "What happens with bigger text.",
+          ],
+        },
+        {
+          layout: "site",
+          heading: "The Human Interface Guidelines",
+          label: "Lists and tables",
+          src: "https://developer.apple.com/design/human-interface-guidelines/lists-and-tables",
+          body: "Scroll it. Every component has a page like this: what it's for, best practices, and each platform.",
+        },
+        {
+          layout: "points",
+          heading: "Then test it",
+          points: [
+            "“Make taking out the trash a weekly chore that rotates between three people.”",
+            "“Find out whose turn it is this week.”",
+            "Watch whether they find the toggle without help.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "What to take from it",
+          points: [
+            "One user, one problem, one feature.",
+            "Find what the app already does.",
+            "Build from the kit. Make new only what's missing.",
+            "Look up each part before you draw it.",
+          ],
         },
 
         /* ========== 07 START BUILDING ========== */
@@ -3547,7 +3595,7 @@ const COURSE = {
           layout: "points",
           heading: "Five things to learn first",
           points: [
-            "Frames: one per screen, set to a phone size.",
+            "Frames: one per screen, set to an iPhone size.",
             "Auto layout: things that stack and space themselves.",
             "Components: build a button once, use it everywhere.",
             "Styles: name your colours and text sizes.",

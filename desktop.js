@@ -898,6 +898,10 @@
     el: el,
     glyph: glyph,
     course: COURSE,
+    /* For apps that open the desktop's own windows, like the Terminal. */
+    openDeck: openDeck,
+    openReading: openReading,
+    openReadMe: openReadMe,
   };
 
   /* -------------------------------------------------------------- start --- */

@@ -162,6 +162,183 @@
   });
 
   /* ==========================================================================
+     TERMINAL
+     The course as a command line. It reads the same course.js as everything
+     else, so `ls` and `due` stay right as weeks are posted. Draft weeks are
+     listed but will not open, the same as their greyed-out folders. `skills`
+     prints the one line that installs the class skill for Claude Code.
+     ========================================================================== */
+
+  var REPO = "https://github.com/julialiu05/Intro-to-Product-design";
+  var pad2 = function (n) { return String(n).padStart(2, "0"); };
+
+  function shownWeeks() {
+    var n = COURSE.DESKTOP_WEEKS || (COURSE.weeks || []).length;
+    return (COURSE.weeks || []).filter(function (w) { return w.week <= n; });
+  }
+
+  function findWeek(arg) {
+    var n = parseInt(String(arg || "").replace(/\D/g, ""), 10);
+    if (!n) return { err: "usage: give a week number, like 4" };
+    var wk = (COURSE.weeks || []).filter(function (w) { return w.week === n; })[0];
+    if (!wk) return { err: "week " + pad2(n) + ": no such week" };
+    if (wk.status === "draft" || n > (COURSE.DESKTOP_WEEKS || 99)) return { err: "week " + pad2(n) + ": not posted yet" };
+    return { wk: wk };
+  }
+
+  var COMMANDS = {
+    help: {
+      about: "list commands",
+      run: function () {
+        return Object.keys(COMMANDS).map(function (k) {
+          return "  " + k.padEnd(10) + COMMANDS[k].about;
+        });
+      },
+    },
+    ls: {
+      about: "list the weeks",
+      run: function () {
+        return shownWeeks().map(function (w) {
+          var tag = w.status === "draft" ? "  (not posted)" : w.week === COURSE.CURRENT_WEEK ? "  ← this week" : "";
+          return "Week " + pad2(w.week) + "  " + w.title + tag;
+        });
+      },
+    },
+    open: {
+      about: "open a week's slides: open 5",
+      run: function (arg) {
+        var f = findWeek(arg || COURSE.CURRENT_WEEK);
+        if (f.err) return [f.err];
+        Desktop.openDeck(f.wk.week);
+        return ["opening Week " + pad2(f.wk.week) + " · " + f.wk.title];
+      },
+    },
+    readings: {
+      about: "open a week's reading list: readings 5",
+      run: function (arg) {
+        var f = findWeek(arg || COURSE.CURRENT_WEEK);
+        if (f.err) return [f.err];
+        Desktop.openReading(f.wk.week);
+        return ["opening Some things to look at.md"];
+      },
+    },
+    due: {
+      about: "what's due, and when",
+      run: function () {
+        var out = shownWeeks().filter(function (w) {
+          return w.status !== "draft" && w.assignment && w.assignment.due;
+        }).map(function (w) {
+          return pad2(w.week) + "  " + w.assignment.title + "  ·  " + w.assignment.due;
+        });
+        return out.length ? out : ["nothing due"];
+      },
+    },
+    readme: {
+      about: "open the Read Me",
+      run: function () { Desktop.openReadMe(); return ["opening Read Me"]; },
+    },
+    staff: {
+      about: "who teaches this",
+      run: function () {
+        return (COURSE.facilitators || []).map(function (p) {
+          return p.name.padEnd(12) + p.role.padEnd(13) + p.email;
+        });
+      },
+    },
+    skills: {
+      about: "install the class skill for Claude Code",
+      run: function () {
+        return [
+          "design-system-screens: builds your screens from your app's design system.",
+          "",
+          "Paste this into your own Terminal to install it for Claude Code:",
+          "",
+          "  git clone --depth 1 " + REPO + ".git /tmp/des198 && mkdir -p ~/.claude/skills && cp -R /tmp/des198/skills/design-system-screens ~/.claude/skills/",
+          "",
+          "Then in Claude Code: “Use the design-system-screens skill.”",
+          "More: " + REPO + "/tree/main/skills",
+        ];
+      },
+    },
+    date: {
+      about: "today's date",
+      run: function () { return [new Date().toString().replace(/ GMT.*$/, "")]; },
+    },
+    clear: { about: "clear the screen", run: function () { return null; } },
+  };
+
+  function buildTerminal(body) {
+    var wrap = node("div", "term");
+    var out = node("div", "term__out");
+    var line = node("label", "term__line");
+    var prompt = node("span", "term__prompt", "student@des198 ~ %");
+    var input = node("input", "term__in");
+    input.type = "text";
+    input.spellcheck = false;
+    input.autocomplete = "off";
+    input.setAttribute("autocapitalize", "off");
+    input.setAttribute("aria-label", "Terminal command");
+    line.appendChild(prompt);
+    line.appendChild(input);
+    wrap.appendChild(out);
+    wrap.appendChild(line);
+    body.appendChild(wrap);
+
+    var history = [], back = 0;
+
+    function print(text, cls) {
+      out.appendChild(node("div", "term__row" + (cls ? " " + cls : ""), text));
+    }
+
+    function run(raw) {
+      var cmd = raw.trim();
+      print(prompt.textContent + " " + raw, "term__echo");
+      if (!cmd) return;
+      history.push(cmd); back = history.length;
+      var parts = cmd.split(/\s+/), name = parts[0].toLowerCase();
+      if (name === "clear") { out.textContent = ""; return; }
+      if (name === "cd") { print("there's only one folder here. try ls"); return; }
+      if (name === "sudo") { print("nice try"); return; }
+      var c = COMMANDS[name];
+      if (!c) { print("zsh: command not found: " + parts[0]); print("type help to see what works", "term__dim"); return; }
+      (c.run(parts.slice(1).join(" ")) || []).forEach(function (r) { print(r); });
+    }
+
+    print("Last login: " + new Date().toString().slice(0, 24) + " on ttys001", "term__dim");
+    print(COURSE.code + " · " + COURSE.title + ". Type help to start.");
+
+    input.addEventListener("keydown", function (ev) {
+      if (ev.key === "Enter") {
+        run(input.value); input.value = "";
+      } else if (ev.key === "ArrowUp") {
+        if (back > 0) input.value = history[--back];
+        ev.preventDefault();
+      } else if (ev.key === "ArrowDown") {
+        back = Math.min(history.length, back + 1);
+        input.value = history[back] || "";
+        ev.preventDefault();
+      } else if (ev.key === "Tab") {
+        var hits = Object.keys(COMMANDS).filter(function (k) { return k.indexOf(input.value) === 0; });
+        if (input.value && hits.length === 1) input.value = hits[0] + " ";
+        ev.preventDefault();
+      } else if (ev.key === "l" && ev.ctrlKey) {
+        out.textContent = ""; ev.preventDefault();
+      }
+      wrap.scrollTop = wrap.scrollHeight;
+    });
+    /* click anywhere in the window to type, unless you are selecting text */
+    wrap.addEventListener("mouseup", function () {
+      if (!String(window.getSelection())) input.focus();
+    });
+    setTimeout(function () { input.focus(); }, 0);
+  }
+
+  Desktop.add({
+    id: "terminal", ch: "⌨️", label: "Terminal", w: 620, h: 400,
+    build: buildTerminal,
+  });
+
+  /* ==========================================================================
      2048
      Arrow keys or swipe. The whole game is the slide function: collapse a
      row to one side, merge equal neighbours once, pad it back out.

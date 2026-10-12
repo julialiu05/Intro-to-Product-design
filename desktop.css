@@ -897,6 +897,32 @@ body {
 .games__text strong { font-size: 13px; font-weight: 590; }
 .games__text span { font-size: 12px; color: var(--ink-soft); }
 
+/* the Terminal: the one window that stays dark in light mode, because that
+   is what a terminal looks like. Same inner radius as the other apps. */
+.term {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  padding: 10px 12px;
+  background: rgba(24, 24, 27, .94);
+  color: #e8e8ed;
+  border-radius: var(--r-in);
+  font: 12.5px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+  overflow: auto;
+  cursor: text;
+}
+.term__row { white-space: pre-wrap; overflow-wrap: anywhere; }
+.term__echo { color: #ffffff; }
+.term__dim { color: #8e8e93; }
+.term__line { display: flex; gap: .6em; align-items: baseline; }
+.term__prompt { color: #30d158; flex: none; }
+.term__in {
+  flex: 1; min-width: 0;
+  appearance: none; -webkit-appearance: none;
+  border: 0; outline: 0; padding: 0;
+  background: transparent; color: inherit; font: inherit;
+  caret-color: #e8e8ed;
+}
+
 /* a person's one-line bio, under their name in the Notes app */
 .doc dd .bio {
   display: block;

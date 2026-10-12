@@ -35,8 +35,9 @@ Open your agent in an empty folder for your project and say something like:
 > Use the design-system-screens skill. My app is Reminders, the feature lets
 > roommates take turns on chores, and the design system is Apple's iOS.
 
-It will ask you six questions before it builds anything. Answer them from your
-research and your wireframes.
+It will ask you eight questions before it builds anything. Answer them from your
+research and your wireframes, and have two or three screenshots of the real
+app ready.
 
 ### Before you use Figma with it
 

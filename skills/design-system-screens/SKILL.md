@@ -19,9 +19,12 @@ optional last step.
 
 The student is the designer. You are the fastest pair of hands in the room.
 
-- **Ask before you decide.** When there is a real design choice (layout,
-  wording, which component, what happens on error), offer two or three options
-  in a sentence each and let the student pick. Do not quietly choose for them.
+- **Ask before you decide, in batches.** When there is a real design choice
+  (layout, wording, which component, what happens on error), offer two or
+  three options in a sentence each and let the student pick. Do not quietly
+  choose for them. But do not stop for every choice: save them up and ask at
+  three points only. After the questions below, after the specimen page
+  (Step 2), and after the versions of the key screen (Step 3).
 - **Keep a decision log.** Append to `decisions.md` every time a choice is
   made: what was asked, what you made, what the student kept or changed, and
   why. The course policy on AI is: say where you used it. "A prototype
@@ -46,6 +49,10 @@ Ask these in one message, then wait for the answers.
    help them find out.)
 6. Do they have wireframes or sketches? Ask for a photo or a Figma link. Build
    from their layout, not a new one.
+7. Send two or three screenshots of the real app, around where the feature
+   goes. You will copy sizes from them and compare against them at the end.
+8. Which version of the system should it match? On iPhone, the iOS version on
+   their own phone.
 
 ## Step 1: get the design system
 
@@ -84,6 +91,19 @@ the flow needs. Quote what you take, with the URL.
 Numbers from the HIG worth knowing on iPhone: body text defaults to 17 pt and
 should never go below 11 pt. Controls default to 44 × 44 pt and should never
 go below 28 × 28 pt.
+
+What the HIG does and does not give you. It gives the type scale, the system
+colour values, minimum sizes and contrast rules. It does not give spacing,
+corner radii, component sizes, or the values of the label and background
+colours. Those live in Apple's iOS UI kit for Figma (source C). Without the
+kit, take them from the student's screenshots (source D) and mark each one
+estimated.
+
+Reading the HIG as an agent: the site is rendered by JavaScript, so fetch its
+JSON instead, at
+`https://developer.apple.com/tutorials/data/design/human-interface-guidelines/<page>.json`
+(for example `color`, `typography`, `lists-and-tables`, `sheets`). The system
+colour RGB values are in the alt text of the swatch images on the Color page.
 
 ### C. A Figma file or library
 
@@ -140,7 +160,8 @@ each group with its source.
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* only if the system defines dark values; copy them, don't invent them */
+    /* copy the system's dark values where it publishes them; where it
+       doesn't, estimate from a dark-mode screenshot and mark it */
   }
 }
 ```
@@ -160,9 +181,14 @@ those, and nothing else.
 - Use the design system's own names for things: "List row", "Sheet",
   "Toggle", not names you made up.
 - Use tokens only. No raw colours or sizes in components, except `0` and
-  `1px` hairlines.
-- Check each component against its page in the design system's docs before
-  moving on. Where buttons go, how big, what it looks like in dark mode.
+  `1px` hairlines. Icon sizes and stroke widths are tokens too.
+- Icons: use the system's own icon set if it is published for the web. Apple's
+  SF Symbols are not, so on iPhone draw simple SVG copies and say so in
+  `SOURCES.md`.
+- Check each component before moving on. Placement and behaviour against its
+  page in the design system's docs: where buttons go, what is disabled when.
+  Size and look against the student's screenshots or the UI kit, because docs
+  pages are usually rules, not measurements.
 - If the feature needs something the system does not have, build it last,
   from the system's tokens, so it looks like it was always there. Tell the
   student it is new, because that is a design decision for their log.
@@ -174,29 +200,33 @@ cheaper to fix a button once than on every screen.
 
 - One file per screen in `screens/`, numbered in flow order:
   `01-shared-list.html`, `02-new-reminder.html`.
-- Each screen is a 393 × 852 frame, the size of a recent standard iPhone in
-  points, centred on a neutral background. Match it to the frame size the
-  student uses in Figma.
-- Leave room for the status bar at the top and the home indicator at the
-  bottom. Keep content out of both.
-- Start from the student's wireframe. Get the layout right in greyscale
-  first, then apply the tokens.
-- **Real content.** Real names, real numbers, a name long enough to wrap. Take
-  it from their research when you can. Never lorem ipsum.
+- Each screen is one iPhone-sized frame, centred on a neutral background. Use
+  the same size as the student's Figma frame, or their own phone. If they do
+  not know, use 393 × 852.
+- Draw the status bar (time, signal, battery) at the top and the home
+  indicator at the bottom, so it reads as a phone. Keep content out of both.
+- Start from the student's wireframe, or from their screenshots if there is no
+  wireframe.
+- **Real content.** Real names, real numbers, and at least one title long
+  enough to wrap. Take it from their research. If there is nothing long
+  enough, ask for one. Never invent people, and never lorem ipsum.
 - One primary action per screen. It should be the most obvious thing on it.
 - Build the happy path first. Then add the states people forget, where the
   flow needs them: empty, loading, error, done.
-- **Explorations.** For the key screen, the student may want versions. Make
-  them as `03-key-a.html`, `03-key-b.html`, `03-key-c.html` and put them side
-  by side on the index page. Keep the ones they do not pick: they belong in
-  the Explorations section of the case study.
+- **Explorations.** For the key screen, the student may want versions. Name
+  them after the key screen's number, for example `02-new-reminder-a.html`,
+  `02-new-reminder-b.html`, and put them side by side on the index page. Ask
+  which one to use, and link only that one into the flow. Keep the others:
+  they belong in the Explorations section of the case study.
 
 ## Step 4: link them into a prototype
 
 - Link screens with plain `<a href>` on the buttons and rows that move the
   flow forward, and a way back on every screen.
 - Make `index.html`: every screen as a thumbnail, in flow order, with its
-  name, and a link to start the prototype at the first screen.
+  name, the versions of the key screen in their own row, and a link to start
+  the prototype at the first screen. Do not link to `decisions.md` from it:
+  browsers show Markdown as raw text.
 - To open it: `python3 -m http.server 8000` in the folder, then
   http://localhost:8000. To try it on a phone, open the same address with the
   computer's local IP, on the same wifi.
@@ -225,11 +255,15 @@ Go through this list for every screen, and fix what fails.
 - Every piece of text uses one of the system's text styles.
 - No text below the system's minimum (11 pt on iPhone).
 - Nothing you need to tap is smaller than 44 × 44 (iPhone).
-- Body text has a contrast ratio of at least 4.5:1 against its background.
+- Text has a contrast ratio of at least 4.5:1 against its background. That
+  includes secondary text and text buttons. If the real app's own colours fail
+  (Apple's default blue and grey on white do), leave the existing parts as
+  they are, make sure the new parts pass, and write it down in `decisions.md`.
 - Colour is never the only way something is shown.
 - It still works with the longest real name and the biggest real number.
 - Dark mode, if the system has it.
-- Next to a screenshot of the real app, it looks like the same app.
+- Next to the student's screenshots of the real app, it looks like the same
+  app, on the same iOS version.
 - The feature is the only new thing. Everything else already existed.
 
 ## Step 7: write it down
@@ -258,6 +292,8 @@ design-system/
 screens/
   01-....html
   02-....html
+  02-...-a.html     versions of the key screen
+  02-...-b.html
 index.html
 decisions.md
 ```

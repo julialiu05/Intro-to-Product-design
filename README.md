@@ -15,7 +15,7 @@ server needed. Open `index.html`.
 | `base.css` | Structure: layout, flow, accessibility. |
 | `site.js` | Builds the scroll deck from `course.js`. |
 | `desktop.css`, `desktop.js` | The desktop. Self-contained, reads `course.js`. |
-| `apps.js` | The dock apps: Calendar, and Games (2048, Connect Four). |
+| `apps.js` | The dock apps: Calendar, Terminal, and Games (2048, Connect Four, Chess). |
 | `somethingstolookat.md` | Extra reading, not required. |
 | `img/wall-*.jpg` | The desktop wallpapers, rotated. |
 | `img/w1/` | Week 1 images: portraits and lecture examples. |
@@ -323,6 +323,13 @@ assignment: {
   dueDate: "2026-09-17",        // what the Calendar places. Keep the two in step.
 }
 ```
+
+**Terminal** is the course as a command line, and reads `course.js` like
+everything else. `help` lists the commands: `ls` for the weeks, `open 4` for a
+week's slides, `readings 4`, `due`, `readme`, `staff`, and `skills`, which
+prints the one line that installs the class skill for Claude Code. Draft weeks
+are listed but will not open. To add a command, add an entry to `COMMANDS` in
+`apps.js`.
 
 **Games** is one dock icon holding both, rather than a dock slot each. Two
 controller icons side by side would say nothing about which is which, and this

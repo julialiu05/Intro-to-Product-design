@@ -3025,22 +3025,20 @@ const COURSE = {
     {
       week: 5,
       date: "Oct 15",
-      title: "From research to a prototype",
+      title: "From ideas to screens",
       status: "draft",
       summary: "",
       agenda: [
         "Critique of your research plans",
-        "From findings to ideas",
-        "Choosing one",
-        "Flow and wireframe",
+        "From idea to screens",
         "Design for iPhone",
+        "From wireframe to visual design",
         "Example: a feature for Reminders",
         "Start building",
         "Figma basics",
         "Make it clickable",
         "Prototype only what matters",
         "Build your first screen",
-        "Explorations and first screens, due next week",
       ],
       readings: [
         {
@@ -3048,7 +3046,7 @@ const COURSE = {
           author: "Apple",
           kind: "Post",
           url: "https://developer.apple.com/design/human-interface-guidelines/",
-          note: "Apple's design system. Read the page for every component your feature uses before you draw it.",
+          note: "Apple's design system. Read the page for every component your feature uses before you draw it. Typography, Color and Layout cover the visual design part of class.",
         },
         {
           title: "Apple Design Resources",
@@ -3056,13 +3054,6 @@ const COURSE = {
           kind: "Post",
           url: "https://developer.apple.com/design/resources/",
           note: "Where the iOS UI kit for Figma lives. Download it before you start building.",
-        },
-        {
-          title: "Using “How Might We” Questions to Ideate on the Right Problems",
-          author: "Maria Rosala, Nielsen Norman Group",
-          kind: "Post",
-          url: "https://www.nngroup.com/articles/how-might-we-questions/",
-          note: "Read it before you write your HMW questions. The rule that matters: a good one does not have a solution hiding in it.",
         },
         {
           title: "Guide to auto layout",
@@ -3077,14 +3068,6 @@ const COURSE = {
           kind: "Post",
           url: "https://www.nngroup.com/articles/wireflows/",
           note: "Wireframes and flows on one page. A good shape for the homework.",
-        },
-        {
-          title: "7 Simple Rules of Brainstorming",
-          author: "IDEO U",
-          kind: "Post",
-          optional: true,
-          url: "https://www.ideou.com/blogs/inspiration/7-simple-rules-of-brainstorming",
-          note: "Optional. Short. For when your group sits down to come up with ideas.",
         },
         {
           title: "Design Systems 101",
@@ -3115,40 +3098,36 @@ const COURSE = {
          any week carrying a dueDate onto the Calendar whether or not the week
          is a draft. Set it to "2026-10-21" with the other publish switches. */
       assignment: {
-        title: "Explorations and first screens",
+        title: "Flow, explorations and first screens",
         due: "Wed Oct 21, 11:59pm",
         dueDate: "",
-        body: "As a group: at least three directions for your feature, sketched, and the one you picked and why. A user flow for it. Then the first screens of your prototype, built and linked together.",
+        body: "As a group: a user flow for your feature and wireframes of every screen in it. Three versions of your key screen, and which one you picked and why. Then the first screens of your prototype, designed with your app's design system or the iOS kit, and linked together.",
         deliverable: "One doc per group, every name on it, with a link to your Figma file or code. Photos of paper sketches are fine.",
       },
       materials: [],
       /* ------------------------------------------------------------------
-         Order: critique, then two halves. The first half takes Week 4's
-         research to one chosen idea, kept short because synthesis was
-         taught last week. The second half is making: start building the
-         prototype. Matches the Project 1 checkpoints, Oct 15 explorations
-         and Oct 22 prototype in progress.
+         Order: critique, then making. No ideation: groups arrive with an
+         idea from their research, and this week turns it into screens.
+         Flow and wireframe, then Apple's design system, then wireframe to
+         visual design, then a worked example that uses all of it, then
+         building in Figma. Matches the Project 1 checkpoints, Oct 15
+         explorations and Oct 22 prototype in progress.
 
-         The worked example is still the delivery app and Late-shift Lena
-         from Week 4. The example HMWs, ideas, flow and screens are made up
-         for teaching.
+         The delivery app and Late-shift Lena from Week 4 carry the flow
+         and key screen slides. The Reminders example is made up for
+         teaching too. Both are labelled as examples on the slides.
 
          Sources, with wording kept where a slide quotes them:
-         - Nielsen Norman Group: Rosala on How Might We questions;
-           Laubheimer on wireflows.
-         - IDEO U, 7 Simple Rules of Brainstorming.
-         - Google Ventures design sprint: Crazy 8s, dot voting.
-         - Bill Buxton, Sketching User Experiences: sketches ask questions,
-           prototypes answer them. Paraphrased, not quoted.
-         - Figma Help Center, Guide to auto layout.
-         - Apple Design Resources: Apple's iOS UI kit for Figma.
-         - Apple Human Interface Guidelines and Apple Design Resources:
-           the component definitions, quoted word for word, and images.
+         - Apple Human Interface Guidelines: component definitions quoted
+           word for word; Typography, Color, Layout and Accessibility for
+           the visual design numbers; images.
+         - Apple Design Resources: the iOS UI kit for Figma.
          - Apple Support, "Share and assign reminders on your iPhone or
            iPad", for what Reminders already does.
          - Therese Fessenden, NN/g, Design Systems 101: the definition and
            the three parts.
-         - Iain Bean, The Component Gallery.
+         - Page Laubheimer, NN/g, on wireflows.
+         - Figma Help Center, Guide to auto layout.
          - The course's own Using AI policy, quoted from this file.
          Image credits in img/w5/_credits.json.
          ------------------------------------------------------------------ */
@@ -3171,8 +3150,8 @@ const COURSE = {
           ],
         },
 
-        /* ========== 02 FINDINGS TO IDEAS ========== */
-        { layout: "section", text: "From findings to ideas", num: "02" },
+        /* ========== 02 FROM IDEA TO SCREENS ========== */
+        { layout: "section", text: "From idea to screens", num: "02" },
         {
           layout: "figure",
           src: "img/w4/double-diamond.jpg",
@@ -3182,122 +3161,9 @@ const COURSE = {
         {
           layout: "two",
           heading: "Where you are",
-          left: { label: "Last week", body: "Research and synthesis.\nAffinity map, persona, journey." },
-          right: { label: "This week", body: "Turn it into one idea.\nThen start building it." },
+          left: { label: "Last week", body: "Research.\nWho it's for, and what's wrong." },
+          right: { label: "This week", body: "Turn your idea into screens.\nThen make them look real." },
         },
-        {
-          layout: "statement",
-          text: "The low point is the opportunity.",
-          sub: "From last week: Lena gives up at Browse.",
-        },
-        {
-          layout: "statement",
-          text: "How might we…?",
-          sub: "A question that turns a finding into something you can have ideas about.",
-        },
-        {
-          layout: "points",
-          heading: "A good HMW",
-          points: [
-            "Starts from something you found in research.",
-            "Does not have a solution hiding in it.",
-            "Is broad enough for lots of ideas.",
-            "Is narrow enough to stay on the problem.",
-          ],
-        },
-        {
-          layout: "two",
-          heading: "Don't hide a solution in it",
-          left: { label: "Bad", body: "“How might we tell users which form to complete?”" },
-          right: { label: "Better", body: "“How might we make users feel confident they are filing their taxes correctly?”" },
-        },
-        {
-          layout: "points",
-          heading: "Example: one finding, several HMWs",
-          points: [
-            "How might we help Lena decide in under a minute?",
-            "How might we show the real price before she starts choosing?",
-            "How might we make ordering easier than pouring cereal?",
-          ],
-        },
-        {
-          layout: "two",
-          heading: "Two kinds of thinking",
-          left: { label: "Diverge", body: "Go wide.\nAs many ideas as you can.\nNo judging." },
-          right: { label: "Converge", body: "Narrow down.\nPick one.\nSay why." },
-        },
-        {
-          layout: "statement",
-          text: "Your first idea is rarely your best one.",
-          sub: "It is usually the one everybody has.",
-        },
-        {
-          layout: "points",
-          heading: "Crazy 8s",
-          points: [
-            "Fold a sheet of paper into eight boxes.",
-            "Set a timer for eight minutes.",
-            "One idea per box. One minute each.",
-            "Alone first, then show your group.",
-          ],
-        },
-        {
-          layout: "columns",
-          heading: "Example: Lena's eight",
-          items: [
-            { label: "Choose less", list: ["Three picks, not 400", "A surprise button with a budget", "“What my friends ordered”"] },
-            { label: "Price first", list: ["Total shown on every card", "Set $15, see only what fits", "Fees split with a neighbour"] },
-            { label: "Habit, but better", list: ["Reorder, with one new thing", "Tonight's dinner, planned at lunch"] },
-          ],
-        },
-        {
-          layout: "exercise",
-          heading: "On your own",
-          prompt: "Pick one HMW from your research. Crazy 8s.",
-          time: "8 min",
-        },
-
-        /* ========== 03 CHOOSING ========== */
-        { layout: "section", text: "Choosing one", num: "03" },
-        {
-          layout: "figure",
-          src: "img/w5/dot-voting.jpg",
-          caption: "Dot voting. Photo by Ben Chun, CC BY-SA 2.0, Wikimedia Commons",
-        },
-        {
-          layout: "points",
-          heading: "Dot voting",
-          points: [
-            "Put every sketch on the table.",
-            "Everyone reads them in silence.",
-            "Three dots each, on the ideas you'd build.",
-            "Talk about the ideas, not who drew them.",
-          ],
-        },
-        {
-          layout: "points",
-          heading: "Then check it against your research",
-          points: [
-            "Does it answer your design statement?",
-            "Does it help your primary persona at their low point?",
-            "Is it easier than what they do instead?",
-            "Can you build it by Oct 29?",
-          ],
-        },
-        {
-          layout: "exercise",
-          heading: "In your group",
-          prompt: "Show your eights. Dot vote. Pick one direction, and say why in one sentence.",
-          time: "12 min",
-        },
-        {
-          layout: "statement",
-          text: "Keep the ones you didn't pick.",
-          sub: "They go in the Explorations section of your case study.",
-        },
-
-        /* ========== 04 FLOW AND WIREFRAME ========== */
-        { layout: "section", text: "Flow and wireframe", num: "04" },
         {
           layout: "points",
           heading: "Draw the flow first",
@@ -3335,13 +3201,32 @@ const COURSE = {
           sub: "“Thai Basil, $13.80 total, 25 min” tells you if it fits. Squiggles don't.",
         },
         {
-          layout: "two",
-          heading: "Sketch or prototype",
-          left: { label: "Sketch", body: "Quick and cheap.\nThrown away.\nAsks a question." },
-          right: { label: "Prototype", body: "Slower, more detailed.\nKept and tested.\nAnswers a question." },
+          layout: "statement",
+          text: "Find your key screen.",
+          sub: "The one where your feature happens. Most of your time goes here.",
+        },
+        {
+          layout: "columns",
+          heading: "Explore it: three versions",
+          items: [
+            { label: "Version 1", body: "Three cards.", list: ["One per pick", "Price big"] },
+            { label: "Version 2", body: "A short list.", list: ["Price on the right", "More fits on screen"] },
+            { label: "Version 3", body: "One at a time.", list: ["Swipe for the next", "Fastest to decide"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Keep the versions you didn't pick.",
+          sub: "They go in the Explorations section of your case study, with why you dropped them.",
+        },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "Draw your flow. Then sketch three versions of your key screen and pick one.",
+          time: "15 min",
         },
 
-        /* ========== 05 DESIGN SYSTEM: IPHONE ========== */
+        /* ========== 03 DESIGN SYSTEM: IPHONE ========== */
         /* Definition and three parts: Therese Fessenden, NN/g, Design
            Systems 101. Apple's side: Apple Design Resources ("Design apps
            accurately and quickly using official Apple design templates...")
@@ -3349,7 +3234,7 @@ const COURSE = {
            and Patterns sections line up with NN/g's three parts. Component
            definitions are the HIG's own first lines, word for word. Images
            are from the HIG, credited in img/w5/_credits.json. */
-        { layout: "section", text: "Design for iPhone", num: "05" },
+        { layout: "section", text: "Design for iPhone", num: "03" },
         {
           layout: "quote",
           quote: "A design system is a complete set of standards intended to manage design at scale using reusable components and patterns.",
@@ -3406,14 +3291,98 @@ const COURSE = {
           time: "5 min",
         },
 
-        /* ========== 06 EXAMPLE ========== */
+        /* ========== 04 WIREFRAME TO VISUAL DESIGN ========== */
+        /* Numbers and quoted lines are from the HIG: Typography (iOS
+           default 17 pt, minimum 11 pt, and the text style names),
+           Accessibility (iOS controls 44x44 pt default, 28x28 pt minimum),
+           Color, and Layout (safe area). Week 2 taught colour, type and
+           grid, so this only maps that onto iPhone. */
+        { layout: "section", text: "From wireframe to visual design", num: "04" },
+        {
+          layout: "statement",
+          text: "Same layout. Now make it look like it belongs.",
+          sub: "Week 2 still applies: hierarchy, colour, type and grid. The kit gives you good defaults.",
+        },
+        {
+          layout: "columns",
+          heading: "Four things change",
+          items: [
+            { label: "Hierarchy", body: "What gets seen first." },
+            { label: "Type", body: "Apple's text styles." },
+            { label: "Colour", body: "System colours, one accent." },
+            { label: "Spacing", body: "Edges, gaps, safe area." },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Hierarchy",
+          points: [
+            "One main thing per screen.",
+            "One primary action. Make it the most obvious thing.",
+            "Squint at it. What do you see first?",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Use Apple's text styles, not made-up sizes.",
+          sub: "Large Title, Title 1 to 3, Headline, Body, Callout, Subhead, Footnote, Caption. They're in the kit.",
+        },
+        {
+          layout: "two",
+          heading: "Text size on iPhone",
+          left: { label: "Default", body: "17 pt" },
+          right: { label: "Minimum", body: "11 pt" },
+        },
+        {
+          layout: "quote",
+          quote: "Using system colors is a convenient way to make your experience feel at home on the device.",
+          attribution: "Apple Human Interface Guidelines",
+        },
+        {
+          layout: "points",
+          heading: "Colour",
+          points: [
+            "Start in greyscale.",
+            "Add one accent colour, for actions.",
+            "Check it in dark mode.",
+            "Never let colour be the only way something is said.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Spacing",
+          points: [
+            "Line things up on the same left edge.",
+            "The same gap between the same kind of thing.",
+            "More space between groups than inside them.",
+            "Keep content in the safe area, clear of the status bar and home indicator.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Make it tappable",
+          left: { label: "Default control size", body: "44 × 44 pt" },
+          right: { label: "Minimum", body: "28 × 28 pt" },
+        },
+        {
+          layout: "points",
+          heading: "Before you call a screen done",
+          points: [
+            "Real words and numbers in it.",
+            "Every size is a text style.",
+            "Every colour is from the kit or the app.",
+            "Nothing smaller than 44 pt that you need to tap.",
+          ],
+        },
+
+        /* ========== 05 EXAMPLE ========== */
         /* A worked example on an Apple app, so every part of it is in the
            kit. Reminders already lets you share a list and assign a
            reminder to someone; reassigning is done by hand (Apple Support,
            "Share and assign reminders on your iPhone or iPad"). The
            roommates, research and feature are made up for teaching, the
            same way Lena was. */
-        { layout: "section", text: "Example: a feature for Reminders", num: "06" },
+        { layout: "section", text: "Example: a feature for Reminders", num: "05" },
         {
           layout: "statement",
           text: "Example: Reminders, for roommates.",
@@ -3439,10 +3408,6 @@ const COURSE = {
           heading: "What Reminders already does",
           left: { label: "Already there", body: "Share a list.\nAssign a reminder to someone." },
           right: { label: "Still by hand", body: "When it's done, someone has to reassign it.\nSo nobody does." },
-        },
-        {
-          layout: "statement",
-          text: "How might we help roommates know whose turn it is, without anyone keeping track?",
         },
         {
           layout: "statement",
@@ -3547,8 +3512,8 @@ const COURSE = {
           ],
         },
 
-        /* ========== 07 START BUILDING ========== */
-        { layout: "section", text: "Start building", num: "07" },
+        /* ========== 06 START BUILDING ========== */
+        { layout: "section", text: "Start building", num: "06" },
         {
           layout: "statement",
           text: "You're adding to an app that already exists.",
@@ -3588,9 +3553,9 @@ const COURSE = {
           ],
         },
 
-        /* ========== 08 FIGMA BASICS ========== */
+        /* ========== 07 FIGMA BASICS ========== */
         /* Auto layout wording from the Figma Help Center. */
-        { layout: "section", text: "Figma basics", num: "08" },
+        { layout: "section", text: "Figma basics", num: "07" },
         {
           layout: "points",
           heading: "Five things to learn first",
@@ -3634,8 +3599,8 @@ const COURSE = {
           ],
         },
 
-        /* ========== 09 MAKE IT CLICKABLE ========== */
-        { layout: "section", text: "Make it clickable", num: "09" },
+        /* ========== 08 MAKE IT CLICKABLE ========== */
+        { layout: "section", text: "Make it clickable", num: "08" },
         {
           layout: "points",
           heading: "In prototype mode",
@@ -3666,8 +3631,8 @@ const COURSE = {
           sub: "Your case study needs video of the prototype, not static screens. Start recording now.",
         },
 
-        /* ========== 10 PROTOTYPE WHAT MATTERS ========== */
-        { layout: "section", text: "Prototype only what matters", num: "10" },
+        /* ========== 09 PROTOTYPE WHAT MATTERS ========== */
+        { layout: "section", text: "Prototype only what matters", num: "09" },
         {
           layout: "statement",
           text: "Build the path, not the whole app.",
@@ -3704,8 +3669,8 @@ const COURSE = {
           ],
         },
 
-        /* ========== 11 IN CLASS ========== */
-        { layout: "section", text: "Build your first screen", num: "11" },
+        /* ========== 10 IN CLASS ========== */
+        { layout: "section", text: "Build your first screen", num: "10" },
         {
           layout: "visual",
           side: "right",
@@ -3727,18 +3692,18 @@ const COURSE = {
           time: "Rest of class",
         },
 
-        /* ========== 12 THIS WEEK ========== */
-        { layout: "section", text: "This week", num: "12" },
+        /* ========== 11 THIS WEEK ========== */
+        { layout: "section", text: "This week", num: "11" },
         { layout: "assignment" },
         {
           layout: "points",
           heading: "What to hand in",
           points: [
-            "Your HMWs, from your research.",
-            "At least three directions, sketched.",
-            "The one you picked, and why.",
-            "A user flow for it.",
-            "The first screens of your prototype, linked together.",
+            "A user flow for your feature.",
+            "Wireframes of every screen in it.",
+            "Three versions of your key screen, and which one you picked and why.",
+            "The first screens, designed with the kit or your app's system.",
+            "Linked together, so it clicks through.",
           ],
         },
         {

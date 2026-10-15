@@ -3105,11 +3105,11 @@ const COURSE = {
         },
       ],
       assignment: {
-        title: "Flow, explorations and first screens",
+        title: "A working prototype",
         due: "Wed Oct 21, 11:59pm",
         dueDate: "2026-10-21",
-        body: "As a group: a user flow for your feature and wireframes of every screen in it. Three versions of your key screen, and which one you picked and why. Then the first screens of your prototype, designed with your app's design system or the iOS kit, and linked together.",
-        deliverable: "One doc per group, every name on it, with a link to your Figma file or code. Photos of paper sketches are fine.",
+        body: "As a group: your feature as a prototype someone can tap through. Every screen in your flow as a frame, linked together so it works from start to finish. It doesn't have to be final or polished, but it has to work.",
+        deliverable: "One link per group, every name on it: your Figma prototype or your code. Add your user flow, and any versions of your key screen you tried.",
       },
       materials: [],
       /* The Week 5 Read Me: Figma and AI setup for Berkeley students. Every
@@ -3967,12 +3967,16 @@ const COURSE = {
           layout: "points",
           heading: "What to hand in",
           points: [
-            "A user flow for your feature.",
-            "Wireframes of every screen in it.",
-            "Three versions of your key screen, and which one you picked and why.",
-            "The first screens, designed with the kit or your app's system.",
-            "Linked together, so it clicks through.",
+            "A prototype someone can tap through, start to finish.",
+            "Every screen in your flow, as a frame.",
+            "Linked together: every button goes where it should.",
+            "Your user flow, and any versions of your key screen you tried.",
           ],
+        },
+        {
+          layout: "statement",
+          text: "Rough is fine. Broken is not.",
+          sub: "It doesn't have to look final. Someone has to be able to use it.",
         },
         {
           layout: "two",

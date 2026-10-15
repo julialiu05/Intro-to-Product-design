@@ -44,7 +44,7 @@ const COURSE = {
 
   // Which week to surface, AND which theme the whole site wears.
   // Bump this every Wednesday and the site changes its skin.
-  CURRENT_WEEK: 4,
+  CURRENT_WEEK: 5,
 
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
@@ -3026,7 +3026,7 @@ const COURSE = {
       week: 5,
       date: "Oct 15",
       title: "From ideas to screens",
-      status: "draft",
+      status: "published",
       /* The iOS 11 beach wallpaper, Apple, for a week built on iPhone. */
       background: "img/w5/ios-beach-background.jpg",
       summary: "",
@@ -3104,13 +3104,10 @@ const COURSE = {
           note: "Optional. One component, every design system's version of it. Look up whatever you're about to build.",
         },
       ],
-      /* `dueDate` stays empty until the week is published, because apps.js puts
-         any week carrying a dueDate onto the Calendar whether or not the week
-         is a draft. Set it to "2026-10-21" with the other publish switches. */
       assignment: {
         title: "Flow, explorations and first screens",
         due: "Wed Oct 21, 11:59pm",
-        dueDate: "",
+        dueDate: "2026-10-21",
         body: "As a group: a user flow for your feature and wireframes of every screen in it. Three versions of your key screen, and which one you picked and why. Then the first screens of your prototype, designed with your app's design system or the iOS kit, and linked together.",
         deliverable: "One doc per group, every name on it, with a link to your Figma file or code. Photos of paper sketches are fine.",
       },

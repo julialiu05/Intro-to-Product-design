@@ -1,0 +1,18 @@
+[
+  {
+    "file": "img/w6/f-pattern-heatmap.jpg",
+    "title": "Tigers in Crisis heatmap, F-shaped pattern",
+    "creator": "Kara Pernice, Nielsen Norman Group",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/",
+    "bytes": 404316
+  },
+  {
+    "file": "img/w6/layer-cake-heatmap.jpg",
+    "title": "Layer-cake pattern heatmap, bacnyc.org",
+    "creator": "Kara Pernice, Nielsen Norman Group",
+    "license": "Third-party lecture image, credited in caption",
+    "source": "https://www.nngroup.com/articles/layer-cake-pattern-scanning/",
+    "bytes": 157364
+  }
+]

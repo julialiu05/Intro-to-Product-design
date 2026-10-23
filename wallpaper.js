@@ -24,14 +24,16 @@
 
 /* wall-1 to wall-4 (the paintings) are no longer in the rotation but stay in
    img/: wall-1 is still the default deck backdrop in desktop.css. */
-/* Week 5 is built on iPhone, so the desktop wears Apple's iOS 11 beach
-   for now. One entry means no rotation. wall-5, wall-6 and wall-8 stay in
-   img/ to bring back:
+/* wall-5, wall-6, wall-8 and Week 5's iOS beach stay in img/ to bring back:
      { src: "img/wall-5.jpg", ink: "dark" },   pink, sparkles and a cat
      { src: "img/wall-6.jpg", ink: "dark" },   pastel ocean, fish and rays
-     { src: "img/wall-8.jpg", ink: "dark" },   iridescent marble, sparkles */
+     { src: "img/wall-8.jpg", ink: "dark" },   iridescent marble, sparkles
+     { src: "img/w5/ios-beach-background.jpg", ink: "dark" },   teal sea */
 var WALLPAPERS = [
-  { src: "img/w5/ios-beach-background.jpg", ink: "dark" },   /* teal sea at the top */
+  { src: "img/wall-9.jpg",  ink: "light" },   /* night field, a girl with a star wand */
+  { src: "img/wall-10.jpg", ink: "light" },   /* bubbles and stars on a dark sky */
+  { src: "img/wall-11.jpg", ink: "light" },   /* hands of star confetti, blue gingham */
+  { src: "img/wall-12.jpg", ink: "light" },   /* flowers in sand, at night */
 ];
 
 var WALL_EVERY = 30000;   /* ms between changes */

@@ -44,12 +44,12 @@ const COURSE = {
 
   // Which week to surface, AND which theme the whole site wears.
   // Bump this every Wednesday and the site changes its skin.
-  CURRENT_WEEK: 5,
+  CURRENT_WEEK: 6,
 
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
   // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
-  DESKTOP_WEEKS: 5,
+  DESKTOP_WEEKS: 6,
 
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
@@ -3983,6 +3983,673 @@ const COURSE = {
           heading: "Where this is going",
           left: { label: "Oct 22", body: "Prototype in progress.\nBring it to class." },
           right: { label: "Oct 29", body: "Prototype running.\nPage live.\nEvery group presents." },
+        },
+      ],
+    },
+
+    {
+      week: 6,
+      date: "Oct 22",
+      title: "Telling the story: case studies",
+      status: "published",
+      background: "img/w6/stars-background.jpg",
+      summary: "",
+      agenda: [
+        "Critique of your prototypes",
+        "Why a case study",
+        "How people read it",
+        "The shape of a case study",
+        "Part by part",
+        "Writing it",
+        "Pictures and video",
+        "A real one",
+        "Headings first",
+        "Example case study, with Julia",
+      ],
+      readings: [
+        {
+          title: "An Introduction to Case Studies for Designers",
+          author: "Jenny B Kowalski, Tyler School of Art and Architecture",
+          kind: "Post",
+          url: "https://medium.com/tylerdi/an-introduction-to-case-studies-for-designers-80e1abc50b8f",
+          note: "The basic structure, how a case study differs from a pitch, and how to get the writing done. Most of tonight comes from here.",
+        },
+        {
+          title: "5 Steps to Creating a UX-Design Portfolio",
+          author: "Rachel Krause, Nielsen Norman Group",
+          kind: "Post",
+          url: "https://www.nngroup.com/articles/ux-design-portfolios/",
+          note: "What 204 people who hire designers said they look for, and the seven things a case study should cover.",
+        },
+        {
+          title: "How to write a UX portfolio case study",
+          author: "Erik D. Kennedy, Learn UI Design",
+          kind: "Post",
+          url: "https://learnui.design/blog/great-ux-ui-portfolio-case-study.html",
+          note: "The other side of the argument: lead with the result, and show decisions, not process. Full of real examples.",
+        },
+        {
+          title: "The Layer-Cake Pattern of Scanning Content on the Web",
+          author: "Kara Pernice, Nielsen Norman Group",
+          kind: "Post",
+          optional: true,
+          url: "https://www.nngroup.com/articles/layer-cake-pattern-scanning/",
+          note: "Optional. Why your headings matter more than your paragraphs, with the eyetracking to prove it.",
+        },
+        {
+          title: "Duolingo Feature",
+          author: "Megan Archer",
+          kind: "Post",
+          optional: true,
+          url: "https://www.meganarcherux.com/ux-work/duolingo-feature",
+          note: "Optional. The case study we take apart in class. Same brief as Project 1.",
+        },
+        {
+          title: "Case Study Club",
+          author: "Case Study Club",
+          kind: "Post",
+          optional: true,
+          url: "https://www.casestudy.club/",
+          note: "Optional. A library of real case studies. Find one for an app like yours and read only its headings.",
+        },
+        {
+          title: "case-study-page",
+          author: "DES 198",
+          kind: "Skill",
+          optional: true,
+          url: "https://github.com/julialiu05/Intro-to-Product-design/tree/main/skills",
+          note: "Optional, for building with AI. Lays your own material out as the nine-part page. It never writes your words for you.",
+        },
+      ],
+      assignment: {
+        title: "Case study page and prototype",
+        due: "Thu Oct 29, in class",
+        dueDate: "2026-10-29",
+        body: "As a group: your Project 1 case study, live on the web, in the nine parts, with video of your prototype running. Then present it in class.",
+        deliverable: "One link per group, every name on it: your live page and your prototype.",
+      },
+      materials: [],
+      /* ------------------------------------------------------------------
+         Order: critique, teach, a real example, group work, then Julia
+         walks through her own case study live. About 45 minutes of
+         teaching before the walkthrough.
+
+         Lena and the delivery app from Weeks 4 and 5 are the running
+         example again, so the nine parts are shown on a project students
+         already know. Her overview, quotes, test result and decisions are
+         made up for teaching and labelled as examples.
+
+         Sources, with wording kept where a slide quotes them:
+         - Jenny B Kowalski, "An Introduction to Case Studies for
+           Designers", TylerD&I on Medium, Oct 13 2020: Designer A and B,
+           the five-part structure, case study vs pitch, the four writing
+           steps (from Scott Kubie, Writing for Designers, A Book Apart
+           2018), Taylor Nguyen on what isn't on the screen, Tobias van
+           Schneider on personas, proofreading vs editing.
+         - Rachel Krause, NN/g, "5 Steps to Creating a UX-Design
+           Portfolio", 2019: the survey of 204 hiring managers, their
+           quotes, the seven case study elements, advice for students.
+         - Megan Chan, NN/g, "UX Hiring: Insights from a Design
+           Recruiter", 2026: Hang Xu on who reads it first.
+         - Jakob Nielsen, NN/g, "How Little Do Users Read?", 2008: 28% at
+           most, 20% more likely.
+         - Kara Pernice, NN/g: F-shaped pattern (2017) and layer-cake
+           pattern (2019), heatmaps and the advice that goes with them.
+         - Amy Schade, NN/g, "Inverted Pyramid", 2018.
+         - Erik D. Kennedy, Learn UI Design, "How to write a UX portfolio
+           case study", 2024: sales pitch, lead with the end, decisions
+           not process, annotate, two next steps.
+         - Google, "UX design portfolio tips": provide context.
+         - Megan Archer, "Duolingo Feature": section headings, research
+           and test numbers as published on her page.
+         - skills/case-study-page/SKILL.md, the class skill.
+         Image credits in img/w6/_credits.json.
+         ------------------------------------------------------------------ */
+      slides: [
+        { layout: "title" },
+
+        /* ========== 01 CRITIQUE ========== */
+        /* Add this week's prototypes here as `figure`, `gallery` or `site`
+           slides, unnamed, the same way earlier weeks did. */
+        { layout: "section", text: "Critique", num: "01" },
+        {
+          layout: "statement",
+          text: "Show us your projects so far.",
+        },
+        {
+          layout: "points",
+          heading: "Ask about each one",
+          points: [
+            "What was the hardest decision, and what did you choose?",
+            "What did you try that didn't work?",
+            "What surprised you along the way?",
+            "Does it solve the problem in their design statement?",
+            "Could you use it without them explaining?",
+          ],
+        },
+
+        /* ========== 02 WHY A CASE STUDY ========== */
+        { layout: "section", text: "Why a case study", num: "02" },
+        {
+          layout: "two",
+          heading: "Two portfolios, same work",
+          left: { label: "Designer A", body: "Big images.\nA one-sentence description of the project." },
+          right: { label: "Designer B", body: "The problem they were solving.\nThe steps they took to solve it." },
+        },
+        {
+          layout: "statement",
+          text: "The work is the same. Which designer do you understand?",
+          sub: "Jenny B Kowalski",
+        },
+        {
+          layout: "statement",
+          text: "A case study shows how you think.",
+          sub: "How you approach problems, how you communicate, and how you respond when things go wrong.",
+        },
+        /* Reasons from NN/g (Krause: "picture you on their team", and
+           rejected options show "you can work within real constraints"),
+           Google's portfolio tips ("in the absence of presenting your
+           portfolio") and Kowalski (how you communicate). */
+        {
+          layout: "points",
+          heading: "Why the process matters to them",
+          points: [
+            "They can't watch you work. The page is the only way to see how you think.",
+            "Final screens look alike. Your reasons don't.",
+            "It shows you can work with real limits, dead ends, and being wrong.",
+            "They can picture you on their team.",
+            "A clear page reads as clear thinking. A messy one, as messy thinking.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "A case study is not a pitch",
+          left: { label: "Pitch", body: "Who, what, and why.\nSells the potential." },
+          right: { label: "Case study", body: "Adds how.\nThe process, the problems, what you learned." },
+        },
+        {
+          layout: "quote",
+          quote: "Oftentimes, you're being evaluated by a recruiter who's never done design before.",
+          attribution: "Hang Xu, design recruiter, on the NN/g UX Podcast",
+        },
+        {
+          layout: "columns",
+          heading: "Who reads it",
+          items: [
+            { label: "A recruiter", body: "Not a designer.", list: ["Skims", "Wants the point fast"] },
+            { label: "A hiring manager", body: "A designer.", list: ["Wants your reasons", "Reads the parts that matter"] },
+            { label: "You, later", body: "In an interview.", list: ["Walks you through your own story"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "So what do they want to see?",
+          sub: "Nielsen Norman Group asked 204 people who hire designers.",
+        },
+        {
+          layout: "two",
+          heading: "What they said",
+          left: { label: "Show the value", body: "“Show me how you started with an opportunity and produced real value for a user and the organization.”" },
+          right: { label: "Show the mess", body: "“Don't just show me the finished product.”" },
+        },
+        {
+          layout: "statement",
+          text: "Every reader wants the same thing: your reasons, not just your result.",
+          sub: "The recruiter needs them fast. The designer needs them clear. You need them in the interview.",
+        },
+        /* Hang Xu, in Megan Chan's NN/g article: "for each hour the hiring
+           manager spends in evaluating us, we're spending probably 30
+           hours, maybe", and at least "more than 10 to 1". */
+        {
+          layout: "statement",
+          text: "They spend minutes on what took you weeks.",
+          sub: "Design recruiter Hang Xu guesses candidates put in 10 to 30 hours for every hour a hiring manager spends looking.",
+        },
+        {
+          layout: "points",
+          heading: "So in those minutes, the page has to show",
+          points: [
+            "The problem, in one sentence.",
+            "What you made, working.",
+            "Why you made it that way.",
+            "What went wrong, and what you changed.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "If your reasons are buried in a paragraph, they don't get read.",
+          sub: "Here's how people actually read a page.",
+        },
+
+        /* ========== 03 HOW PEOPLE READ IT ========== */
+        { layout: "section", text: "How people read it", num: "03" },
+        {
+          layout: "statement",
+          text: "People read about 20% of the words on a web page.",
+          sub: "Write 500 words, and they read about 100. Jakob Nielsen, Nielsen Norman Group, from 45,237 page views.",
+        },
+        {
+          layout: "figure",
+          src: "img/w6/f-pattern-heatmap.jpg",
+          caption: "The F-shaped pattern: a few lines read across, then down the left edge. Kara Pernice, Nielsen Norman Group",
+        },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "The layer-cake pattern",
+          body: "Eyes stop on the headings and skip most of the text between them.",
+          points: [
+            "NN/g calls it the most effective way to scan.",
+            "It only works when the headings say something.",
+          ],
+          src: "img/w6/layer-cake-heatmap.jpg",
+          caption: "Layer-cake pattern. Kara Pernice, Nielsen Norman Group",
+        },
+        {
+          layout: "statement",
+          text: "Write it to be scanned.",
+          sub: "The headings tell the story. The paragraphs are for the people who stop.",
+        },
+        {
+          layout: "points",
+          heading: "So",
+          points: [
+            "Put the most important points first.",
+            "Start each heading with the words that carry the most information.",
+            "Bold the key words.",
+            "Bullets for lists and steps.",
+            "Cut what isn't needed.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Make each heading say what you found",
+          left: { label: "Instead of a label", body: "Research\n\nTesting\n\nIteration" },
+          right: { label: "Write the finding", body: "Students give up after scrolling 40 restaurants\n\n4 of 5 testers missed the budget button\n\nWe moved the budget button to the top" },
+        },
+        {
+          layout: "statement",
+          text: "Read only your headings. Do they tell the whole story?",
+          sub: "Problem, what you learned, what you changed. Someone who skims should still get it.",
+        },
+
+        /* ========== 04 THE SHAPE ========== */
+        { layout: "section", text: "The shape of a case study", num: "04" },
+        {
+          layout: "points",
+          heading: "The basic structure",
+          points: [
+            "Introduction: the project in a sentence or two, and who was on the team.",
+            "Reframe the problem: what was the brief, and what was your take on it?",
+            "Your approach: sketches, flows, drafts. What worked, what didn't.",
+            "Final deliverables: the finished thing, as screens, prototype, recordings.",
+            "Conclusion: what's next, and what you'd improve with more time.",
+          ],
+        },
+        {
+          layout: "columns",
+          heading: "Project 1's nine parts follow the same structure",
+          items: [
+            { label: "Introduction", list: ["Overview"] },
+            { label: "Final deliverables", list: ["Solution", "Core flows"] },
+            { label: "Problem and approach", list: ["Research", "Explorations", "Prototyping and testing", "Design decisions"] },
+            { label: "Conclusion", list: ["Constraints", "Reflections"] },
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Two kinds of advice",
+          left: { label: "Tell a story", body: "“The most interesting case studies tell a story.”\nJenny B Kowalski" },
+          right: { label: "Sell it", body: "“Your project case study isn't a story, it's a sales pitch.”\nErik D. Kennedy" },
+        },
+        {
+          layout: "statement",
+          text: "Do both: the ending first, then the story.",
+          sub: "That's why Solution comes second, before Research.",
+        },
+        {
+          layout: "quote",
+          quote: "The most important information (or what might even be considered the conclusion) is presented first.",
+          attribution: "Amy Schade, Nielsen Norman Group, on the inverted pyramid",
+        },
+        {
+          layout: "points",
+          heading: "The top of the page",
+          points: [
+            "A title that says what it is.",
+            "One sentence: the app, the problem, the feature.",
+            "Role, timeline, team, tools.",
+            "The prototype, running.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "If they read nothing else, would they know what you did?",
+          sub: "Google's portfolio advice: someone should know the exact problem and solution without having to ask.",
+        },
+
+        /* ========== 05 PART BY PART ========== */
+        /* Lena's overview, quote, test result and decisions are made up
+           for teaching, the same way she was in Weeks 4 and 5. */
+        { layout: "section", text: "Part by part", num: "05" },
+        {
+          layout: "statement",
+          text: "Example: Lena's delivery app, as a case study.",
+          sub: "Made up for teaching, the way Lena was. Same project, written up.",
+        },
+        {
+          layout: "two",
+          heading: "Overview",
+          left: { label: "Vague", body: "“We redesigned a food delivery app to improve the user experience.”" },
+          right: { label: "Specific", body: "“Students who order late give up after scrolling 40 restaurants. We added a budget mode: set $15, see three picks.”" },
+        },
+        {
+          layout: "statement",
+          text: "Solution: show it working.",
+          sub: "Video of the prototype, not static screens. Muted, short, and it plays on a phone.",
+        },
+        {
+          layout: "statement",
+          text: "Open app → Set budget → See three picks → Order",
+          sub: "Core flows: one line on what they're trying to do, then the video of it.",
+        },
+        {
+          layout: "points",
+          heading: "Research",
+          points: [
+            "Who you talked to, and how many.",
+            "Their words, quoted exactly.",
+            "What surprised you.",
+            "The finding, not just the method.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Be specific, and honest about how many",
+          left: { label: "Vague", body: "“Most users found browsing frustrating.”" },
+          right: { label: "Specific", body: "“4 of the 5 students we talked to had closed the app without ordering that week.”" },
+        },
+        {
+          layout: "statement",
+          text: "Five people is not 80%.",
+          sub: "With a small group, give the count. A percentage makes it sound bigger than it was.",
+        },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "Show the artifact, say what it changed",
+          points: [
+            "Not just “we made a journey map.”",
+            "“The low point was Browse, so that's where the feature goes.”",
+          ],
+          src: "img/w4/journey-map-mobile-plan.jpg",
+          caption: "Jumping Jamie switches mobile plans. Nielsen Norman Group",
+        },
+        {
+          layout: "quote",
+          quote: "I'm curious to know what isn't in the design and why, just as much as I'd like to know why elements made it in.",
+          attribution: "Hiring manager, NN/g survey",
+        },
+        {
+          layout: "columns",
+          heading: "Explorations: the versions you dropped",
+          items: [
+            { label: "Version 1", body: "Three cards.", list: ["Kept", "Prices easy to compare"] },
+            { label: "Version 2", body: "A short list.", list: ["Dropped", "Looked like the 40 restaurants again"] },
+            { label: "Version 3", body: "One at a time.", list: ["Dropped", "Testers swiped past the one they wanted"] },
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Prototyping and testing",
+          left: { label: "What broke", body: "4 of 5 didn't see the budget button.\nIt was under the search bar." },
+          right: { label: "What we changed", body: "Moved it to the top of the home screen.\nRetested: 5 of 5 found it." },
+        },
+        {
+          layout: "statement",
+          text: "Before and after, side by side.",
+          sub: "The page is graded on being honest about what went wrong. This is where you show it.",
+        },
+        {
+          layout: "points",
+          heading: "Design decisions: three or four that mattered",
+          points: [
+            "What you chose.",
+            "What you turned down.",
+            "Why.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Example decision",
+          left: { label: "Chose", body: "Three picks.\nNot ten." },
+          right: { label: "Why", body: "Lena gives up when there's too much choice. Three fit on one screen without scrolling." },
+        },
+        {
+          layout: "quote",
+          quote: "It is in the things not shown on the screen that makes us designers.",
+          attribution: "Taylor Nguyen, UX Planet",
+        },
+        {
+          layout: "two",
+          heading: "Don't describe the picture",
+          left: { label: "Describes", body: "“Users enter their budget here.”" },
+          right: { label: "Explains", body: "“Budget comes first, because price was the reason 4 of 5 gave up.”" },
+        },
+        {
+          layout: "statement",
+          text: "Put the why next to the picture.",
+          sub: "A short note pointing at the part it explains. Erik Kennedy calls this annotating.",
+        },
+        {
+          layout: "points",
+          heading: "Constraints",
+          points: [
+            "Time: three weeks.",
+            "Access: no real restaurant or order data.",
+            "Skill: first time in Figma.",
+            "Scope: one feature, one persona.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Student project? Say what isn't real.",
+          sub: "NN/g's advice for students: acknowledge the unrealistic parts in the description.",
+        },
+        {
+          layout: "points",
+          heading: "Reflections",
+          points: [
+            "What you'd redo.",
+            "What you'd test next, with more time.",
+            "Where you used AI, and where you overruled it.",
+          ],
+        },
+
+        /* ========== 06 WRITING IT ========== */
+        /* Kubie's four steps and the quotes, as Kowalski gives them. */
+        { layout: "section", text: "Writing it", num: "06" },
+        {
+          layout: "statement",
+          text: "“Writing is always hard.”",
+          sub: "Scott Kubie, Writing for Designers. Even for writers. So break it into steps.",
+        },
+        {
+          layout: "columns",
+          heading: "Four steps",
+          items: [
+            { label: "Prepare", body: "Collect your process.", list: ["Notes, sketches, drafts", "The nine parts as an outline"] },
+            { label: "Compose", body: "Get it all down.", list: ["Something in every section", "Don't make it good yet"] },
+            { label: "Edit", body: "Fix what it says.", list: ["Cut, simplify, reorder", "Read it out loud"] },
+            { label: "Finish", body: "Proofread.", list: ["Someone new reads it", "Then it's done"] },
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Step 1, Prepare: the outline is a wireframe for your writing.",
+          sub: "Gather your notes, sketches and drafts. Use the nine parts as the outline. Jenny B Kowalski",
+        },
+        {
+          layout: "statement",
+          text: "Step 2, Compose: get it all down.",
+          sub: "“To write quickly and to write everything.” Scott Kubie. Something in every section, even one line. Don't make it good yet.",
+        },
+        {
+          layout: "two",
+          heading: "Step 3, Edit: change what it says",
+          left: { label: "Editing", body: "What it says.\nWhat's in it, what's cut, what order." },
+          right: { label: "Not proofreading", body: "Spelling, grammar, facts.\nThat's step 4." },
+        },
+        {
+          layout: "statement",
+          text: "Most of editing is cutting.",
+          sub: "“I want to understand your process, but I don't need to know your user persona better than I know my own mother.” Tobias van Schneider",
+        },
+        {
+          layout: "points",
+          heading: "How to edit",
+          points: [
+            "Sleep on it first.",
+            "Read it out loud.",
+            "Have someone outside your group read it.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Step 4, Finish: proofread, then stop",
+          points: [
+            "Proofread backwards, word by word.",
+            "Click every link. Play every video.",
+            "Then it's done.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Using AI to write it? The words are still yours.",
+          sub: "Say where you used it. The page is graded on your reasons, and AI doesn't know them.",
+        },
+
+        /* ========== 07 PICTURES AND VIDEO ========== */
+        { layout: "section", text: "Pictures and video", num: "07" },
+        {
+          layout: "visual",
+          side: "right",
+          heading: "Show real work, even if it's messy",
+          body: "NN/g's advice for portfolios.",
+          points: [
+            "Sticky notes, sketches, whiteboards.",
+            "Photograph them now, before they're gone.",
+          ],
+          src: "img/w4/affinity-wall.jpg",
+          caption: "Affinity wall, Wikipedia usability study, 2009. Photo by Parul Vora, CC BY-SA 3.0",
+        },
+        {
+          layout: "points",
+          heading: "Every picture earns its place",
+          points: [
+            "One idea per section, one picture per idea.",
+            "A caption that says what to notice.",
+            "Crop to the part that matters.",
+            "Real words in the screens, not lorem ipsum.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Video of the prototype",
+          points: [
+            "Under a minute per flow.",
+            "Muted, and it still makes sense.",
+            "A poster image, so something shows before it plays.",
+            "Under about 10 MB, so it loads.",
+          ],
+        },
+
+        /* ========== 08 A REAL ONE ========== */
+        /* Section names and numbers as published on her page. 82% of 11
+           people is 9; 63% is 7. */
+        { layout: "section", text: "A real one", num: "08" },
+        {
+          layout: "site",
+          heading: "Duolingo Feature, by Megan Archer",
+          label: "meganarcherux.com",
+          src: "https://www.meganarcherux.com/ux-work/duolingo-feature",
+          body: "A feature added to an app she doesn't work for. Same brief as Project 1. Scroll it.",
+        },
+        {
+          layout: "columns",
+          heading: "Her sections",
+          items: [
+            { label: "Introduction", list: ["Problem and solution"] },
+            { label: "Research", list: ["Survey, interviews, competitors"] },
+            { label: "Define, ideate, design", list: ["Persona, flows, wireframes", "Hi-fi screens"] },
+            { label: "Test and conclusion", list: ["Maze tests, then changes", "A link to the prototype"] },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "What it does well",
+          points: [
+            "The feature in one line, at the top.",
+            "The prototype linked up front.",
+            "Testing says what went wrong: 5 of 8 got stuck on the edit button.",
+            "Then what changed because of it.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "What you'd push on",
+          points: [
+            "11 people, given as percentages. 82% is 9 people.",
+            "Headings are process steps, not findings.",
+            "Branding choices say what, not what else was tried.",
+          ],
+        },
+        {
+          layout: "site",
+          heading: "Find more",
+          label: "casestudy.club",
+          src: "https://www.casestudy.club/",
+          body: "Find one for an app like yours. Read only the headings. Can you tell the story?",
+        },
+
+        /* ========== 09 HEADINGS FIRST ========== */
+        { layout: "section", text: "Headings first", num: "09" },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "Write only the headings of your case study, one per part, each one a finding. Swap with another group. Can they tell you your story from the headings alone?",
+          time: "10 min",
+        },
+        {
+          layout: "points",
+          heading: "Before it goes live",
+          points: [
+            "Every claim in Research has a source.",
+            "Every quote is word for word.",
+            "The video plays, muted, on a phone.",
+            "Explorations shows at least one version you didn't pick.",
+            "Testing says what went wrong.",
+            "Reflections says where you used AI.",
+            "Every link works.",
+          ],
+        },
+
+        /* ========== 10 THIS WEEK ========== */
+        { layout: "section", text: "This week", num: "10" },
+        { layout: "assignment" },
+        {
+          layout: "points",
+          heading: "Graded on",
+          points: [
+            "Evidence for the problem.",
+            "Reasons behind the decisions.",
+            "Prototype works.",
+            "Page is honest about what went wrong.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Julia will now walk you through an example case study.",
         },
       ],
     },

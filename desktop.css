@@ -1237,6 +1237,15 @@ body {
   background: var(--wall-2);
 }
 
+/* A film opened from a week folder. Black behind it like QuickTime, fitted
+   so the whole frame is visible whatever shape the window is dragged to. */
+.filmframe {
+  flex: 1; width: 100%; min-height: 0;
+  display: block; object-fit: contain;
+  border-radius: var(--r-in);
+  background: #000;
+}
+
 /* Standalone, the deck offers its own way back to the desktop. Inside a
    window it does not: the window's own close button is the way back, and a
    second one would be a button that leaves you where you already are. */

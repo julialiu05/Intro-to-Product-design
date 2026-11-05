@@ -44,12 +44,12 @@ const COURSE = {
 
   // Which week to surface, AND which theme the whole site wears.
   // Bump this every Wednesday and the site changes its skin.
-  CURRENT_WEEK: 6,
+  CURRENT_WEEK: 7,
 
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
   // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
-  DESKTOP_WEEKS: 6,
+  DESKTOP_WEEKS: 7,
 
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
@@ -4651,6 +4651,348 @@ const COURSE = {
           layout: "statement",
           text: "Julia will now walk you through an example case study.",
         },
+      ],
+    },
+    /* ------------------------------------------------------------------
+       Week 7: Project 2, with AGI, Inc. The brief from AGI,
+       Inc. has not arrived yet: the assignment block, the "Project 2
+       brief.md" doc and the slide marked PLACEHOLDER below all stand in
+       for it. Swap them when it lands.
+
+       The reveal film lives in img/w7/ at 1080p (the 4K master is in
+       ~/Desktop/ipd-agi-reveal). It follows the deck's rule and stays
+       locked until status is "published", so the reveal cannot leak
+       before class.
+
+       The deck: the Project 2 framing, then a lecture on designing a
+       physical thing, written for a wearable with an AI assistant in it.
+       No images yet. Add `figure` and `gallery` slides into img/w7/ once
+       the photos are picked.
+       ------------------------------------------------------------------ */
+    {
+      week: 7,
+      date: "Nov 5",
+      title: "IPD × AGI, Inc.",
+      status: "draft",
+      /* The same wallpaper the reveal film ends on. */
+      background: "img/wall-3.jpg",
+      summary: "",
+      agenda: [
+        "Project 2 reveal",
+        "Hardware, fashion, AI assistants",
+        "Designing a physical thing",
+        "Looks-like, works-like",
+        "The body as the site",
+        "Materials, and how things get made",
+        "Inside a wearable",
+        "Prototype with no budget",
+        "The brief",
+      ],
+      readings: [
+        {
+          title: "AGI, Inc.",
+          author: "AGI, Inc.",
+          kind: "Post",
+          url: "https://theagi.company",
+          note: "The partner. Look at what they have made before class.",
+        },
+        {
+          title: "Ten principles for good design",
+          author: "Dieter Rams, Vitsœ",
+          kind: "Post",
+          url: "https://www.vitsoe.com/us/about/good-design",
+          note: "The ten lines every industrial designer has pinned up somewhere. Read them against the object you are about to design.",
+        },
+        {
+          title: "Designing for watchOS",
+          author: "Apple, Human Interface Guidelines",
+          kind: "Post",
+          url: "https://developer.apple.com/design/human-interface-guidelines/designing-for-watchos",
+          note: "How Apple thinks about a thing worn on the body: glances, not sessions. Short, and most of it applies to any wearable.",
+        },
+        {
+          title: "The Worst Product I've Ever Reviewed... For Now",
+          author: "Marques Brownlee",
+          kind: "Video",
+          optional: true,
+          url: "https://www.youtube.com/watch?v=TitZV6k8zfA",
+          note: "Optional. The Humane Ai Pin, reviewed. Watch it for the list of things that have to be true before anyone wears an AI device twice.",
+        },
+        {
+          title: "Making It: Manufacturing Techniques for Product Design",
+          author: "Chris Lefteri, Laurence King",
+          kind: "Book chapter",
+          optional: true,
+          note: "Optional. One process per spread: injection moulding, CNC, casting, sewing. Flip through it to see what a factory can and cannot do.",
+        },
+      ],
+      /* PLACEHOLDER until the AGI, Inc. brief arrives. `due` and `dueDate`
+         must stay the same date. */
+      assignment: {
+        title: "Project 2: the brief",
+        due: "Thu Nov 12, 6:00pm",
+        dueDate: "2026-11-12",
+        body: "The full brief comes from AGI, Inc. Until it lands: wear something for a day where an AI assistant could live on your body, a pendant, a clip, an earbud, anything, and write down every moment you wanted to say something to it.",
+        deliverable: "Ten sketches of where it could live on the body, and one paragraph on what you wanted to say to it. One post per person.",
+      },
+      materials: [],
+      videos: [
+        {
+          name: "IPD × AGI, Inc. reveal.mp4",
+          kind: "Film",
+          src: "img/w7/ipd-x-agi-reveal.mp4",
+          poster: "img/w7/ipd-x-agi-reveal-poster.jpg",
+          state: "1:39",
+        },
+      ],
+      docs: [
+        {
+          name: "Project 2 brief.md",
+          kind: "Read Me",
+          state: "Coming",
+          body: [
+            "# Project 2 brief",
+            "",
+            "The brief is coming from AGI, Inc. It will be posted here.",
+            "",
+            "Until then, the question to sit with:",
+            "",
+            "> Hardware, fashion, AI assistants: what's the object where all three meet?",
+          ],
+        },
+      ],
+      slides: [
+        { layout: "title" },
+
+        /* ========== 01 PROJECT 2 ========== */
+        { layout: "section", text: "Project 2", num: "01" },
+        {
+          layout: "statement",
+          text: "Hardware, fashion, AI assistants.",
+          sub: "What's the object where all three meet?",
+        },
+        {
+          layout: "statement",
+          text: "With AGI, Inc.",
+          sub: "An innovation lab in San Francisco. AI that runs on the device.",
+        },
+        {
+          layout: "two",
+          heading: "What you could make",
+          left:  { label: "A wearable", body: "Something worn.\nIt listens, sees, or speaks." },
+          right: { label: "An app", body: "Something on a phone.\nOr both, talking to each other." },
+        },
+        /* PLACEHOLDER. Replace this slide with the brief when it arrives. */
+        {
+          layout: "statement",
+          text: "The brief.",
+          sub: "Coming from AGI, Inc.",
+          note: "Placeholder. Swap in the brief slides here when AGI, Inc. sends them.",
+        },
+
+        /* ========== 02 DESIGNING A PHYSICAL THING ========== */
+        { layout: "section", text: "Designing a physical thing", num: "02" },
+        {
+          layout: "statement",
+          text: "Software ships a change. Hardware ships a decision.",
+        },
+        {
+          layout: "two",
+          heading: "What changes when it's physical",
+          left:  { label: "Screens", body: "Undo.\nUpdate tonight.\nFree to copy." },
+          right: { label: "Objects", body: "No undo after tooling.\nEvery copy costs money.\nIt has weight, and a body to sit on." },
+        },
+        {
+          layout: "points",
+          heading: "The hardware process",
+          points: [
+            "Sketch. Hundreds, fast.",
+            "Looks-like prototype: the shape, in foam or clay.",
+            "Works-like prototype: the function, however ugly.",
+            "Looks-like works-like: one object that does both.",
+            "Design for manufacturing: can it be made ten thousand times?",
+            "Pilot run. Then production.",
+          ],
+        },
+        {
+          layout: "two",
+          heading: "Looks-like, works-like",
+          left:  { label: "Looks-like", body: "Foam, clay, a 3D print.\nHow it sits in the hand.\nNothing inside." },
+          right: { label: "Works-like", body: "A breadboard, a phone, tape.\nDoes the thing.\nUgly is fine." },
+        },
+        {
+          layout: "points",
+          heading: "Form, fit, function",
+          points: [
+            "Form: what it looks like, from across the room and up close.",
+            "Fit: how it meets the body, the pocket, the other parts.",
+            "Function: what it does when you use it.",
+          ],
+        },
+
+        /* ========== 03 THE BODY AS THE SITE ========== */
+        { layout: "section", text: "The body as the site", num: "03" },
+        {
+          layout: "statement",
+          text: "A wearable has a site, the way a building does.",
+        },
+        {
+          layout: "points",
+          heading: "Where on the body",
+          points: [
+            "Ear: hears you. Nobody sees it.",
+            "Wrist: glanced at a hundred times a day.",
+            "Chest: faces the room. Sees what you see.",
+            "Face: the best view, the hardest to wear.",
+            "Finger: always on, nothing to say.",
+            "Pocket: the phone already won here.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Ergonomics",
+          points: [
+            "Weight: grams matter on an ear, not in a bag.",
+            "Pressure: anything that pinches comes off in an hour.",
+            "Heat: a processor against skin.",
+            "Sweat, rain, a wash.",
+            "Putting it on one-handed, in the dark.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Fashion decides whether it gets worn twice.",
+        },
+        {
+          layout: "points",
+          heading: "Fashion questions",
+          points: [
+            "What does it say about the person wearing it?",
+            "Does it go with what they already own?",
+            "Who sees it, and what do they think is happening?",
+            "Does it look like a gadget, or like clothing?",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "The ones that came before",
+          points: [
+            "Apple Watch. AirPods.",
+            "Ray-Ban Meta.",
+            "Humane Ai Pin.",
+            "Rabbit r1.",
+            "Friend. Limitless.",
+            "The chrome pendant, AGI, Inc.",
+          ],
+        },
+        {
+          layout: "exercise",
+          heading: "In pairs",
+          prompt: "Pick one of those. Why did it get worn twice, or not?",
+          time: "5 min",
+        },
+
+        /* ========== 04 MATERIALS AND MAKING ========== */
+        { layout: "section", text: "Materials, and how things get made", num: "04" },
+        {
+          layout: "columns",
+          heading: "Three families",
+          items: [
+            {
+              label: "Plastics",
+              body: "Light, cheap at scale, any colour.",
+              list: ["Injection moulded", "3D printed for one-offs", "Feels cheap unless you work at it"],
+            },
+            {
+              label: "Metals",
+              body: "Cold, heavy, premium.",
+              list: ["Machined, stamped or cast", "Takes a finish: brushed, polished, anodised", "Blocks radio signals"],
+            },
+            {
+              label: "Textiles and leather",
+              body: "Soft, worn, forgiving.",
+              list: ["Cut and sewn", "Takes a wash, or doesn't", "This is where fashion lives"],
+            },
+          ],
+        },
+        {
+          layout: "points",
+          heading: "One, ten, ten thousand",
+          points: [
+            "One: 3D print it, laser cut it, sew it by hand.",
+            "Ten: machine it, cast it in silicone.",
+            "Ten thousand: injection mould, stamp, a factory line.",
+            "The design changes at every step.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Tooling is the point of no return.",
+          sub: "A mould is cut once. Every mistake in it ships ten thousand times.",
+        },
+        {
+          layout: "points",
+          heading: "Inside a wearable",
+          points: [
+            "Battery. The biggest part, always.",
+            "Processor and memory, running the model.",
+            "Microphone, camera, speaker.",
+            "Radio: Bluetooth, Wi-Fi, cellular.",
+            "Sensors: motion, heart rate, light.",
+            "Enclosure, a button, a way to charge.",
+          ],
+        },
+        {
+          layout: "statement",
+          text: "Everything inside fights for the same cubic centimetre.",
+        },
+        {
+          layout: "two",
+          heading: "On the device, or in the cloud",
+          left:  { label: "On the device", body: "Private.\nWorks without signal.\nNeeds a bigger battery and chip." },
+          right: { label: "In the cloud", body: "Small, light, cheap.\nNeeds a connection.\nEverything you say leaves the room." },
+        },
+
+        /* ========== 05 PROTOTYPE WITH NO BUDGET ========== */
+        { layout: "section", text: "Prototype with no budget", num: "05" },
+        {
+          layout: "statement",
+          text: "Prototype the experience, not the electronics.",
+        },
+        {
+          layout: "points",
+          heading: "Things you already have",
+          points: [
+            "Cardboard, foam, clay, tape.",
+            "A phone or an AirPod standing in for the device.",
+            "A person in the next room, playing the assistant.",
+            "A paper version you wear for a day.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Wizard of Oz",
+          points: [
+            "The user talks to the object.",
+            "A teammate hears it and answers as the assistant.",
+            "The user doesn't know.",
+            "You learn what people say to it before you build anything.",
+          ],
+        },
+        {
+          layout: "exercise",
+          heading: "In your group",
+          prompt: "Ten sketches of where an AI assistant could live on the body. No phones.",
+          time: "10 min",
+        },
+        {
+          layout: "statement",
+          text: "Wear it for a day before you decide anything.",
+        },
+
+        /* ========== 06 HOMEWORK ========== */
+        { layout: "section", text: "Homework", num: "06" },
+        { layout: "assignment" },
       ],
     },
   ],

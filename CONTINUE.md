@@ -95,7 +95,11 @@ It can also carry `background` (the deck's backdrop image) and `docs[]`,
 Read Me files that show up in the week's folder: each is `{ name, kind,
 state, body }`, with `body` an array of Markdown lines. Week 5 has two. Docs
 open even while a week is a draft, so a folder can go on the desktop before
-its slides are posted.
+its slides are posted. A week can also carry `videos[]`, films that open
+in a player window: each is `{ name, src, poster, state }`, with the file
+in `img/wN/`, re-encoded to 1080p so the repo stays small. Films follow the
+deck's rule and stay locked while the week is a draft. An optional `label`
+renames the week's folder on the desktop, for a folder that spans two weeks.
 
 If a week has no `slides` array, `autoDeck()` in `site.js:79` builds a usable
 deck from the title, agenda, readings and assignment. So a week is never

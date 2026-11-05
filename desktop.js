@@ -360,7 +360,7 @@
     if (!wk) return;
     var draft = wk.status === "draft";
 
-    var w = makeWindow("wk" + n, "Week " + pad2(n), {
+    var w = makeWindow("wk" + n, wk.label || ("Week " + pad2(n)), {
       w: 640, h: 300,
       run: draft ? null : function () { openDeck(n); },
       runLabel: "Open",
@@ -411,6 +411,32 @@
           dw.body.textContent = "";
           dw.body.appendChild(paintMarkdown([].concat(doc.body).join("\n")));
           dw.__built = true;
+        },
+      });
+    });
+    /* A week can also carry films: `videos` in course.js, each
+       { name, src, poster, state }. They follow the deck's rule and stay
+       locked while the week is a draft, so a reveal cannot leak early. */
+    (wk.videos || []).forEach(function (vid, k) {
+      items.push({
+        ch: "🎬",
+        name: vid.name,
+        kind: vid.kind || "Film",
+        date: wk.date,
+        state: draft ? "Not posted" : (vid.state || "Posted"),
+        run: draft ? null : function () {
+          var vw = makeWindow("vid" + n + "-" + k, vid.name, { w: 960, h: 580 });
+          if (vw.__built) return;
+          vw.body.textContent = "";
+          var v = document.createElement("video");
+          v.className = "filmframe";
+          v.controls = true;
+          v.playsInline = true;
+          v.preload = "metadata";
+          if (vid.poster) v.poster = vid.poster;
+          v.src = vid.src;
+          vw.body.appendChild(v);
+          vw.__built = true;
         },
       });
     });
@@ -571,7 +597,7 @@
         out.push({
           id: "wk" + wk,
           ch: "📁",
-          label: "Week " + wk,
+          label: week.label || ("Week " + wk),
           run: function () { openFolder(wk); },
         });
       })(i);

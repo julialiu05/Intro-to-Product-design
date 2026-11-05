@@ -4964,6 +4964,16 @@ const COURSE = {
           ],
         },
         {
+          layout: "points",
+          heading: "What they want after one month",
+          points: [
+            "A pendant design ready for factory prototyping",
+            "An app prototype tested with real users",
+            "A brand and content kit ready to post",
+            "A waitlist with real sign-ups and a rollout event people attend",
+          ],
+        },
+        {
           layout: "statement",
           text: "Not a pitch competition.",
           sub: "A real product rollout to founders, investors, creatives and press.",
@@ -5088,16 +5098,6 @@ const COURSE = {
             "A phone or an AirPod standing in for the device.",
             "A person in the next room, playing the assistant.",
             "A paper version you wear for a day.",
-          ],
-        },
-        {
-          layout: "points",
-          heading: "Wizard of Oz",
-          points: [
-            "The user talks to the object.",
-            "A teammate hears it and answers as the assistant.",
-            "The user doesn't know.",
-            "You learn what people say to it before you build anything.",
           ],
         },
         {

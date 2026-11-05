@@ -4894,18 +4894,13 @@ const COURSE = {
         { layout: "title" },
 
         /* ========== 01 PROJECT 2 ========== */
+        /* From the memo. The wording is theirs. */
         { layout: "section", text: "Project 2", num: "01" },
-        {
-          layout: "statement",
-          text: "Hardware, fashion, AI assistants.",
-          sub: "What's the object where all three meet?",
-        },
         {
           layout: "statement",
           text: "With AGI, Inc.",
           sub: "Div Garg, Founder. William, Head of Growth & Wearables.",
         },
-        /* From the memo. The wording is theirs. */
         {
           layout: "statement",
           text: "For four weeks, you are the founding team of a hardware startup.",
@@ -4918,12 +4913,8 @@ const COURSE = {
             "What it is: a pendant worn as jewelry that connects to your phone. Tap it, speak, and AGI's agents take action for you, hands-free.",
             "What it stands for: personal AI that grows with you, hands-free control, and agents working in the background.",
             "Who it's for: ambitious 18 to 30 year olds in startups, design, fashion and VC. Serious about work, full life outside it.",
-            "The bar: people should want to wear it even when it's switched off.",
+            "The bar: people should want to wear it even when it's switched off. Jewelry first, technology second.",
           ],
-        },
-        {
-          layout: "statement",
-          text: "Jewelry first, technology second.",
         },
         {
           layout: "points",
@@ -4962,11 +4953,6 @@ const COURSE = {
           ],
         },
         {
-          layout: "statement",
-          text: "Each department picks a lead. The leads meet weekly as the leadership team.",
-          sub: "A good startup is one team, not four.",
-        },
-        {
           layout: "points",
           heading: "The 4 weeks",
           points: [
@@ -4981,16 +4967,6 @@ const COURSE = {
           layout: "statement",
           text: "Not a pitch competition.",
           sub: "A real product rollout to founders, investors, creatives and press.",
-        },
-        {
-          layout: "points",
-          heading: "What success looks like",
-          points: [
-            "A pendant design ready for factory prototyping",
-            "An app prototype tested with real users",
-            "A brand and content kit ready to post",
-            "A waitlist with real sign-ups and a rollout event people attend",
-          ],
         },
         {
           layout: "points",
@@ -5027,45 +5003,14 @@ const COURSE = {
             "Pilot run. Then production.",
           ],
         },
-        {
-          layout: "two",
-          heading: "Looks-like, works-like",
-          left:  { label: "Looks-like", body: "Foam, clay, a 3D print.\nHow it sits in the hand.\nNothing inside." },
-          right: { label: "Works-like", body: "A breadboard, a phone, tape.\nDoes the thing.\nUgly is fine." },
-        },
-        {
-          layout: "points",
-          heading: "Form, fit, function",
-          points: [
-            "Form: what it looks like, from across the room and up close.",
-            "Fit: how it meets the body, the pocket, the other parts.",
-            "Function: what it does when you use it.",
-          ],
-        },
 
-        /* ========== 03 THE BODY AS THE SITE ========== */
-        { layout: "section", text: "The body as the site", num: "03" },
-        {
-          layout: "statement",
-          text: "A wearable has a site, the way a building does.",
-        },
-        {
-          layout: "points",
-          heading: "Where on the body",
-          points: [
-            "Ear: hears you. Nobody sees it.",
-            "Wrist: glanced at a hundred times a day.",
-            "Chest: faces the room. Sees what you see.",
-            "Face: the best view, the hardest to wear.",
-            "Finger: always on, nothing to say.",
-            "Pocket: the phone already won here.",
-          ],
-        },
+        /* ========== 03 WORN ON THE BODY ========== */
+        { layout: "section", text: "Worn on the body", num: "03" },
         {
           layout: "points",
           heading: "Ergonomics",
           points: [
-            "Weight: grams matter on an ear, not in a bag.",
+            "Weight: grams matter on a chain, not in a bag.",
             "Pressure: anything that pinches comes off in an hour.",
             "Heat: a processor against skin.",
             "Sweat, rain, a wash.",
@@ -5083,7 +5028,7 @@ const COURSE = {
             "What does it say about the person wearing it?",
             "Does it go with what they already own?",
             "Who sees it, and what do they think is happening?",
-            "Does it look like a gadget, or like clothing?",
+            "Does it look like a gadget, or like jewelry?",
           ],
         },
         {
@@ -5098,36 +5043,9 @@ const COURSE = {
             "The AGI Pendant.",
           ],
         },
-        {
-          layout: "exercise",
-          heading: "In pairs",
-          prompt: "Pick one of those. Why did it get worn twice, or not?",
-          time: "5 min",
-        },
 
-        /* ========== 04 MATERIALS AND MAKING ========== */
-        { layout: "section", text: "Materials, and how things get made", num: "04" },
-        {
-          layout: "columns",
-          heading: "Three families",
-          items: [
-            {
-              label: "Plastics",
-              body: "Light, cheap at scale, any colour.",
-              list: ["Injection moulded", "3D printed for one-offs", "Feels cheap unless you work at it"],
-            },
-            {
-              label: "Metals",
-              body: "Cold, heavy, premium.",
-              list: ["Machined, stamped or cast", "Takes a finish: brushed, polished, anodised", "Blocks radio signals"],
-            },
-            {
-              label: "Textiles and leather",
-              body: "Soft, worn, forgiving.",
-              list: ["Cut and sewn", "Takes a wash, or doesn't", "This is where fashion lives"],
-            },
-          ],
-        },
+        /* ========== 04 HOW THINGS GET MADE ========== */
+        { layout: "section", text: "How things get made", num: "04" },
         {
           layout: "points",
           heading: "One, ten, ten thousand",
@@ -5154,16 +5072,6 @@ const COURSE = {
             "Sensors: motion, heart rate, light.",
             "Enclosure, a button, a way to charge.",
           ],
-        },
-        {
-          layout: "statement",
-          text: "Everything inside fights for the same cubic centimetre.",
-        },
-        {
-          layout: "two",
-          heading: "On the device, or in the cloud",
-          left:  { label: "On the device", body: "Private.\nWorks without signal.\nNeeds a bigger battery and chip." },
-          right: { label: "In the cloud", body: "Small, light, cheap.\nNeeds a connection.\nEverything you say leaves the room." },
         },
 
         /* ========== 05 PROTOTYPE WITH NO BUDGET ========== */
@@ -5198,19 +5106,9 @@ const COURSE = {
           prompt: "Ten sketches of the pendant. Round, a bit bigger than a quarter, steel, one button. No phones.",
           time: "10 min",
         },
-        {
-          layout: "statement",
-          text: "Wear it for a day before you decide anything.",
-        },
 
-        /* ========== 06 CHOOSE YOUR DEPARTMENT ========== */
-        { layout: "section", text: "Choose your department", num: "06" },
-        {
-          layout: "exercise",
-          heading: "Everyone",
-          prompt: "Pick your department. Then each department picks a lead.",
-          time: "15 min",
-        },
+        /* ========== 06 HOMEWORK ========== */
+        { layout: "section", text: "Homework", num: "06" },
         { layout: "assignment" },
       ],
     },

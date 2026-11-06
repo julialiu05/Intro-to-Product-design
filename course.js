@@ -4716,6 +4716,13 @@ const COURSE = {
           note: "How Apple thinks about a thing worn on the body: glances, not sessions. Short, and most of it applies to any wearable.",
         },
         {
+          title: "Designing for Wearables: 7 Rules and Best Practices",
+          author: "Cynthia Vinney, UX Design Institute",
+          kind: "Post",
+          url: "https://www.uxdesigninstitute.com/blog/designing-for-wearables/",
+          note: "Five-minute read. The challenges and rules on the Week 7 slides come from here: power, size, ergonomics, value, privacy, and glanceability.",
+        },
+        {
           title: "The Worst Product I've Ever Reviewed... For Now",
           author: "Marques Brownlee",
           kind: "Video",
@@ -4993,10 +5000,6 @@ const COURSE = {
         /* ========== 02 DESIGNING A PHYSICAL THING ========== */
         { layout: "section", text: "Designing a physical thing", num: "02" },
         {
-          layout: "statement",
-          text: "Software ships a change. Hardware ships a decision.",
-        },
-        {
           layout: "two",
           heading: "What changes when it's physical",
           left:  { label: "Screens", body: "Undo.\nUpdate tonight.\nFree to copy." },
@@ -5028,6 +5031,32 @@ const COURSE = {
             "Putting it on one-handed, in the dark.",
           ],
         },
+        /* From "Designing for Wearables: 7 Rules and Best Practices" by
+           Cynthia Vinney, UX Design Institute, October 2023. The wording
+           is hers where quoted. */
+        {
+          layout: "points",
+          heading: "Five challenges",
+          points: [
+            "Power: limited battery restricts what a device can do.",
+            "Size: fitting the features into a small, attractive device. Design larger, then shrink.",
+            "Ergonomics: “The user shouldn't be constantly reminded that they've got a wearable on them.”",
+            "Value: stylish, comfortable, and technology people actually want.",
+            "Privacy: data can be seen by people nearby.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Six rules",
+          points: [
+            "Fashionability: a stylish, comfortable device sells before its software is considered.",
+            "Glanceability: exactly what the user needs, when they need it. “Anything more requires too much from the user.”",
+            "Keep it simple: limit functionality.",
+            "Minimal interface: little information, sharp contrast, basic type.",
+            "Privacy: vibrate before showing anything.",
+            "Wireless: where it sits on the body, how much data, how far, how fast.",
+          ],
+        },
         {
           layout: "statement",
           text: "Fashion decides whether it gets worn twice.",
@@ -5057,16 +5086,6 @@ const COURSE = {
 
         /* ========== 04 HOW THINGS GET MADE ========== */
         { layout: "section", text: "How things get made", num: "04" },
-        {
-          layout: "points",
-          heading: "One, ten, ten thousand",
-          points: [
-            "One: 3D print it, laser cut it, sew it by hand.",
-            "Ten: machine it, cast it in silicone.",
-            "Ten thousand: injection mould, stamp, a factory line.",
-            "The design changes at every step.",
-          ],
-        },
         {
           layout: "statement",
           text: "Tooling is the point of no return.",

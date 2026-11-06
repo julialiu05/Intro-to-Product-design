@@ -4678,10 +4678,10 @@ const COURSE = {
       status: "draft",
       /* The same wallpaper the reveal film ends on. */
       background: "img/wall-3.jpg",
-      /* Desktop effects for the week. A crosshair pointer for a week spent
-         measuring physical things, and no bubbles. Delete the line to go
-         back to normal. */
-      fx: { cursor: "crosshair", bubbles: false },
+      /* Desktop effects for the week. A round pointer for a week about a
+         round object, and no bubbles. Delete the line to go back to normal.
+         `cursor` takes "circle" or any CSS cursor value. */
+      fx: { cursor: "circle", bubbles: false },
       summary: "",
       agenda: [
         "Project 2 reveal",

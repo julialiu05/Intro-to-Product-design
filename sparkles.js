@@ -28,7 +28,25 @@
     var w = (COURSE.weeks || []).filter(function (x) { return x.week === COURSE.CURRENT_WEEK; })[0];
     return (w && w.fx) || {};
   })();
-  if (FX.cursor) document.documentElement.style.cursor = FX.cursor;
+  /* "circle" is a ring drawn on a canvas: a dark 2px ring with a white
+     halo so it reads on any wallpaper, hotspot in the centre. Anything else
+     is passed through as a CSS cursor value. */
+  function ringCursor() {
+    var d = 22, c = document.createElement("canvas");
+    c.width = c.height = d * 2;
+    var g = c.getContext("2d");
+    g.scale(2, 2);
+    g.beginPath(); g.arc(d / 2, d / 2, 7.5, 0, 6.283);
+    g.lineWidth = 4; g.strokeStyle = "rgba(255,255,255,.95)"; g.stroke();
+    g.lineWidth = 2; g.strokeStyle = "#1d1d1f"; g.stroke();
+    return "url(" + c.toDataURL() + ") " + (d / 2) + " " + (d / 2) + ", auto";
+  }
+  if (FX.cursor) {
+    var cur = FX.cursor === "circle" ? ringCursor() : FX.cursor;
+    var st = document.createElement("style");
+    st.textContent = "html, body, button, a, .icon, .dock__app, .row { cursor: " + cur + " !important; }";
+    document.head.appendChild(st);
+  }
   var BUBBLES = FX.bubbles !== false;
 
   /* Pastel fairy colours: white, pink, lavender, butter, ice blue. */

@@ -101,8 +101,9 @@ in `img/wN/`, re-encoded to 1080p so the repo stays small. Films follow the
 deck's rule and stay locked while the week is a draft. An optional `label`
 renames the week's folder on the desktop, for a folder that spans two weeks.
 An optional `fx` on the current week changes the desktop's feel for that
-week: `{ cursor: "crosshair", bubbles: false }` sets the pointer to any CSS
-cursor value and turns the floating bubbles off. Only the current week's
+week: `{ cursor: "circle", bubbles: false }` sets the pointer ("circle" is a
+drawn ring; anything else is a CSS cursor value) and turns the floating
+bubbles off. Only the current week's
 `fx` is read.
 
 If a week has no `slides` array, `autoDeck()` in `site.js:79` builds a usable

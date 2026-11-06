@@ -272,13 +272,12 @@
       id: "skill", title: "Let an AI do all of it",
       lead: "All of this is also a skill: a set of instructions your AI agent reads so it does the steps with you, in order, and hands every log-in back to you.",
       steps: [
-        "Download the github-pages folder from the skills folder in the course repo.",
+        "Ask us for the github-pages skill folder in class or on Slack.",
         "Claude Code: put it at .claude/skills/github-pages/SKILL.md inside your project. Codex, Cursor and others read the same format; check where their skills folder is.",
         "No agent? Paste the contents of SKILL.md into any AI chat first.",
         "Then say the line below.",
       ],
       code: "Use the github-pages skill. Put this folder online.",
-      links: [["skills folder", "https://github.com/julialiu05/Intro-to-Product-design/tree/main/skills"]],
     },
   ];
 

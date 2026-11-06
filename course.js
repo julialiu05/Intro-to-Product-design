@@ -4673,7 +4673,7 @@ const COURSE = {
       week: 7,
       date: "Nov 5",
       title: "IPD × AGI, Inc.",
-      status: "draft",
+      status: "published",
       /* The same wallpaper the reveal film ends on. */
       background: "img/wall-3.jpg",
       /* Desktop effects for the week. A round pointer for a week about a

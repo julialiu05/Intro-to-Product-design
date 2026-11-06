@@ -162,6 +162,224 @@
   });
 
   /* ==========================================================================
+     GITHUB
+     The setup guide as an app: make an account, get the tools, put a project
+     folder on GitHub, turn on GitHub Pages, keep it updated, work as a group.
+     Each step has the buttons route and the terminal route, and a prompt to
+     hand the step to an AI agent. Ticks are remembered in localStorage.
+     ========================================================================== */
+
+  var GH_STEPS = [
+    {
+      id: "account", title: "Make a GitHub account",
+      lead: "GitHub is a shared folder for your project that remembers every version. It is also free hosting for your site. One account, for the whole course and after.",
+      steps: [
+        "Sign up at github.com/signup. Use your berkeley.edu email, or your own email and add the Berkeley one later under Settings, Emails.",
+        "Pick a username you would put on a resume. It ends up in your website's address.",
+        "Verify as a student at education.github.com. That gives you GitHub Pro free, which you only need if you want a private repository to have a website.",
+      ],
+      links: [["github.com/signup", "https://github.com/signup"], ["education.github.com", "https://education.github.com"]],
+    },
+    {
+      id: "tools", title: "Get the tools",
+      lead: "Two ways to use GitHub. Buttons, with the GitHub Desktop app. Or the terminal, with git and the GitHub command line, which is the way an AI agent can do it with you. Either is fine. You can switch later.",
+      steps: [
+        "Buttons: download GitHub Desktop and open it.",
+        "Terminal, on a Mac: open Terminal (Cmd+Space, type Terminal) and paste the command below. If it says brew is not found, install Homebrew first from brew.sh, then paste again.",
+        "Terminal, on Windows: install Git for Windows from git-scm.com and the GitHub CLI from cli.github.com.",
+      ],
+      code: "brew install git gh",
+      links: [["desktop.github.com", "https://desktop.github.com"], ["brew.sh", "https://brew.sh"], ["cli.github.com", "https://cli.github.com"]],
+    },
+    {
+      id: "login", title: "Log in",
+      lead: "You do this one yourself, once. Never give a password to an AI agent. If an agent needs you logged in, it should stop and hand this to you.",
+      steps: [
+        "Buttons: in GitHub Desktop, Sign in to GitHub.com, and approve in the browser.",
+        "Terminal: paste the command below. Answer GitHub.com, HTTPS, Yes, Login with a web browser. It shows a code; paste it into the browser page it opens.",
+        "In Claude Code, type ! before the command to run it yourself: ! gh auth login",
+      ],
+      code: "gh auth login",
+    },
+    {
+      id: "repo", title: "Put your project on GitHub",
+      lead: "A repository is one project folder on GitHub. Your folder needs index.html at the top level, not inside a subfolder, because that is the file the website opens.",
+      steps: [
+        "Buttons: in GitHub Desktop, File, Add Local Repository, choose the folder, then Publish repository. Untick Keep this code private if you want a free website.",
+        "Terminal: go into the folder, then paste the lines below one at a time. Replace my-project with your project's name, no spaces.",
+        "Public or private? Public means anyone can see the files and the website is free. Private hides the files and the website needs student Pro from step 1.",
+      ],
+      code: "cd ~/Desktop/my-project\ngit init\ngit add .\ngit commit -m \"First version\"\ngh repo create my-project --public --source=. --push",
+      ai: "I'm a design student and I have never used GitHub. Turn this folder into a git repository and put it on GitHub, one step at a time. Before each step, tell me in one plain sentence what it does, then do it. When I need to log in, stop and give me the command to run myself. Never ask for my password. Ask me whether it should be public or private and explain the difference in one sentence. Give me the link, then stop.",
+    },
+    {
+      id: "pages", title: "Turn on GitHub Pages",
+      lead: "GitHub Pages serves the files in your repository as a website, free, at an address you can put on a resume.",
+      steps: [
+        "On github.com, open your repository, then Settings, then Pages in the left sidebar.",
+        "Under Build and deployment, set Source to Deploy from a branch. Branch: main, folder: / (root). Save.",
+        "Wait a minute, reload the Pages settings, and the address appears at the top: https://USERNAME.github.io/REPO/",
+        "Terminal, if you would rather: the command below does the same. Replace USERNAME and REPO.",
+        "Have your own domain? Settings, Pages, Custom domain. Optional.",
+      ],
+      code: "gh api -X POST repos/USERNAME/REPO/pages -f \"source[branch]=main\" -f \"source[path]=/\"",
+      ai: "Publish this folder as a website with GitHub Pages and give me the address. If the repository is private, tell me what that changes before doing anything.",
+    },
+    {
+      id: "check", title: "Check the live site",
+      lead: "Open the address on your phone as well as your laptop. The things that break are always the same three.",
+      steps: [
+        "A broken image is almost always capital letters. Photo.JPG in the folder and photo.jpg in the HTML works on your Mac and fails on GitHub. Make the HTML match the file exactly.",
+        "A 404 on the home page means index.html is not at the top level of the repository.",
+        "Nothing changed? Wait a minute and hard refresh: Cmd+Shift+R.",
+      ],
+      ai: "Open my GitHub Pages site and check that every image and video loads. For any that don't, find the mismatch between the HTML and the real file name, including capital letters, and fix the HTML.",
+    },
+    {
+      id: "update", title: "Update it, every time",
+      lead: "From now on this is the whole routine. Save a version, upload it, and the site updates within a minute.",
+      steps: [
+        "Buttons: in GitHub Desktop, write a short summary, Commit to main, then Push origin.",
+        "Terminal: the three lines below, from inside the folder.",
+        "Write the summary for a person: \"Added testing section and video\", not \"update\".",
+      ],
+      code: "git add .\ngit commit -m \"What changed, in a few words\"\ngit push",
+      ai: "Save my work to GitHub. First tell me in plain words what changed since the last save. Then write a short message describing it, save it, and upload it. If anything goes wrong, stop and explain before you fix it.",
+    },
+    {
+      id: "group", title: "Work as a group",
+      lead: "One repository, every name on it. Everyone can edit; GitHub keeps every version, so nothing is lost.",
+      steps: [
+        "Add your group: on github.com, Settings, Collaborators, Add people, their GitHub usernames. They accept by email.",
+        "Before you start working: get the latest. Buttons: Fetch origin, then Pull. Terminal: git pull.",
+        "Avoid two people editing the same file at the same moment. If it happens, git stops and asks which version to keep. Don't guess: read both.",
+      ],
+      code: "git pull",
+      ai: "Get my group's latest changes from GitHub. If two of us changed the same thing, don't pick for me: show me both versions in plain words and ask which one to keep.",
+    },
+    {
+      id: "broke", title: "I broke something",
+      lead: "This is the point of GitHub. Every save is still there.",
+      steps: [
+        "See your last five saves with the first line below.",
+        "Put one file back to how it was at the last save with the second line. It only touches that file.",
+        "Anything bigger, ask an AI with the prompt below, or ask us in class. Never run a command with the word force or hard in it unless you know why.",
+      ],
+      code: "git log --oneline -5\ngit checkout -- path/to/file",
+      ai: "I broke something. Show me my last five saves, each in one plain sentence, and help me go back to the one I pick without deleting anything.",
+    },
+    {
+      id: "skill", title: "Let an AI do all of it",
+      lead: "All of this is also a skill: a set of instructions your AI agent reads so it does the steps with you, in order, and hands every log-in back to you.",
+      steps: [
+        "Download the github-pages folder from the skills folder in the course repo.",
+        "Claude Code: put it at .claude/skills/github-pages/SKILL.md inside your project. Codex, Cursor and others read the same format; check where their skills folder is.",
+        "No agent? Paste the contents of SKILL.md into any AI chat first.",
+        "Then say the line below.",
+      ],
+      code: "Use the github-pages skill. Put this folder online.",
+      links: [["skills folder", "https://github.com/julialiu05/Intro-to-Product-design/tree/main/skills"]],
+    },
+  ];
+
+  function buildGitHub(body) {
+    var KEY = "des198.github.done";
+    var done = {};
+    try { done = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { done = {}; }
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} }
+
+    var wrap = node("div", "gh");
+    var nav = node("nav", "gh__nav");
+    nav.setAttribute("aria-label", "Steps");
+    var main = node("section", "gh__main");
+    wrap.appendChild(nav); wrap.appendChild(main);
+    body.appendChild(wrap);
+
+    var at = 0, buttons = [];
+    for (var i = 0; i < GH_STEPS.length; i++) if (!done[GH_STEPS[i].id]) { at = i; break; }
+
+    function codeBlock(text) {
+      var pre = node("pre", "gh__code", text);
+      var cp = node("button", "gh__copy", "Copy");
+      cp.type = "button";
+      cp.addEventListener("click", function () {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText(text).then(function () {
+          cp.textContent = "Copied";
+          setTimeout(function () { cp.textContent = "Copy"; }, 1200);
+        });
+      });
+      pre.appendChild(cp);
+      return pre;
+    }
+
+    function show(i) {
+      at = i;
+      var st = GH_STEPS[i];
+      buttons.forEach(function (b, j) { b.setAttribute("aria-current", j === i ? "true" : "false"); });
+      main.textContent = "";
+      main.appendChild(node("p", "eyebrow", "Step " + (i + 1) + " of " + GH_STEPS.length));
+      main.appendChild(node("h2", null, st.title));
+      main.appendChild(node("p", null, st.lead));
+      var ol = node("ol");
+      st.steps.forEach(function (t) { ol.appendChild(node("li", null, t)); });
+      main.appendChild(ol);
+      if (st.code) {
+        main.appendChild(node("h3", null, "Paste this"));
+        main.appendChild(codeBlock(st.code));
+      }
+      if (st.ai) {
+        main.appendChild(node("h3", null, "Or ask your AI agent"));
+        main.appendChild(codeBlock(st.ai));
+      }
+      if (st.links) {
+        var p = node("p");
+        st.links.forEach(function (l, k) {
+          if (k) p.appendChild(document.createTextNode(" · "));
+          var a = node("a", null, l[0]);
+          a.href = l[1]; a.target = "_blank"; a.rel = "noopener";
+          p.appendChild(a);
+        });
+        main.appendChild(p);
+      }
+      var foot = node("div", "gh__foot");
+      var tick = node("button", "gh__btn", done[st.id] ? "Done ✓" : "Mark done");
+      tick.type = "button";
+      tick.addEventListener("click", function () {
+        done[st.id] = !done[st.id]; save();
+        buttons[i].dataset.done = done[st.id] ? "true" : "false";
+        tick.textContent = done[st.id] ? "Done ✓" : "Mark done";
+      });
+      foot.appendChild(tick);
+      if (i + 1 < GH_STEPS.length) {
+        var next = node("button", "gh__btn gh__btn--go", "Next");
+        next.type = "button";
+        next.addEventListener("click", function () { show(i + 1); main.scrollTop = 0; });
+        foot.appendChild(next);
+      }
+      main.appendChild(foot);
+      main.scrollTop = 0;
+    }
+
+    GH_STEPS.forEach(function (st, i) {
+      var b = node("button", "gh__step");
+      b.type = "button";
+      b.dataset.done = done[st.id] ? "true" : "false";
+      b.appendChild(node("span", "gh__tick"));
+      b.appendChild(node("span", null, st.title));
+      b.addEventListener("click", function () { show(i); });
+      nav.appendChild(b);
+      buttons.push(b);
+    });
+    show(at);
+  }
+
+  Desktop.add({
+    id: "github", ch: "🐙", label: "GitHub", w: 720, h: 560,
+    build: buildGitHub,
+  });
+
+  /* ==========================================================================
      TERMINAL
      The course as a command line. It reads the same course.js as everything
      else, so `ls` and `due` stay right as weeks are posted. Draft weeks are
@@ -190,7 +408,7 @@
     help: {
       about: "list commands",
       run: function () {
-        return Object.keys(COMMANDS).map(function (k) {
+        return Object.keys(COMMANDS).filter(function (k) { return COMMANDS[k].about; }).map(function (k) {
           return "  " + k.padEnd(10) + COMMANDS[k].about;
         });
       },
@@ -396,6 +614,31 @@
       run: function () { return [new Date().toString().replace(/ GMT.*$/, "")]; },
     },
     clear: { about: "clear the screen", run: function () { return null; } },
+    whoami: { about: "", run: function () { return ["a designer. for the next four weeks, a founder."]; } },
+    sl: {
+      about: "",
+      run: function () {
+        if (!window.Eggs || !window.Eggs.train()) return ["🚂 (the train runs when motion is on)"];
+        return ["🚂 choo"];
+      },
+    },
+    say: {
+      about: "",
+      run: function (arg) {
+        if (!arg) return ["say what?"];
+        if (!("speechSynthesis" in window)) return ["this browser can't speak"];
+        speechSynthesis.speak(new SpeechSynthesisUtterance(arg));
+        return ["🔈 " + arg];
+      },
+    },
+    cowsay: {
+      about: "",
+      run: function (arg) {
+        var t = arg || "moo";
+        var bar = new Array(t.length + 3).join("-");
+        return [" " + bar, "< " + t + " >", " " + bar, "        \\   ^__^", "         \\  (oo)\\_______", "            (__)\\       )\\/\\", "                ||----w |", "                ||     ||"];
+      },
+    },
   };
 
   function buildTerminal(body) {
@@ -429,7 +672,8 @@
       var parts = cmd.split(/\s+/), name = parts[0].toLowerCase();
       if (name === "clear") { out.textContent = ""; return; }
       if (name === "cd") { print("there's only one folder here. try ls"); return; }
-      if (name === "sudo") { print("nice try"); return; }
+      if (name === "sudo") { print(/make me a sandwich/.test(cmd) ? "okay." : "nice try"); return; }
+      if (name === "rm") { print("no."); print("this is a desktop, not a demolition site", "term__dim"); return; }
       var c = COMMANDS[name];
       if (!c) { print("zsh: command not found: " + parts[0]); print("type help to see what works", "term__dim"); return; }
       (c.run(parts.slice(1).join(" ")) || []).forEach(function (r) { print(r); });

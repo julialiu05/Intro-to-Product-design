@@ -47,6 +47,25 @@ screens. It never invents research, quotes or numbers: if something is
 missing, it leaves a visible gap and tells you. Install it the same way as
 the one above, and start it with "Use the case-study-page skill."
 
+## clean-case-study
+
+The visual layer for a case study: a calm, editorial single page with one
+column of writing, large captioned figures, a sticky side nav and a
+metadata grid, in plain HTML and CSS. It carries its own type scale,
+spacing and colour tokens, and refuses cards, gradients, shadows and emoji.
+Use it after `case-study-page` has the words in place, or on any project
+write-up. Start it with "Use the clean-case-study skill."
+
+## github-pages
+
+Puts a project folder on GitHub and live at a `github.io` address, one step
+at a time, for someone who has never opened a terminal. It explains each
+step before doing it, hands every log-in back to you, never asks for a
+password and never deletes anything. Ends with the three commands you run
+from then on. The GitHub app in the course site's dock walks through the
+same steps by hand. Start it with "Use the github-pages skill. Put this
+folder online."
+
 ## No paid plan?
 
 Claude Code needs a paid Claude plan. Free options that read these skills:

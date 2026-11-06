@@ -1677,3 +1677,103 @@ body {
 @media (max-height: 840px) {
   .sc-slide .s-site__win { height: min(44vh, 430px); }
 }
+
+/* ------------------------------------------------------------- GitHub --- */
+/* The setup guide. A list of steps on the left, one step on the right, and
+   a tick that remembers itself. Same bones as the Finder window. */
+
+.gh {
+  flex: 1; display: flex; min-height: 0; min-width: 0; font-size: 13px;
+  background: var(--content);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-radius: var(--r-in);
+  overflow: hidden;
+}
+.gh__nav {
+  flex: none; width: 190px; overflow: auto;
+  padding: 8px 6px; border-right: .5px solid var(--hair);
+}
+.gh__step {
+  display: flex; align-items: center; gap: 8px;
+  width: 100%; padding: 6px 8px;
+  appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 7px; background: transparent;
+  color: var(--ink); font: inherit; font-size: 12.5px; text-align: left; cursor: pointer;
+}
+.gh__step:hover { background: var(--sel-idle); }
+.gh__step[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
+.gh__tick {
+  flex: none; width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid currentColor; opacity: .45;
+  display: grid; place-items: center; font-size: 10px; line-height: 1;
+}
+.gh__step[data-done="true"] .gh__tick { opacity: 1; }
+.gh__step[data-done="true"] .gh__tick::before { content: "✓"; }
+.gh__main { flex: 1; min-width: 0; overflow: auto; padding: 18px 22px 24px; }
+.gh__main .eyebrow {
+  margin: 0 0 4px; font-size: 11px; font-weight: 590;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint);
+}
+.gh__main h2 { margin: 0 0 10px; font-size: 19px; font-weight: 640; letter-spacing: -.015em; }
+.gh__main p, .gh__main li { line-height: 1.55; max-width: 60ch; }
+.gh__main p { margin: 0 0 10px; }
+.gh__main ol { margin: 0 0 12px; padding-left: 20px; }
+.gh__main li { margin-bottom: 4px; }
+.gh__main a { color: var(--accent); }
+.gh__main h3 {
+  margin: 16px 0 6px; font-size: 11px; font-weight: 590;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft);
+}
+.gh__code {
+  position: relative; margin: 0 0 12px; padding: 10px 12px;
+  border-radius: 8px; background: var(--ink); color: #f5f5f7;
+  font: 12px/1.55 ui-monospace, "SF Mono", Menlo, monospace;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.gh__copy {
+  position: absolute; top: 6px; right: 6px;
+  padding: 2px 8px; appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 6px; background: rgba(255,255,255,.14);
+  color: #fff; font: inherit; font-size: 11px; cursor: pointer;
+}
+.gh__copy:hover { background: rgba(255,255,255,.26); }
+.gh__foot {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  margin-top: 18px; padding-top: 12px; border-top: .5px solid var(--hair);
+}
+.gh__btn {
+  padding: 5px 12px; appearance: none; -webkit-appearance: none;
+  border: 0; border-radius: 7px; background: var(--sel-idle);
+  color: var(--ink); font: inherit; font-size: 12.5px; cursor: pointer;
+}
+.gh__btn:hover { filter: brightness(.96); }
+.gh__btn--go { background: var(--accent); color: var(--accent-ink); }
+
+/* --------------------------------------------------------- easter eggs --- */
+
+.toast {
+  position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden;
+}
+.toast span { position: absolute; left: 0; top: 0; will-change: transform; filter: drop-shadow(0 4px 8px rgba(0,0,0,.18)); }
+
+.train {
+  position: fixed; left: 0; bottom: 110px; z-index: 95; pointer-events: none;
+  font-size: 44px; white-space: nowrap;
+  animation: train-run 6s linear forwards;
+}
+@keyframes train-run {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-110%); }
+}
+
+.dock__app--wave { animation: dock-wave .6s ease-out both; }
+@keyframes dock-wave {
+  0%   { transform: translateY(0); }
+  35%  { transform: translateY(-22px); }
+  100% { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast, .train { display: none; }
+  .dock__app--wave { animation: none; }
+}

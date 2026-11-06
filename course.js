@@ -4740,15 +4740,15 @@ const COURSE = {
           note: "Optional. One process per spread: injection moulding, CNC, casting, sewing. Flip through it to see what a factory can and cannot do.",
         },
       ],
-      /* Week 1 of the sprint, from the memo: "Teams formed, NDA signed,
-         research underway", and Week 2 is "Each department shows 2 to 3
-         directions; one picked". */
+      /* Ideas in words, not sketches: the point is to think about the
+         object before drawing it. Week 2 of the sprint is concepts, so these
+         feed the department directions on Nov 12. */
       assignment: {
-        title: "Context and research",
+        title: "Ideas, in words",
         due: "Thu Nov 12, 6:00pm",
         dueDate: "2026-11-12",
-        body: "Sign the NDA, join the Slack, and choose your department. Then research: talk to people who fit the audience, and study jewelry, wearables and competitors. Come on Nov 12 with your department's 2 to 3 directions for the next product.",
-        deliverable: "One post per department, every name on it: what you learned from research, and the 2 to 3 directions you will present.",
+        body: "Come in with ideas for the next product, written in words, not sketches. Hardware, fashion, AI assistants: what's the object where all three meet? Three ideas, a short paragraph each: what it is, who wears it, what happens when you use it, and why they'd wear it switched off.",
+        deliverable: "One post per person: three ideas, a paragraph each. No drawings yet.",
       },
       materials: [],
       videos: [

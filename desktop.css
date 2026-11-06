@@ -1687,8 +1687,7 @@ body {
   background: var(--content);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   backdrop-filter: blur(20px) saturate(160%);
-  border-radius: var(--r-in);
-  overflow: hidden;
+  overflow: hidden;   /* flush with the window, which clips the corners */
 }
 .gh__nav {
   flex: none; width: 190px; overflow: auto;

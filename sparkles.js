@@ -20,6 +20,17 @@
 
   if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+  /* The current week can turn things off: `fx: { bubbles: false }` on the
+     week object in course.js. The cursor is set there too, so a week can
+     change the feel of the desktop without touching any code. */
+  var FX = (function () {
+    if (typeof COURSE === "undefined") return {};
+    var w = (COURSE.weeks || []).filter(function (x) { return x.week === COURSE.CURRENT_WEEK; })[0];
+    return (w && w.fx) || {};
+  })();
+  if (FX.cursor) document.documentElement.style.cursor = FX.cursor;
+  var BUBBLES = FX.bubbles !== false;
+
   /* Pastel fairy colours: white, pink, lavender, butter, ice blue. */
   var DUST = ["#ffffff", "#ffd6f5", "#e8d9ff", "#fff1bf", "#cdf3ff"];
 
@@ -161,7 +172,7 @@
       t: 0,
     };
   }
-  for (var b = 0; b < want; b++) bubbles.push(bubble(true));
+  for (var b = 0; b < (BUBBLES ? want : 0); b++) bubbles.push(bubble(true));
 
   function drawBubbles(dt) {
     bx.clearRect(0, 0, W, H);

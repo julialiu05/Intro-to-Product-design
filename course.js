@@ -4682,7 +4682,7 @@ const COURSE = {
       agenda: [
         "Project 2 reveal",
         "The brief from AGI, Inc.",
-        "What they started with",
+        "What they started with, and the next product",
         "One company, four departments",
         "The 4 weeks",
         "Designing a physical thing",
@@ -4738,7 +4738,7 @@ const COURSE = {
         title: "Context and research",
         due: "Thu Nov 12, 6:00pm",
         dueDate: "2026-11-12",
-        body: "Sign the NDA, join the Slack, and choose your department. Then research: talk to people who fit the audience, and study jewelry, wearables and competitors. Come on Nov 12 with your department's 2 to 3 directions.",
+        body: "Sign the NDA, join the Slack, and choose your department. Then research: talk to people who fit the audience, and study jewelry, wearables and competitors. Come on Nov 12 with your department's 2 to 3 directions for the next product.",
         deliverable: "One post per department, every name on it: what you learned from research, and the 2 to 3 directions you will present.",
       },
       materials: [],
@@ -4902,11 +4902,6 @@ const COURSE = {
           sub: "Div Garg, Founder. William, Head of Growth & Wearables.",
         },
         {
-          layout: "statement",
-          text: "Hardware, fashion, AI assistants.",
-          sub: "What's the object where all three meet?",
-        },
-        {
           layout: "points",
           heading: "What they started with",
           tap: "It can be much more than this.",
@@ -4918,12 +4913,17 @@ const COURSE = {
           ],
         },
         {
+          layout: "statement",
+          text: "You're designing the next product.",
+          sub: "Hardware, fashion, AI assistants: what's the object where all three meet?",
+        },
+        {
           layout: "points",
-          heading: "Fixed constraints",
+          heading: "What you're given",
           points: [
-            "Size: the internals (chip, battery, mic) are round and slightly larger than a US quarter. They cannot get smaller.",
-            "Material: stainless steel. Silver blocks the wireless signal.",
-            "Function: one button, a visible signal when it's recording, and a phone within about 10 meters.",
+            "The internals: chip, battery, mic. Round, slightly larger than a US quarter. They cannot get smaller.",
+            "One button, a visible signal when it's recording, and a phone within about 10 meters.",
+            "Stainless steel works. Silver blocks the wireless signal.",
           ],
           tap: "Everything else is open.",
         },
@@ -4933,7 +4933,7 @@ const COURSE = {
           items: [
             {
               label: "Industrial Design + Prototyping",
-              body: "Design the pendant",
+              body: "Design the object",
               list: ["Sketches, CAD, 3D prints", "Materials and finishes", "A wearable prototype"],
             },
             {
@@ -4961,14 +4961,14 @@ const COURSE = {
             "Week 2, Nov 12 to 19: Concepts. Each department shows 2 to 3 directions; one picked.",
             "Week 3, Nov 19 to Dec 3: Build, with Thanksgiving week async. Prototypes, app flows, brand and launch plan in progress.",
             "Week 4, Dec 3: Finish + Rehearse. Full run-through, everything ready for the rollout.",
-            "Early December: Rollout event. The AGI Pendant goes live to its first community.",
+            "Early December: Rollout event. What you made goes live to its first community.",
           ],
         },
         {
           layout: "points",
           heading: "What they want after one month",
           points: [
-            "A pendant design ready for factory prototyping",
+            "A hardware design ready for factory prototyping",
             "An app prototype tested with real users",
             "A brand and content kit ready to post",
             "A waitlist with real sign-ups and a rollout event people attend",
@@ -5021,7 +5021,7 @@ const COURSE = {
           layout: "points",
           heading: "Ergonomics",
           points: [
-            "Weight: grams matter on a chain, not in a bag.",
+            "Weight: grams matter on the body, not in a bag.",
             "Pressure: anything that pinches comes off in an hour.",
             "Heat: a processor against skin.",
             "Sweat, rain, a wash.",
@@ -5039,7 +5039,7 @@ const COURSE = {
             "What does it say about the person wearing it?",
             "Does it go with what they already own?",
             "Who sees it, and what do they think is happening?",
-            "Does it look like a gadget, or like jewelry?",
+            "Does it look like a gadget, or like something you'd wear anyway?",
           ],
         },
         {
@@ -5104,7 +5104,7 @@ const COURSE = {
         {
           layout: "exercise",
           heading: "On your own",
-          prompt: "Ten sketches of the pendant. Round, a bit bigger than a quarter, steel, one button. No phones.",
+          prompt: "Ten sketches of the next product, built around the same internals. No phones.",
           time: "10 min",
         },
 

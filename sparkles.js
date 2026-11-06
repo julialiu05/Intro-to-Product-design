@@ -28,17 +28,19 @@
     var w = (COURSE.weeks || []).filter(function (x) { return x.week === COURSE.CURRENT_WEEK; })[0];
     return (w && w.fx) || {};
   })();
-  /* "circle" is a ring drawn on a canvas: a dark 2px ring with a white
-     halo so it reads on any wallpaper, hotspot in the centre. Anything else
-     is passed through as a CSS cursor value. */
+  /* "circle" is a small white dot drawn on a canvas, with a soft shadow
+     and a faint edge so it still shows on a pale wallpaper. Hotspot in the
+     centre. Anything else is passed through as a CSS cursor value. */
   function ringCursor() {
-    var d = 22, c = document.createElement("canvas");
+    var d = 24, c = document.createElement("canvas");
     c.width = c.height = d * 2;
     var g = c.getContext("2d");
     g.scale(2, 2);
-    g.beginPath(); g.arc(d / 2, d / 2, 7.5, 0, 6.283);
-    g.lineWidth = 4; g.strokeStyle = "rgba(255,255,255,.95)"; g.stroke();
-    g.lineWidth = 2; g.strokeStyle = "#1d1d1f"; g.stroke();
+    g.shadowColor = "rgba(0,0,0,.35)"; g.shadowBlur = 4; g.shadowOffsetY = 1;
+    g.beginPath(); g.arc(d / 2, d / 2, 7, 0, 6.283);
+    g.fillStyle = "#ffffff"; g.fill();
+    g.shadowColor = "transparent";
+    g.lineWidth = 1; g.strokeStyle = "rgba(0,0,0,.18)"; g.stroke();
     return "url(" + c.toDataURL() + ") " + (d / 2) + " " + (d / 2) + ", auto";
   }
   if (FX.cursor) {

@@ -4917,22 +4917,13 @@ const COURSE = {
             "What it stands for: personal AI that grows with you, hands-free control, and agents working in the background.",
             "Who it's for: ambitious 18 to 30 year olds in startups, design, fashion and VC. Serious about work, full life outside it.",
             "The bar: people should want to wear it even when it's switched off. Jewelry first, technology second.",
+            "Its constraints: round internals a bit bigger than a quarter, stainless steel, one button, a recording light, a phone within 10 meters.",
           ],
         },
         {
           layout: "statement",
           text: "You're designing the next product.",
           sub: "Hardware, fashion, AI assistants: what's the object where all three meet?",
-        },
-        {
-          layout: "points",
-          heading: "What you're given",
-          points: [
-            "The internals: chip, battery, mic. Round, slightly larger than a US quarter. They cannot get smaller.",
-            "One button, a visible signal when it's recording, and a phone within about 10 meters.",
-            "Stainless steel works. Silver blocks the wireless signal.",
-          ],
-          tap: "Everything else is open.",
         },
         {
           layout: "columns",
@@ -5123,7 +5114,7 @@ const COURSE = {
         {
           layout: "exercise",
           heading: "On your own",
-          prompt: "Ten sketches of the next product, built around the same internals. No phones.",
+          prompt: "Ten sketches of the next product. No phones.",
           time: "10 min",
         },
 

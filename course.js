@@ -4718,6 +4718,13 @@ const COURSE = {
           note: "How Apple thinks about a thing worn on the body: glances, not sessions. Short, and most of it applies to any wearable.",
         },
         {
+          title: "hangry: a hair clip that says it for you",
+          author: "Marisa Chentakul, @meshtimes",
+          kind: "Post",
+          url: "https://littlebrat.vercel.app",
+          note: "The example in class. A creative technologist in NYC making a wearable in public: a clip with a screen, a one-line site, a waitlist. Her Instagram has the clip on the subway.",
+        },
+        {
           title: "Designing for Wearables: 7 Rules and Best Practices",
           author: "Cynthia Vinney, UX Design Institute",
           kind: "Post",
@@ -4874,6 +4881,18 @@ const COURSE = {
             "Pilot run. Then production.",
           ],
         },
+        {
+          layout: "points",
+          heading: "Inside a wearable",
+          points: [
+            "Battery. The biggest part, always.",
+            "Processor and memory, running the model.",
+            "Microphone, camera, speaker.",
+            "Radio: Bluetooth, Wi-Fi, cellular.",
+            "Sensors: motion, heart rate, light.",
+            "Enclosure, a button, a way to charge.",
+          ],
+        },
 
         /* ========== 03 WORN ON THE BODY ========== */
         { layout: "section", text: "Worn on the body", num: "03" },
@@ -4928,6 +4947,26 @@ const COURSE = {
             "Does it look like a gadget, or like something you'd wear anyway?",
           ],
         },
+        /* Example: hangry, by Marisa Chentakul (@meshtimes), creative
+           technologist, NYC. Her words from littlebrat.vercel.app and her
+           Instagram, Nov 2026. Add a screenshot of the clip on her as a
+           `figure` slide here once you have one saved in img/w7/. */
+        {
+          layout: "statement",
+          text: "hangry, by Marisa Chentakul",
+          sub: "“a hair clip that says it for you”",
+        },
+        {
+          layout: "points",
+          heading: "What she did",
+          points: [
+            "A hair clip with a tiny screen. It says “no talk” or “say hi” so you don't have to.",
+            "Worn where a clip already lives. Nobody has to learn where to put it.",
+            "A board on a clip, filmed on the subway, before it shipped.",
+            "A name, a one-line site, a “join” button. The waitlist came first.",
+            "Hardware, fashion, a message on your behalf. All three.",
+          ],
+        },
         {
           layout: "points",
           heading: "The ones that came before",
@@ -4941,28 +4980,9 @@ const COURSE = {
           ],
         },
 
-        /* ========== 04 HOW THINGS GET MADE ========== */
-        { layout: "section", text: "How things get made", num: "04" },
-        {
-          layout: "statement",
-          text: "Tooling is the point of no return.",
-          sub: "A mould is cut once. Every mistake in it ships ten thousand times.",
-        },
-        {
-          layout: "points",
-          heading: "Inside a wearable",
-          points: [
-            "Battery. The biggest part, always.",
-            "Processor and memory, running the model.",
-            "Microphone, camera, speaker.",
-            "Radio: Bluetooth, Wi-Fi, cellular.",
-            "Sensors: motion, heart rate, light.",
-            "Enclosure, a button, a way to charge.",
-          ],
-        },
 
-        /* ========== 05 PROTOTYPE WITH NO BUDGET ========== */
-        { layout: "section", text: "Prototype with no budget", num: "05" },
+        /* ========== 04 PROTOTYPE WITH NO BUDGET ========== */
+        { layout: "section", text: "Prototype with no budget", num: "04" },
         {
           layout: "statement",
           text: "Prototype the experience, not the electronics.",
@@ -4984,8 +5004,8 @@ const COURSE = {
           time: "10 min",
         },
 
-        /* ========== 06 HOMEWORK ========== */
-        { layout: "section", text: "Homework", num: "06" },
+        /* ========== 05 HOMEWORK ========== */
+        { layout: "section", text: "Homework", num: "05" },
         { layout: "assignment" },
       ],
     },

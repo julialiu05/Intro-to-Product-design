@@ -4681,8 +4681,8 @@ const COURSE = {
       summary: "",
       agenda: [
         "Project 2 reveal",
-        "Kickoff with Div and William, AGI Inc.",
-        "The AGI Pendant",
+        "The brief from AGI, Inc.",
+        "What they started with",
         "One company, four departments",
         "The 4 weeks",
         "Designing a physical thing",
@@ -4983,10 +4983,10 @@ const COURSE = {
           layout: "points",
           heading: "Today",
           points: [
-            "Kickoff in class with Div and William",
-            "Hands-on with the working device and apps",
-            "Sign NDA, join Slack, choose departments",
-            "Research: talk to people who fit the audience; study jewelry, wearables and competitors",
+            "The brief, and the question it leaves open",
+            "Designing a physical thing",
+            "Choose your department",
+            "Start research: talk to people who fit the audience; study jewelry, wearables and competitors",
           ],
         },
 

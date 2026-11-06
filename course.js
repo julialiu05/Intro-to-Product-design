@@ -4752,11 +4752,11 @@ const COURSE = {
          object before drawing it. Week 2 of the sprint is concepts, so these
          feed the department directions on Nov 12. */
       assignment: {
-        title: "Ideas, in words",
+        title: "A mood board and an idea",
         due: "Thu Nov 12, 6:00pm",
         dueDate: "2026-11-12",
-        body: "Come in with ideas for the next product, written in words, not sketches. Hardware, fashion, AI assistants: what's the object where all three meet? Three ideas, a short paragraph each: what it is, who wears it, what happens when you use it, and why they'd wear it switched off.",
-        deliverable: "One post per person: three ideas, a paragraph each. No drawings yet.",
+        body: "Come with a mood board for the next product, and one idea you're ready to talk about: your thinking, drawings, references, whatever got you there, on one page you can present from.",
+        deliverable: "One page per person, posted before class and presented in class: the mood board on one side, the idea on the other.",
       },
       materials: [],
       videos: [
@@ -4945,18 +4945,6 @@ const COURSE = {
             "Hardware, fashion, a message on your behalf. All three.",
           ],
         },
-        {
-          layout: "points",
-          heading: "The ones that came before",
-          points: [
-            "Apple Watch. AirPods.",
-            "Ray-Ban Meta.",
-            "Humane Ai Pin.",
-            "Rabbit r1.",
-            "Friend. Limitless.",
-            "The AGI Pendant.",
-          ],
-        },
 
 
         /* ========== 04 PROTOTYPE WITH NO BUDGET ========== */
@@ -5008,6 +4996,12 @@ const COURSE = {
         /* ========== 06 HOMEWORK ========== */
         { layout: "section", text: "Homework", num: "06" },
         { layout: "assignment" },
+        {
+          layout: "exercise",
+          heading: "Before you leave",
+          prompt: "Come up to Julia and the TAs. Tell us what you're interested in and sign up for a department 1 on 1. That's attendance for today.",
+          time: "End of class",
+        },
       ],
     },
   ],

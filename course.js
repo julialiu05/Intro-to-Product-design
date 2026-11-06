@@ -4908,7 +4908,8 @@ const COURSE = {
         },
         {
           layout: "points",
-          heading: "The product",
+          heading: "What they started with",
+          tap: "It can be much more than this.",
           points: [
             "What it is: a pendant worn as jewelry that connects to your phone. Tap it, speak, and AGI's agents take action for you, hands-free.",
             "What it stands for: personal AI that grows with you, hands-free control, and agents working in the background.",

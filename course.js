@@ -4903,8 +4903,8 @@ const COURSE = {
         },
         {
           layout: "statement",
-          text: "For four weeks, you are the founding team of a hardware startup.",
-          sub: "Together, the 30 of you design, build and roll out the AGI Pendant.",
+          text: "Hardware, fashion, AI assistants.",
+          sub: "What's the object where all three meet?",
         },
         {
           layout: "points",

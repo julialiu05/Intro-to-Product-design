@@ -4693,6 +4693,7 @@ const COURSE = {
         "Materials, and how things get made",
         "Inside a wearable",
         "Prototype with no budget",
+        "Transparency and AI",
         "Choose your department",
       ],
       readings: [
@@ -4896,17 +4897,6 @@ const COURSE = {
 
         /* ========== 03 WORN ON THE BODY ========== */
         { layout: "section", text: "Worn on the body", num: "03" },
-        {
-          layout: "points",
-          heading: "Ergonomics",
-          points: [
-            "Weight: grams matter on the body, not in a bag.",
-            "Pressure: anything that pinches comes off in an hour.",
-            "Heat: a processor against skin.",
-            "Sweat, rain, a wash.",
-            "Putting it on one-handed, in the dark.",
-          ],
-        },
         /* From "Designing for Wearables: 7 Rules and Best Practices" by
            Cynthia Vinney, UX Design Institute, October 2023. The wording
            is hers where quoted. */
@@ -4919,18 +4909,6 @@ const COURSE = {
             "Ergonomics: “The user shouldn't be constantly reminded that they've got a wearable on them.”",
             "Value: stylish, comfortable, and technology people actually want.",
             "Privacy: data can be seen by people nearby.",
-          ],
-        },
-        {
-          layout: "points",
-          heading: "Six rules",
-          points: [
-            "Fashionability: a stylish, comfortable device sells before its software is considered.",
-            "Glanceability: exactly what the user needs, when they need it. “Anything more requires too much from the user.”",
-            "Keep it simple: limit functionality.",
-            "Minimal interface: little information, sharp contrast, basic type.",
-            "Privacy: vibrate before showing anything.",
-            "Wireless: where it sits on the body, how much data, how far, how fast.",
           ],
         },
         {
@@ -4988,24 +4966,47 @@ const COURSE = {
           text: "Prototype the experience, not the electronics.",
         },
         {
-          layout: "points",
-          heading: "Things you already have",
-          points: [
-            "Cardboard, foam, clay, tape.",
-            "A phone or an AirPod standing in for the device.",
-            "A person in the next room, playing the assistant.",
-            "A paper version you wear for a day.",
-          ],
-        },
-        {
           layout: "exercise",
           heading: "On your own",
           prompt: "Ten sketches of the next product. No phones.",
           time: "10 min",
         },
 
-        /* ========== 05 HOMEWORK ========== */
-        { layout: "section", text: "Homework", num: "05" },
+        /* ========== 05 TRANSPARENCY AND AI ========== */
+        /* Two kinds of transparency: the object to the people around it
+           (the memo's recording signal, Vinney's privacy rule) and the
+           students about their own process (the course's Using AI policy,
+           quoted from the Read Me). */
+        { layout: "section", text: "Transparency and AI", num: "05" },
+        {
+          layout: "statement",
+          text: "Everyone in the room is a user. Most of them didn't sign up.",
+        },
+        {
+          layout: "points",
+          heading: "Transparent to the people around it",
+          points: [
+            "A visible signal when it's recording. Not a setting.",
+            "What it heard, where it went, who can read it: one sentence, on the box.",
+            "Vibrate before it shows anything. Dim when it faces away.",
+            "On the device or in the cloud is a design decision. Say which.",
+            "If you'd be embarrassed to explain it to the person next to you, redesign it.",
+          ],
+        },
+        {
+          layout: "points",
+          heading: "Transparent about how you made it",
+          points: [
+            "Say where you used AI. Every deliverable, every department.",
+            "“A prototype generated in one prompt with no account of the decisions inside it is not an assignment, it is a screenshot.”",
+            "Keep a decisions log: what you chose, what you turned down, why.",
+            "AI's words are not research. Quotes come from people you talked to.",
+            "Use it for the parts you'd skip: variants, code, clean-up. Not for the decision.",
+          ],
+        },
+
+        /* ========== 06 HOMEWORK ========== */
+        { layout: "section", text: "Homework", num: "06" },
         { layout: "assignment" },
       ],
     },

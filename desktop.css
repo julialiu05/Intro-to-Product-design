@@ -1605,6 +1605,21 @@ body {
 .sc-slide .s-site__note {
   margin: 0; font-size: .8125rem; color: #6e6e73;
 }
+.sc-slide .s-site__full {
+  margin-left: auto; flex: none;
+  font: inherit; font-size: 12px; font-weight: 560; color: #1d1d1f;
+  padding: 4px 11px; border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.1);
+  background: rgba(255,255,255,.75);
+  cursor: pointer;
+}
+.sc-slide .s-site__full:hover { background: #fff; }
+/* Full screen: the window fills the screen, and the page shows to its
+   bottom edge, so an embedded deck's own toolbar comes back into view. */
+.sc-slide .s-site__win:fullscreen { height: 100vh; border-radius: 0; }
+.sc-slide .s-site__win:fullscreen .s-site__frame { height: 100%; }
+.sc-slide .s-site__win:-webkit-full-screen { height: 100vh; border-radius: 0; }
+.sc-slide .s-site__win:-webkit-full-screen .s-site__frame { height: 100%; }
 @media (max-width: 700px) {
   .sc-slide .s-site__win { height: min(52vh, 420px); }
 }

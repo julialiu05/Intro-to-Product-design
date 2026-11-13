@@ -44,12 +44,12 @@ const COURSE = {
 
   // Which week to surface, AND which theme the whole site wears.
   // Bump this every Wednesday and the site changes its skin.
-  CURRENT_WEEK: 7,
+  CURRENT_WEEK: 8,
 
   // How many week folders sit on the desktop (index.html), counting from 1.
   // The desktop fills up as the course runs: add one each week you release.
   // Nothing else uses this, so it is safe to keep behind CURRENT_WEEK.
-  DESKTOP_WEEKS: 7,
+  DESKTOP_WEEKS: 8,
 
   description: [
     "Most design classes teach you to make things look good. This one is about the part before that: figuring out what to build, for whom, and how you'd know if it worked. We treat design as a sequence of decisions you can defend, not a matter of taste you either have or don't.",
@@ -4676,10 +4676,6 @@ const COURSE = {
       status: "published",
       /* The same wallpaper the reveal film ends on. */
       background: "img/wall-3.jpg",
-      /* Desktop effects for the week. A round pointer for a week about a
-         round object, and no bubbles. Delete the line to go back to normal.
-         `cursor` takes "circle" or any CSS cursor value. */
-      fx: { cursor: "circle", bubbles: false },
       summary: "",
       agenda: [
         "Project 2 reveal",
@@ -5001,6 +4997,146 @@ const COURSE = {
           heading: "Before you leave",
           prompt: "Come up to Julia and the TAs. Tell us what you're interested in and sign up for a department 1 on 1. That's attendance for today.",
           time: "End of class",
+        },
+      ],
+    },
+    /* ------------------------------------------------------------------
+       Week 8: AGI, Inc. visits. Barely a lecture: the deck is the
+       agenda that runs the room. Mood boards first, then subteams, then
+       the clients see the spreads (the Week 7 homework), present their own
+       deck, take questions, and rotate between subteams for the rest of
+       class.
+
+       Subteams were picked by staff from each student's strengths and
+       preferences, their application essays and portfolios, and their
+       work so far. Not fully formalized yet.
+       ------------------------------------------------------------------ */
+    {
+      week: 8,
+      date: "Nov 12",
+      title: "AGI, Inc. visits",
+      status: "published",
+      background: "img/w8/star-sky-background.jpg",
+      summary: "",
+      agenda: [
+        "Refine your mood board",
+        "Subteams",
+        "Your spreads, presented to AGI, Inc.",
+        "AGI, Inc. presents",
+        "Q&A",
+        "Work in your subteams",
+      ],
+      readings: [],
+      materials: [],
+      docs: [],
+      slides: [
+        { layout: "title" },
+        {
+          layout: "points",
+          heading: "Today",
+          points: [
+            "Refine and edit your mood board, 20 to 30 min",
+            "Get into your subteams",
+            "Your spreads, presented one by one to the clients",
+            "AGI, Inc. presents their deck",
+            "Q&A",
+            "Back into your subteams to work, while the clients rotate from group to group",
+          ],
+        },
+
+        /* ========== 01 BEFORE THE CLIENTS ARRIVE ========== */
+        /* The Week 7 homework, in the wording of the announcement. */
+        { layout: "section", text: "Before the clients arrive", num: "01" },
+        {
+          layout: "exercise",
+          heading: "On your own",
+          prompt: "Refine and edit your mood board + idea spread. Your mood board: the visual references, colors, textures and inspiration for the product. Some ideas, typed out: how you envision your product to look like, your thinking behind it, feature ideas, how you got there.",
+          time: "20 to 30 min",
+        },
+
+        /* ========== 02 SUBTEAMS ========== */
+        { layout: "section", text: "Subteams", num: "02" },
+        {
+          layout: "columns",
+          heading: "The subteams",
+          tap: "Not set in stone yet.",
+          items: [
+            {
+              label: "Hardware",
+              body: "Everyone",
+              list: ["Research", "Build ideas", "Digital mock-ups"],
+            },
+            {
+              label: "Software",
+              body: "The interfaces that go with the physical product",
+              list: ["UI/UX", "Mobile", "Web"],
+            },
+            {
+              label: "Prototyping",
+              body: "The physical prototype",
+              list: ["CAD", "3D printing", "Building it with materials"],
+            },
+            {
+              label: "Marketing",
+              body: "The product's brand identity, image and aesthetic",
+              list: ["Brand identity", "Image and aesthetic", "A strategy to reach the target audience"],
+            },
+          ],
+        },
+        /* Picked from strengths and preferences, application essays and
+           portfolios, and the work so far. */
+        {
+          layout: "columns",
+          heading: "Your subteams",
+          items: [
+            {
+              label: "Hardware + Software",
+              list: ["Grace Setijawan", "Nikolai Petukhov", "Qwyen Le", "Jeffrey Zhao", "Colleene Chang", "Cassandra Nguyen"],
+            },
+            {
+              label: "Hardware + Prototyping",
+              list: ["Deborah Ruiz", "Janus Sucharitakul", "Yanyu Gu", "Terry Kim", "Cecilia Ma", "Witthawat Morning", "Chloe Lu"],
+            },
+            {
+              label: "Hardware + Marketing",
+              list: ["Andy Chen", "Sasha Murakawa", "Coco Fan", "Katie Hwang", "Novia Li", "Elon Hufana", "Ryan Jang"],
+            },
+          ],
+        },
+        {
+          layout: "exercise",
+          heading: "In your subteams",
+          prompt: "Get into your subteams. Talk through your ideas and what you want to ask the clients.",
+          time: "Until the clients arrive",
+        },
+
+        /* ========== 03 AGI, INC. ========== */
+        { layout: "section", text: "AGI, Inc.", num: "03" },
+        /* The students' spreads, live. Paste the Google Slides link into
+           `src`, swapping the "/edit..." at the end for "/embed" so it plays
+           inside the window. The deck has to be shared as "anyone with the
+           link can view" or it shows a sign-in page. */
+        {
+          layout: "site",
+          heading: "Your spreads",
+          label: "Mood boards + ideas",
+          src: "https://docs.google.com/presentation/d/1qq8NCeczJ7l9VDQaa4pGZOoxSP_-_8OB04U9AbjmWqw/embed",
+          body: "One by one, to the clients.",
+        },
+        {
+          layout: "statement",
+          text: "AGI, Inc. presents.",
+          sub: "Their deck, with more on what they're looking for.",
+        },
+        { layout: "statement", text: "Q&A" },
+
+        /* ========== 04 BACK TO YOUR SUBTEAMS ========== */
+        { layout: "section", text: "Back to your subteams", num: "04" },
+        {
+          layout: "exercise",
+          heading: "In your subteams",
+          prompt: "Keep working. The clients will rotate from group to group to talk more about what they expect.",
+          time: "Rest of class",
         },
       ],
     },

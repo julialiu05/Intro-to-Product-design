@@ -267,6 +267,10 @@
     f.className = "deckframe";
     f.src = "scroll.html?w=" + n;
     f.title = "Week " + pad2(n) + " slides";
+    /* so an embedded deck (Google Slides on a "site" slide) can go full
+       screen; every frame between it and the page has to allow it */
+    f.allow = "fullscreen";
+    f.allowFullscreen = true;
     w.body.appendChild(f);
     w.__built = true;
     return w;

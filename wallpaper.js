@@ -29,11 +29,16 @@
      { src: "img/wall-6.jpg", ink: "dark" },   pastel ocean, fish and rays
      { src: "img/wall-8.jpg", ink: "dark" },   iridescent marble, sparkles
      { src: "img/w5/ios-beach-background.jpg", ink: "dark" },   teal sea */
+/* wall-9 to wall-12 stay in img/ to bring back:
+     { src: "img/wall-9.jpg",  ink: "light" },   night field, a girl with a star wand
+     { src: "img/wall-10.jpg", ink: "light" },   bubbles and stars on a dark sky
+     { src: "img/wall-11.jpg", ink: "light" },   hands of star confetti, blue gingham
+     { src: "img/wall-12.jpg", ink: "light" },   flowers in sand, at night */
 var WALLPAPERS = [
-  { src: "img/wall-9.jpg",  ink: "light" },   /* night field, a girl with a star wand */
-  { src: "img/wall-10.jpg", ink: "light" },   /* bubbles and stars on a dark sky */
-  { src: "img/wall-11.jpg", ink: "light" },   /* hands of star confetti, blue gingham */
-  { src: "img/wall-12.jpg", ink: "light" },   /* flowers in sand, at night */
+  { src: "img/wall-16.jpg", ink: "light" },   /* pastel flower field under planets */
+  { src: "img/wall-13.jpg", ink: "light" },   /* crescent moon, pastel clouds, glowing birds */
+  { src: "img/wall-14.jpg", ink: "light" },   /* glitter night, a bunny, a cat and a bear afloat */
+  { src: "img/wall-15.jpg", ink: "light" },   /* a girl on a golden magic circle of flowers */
 ];
 
 var WALL_EVERY = 30000;   /* ms between changes */

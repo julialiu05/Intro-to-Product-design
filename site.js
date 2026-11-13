@@ -249,9 +249,10 @@ function slideHTML(s, w) {
               <span class="light light--zoom"></span>
             </span>
             ${s.label ? `<span class="s-site__title">${esc(s.label)}</span>` : ""}
+            <button class="s-site__full" type="button">Full screen</button>
           </header>
           <iframe class="s-site__frame" src="${esc(s.src)}" title="${esc(s.label || s.heading || "Example")}"
-                  loading="lazy" referrerpolicy="no-referrer"
+                  loading="lazy" referrerpolicy="no-referrer" allow="fullscreen" allowfullscreen
                   sandbox="allow-scripts allow-same-origin"></iframe>
         </div>
         ${s.body ? `<p class="s-site__note">${esc(s.body)}</p>` : ""}
@@ -512,6 +513,24 @@ function renderScroll() {
       ev.stopPropagation();
       zoomImg.src = picture.currentSrc || picture.src;
       zoom.hidden = false;
+    });
+  });
+
+  /* A "site" slide's Full screen button: the window, page and all, fills the
+     screen. Esc (or the button again) brings it back. */
+  app.querySelectorAll(".s-site__full").forEach((btn) => {
+    const win = btn.closest(".s-site__win");
+    btn.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (win.requestFullscreen) win.requestFullscreen();
+      else if (win.webkitRequestFullscreen) win.webkitRequestFullscreen();
+    });
+  });
+  document.addEventListener("fullscreenchange", () => {
+    app.querySelectorAll(".s-site__full").forEach((btn) => {
+      btn.textContent = document.fullscreenElement === btn.closest(".s-site__win")
+        ? "Exit full screen" : "Full screen";
     });
   });
 
